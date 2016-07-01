@@ -1,0 +1,30 @@
+
+Homepage: 
+	User search: how are you
+	redirect to : result?q=howareyou
+
+Result?q=howareyou: 
+	AJAX: detail?q=howareyou
+	Display as like ul 
+
+detail?q=howareyou:
+	JSON, data	
+
+
+
+Pages:
+	Homepage
+	Result page
+	Product page (Details of product, owner of product -> profile page, review, rating)
+	Profile page for each user (User’s email, rating, messaging shit)
+	My account page
+	Login/signup page
+	Admin panel (Add user, delete user, change passwords of users, change database)
+	
+	
+	
+User Database (single table)
+	username
+	user email
+	user password
+	ownership of products
