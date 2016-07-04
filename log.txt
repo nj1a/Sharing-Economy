@@ -1,0 +1,9 @@
+font: open sans 400
+R:0 G:88 B:146 for header
+fix header and nav
+light gray for background
+black for text
+Hoverable Buttons
+
+
+1. can we use bootstrap?
