@@ -19,20 +19,12 @@ input[type=text]:focus {
     width: 50%;
 }
 
-img {
-    width: 100%;
-}
-
 #navS {
     margin-top:51px
 }
 
-#adminMain, #resultMain {
+.main {
     margin-top:80px;
-}
-
-#adminMain {
-    max-width:1400px;
 }
 
 /*#resultMain {
