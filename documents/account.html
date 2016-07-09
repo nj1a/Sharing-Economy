@@ -1,64 +1,152 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>account</title>
-
+        <title>Admin</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-indigo.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
         <link rel="stylesheet" href="../assets/css/style.css">
-        <link href="../assets/css/style_barry.css" rel="stylesheet">
 
         <script src="../assets/js/jQuery-3.0.0.js" defer></script>
         <script src="../assets/js/script.js" defer></script>
     </head>
 
-    <body>
+    <body class="w3-theme-l5">
 
         <!-- Navbar -->
-        <nav class="w3-top">        
+        <nav class="w3-top">
         </nav>
 
         <!-- Navbar on small screens -->
         <nav id="navS" class="w3-hide w3-hide-large w3-hide-medium w3-top">
         </nav>
-        <section class="text-centre">
-            <img class="profile_pic" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Bananas_white_background_DS.jpg"/>
-        </section>
 
-        <main class="w3-content main">
-        <section class="text-centre">
-            <ul class="list" id='item_list'>
-                <li>item1</li>
-                <li>item2</li>
-                <li>item3</li>
-            </ul>
-        </section>
+        <!-- Page Container -->
+        <main class="w3-container w3-content main">
+            <!-- The Grid -->
+            <div class="w3-row">
+                <!-- Left Column -->
+                <section class="w3-col m3">
+                    <!-- Profile -->
+                    <article class="w3-card-2 w3-round w3-white">
+                        <section class="w3-container">
+                        <h4 class="w3-center">My Profile</h4>
+                        <p id="profilePic" class="w3-center">
+                            <img src="img_avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar">
+                        </p>
+                        <hr>
+                        <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
+                        <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
+                        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+                        </section>
+                    </article>
+                    <br>
 
-        <section class="text-centre">
-            <ul class="list" id='info_list'>
-                <li>
-                    <p>username: banana</p>
-                    <input class="change_button" type="submit" value="change">
-                </li>
-                <li>
-                    <p>email: banana@fruits.com</p>
-                    <input class="change_button" type="submit" value="change">
-                </li>
-                <li>
-                    <p>birthday: 01/01/0001</p>
-                    <input class="change_button" type="submit" value="change">
-                </li>
-            </ul>
-        </section>
+                    <!-- Interests -->
+                    <article class="w3-card-2 w3-round w3-white w3-hide-small">
+                        <section class="w3-container">
+                        <p>Interests</p>
+                        <p>
+                            <span class="w3-tag w3-small w3-theme-d5">News</span>
+                            <span class="w3-tag w3-small w3-theme-d4">W3Schools</span>
+                            <span class="w3-tag w3-small w3-theme-d3">Labels</span>
+                            <span class="w3-tag w3-small w3-theme-d2">Games</span>
+                            <span class="w3-tag w3-small w3-theme-d1">Friends</span>
+                            <span class="w3-tag w3-small w3-theme">Games</span>
+                            <span class="w3-tag w3-small w3-theme-l1">Friends</span>
+                            <span class="w3-tag w3-small w3-theme-l2">Food</span>
+                            <span class="w3-tag w3-small w3-theme-l3">Design</span>
+                            <span class="w3-tag w3-small w3-theme-l4">Art</span>
+                            <span class="w3-tag w3-small w3-theme-l5">Photos</span>
+                        </p>
+                        </section>
+                    </article>
+                    <br>
+
+                <!-- End Left Column -->
+                </section>
+
+                <!-- Right Column -->
+                <section class="w3-col m9">
+
+                    <article class="w3-row-padding">
+                        <section class="w3-col m12">
+                            <section class="w3-card-2 w3-round w3-white">
+                                <section class="w3-container w3-padding">
+                                    <h6 class="w3-opacity">What do you want to say?</h6>
+                                    <p contenteditable="true" class="w3-border w3-padding">Status: Feeling Blue</p>
+                                    <button type="button" class="w3-btn w3-theme"><i class="fa fa-pencil"></i>  Post</button>
+                                </section>
+                            </section>
+                        </section>
+                    </article>
+
+                    <article class="w3-container w3-card-2 w3-white w3-round w3-margin"><br>
+                        <img src="img_avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+                        <span class="w3-right w3-opacity">1 min</span>
+                        <h4>John Doe</h4><br>
+                        <hr class="w3-clear">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip
+                            ex ea commodo consequat.</p>
+                        <section class="w3-row-padding" style="margin:0 -16px">
+                            <section class="w3-half">
+                                <img src="img_lights.jpg" style="width:100%" alt="Northern Lights" class="w3-margin-bottom">
+                            </section>
+                            <section class="w3-half">
+                                <img src="img_nature.jpg" style="width:100%" alt="Nature" class="w3-margin-bottom">
+                            </section>
+                        </section>
+                        <button type="button" class="w3-btn w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button>
+                        <button type="button" class="w3-btn w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button>
+                    </article>
+
+                    <article class="w3-container w3-card-2 w3-white w3-round w3-margin"><br>
+                        <img src="img_avatar5.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+                        <span class="w3-right w3-opacity">16 min</span>
+                        <h4>Jane Doe</h4><br>
+                        <hr class="w3-clear">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip
+                            ex ea commodo consequat.</p>
+                        <button type="button" class="w3-btn w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button>
+                        <button type="button" class="w3-btn w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button>
+                    </article>
+
+                    <article class="w3-container w3-card-2 w3-white w3-round w3-margin"><br>
+                        <img src="img_avatar6.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+                        <span class="w3-right w3-opacity">32 min</span>
+                        <h4>Angie Jane</h4><br>
+                        <hr class="w3-clear">
+                        <p>Have you seen this?</p>
+                        <img src="img_nature.jpg" style="width:100%" class="w3-margin-bottom">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip
+                            ex ea commodo consequat.</p>
+                        <button type="button" class="w3-btn w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button>
+                        <button type="button" class="w3-btn w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button>
+                    </article>
+
+                <!-- End Right Column -->
+                </section>
+
+            <!-- End Grid -->
+            </div>
+
+        <!-- End Page Container -->
         </main>
+        <br>
 
         <!-- Footer -->
         <footer>
         </footer>
-
     </body>
 </html>
