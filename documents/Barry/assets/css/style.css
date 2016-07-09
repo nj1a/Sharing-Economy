@@ -1,0 +1,49 @@
+.text-centre{
+	text-align: center;
+}
+a:link{
+	color:black;
+	text-decoration:none;
+}
+a:visited{
+	text-decoration: none;
+	color:black;
+}
+a.underlined:hover{
+	text-decoration:underline;
+}
+header {
+	border-bottom: solid black 1px;
+}
+.search_bar {
+    line-height: 20px;
+    width: 50%;
+}
+
+.button {
+	margin-top:1%;
+	line-height: 50px;
+	width:15%;
+	background-color:#005892;
+	color:white;
+	overflow: auto;
+	font-weight: bold;
+}
+
+.button:hover{
+	background-color: white;
+	color:#005892;
+	font-weight: bold;
+}
+.profile_pic {
+    width: 25%;
+}
+
+.list {
+    list-style-type: none;
+}
+
+#info_list li p{
+    display: block;
+    display: inline;
+}
