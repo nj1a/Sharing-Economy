@@ -18,3 +18,23 @@ input[type=text] {
 input[type=text]:focus {
     width: 50%;
 }
+
+img {
+    width: 100%;
+}
+
+#navS {
+    margin-top:51px
+}
+
+#adminMain, #resultMain {
+    margin-top:80px;
+}
+
+#adminMain {
+    max-width:1400px;
+}
+
+/*#resultMain {
+    margin-left:300px;
+}*/

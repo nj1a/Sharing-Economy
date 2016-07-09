@@ -12,93 +12,101 @@
         <script src="../assets/js/jQuery-3.0.0.js" defer></script>
         <script src="../assets/js/script.js" defer></script>
     </head>
-    
-    <body class="w3-light-grey w3-content" style="max-width:1600px">
+
+    <body class="w3-theme-l5">
 
         <!-- Navbar -->
         <nav class="w3-top">        
         </nav>
 
         <!-- Navbar on small screens -->
-        <nav id="navS" class="w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:51px">
+        <nav id="navS" class="w3-hide w3-hide-large w3-hide-medium w3-top">
         </nav>
 
         <!-- !PAGE CONTENT! -->
-        <main class="w3-main" style="margin-left:300px;margin-top:80px;">
+        <main id="resultMain" class="w3-main">
 
-        <!-- Filter -->
-        <section class="w3-container">
-            <a href="#"><img src="img_avatar_g2.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+            <!-- Filter -->
+            <section class="w3-container  w3-bottombar w3-padding-16">
+                <span class="w3-margin-right">Filter:</span>
+                <button class="w3-btn">ALL</button>
+                <button class="w3-btn w3-white"><i class="fa fa-diamond w3-margin-right"></i>Pens</button>
+                <button class="w3-btn w3-white w3-hide-small"><i class="fa fa-photo w3-margin-right"></i>Pencils</button>
+                <button class="w3-btn w3-white w3-hide-small"><i class="fa fa-map-pin w3-margin-right"></i>Caluclators</button>
+            </section>
             
-            <div class="w3-section w3-bottombar w3-padding-16">
-            <span class="w3-margin-right">Filter:</span>
-            <button class="w3-btn">ALL</button>
-            <button class="w3-btn w3-white"><i class="fa fa-diamond w3-margin-right"></i>Design</button>
-            <button class="w3-btn w3-white w3-hide-small"><i class="fa fa-photo w3-margin-right"></i>Photos</button>
-            <button class="w3-btn w3-white w3-hide-small"><i class="fa fa-map-pin w3-margin-right"></i>Art</button>
-            </div>
-        </section>
-        
-        <!-- First Photo Grid-->
-        <div class="w3-row-padding">
-            <div class="w3-third w3-container w3-margin-bottom">
-            <img src="img_mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-            <div class="w3-container w3-white">
-                <p><b>Lorem Ipsum</b></p>
-                <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-            </div>
-            </div>
-            <div class="w3-third w3-container w3-margin-bottom">
-            <img src="img_lights.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-            <div class="w3-container w3-white">
-                <p><b>Lorem Ipsum</b></p>
-                <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-            </div>
-            </div>
-            <div class="w3-third w3-container">
-            <img src="img_nature.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-            <div class="w3-container w3-white">
-                <p><b>Lorem Ipsum</b></p>
-                <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-            </div>
-            </div>
-        </div>
-        
-        <!-- Second Photo Grid-->
-        <div class="w3-row-padding">
-            <div class="w3-third w3-container w3-margin-bottom">
-            <img src="img_fjords.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-            <div class="w3-container w3-white">
-                <p><b>Lorem Ipsum</b></p>
-                <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-            </div>
-            </div>
-            <div class="w3-third w3-container w3-margin-bottom">
-            <img src="img_lights.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-            <div class="w3-container w3-white">
-                <p><b>Lorem Ipsum</b></p>
-                <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-            </div>
-            </div>
-            <div class="w3-third w3-container">
-            <img src="img_mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-            <div class="w3-container w3-white">
-                <p><b>Lorem Ipsum</b></p>
-                <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-            </div>
-            </div>
-        </div>
+            <!-- First Photo Grid-->
+            <section class="w3-row-padding">
+                <section class="w3-third w3-container w3-margin-bottom">
+                    <img src="img_mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+                    <article class="w3-container w3-white">
+                        <p><b>Lorem Ipsum</b></p>
+                        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo 
+                            condimentum, porta lectus vitae, ultricies congue gravida
+                            diam non fringilla.</p>
+                    </article>
+                </section>
+                <section class="w3-third w3-container w3-margin-bottom">
+                    <img src="img_lights.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+                    <article class="w3-container w3-white">
+                        <p><b>Lorem Ipsum</b></p>
+                        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo 
+                            condimentum, porta lectus vitae, ultricies congue gravida 
+                            diam non fringilla.</p>
+                    </article>
+                </section>
+                <section class="w3-third w3-container">
+                    <img src="img_nature.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+                    <article class="w3-container w3-white">
+                        <p><b>Lorem Ipsum</b></p>
+                        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo 
+                            condimentum, porta lectus vitae, ultricies congue gravida
+                            diam non fringilla.</p>
+                    </article>
+                </section>
+            </section>
+            
+            <!-- Second Photo Grid-->
+            <section class="w3-row-padding">
+                <section class="w3-third w3-container w3-margin-bottom">
+                    <img src="img_fjords.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+                    <article class="w3-container w3-white">
+                        <p><b>Lorem Ipsum</b></p>
+                        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo 
+                            condimentum, porta lectus vitae, ultricies congue gravida 
+                            diam non fringilla.</p>
+                    </article>
+                </section>
+                <section class="w3-third w3-container w3-margin-bottom">
+                    <img src="img_lights.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+                    <article class="w3-container w3-white">
+                        <p><b>Lorem Ipsum</b></p>
+                        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo 
+                            condimentum, porta lectus vitae, ultricies congue gravida
+                            diam non fringilla.</p>
+                    </article>
+                </section>
+                <section class="w3-third w3-container">
+                    <img src="img_mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+                    <article class="w3-container w3-white">
+                        <p><b>Lorem Ipsum</b></p>
+                        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo 
+                            condimentum, porta lectus vitae, ultricies congue gravida 
+                            diam non fringilla.</p>
+                    </article>
+                </section>
+            </section>
 
-        <!-- Pagination -->
-        <div class="w3-center w3-padding-32">
-            <ul class="w3-pagination">
-            <li><a class="w3-black" href="#">1</a></li>
-            <li><a class="w3-hover-black" href="#">2</a></li>
-            <li><a class="w3-hover-black" href="#">3</a></li>
-            <li><a class="w3-hover-black" href="#">4</a></li>
-            <li><a class="w3-hover-black" href="#">»</a></li>
-            </ul>
-        </div>
+            <!-- Pagination -->
+            <section class="w3-center w3-padding-32">
+                <ul class="w3-pagination">
+                <li><a class="w3-black" href="#">1</a></li>
+                <li><a class="w3-hover-black" href="#">2</a></li>
+                <li><a class="w3-hover-black" href="#">3</a></li>
+                <li><a class="w3-hover-black" href="#">4</a></li>
+                <li><a class="w3-hover-black" href="#">»</a></li>
+                </ul>
+            </section>
 
         <!-- End page content -->
         </main>
