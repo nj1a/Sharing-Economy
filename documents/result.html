@@ -1,24 +1,112 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>result</title>
-        <!-- css -->
-        <link href="style.css" type="text/css" rel="stylesheet">
-        <!-- jquery liberary -->
-        <script src="" type="text/javascript" defer></script>
-        <!-- script -->
-        <script src="" type="text/javascript" defer></script>
-    </head>
-    <body>
-        <form>
-            <input class="search_bar" type="text" name="search_info" value=""><br>
-            <input class="search" type="button" value="search"> <br>
-        </form>
-        <input type="checkbox" name="campus" value="campus">campus<br>
-        <button class="function_buttom">sort</button>
-        <ul>
+        <title>Search Results</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-indigo.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../assets/css/style.css">
 
-        </ul>
+        <script src="../assets/js/jQuery-3.0.0.js" defer></script>
+        <script src="../assets/js/script.js" defer></script>
+    </head>
+    
+    <body class="w3-light-grey w3-content" style="max-width:1600px">
+
+        <!-- Navbar -->
+        <nav class="w3-top">        
+        </nav>
+
+        <!-- Navbar on small screens -->
+        <nav id="navS" class="w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:51px">
+        </nav>
+
+        <!-- !PAGE CONTENT! -->
+        <main class="w3-main" style="margin-left:300px;margin-top:80px;">
+
+        <!-- Filter -->
+        <section class="w3-container">
+            <a href="#"><img src="img_avatar_g2.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+            
+            <div class="w3-section w3-bottombar w3-padding-16">
+            <span class="w3-margin-right">Filter:</span>
+            <button class="w3-btn">ALL</button>
+            <button class="w3-btn w3-white"><i class="fa fa-diamond w3-margin-right"></i>Design</button>
+            <button class="w3-btn w3-white w3-hide-small"><i class="fa fa-photo w3-margin-right"></i>Photos</button>
+            <button class="w3-btn w3-white w3-hide-small"><i class="fa fa-map-pin w3-margin-right"></i>Art</button>
+            </div>
+        </section>
+        
+        <!-- First Photo Grid-->
+        <div class="w3-row-padding">
+            <div class="w3-third w3-container w3-margin-bottom">
+            <img src="img_mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container w3-white">
+                <p><b>Lorem Ipsum</b></p>
+                <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+            </div>
+            </div>
+            <div class="w3-third w3-container w3-margin-bottom">
+            <img src="img_lights.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container w3-white">
+                <p><b>Lorem Ipsum</b></p>
+                <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+            </div>
+            </div>
+            <div class="w3-third w3-container">
+            <img src="img_nature.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container w3-white">
+                <p><b>Lorem Ipsum</b></p>
+                <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+            </div>
+            </div>
+        </div>
+        
+        <!-- Second Photo Grid-->
+        <div class="w3-row-padding">
+            <div class="w3-third w3-container w3-margin-bottom">
+            <img src="img_fjords.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container w3-white">
+                <p><b>Lorem Ipsum</b></p>
+                <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+            </div>
+            </div>
+            <div class="w3-third w3-container w3-margin-bottom">
+            <img src="img_lights.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container w3-white">
+                <p><b>Lorem Ipsum</b></p>
+                <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+            </div>
+            </div>
+            <div class="w3-third w3-container">
+            <img src="img_mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container w3-white">
+                <p><b>Lorem Ipsum</b></p>
+                <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+            </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="w3-center w3-padding-32">
+            <ul class="w3-pagination">
+            <li><a class="w3-black" href="#">1</a></li>
+            <li><a class="w3-hover-black" href="#">2</a></li>
+            <li><a class="w3-hover-black" href="#">3</a></li>
+            <li><a class="w3-hover-black" href="#">4</a></li>
+            <li><a class="w3-hover-black" href="#">»</a></li>
+            </ul>
+        </div>
+
+        <!-- End page content -->
+        </main>
+
+        <!-- Footer -->
+        <footer>
+        </footer>
+
     </body>
 </html>
+

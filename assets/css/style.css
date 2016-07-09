@@ -1,3 +1,20 @@
-html, body, h1, h2, h3, h4, h5 {
-    font-family: "Open Sans", sans-serif
+* {
+    font-family: "Open Sans", sans-serif;
+}
+
+input[type=text] {
+    width: 30%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 2px;
+    font-size: 18px;
+    background-color: white;
+    padding: 5px 20px 5px 20px;
+    margin-top: 3px;
+    margin-left: 100px;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 50%;
 }

@@ -1,19 +1,6 @@
-// Accordion
-function myFunction(id) {
-    var x = document.getElementById(id);
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-        x.previousElementSibling.className += " w3-theme-d1";
-    } else {
-        x.className = x.className.replace("w3-show", "");
-        x.previousElementSibling.className =
-        x.previousElementSibling.className.replace(" w3-theme-d1", "");
-    }
-}
-
 // Used to toggle the menu on smaller screens when clicking on the menu button
 function openNav() {
-    var x = document.getElementById("navDemo");
+    var x = document.getElementById("navS");
     if (x.className.indexOf("w3-show") == -1) {
         x.className += " w3-show";
     } else {
@@ -22,8 +9,9 @@ function openNav() {
 }
 
 $(document).ready(function() {
-    $('#btn1').click(myFunction('#Demo1'));
-    $('#btn2').click(myFunction('#Demo2'));
-    $('#btn3').click(myFunction('#Demo3'));
-    openNav();
+
+    $('nav').load('../assets/common/nav.html');
+    $('#navS').load('../assets/common/navS.html');
+    
+    $('footer').load('../assets/common/footer.html');
 });
