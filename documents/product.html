@@ -7,221 +7,277 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
         <link rel="stylesheet" href="../assets/css/style.css">
+        <link rel="stylesheet" href="../assets/css/product_style.css">
 
         <script src="../assets/js/jQuery-3.0.0.js" defer></script>
         <script src="../assets/js/script.js" defer></script>
-    <style>
-        #menu_bar{
-            width: 1vp;
-            height: 50px;
-            background-color: black;
-        }
-        div#wrap{
-            /*width: 900px;
-            height: 1200px;*/
-            margin: auto;
-
-        }
-        body#entity{
-
-            font-family: Arial;
-            min-height: 1250px;
-
-        }
-        header#logo img{
-            width: 975px;
-            border-style: groove;
-        }
-        article#beef{
-            background-color: white;
-            width: 975px;
-            border-style: groove;
-        }
-        header#product{
-            margin-left: 40%;
-            font-size: 30px;    
-            position: relative;
-            margin-top: 7px;
-        }
-        article#beef p{
-            position: absolute;
-            margin: 1% auto auto 400px;
-            font-size: 20px;
-        }
-        #beef aside img {
-            width: 35%;
-            height: auto;
-            margin: auto auto auto 2%;
-            border-style: inset;
-        }
-        div#capt figure {
-            display: inline-block;
-            width: 150px;
-            margin-bottom: 100px;
-            vertical-align: top;
-        }
+        <script src="../assets/js/product_script.js" defer></script>
         
-        div#capt figure img{
-            width: 200px;
-            border-style: groove;
-        }
-        
-        /******************************* END OF PRODUCT AREA ******************/
-        
-        section#potatos{
-            margin-top: 20px;
-        }
-        
-        div#comment_section{
-            position: absolute;
-            background-color: white;
-            border-style: groove;
-            width: 500px;
-            height: 300px;
-        }
-        
-        div#recommandation{
-            position: absolute;
-            background-color: white;
-            border-style: groove;
-            margin: auto auto auto 525px;
-            width: 450px;
-            height: 300px;
-        }
-
-        div#question{
-            position: absolute;
-            background-color: white;
-            border-style: groove;
-            margin: 170px auto auto 525px;
-            height: 130px;
-            width:450px
-        }
-
-        div#questiontitle, #abouttitle, #shiptitle{
-            background-color: lightgrey;
-            position: absolute;
-            margin: -19px auto auto 20px;
-            border-style: groove;
-            font-size: 25px;
-        }
-        
-        footer#bottom{
-            background-color: white;
-            margin-top: 330px;
-            position: absolute;
-            height: 13px;
-            width: 975px;
-            border-style: groove;
-            font-family: italic;
-            font-size: 11px;
-        }
-        
-        div#comment_section p, #recommandation p, #question p{
-            padding-left: 5px;
-            padding-top: 2px;
-            padding-right: 10px;
-            text-align: justify;
-            font-size: 18px;
-        }
-        
-        div#comment_section p#pictureparagraph{
-            padding-left: 50%;    
-        }
-        
-        img#parcel{
-            position: absolute;
-        }
-        
-        img#thinker{
-            height: 100px;
-            width: auto;
-            position: absolute;
-            margin-left: 70%;
-        }
-        
-        div#question p{
-            margin-right: 28%;
-        }    
-    </style>
 </head>
 <div id="wrap">
 
 <body id="entity">
 
         <!-- Navbar -->
+<!--         <nav class="w3-top">        
+        </nav> -->
+
+        <!-- Navbar on small screens -->
+ <!--        <nav id="navS" class="w3-hide w3-hide-large w3-hide-medium w3-top">
+        </nav> -->
         <nav class="w3-top">        
         </nav>
 
         <!-- Navbar on small screens -->
         <nav id="navS" class="w3-hide w3-hide-large w3-hide-medium w3-top">
         </nav>
-<main class="main">
-            <section id="first">
-            <article id="beef">
-                <header id="product">Organic banana </header>
-                    
-                <aside id="first"><p><b>Owner Info: </b></br>
-                                        - Name: Obama   </br>
-                                        - Email: haha@gmail.com    </br>
-                                        - Phone #: 647        </br>    
-                    
-                </p><img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Bananas_white_background_DS.jpg"/></aside>
-                    
-                
-                    
-                <div id="capt">
-
-                       <figure>
-                        <img id="one"  src="https://upload.wikimedia.org/wikipedia/commons/4/44/Bananas_white_background_DS.jpg" />
-                        <figcaption>Caption 1</br>
-                        </figcaption>
-                       </figure>
-                        
-                    <figure>
-                        <img id="two"  src="https://upload.wikimedia.org/wikipedia/commons/4/44/Bananas_white_background_DS.jpg" />
-                        <figcaption> Caption 2</figcaption>
-                    </figure>
-                        
-                      <figure>
-                     <img id="three" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Bananas_white_background_DS.jpg" />
-                     <figcaption>Caption 3</figcaption>
-                     </figure>
-                        
-                    <figure>
-                    <img id="four" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Bananas_white_background_DS.jpg" />
-                    <figcaption>Caption 4</figcaption>
-                    </figure>
-
-                 </div>
-                    
-                
-                </article>
-                    
-            </section>
         
-    <section id="potatos">
-                    
-                        <div id="comment_section">
-                            <h3>Comment: </h3>
-                            <p>Nice banana -User1</p>
-                            <p>Love it -User2</p>
+        <div id='product_page'>
+            <!-- Need to have a word limit -->
+            <div id='product_title'>
+                Uni-ball Signo 207 gel pen
+            </div>
+            <div id='product_image'>
+                <img src="../assets/images/product_1.jpg" class="slide_image" alt="">
+                <img src="../assets/images/product_2.jpg" class="slide_image" alt="">
+                <img src="../assets/images/product_3.jpg" class="slide_image" alt="">
 
+                <a class"slide_button" id="left_slide_button" onclick="plusDivs(-1)">&lt;</a>
+                <a class="slide_button" id="right_slide_button" onclick="plusDivs(1)">&gt;</a>
+            </div>
+
+            <div id='product_info'>
+                <div id='product_info_text'>
+                    <h1>Product Description</h1>
+                    <table>
+                        <tr>    
+                            <td>
+                                Rating:
+                            </td>
+                            <td>
+                                &#9733;&#9733;&#9733;&#9733;&#9734;
+                                <a href="">Rate this product</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Name:</td>
+                            <td>Uni-Ball Signo 207</td>
+                        </tr>
+                        <tr>
+                            <td>Quantity Available:</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                On/Off Campus:
+                            </td>
+                            <td>
+                                On
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Loaning/Selling:
+                            </td>
+                            <td>
+                                Loaning
+                            </td>
+                        </tr>   
+                        <tr>
+                            <td>Loan Duration:</td>
+                            <td>Less than a day</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Date Listed:
+                            </td>
+                            <td>
+                                July 7, 2016
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Description:
+                            </td>
+                            <td>
+                                Hi everyone! This is the smoothest pen I have ever used. And it is my favourite. Every pen has at least 50% ink in it, so if you want a nice pen for your exam, you will have enough ink to survive. Feel free to ask if you have any questions. 
+                            </td>
+                        </tr>
+                    </table>
+                    <h1>Owner Info</h1>
+                    <table>
+                        <tr>
+                            <td>Username:</td>
+                            <td><a href="">Iamgod420</a></td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>imgod420@gmail.com</td>
+                        </tr>
+                        <tr>
+                            <td>Owner Rating:</td>
+                            <td>&#9733;&#9733;&#9733;&#9734;&#9734;</td>
+                        </tr>
+                        <tr>
+                            <td>Date Joined:</td>
+                            <td>Decemeber 29 2015</td>
+                        </tr>
+                    </table>
+                    <div id='contact_seller_button' class='product_info_button'>
+                        <a href="">Contact Seller</a>
+                    </div>
+                    <div id='buy_button' class='product_info_button'>
+                        <a href="">Get it now for $2</a>
+                    </div>
+                </div>
+            </div>
+            <a href="#product_rating">
+                <div id='show_more'>
+                    Show more
+                </div>              
+            </a>
+
+            <div id='product_rating'>
+                <h1>Customer Reviews</h1>
+                <div id='product_rating_text'>
+                    <span>Overall Rating: &#9733;&#9733;&#9733;&#9733;&#9734;</span> <br>
+                    <textarea name="comment" cols="30" rows="10" form='review_submission' id='review_box'>Type your review here</textarea>
+                    <span>Check your rating here: </span>
+                    <span id='star'><span id='star1' >&#9734;</span><span id='star2'>&#9734;</span><span id='star3'>&#9734;</span><span id='star4'>&#9734;</span><span id='star5'>&#9734;</span></span>
+                    <form action="" id='review_submission'>
+                        <input type="submit" value='Submit'>
+                    </form>
+                    <div id='customer_rating'>
+                        <h2>Other customers' ratings</h2>
+                        <div id='customer_rating_text'>
+                            <div class='customer_rating'>
+                                <span class='comment_username'>
+                                    <a href="">User1</a>
+                                </span>
+                                <span class='comment_rating'>
+                                    &#9733;&#9733;&#9733;&#9733;&#9733;
+                                </span>
+                                <span class='comment_date'>
+                                    July 6, 2016
+                                </span>
+                                <div class='comment'>
+                                        OMG! Best pen ever love it.
+                                </div>
+                            </div>
+                            <div class='customer_rating'>
+                                <span class='comment_username'>
+                                    <a href="">User2</a>
+                                </span>
+                                <span class='comment_rating'>
+                                    &#9734;&#9734;&#9734;&#9734;&#9734;
+                                </span>
+                                <span class='comment_date'>
+                                    July 5, 2016
+                                </span>
+                                <br>
+                                <div class='comment'>
+                                    Do not get this pen! I used it for my econ101 exam and it stopped writing after the first page. I asked the prof and see if she had any pen and she didn't. Right now I am crying because all I answered was 2 questions and I left the rest empty. 
+                                </div>
+                            </div>
+                            <div class='customer_rating'>
+                                <span class='comment_username'>
+                                    <a href="">User2</a>
+                                </span>
+                                <span class='comment_rating'>
+                                    &#9734;&#9734;&#9734;&#9734;&#9734;
+                                </span>
+                                <span class='comment_date'>
+                                    July 5, 2016
+                                </span>
+                                <br>
+                                <div class='comment'>
+                                    Do not get this pen! I used it for my econ101 exam and it stopped writing after the first page. I asked the prof and see if she had any pen and she didn't. Right now I am crying because all I answered was 2 questions and I left the rest empty. 
+                                </div>
+                            </div>
+                            <div class='customer_rating'>
+                                <span class='comment_username'>
+                                    <a href="">User2</a>
+                                </span>
+                                <span class='comment_rating'>
+                                    &#9734;&#9734;&#9734;&#9734;&#9734;
+                                </span>
+                                <span class='comment_date'>
+                                    July 5, 2016
+                                </span>
+                                <br>
+                                <div class='comment'>
+                                    Do not get this pen! I used it for my econ101 exam and it stopped writing after the first page. I asked the prof and see if she had any pen and she didn't. Right now I am crying because all I answered was 2 questions and I left the rest empty. 
+                                </div>
+                            </div>
+                            <div class='customer_rating'>
+                                <span class='comment_username'>
+                                    <a href="">User2</a>
+                                </span>
+                                <span class='comment_rating'>
+                                    &#9734;&#9734;&#9734;&#9734;&#9734;
+                                </span>
+                                <span class='comment_date'>
+                                    July 5, 2016
+                                </span>
+                                <br>
+                                <div class='comment'>
+                                    Do not get this pen! I used it for my econ101 exam and it stopped writing after the first page. I asked the prof and see if she had any pen and she didn't. Right now I am crying because all I answered was 2 questions and I left the rest empty. 
+                                </div>
+                            </div>
+                            <div class='customer_rating'>
+                                <span class='comment_username'>
+                                    <a href="">User3</a>
+                                </span>
+                                <span class='comment_rating'>
+                                    &#9733;&#9733;&#9733;&#9733;&#9733;
+                                </span>
+                                <span class='comment_date'>
+                                    July 5, 2016
+                                </span>
+                                <br>
+                                <div class='comment'>
+                                    Aced the exam with this pen. Thanks dad.
+                                </div>
+                            </div>
                         </div>
-                        <div id='recommandation'>
-                            <h3>Related Product:</h3>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/220px-Red_Apple.jpg" alt="">
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div id='recommendation'>
+                <h1>Related Product</h1>
+                <div id='related_product_list'>
+                    <a href="">
+                        <div class='related_product'>
+                            <img src="../assets/images/related_product_1.jpg" alt="">
+                            <span class='related_product_title'>
+                                Pilot G2 gel pen
+                            </span>
                         </div>
-                        
+                    </a>
+                    <a href="">
+                        <div class='related_product'>
+                            <img src="../assets/images/related_product_2.jpg" alt="">
+                            <span class='related_product_title'>
+                                Selling Zebra G-301
+                            </span>
+                        </div>
+                    </a>
+                    <a href="">
+                        <div class='related_product'>
+                            <img src="../assets/images/related_product_3.png" alt="">
+                            <span class='related_product_title'>
+                                Awesome Calculator For Sale
+                            </span>
+                        </div>
+                    </a>
 
-                        
-                    
-                    </section >
-</main>
-
-
-
-                        
-</body>
-</div>
+                </div>
+            </div>
+            <footer>
+                Hi I am footer
+            </footer>
+        </div>
+    </body>
 </html>
