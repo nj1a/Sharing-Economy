@@ -1,0 +1,209 @@
+body{
+	font-family: 'Open Sans', sans-serif;
+}
+
+.span12 {
+	width:100%;
+}
+
+.span6 {
+	width:50%;
+}
+
+.span3{
+	width:31.25%;
+}
+
+.error{
+	width:100%;
+	font-size:80%;
+	color:red;
+	display: block;
+}
+.pd12{
+	padding-left:12px;
+}
+ .login-box [class*="span"] {
+    box-sizing: border-box;
+    float: left;
+    min-height: 1px;
+    padding-left: 12px;
+}
+.profile-section{
+	width:981px;
+	
+	margin:0 auto 0 auto;
+}
+.profile-wrapper {
+	border:solid 1px black;
+	width: 100%;
+	
+	
+}
+
+.information{
+	margin-bottom:auto;
+}
+.information::after {
+	clear: both;
+    content: ".";
+    display: block;
+
+}
+#work.hidden{
+	display:none;
+}
+
+.hidden{
+	display:none;
+}
+
+#work{
+	display: block;
+	
+}
+
+#work::after, #work::before{
+	content: ".";
+	visibility: hidden;
+
+}
+.profile-wrapper > .title {
+	color:red;
+	border:solid 1px black;
+	
+}
+
+.profile-wrapper > .information {
+	color:blue;
+	border:solid 1px black;
+	
+
+}
+
+
+.info-nav {
+
+	width: 242px;
+	
+	position: relative;
+}
+
+.info-contents-wrapper {
+	float:right;
+	padding: 5px 10px;
+	border-left: 1px black solid;
+	
+	/*border:solid 1px black;*/
+}
+
+
+
+.info-nav::before, .info-nav::after {
+	clear:both;
+	content: "";
+	/*visibility: hidden;*/
+
+	
+
+}
+
+.contents{
+	width:731px;
+	position:relative;
+
+	
+}
+div, section {
+	display: block;
+}
+
+
+
+input {
+	width:100%;
+	
+}
+
+
+header {
+	border-bottom: solid black 1px;
+}
+
+a:link{
+	color:black;
+	text-decoration:none;
+}
+a:visited{
+	text-decoration: none;
+	color:black;
+}
+a:hover{
+	font-weight: bold;
+}
+a.underlined:hover{
+	text-decoration:underline;
+}
+
+
+footer{
+	clear:left;
+	margin-top:100px;
+	
+}
+li {
+	list-style: none;
+	
+}
+.text-centre{
+	text-align: center;
+}
+.botmargin20{
+	margin-bottom: 20px
+}
+
+.old, .new {
+	margin-left:13%;
+	
+}
+.login-box{
+	height:45vh;
+	
+}
+.middle-wall{
+	border-right: 2px black solid;
+	display:inline-block;
+	height:250px;
+	left:50%;
+	position:absolute;
+}
+
+.button {
+	margin-top:10%;
+	line-height: 25px;
+	width:50%;
+	background-color:#005892;
+	color:white;
+	overflow: auto;
+	font-weight: bold;
+}
+
+.button:hover{
+	background-color: white;
+	color:#005892;
+	font-weight: bold;
+}
+
+.top{
+	margin-top: 100px;
+	
+}
+.title{
+	/*margin: 3px 0px 3px;*/
+	padding: 5px 0px 5px 3px;
+}
+
+.work-title {
+	text-decoration: underline;
+}
+
