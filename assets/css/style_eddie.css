@@ -35,7 +35,7 @@ body{
 	margin:0 auto 0 auto;
 }
 .profile-wrapper {
-	border:solid 1px black;
+	border:solid 1px #d3d6db;;
 	width: 100%;
 	
 	
@@ -50,35 +50,30 @@ body{
     display: block;
 
 }
-#work.hidden{
+
+.profile-info{
 	display:none;
 }
-
-.hidden{
-	display:none;
+.profile-info li{
+	list-style:none;
 }
 
-#work{
-	display: block;
-	
+.profile-info.selected {
+	display:block;
 }
 
-#work::after, #work::before{
-	content: ".";
-	visibility: hidden;
-
+.bot_bor {
+	border-bottom: 1px solid  #d3d6db;
 }
+
 .profile-wrapper > .title {
-	color:red;
-	border:solid 1px black;
+	color:#1d2129;;
+	
 	
 }
 
 .profile-wrapper > .information {
-	color:blue;
-	border:solid 1px black;
-	
-
+	color:#151B54;
 }
 
 
@@ -87,14 +82,64 @@ body{
 	width: 242px;
 	
 	position: relative;
+
+
 }
+.info-nav ul{
+	list-style: none;
+	padding-left: 0;
+}
+.info-nav li{
+	margin-bottom: 6px;
+	
+	
+}
+.pl_8 {
+	padding-left:8px;
+}
+.work-list > ul{
+	padding-left:0;
+}
+
+.work-list li {
+ 	border-bottom: 1px solid #e9ebee;
+ 	margin-bottom: 5px;
+}
+
+.work-list li::after {
+ 	clear: both;
+    content: ".";
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+}
+
+#work li , #education li{
+	padding-left: 10px;
+}
+
+
 
 .info-contents-wrapper {
 	float:right;
 	padding: 5px 10px;
 	border-left: 1px black solid;
 	
-	/*border:solid 1px black;*/
+
+}
+
+.info-key{
+	color: #95B9C7	;
+	float:left;
+	width:30%;
+}
+
+.info-value{
+	width:65%;
+	float:left;
+	color:#151B54;
 }
 
 
@@ -102,10 +147,6 @@ body{
 .info-nav::before, .info-nav::after {
 	clear:both;
 	content: "";
-	/*visibility: hidden;*/
-
-	
-
 }
 
 .contents{
@@ -145,6 +186,21 @@ a.underlined:hover{
 	text-decoration:underline;
 }
 
+#nav1, #nav2{
+	color:#95B9C7;
+}
+
+
+li.nav-menu{
+	color:#ADDFFF;
+}
+
+li.selected > a{
+	border-left:2px #151B54 solid;
+	font-weight: bold;
+	color:#151b54 !important;
+}
+
 
 footer{
 	clear:left;
@@ -160,6 +216,12 @@ li {
 }
 .botmargin20{
 	margin-bottom: 20px
+
+}
+.user{
+	font-size: 30px;
+	font-weight: bold;
+	color:#151B54;
 }
 
 .old, .new {
@@ -199,11 +261,27 @@ li {
 	
 }
 .title{
-	/*margin: 3px 0px 3px;*/
+	
 	padding: 5px 0px 5px 3px;
+}
+.title-head{
+	width:100%;
+	border-bottom: 1px solid #d3d6db;
+
 }
 
 .work-title {
-	text-decoration: underline;
+	width:100%;
+	font-weight: bold;
+	
+}
+
+#about{
+	color:#151B54;
+	font-weight: bold;
+	padding-left: 10px;
+	background: #f6f7f9 none repeat scroll 0 0;
+    border-bottom: 1px solid #d3d6db;
+    border-radius: 2px 2px 0 0;
 }
 
