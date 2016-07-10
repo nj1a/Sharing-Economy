@@ -10,8 +10,8 @@ function openNav() {
 
 $(document).ready(function() {
 
-    $('nav').load('../assets/common/nav.html');
-    $('#navS').load('../assets/common/navS.html');
+    // $('nav').load('../assets/common/nav.html');
+    // $('#navS').load('../assets/common/navS.html');
     
-    $('footer').load('../assets/common/footer.html');
+    // $('footer').load('../assets/common/footer.html');
 });

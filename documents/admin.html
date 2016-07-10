@@ -4,152 +4,231 @@
         <title>Admin</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-indigo.css">
-        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-green.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
         <link rel="stylesheet" href="../assets/css/style.css">
 
         <script src="../assets/js/jQuery-3.0.0.js" defer></script>
         <script src="../assets/js/script.js" defer></script>
     </head>
-
     <body class="w3-theme-l5">
 
         <!-- Navbar -->
-        <nav class="w3-top">        
+        <nav class="w3-top">    
+            <ul class="w3-navbar w3-theme-d2 w3-left-align w3-large">
+                <li class="w3-hide-medium w3-hide-large w3-opennav w3-right">
+                    <a id="clickNav" class="w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                </li>
+                <li><a href="#" class="w3-padding-large w3-theme-d4">
+                    <i class="fa fa-home w3-margin-right"></i>
+                    Logo
+                    </a>
+                </li>
+                <li class="w3-hide-small">
+                    <a href="#" class="w3-padding-large w3-hover-white" title="News">
+                        <i class="fa fa-globe"></i>
+                    </a>
+                </li>
+                <li class="w3-hide-small"><a href="#" class="w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a></li>
+                <li class="w3-hide-small"><a href="#" class="w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a></li>
+                <li class="w3-hide-small w3-dropdown-hover">
+                    <a href="#" class="w3-padding-large w3-hover-white" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></a>
+                    <section class="w3-dropdown-content w3-white w3-card-4">
+                        <a href="#">One new friend request</a>
+                        <a href="#">John Doe posted on your wall</a>
+                        <a href="#">Jane likes your post</a>
+                    </section>
+                </li>
+                <li class="w3-hide-small"><a href="#" class="w3-padding-large w3-hover-white" title="Admin Panel"><i class="fa fa-eye"></i></a></li>
+                <li class="w3-hide-small w3-right"><a href="#" class="w3-padding-large w3-hover-white" title="My Account"><img src="img_avatar2.png" class="w3-circle" style="height:25px;width:25px" alt="Avatar"></a></li>
+                <input type="text" name="search" placeholder="Search..">
+            </ul>            
         </nav>
 
         <!-- Navbar on small screens -->
         <nav id="navS" class="w3-hide w3-hide-large w3-hide-medium w3-top">
+            <ul class="w3-navbar w3-left-align w3-large w3-theme">
+                <li><a class="w3-padding-large" href="#">Link 1</a></li>
+                <li><a class="w3-padding-large" href="#">Link 2</a></li>
+                <li><a class="w3-padding-large" href="#">Link 3</a></li>
+                <li><a class="w3-padding-large" href="#">My Profile</a></li>
+            </ul>
         </nav>
 
-        <!-- Page Container -->
-        <main class="w3-container w3-content main">
-            <!-- The Grid -->
-            <div class="w3-row">
-                <!-- Left Column -->
-                <section class="w3-col m3">
-                    <!-- Profile -->
-                    <article class="w3-card-2 w3-round w3-white">
-                        <section class="w3-container">
-                        <h4 class="w3-center">My Profile</h4>
-                        <p id="profilePic" class="w3-center">
-                            <img src="img_avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar">
-                        </p>
-                        <hr>
-                        <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
-                        <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
-                        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
-                        </section>
-                    </article>
-                    <br>
-                
-                    <!-- Interests -->
-                    <article class="w3-card-2 w3-round w3-white w3-hide-small">
-                        <section class="w3-container">
-                        <p>Interests</p>
-                        <p>
-                            <span class="w3-tag w3-small w3-theme-d5">News</span>
-                            <span class="w3-tag w3-small w3-theme-d4">W3Schools</span>
-                            <span class="w3-tag w3-small w3-theme-d3">Labels</span>
-                            <span class="w3-tag w3-small w3-theme-d2">Games</span>
-                            <span class="w3-tag w3-small w3-theme-d1">Friends</span>
-                            <span class="w3-tag w3-small w3-theme">Games</span>
-                            <span class="w3-tag w3-small w3-theme-l1">Friends</span>
-                            <span class="w3-tag w3-small w3-theme-l2">Food</span>
-                            <span class="w3-tag w3-small w3-theme-l3">Design</span>
-                            <span class="w3-tag w3-small w3-theme-l4">Art</span>
-                            <span class="w3-tag w3-small w3-theme-l5">Photos</span>
-                        </p>
-                        </section>
-                    </article>
-                    <br>
-                
-                <!-- End Left Column -->
-                </section>
-                
-                <!-- Right Column -->
-                <section class="w3-col m9">
-                
-                    <article class="w3-row-padding">
-                        <section class="w3-col m12">
-                            <section class="w3-card-2 w3-round w3-white">
-                                <section class="w3-container w3-padding">
-                                    <h6 class="w3-opacity">What do you want to say?</h6>
-                                    <p contenteditable="true" class="w3-border w3-padding">Status: Feeling Blue</p>
-                                    <button type="button" class="w3-btn w3-theme"><i class="fa fa-pencil"></i>  Post</button>
-                                </section>
-                            </section>
-                        </section>
-                    </article>
-                    
-                    <article class="w3-container w3-card-2 w3-white w3-round w3-margin"><br>
-                        <img src="img_avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-                        <span class="w3-right w3-opacity">1 min</span>
-                        <h4>John Doe</h4><br>
-                        <hr class="w3-clear">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing 
-                            elit, sed do eiusmod tempor incididunt ut labore et 
-                            dolore magna aliqua. Ut enim ad minim veniam, quis 
-                            nostrud exercitation ullamco laboris nisi ut aliquip 
-                            ex ea commodo consequat.</p>
-                        <section class="w3-row-padding" style="margin:0 -16px">
-                            <section class="w3-half">
-                                <img src="img_lights.jpg" style="width:100%" alt="Northern Lights" class="w3-margin-bottom">
-                            </section>
-                            <section class="w3-half">
-                                <img src="img_nature.jpg" style="width:100%" alt="Nature" class="w3-margin-bottom">
-                            </section>
-                        </section>
-                        <button type="button" class="w3-btn w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button>
-                        <button type="button" class="w3-btn w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button>
-                    </article>
-                    
-                    <article class="w3-container w3-card-2 w3-white w3-round w3-margin"><br>
-                        <img src="img_avatar5.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-                        <span class="w3-right w3-opacity">16 min</span>
-                        <h4>Jane Doe</h4><br>
-                        <hr class="w3-clear">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing 
-                            elit, sed do eiusmod tempor incididunt ut labore et 
-                            dolore magna aliqua. Ut enim ad minim veniam, quis 
-                            nostrud exercitation ullamco laboris nisi ut aliquip 
-                            ex ea commodo consequat.</p>   
-                        <button type="button" class="w3-btn w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button>
-                        <button type="button" class="w3-btn w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button>
-                    </article>
-
-                    <article class="w3-container w3-card-2 w3-white w3-round w3-margin"><br>
-                        <img src="img_avatar6.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-                        <span class="w3-right w3-opacity">32 min</span>
-                        <h4>Angie Jane</h4><br>
-                        <hr class="w3-clear">
-                        <p>Have you seen this?</p>
-                        <img src="img_nature.jpg" style="width:100%" class="w3-margin-bottom">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing 
-                            elit, sed do eiusmod tempor incididunt ut labore et 
-                            dolore magna aliqua. Ut enim ad minim veniam, quis 
-                            nostrud exercitation ullamco laboris nisi ut aliquip 
-                            ex ea commodo consequat.</p>   
-                        <button type="button" class="w3-btn w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button>
-                        <button type="button" class="w3-btn w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button>
-                    </article>
-                
-                <!-- End Right Column -->
-                </section>
-                
-            <!-- End Grid -->
-            </div>
+    <!-- !PAGE CONTENT! -->
+    <main class="w3-content main" style="margin-top:43px;">
         
-        <!-- End Page Container -->
-        </main>
-        <br>
 
-        <!-- Footer -->
+    <!-- Header -->
+    <header class="w3-container" style="padding-top:22px">
+        <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
+    </header>
+
+    <div class="w3-row-padding w3-margin-bottom">
+        <div class="w3-quarter">
+        <div class="w3-container w3-theme-l1 w3-padding-16">
+            <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+            <div class="w3-right">
+            <h3>52</h3>
+            </div>
+            <div class="w3-clear"></div>
+            <h4>Messages</h4>
+        </div>
+        </div>
+        <div class="w3-quarter">
+        <div class="w3-container w3-theme-l2 w3-padding-16">
+            <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
+            <div class="w3-right">
+            <h3>99</h3>
+            </div>
+            <div class="w3-clear"></div>
+            <h4>Groups</h4>
+        </div>
+        </div>
+        <div class="w3-quarter">
+        <div class="w3-container w3-theme-l1 w3-padding-16">
+            <div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div>
+            <div class="w3-right">
+            <h3>23</h3>
+            </div>
+            <div class="w3-clear"></div>
+            <h4>Shares</h4>
+        </div>
+        </div>
+        <div class="w3-quarter">
+        <div class="w3-container w3-theme-l2 w3-text-white w3-padding-16">
+            <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+            <div class="w3-right">
+            <h3>50</h3>
+            </div>
+            <div class="w3-clear"></div>
+            <h4>Users</h4>
+        </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="w3-container">
+        <h5>General Stats</h5>
+        <p>New Visitors</p>
+        <div class="w3-progress-container w3-grey">
+        <div id="myBar" class="w3-progressbar w3-green" style="width:25%">
+            <div class="w3-center w3-text-white">+25%</div>
+        </div>
+        </div>
+
+        <p>New Users</p>
+        <div class="w3-progress-container w3-grey">
+        <div id="myBar" class="w3-progressbar w3-orange" style="width:50%">
+            <div class="w3-center w3-text-white">50%</div>
+        </div>
+        </div>
+
+        <p>Bounce Rate</p>
+        <div class="w3-progress-container w3-grey">
+        <div id="myBar" class="w3-progressbar w3-red" style="width:75%">
+            <div class="w3-center w3-text-white">75%</div>
+        </div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="w3-container">
+        <h5>Countries</h5>
+        <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+        <tr>
+            <td>United States</td>
+            <td>65%</td>
+        </tr>
+        <tr>
+            <td>UK</td>
+            <td>15.7%</td>
+        </tr>
+        <tr>
+            <td>Russia</td>
+            <td>5.6%</td>
+        </tr>
+        <tr>
+            <td>Spain</td>
+            <td>2.1%</td>
+        </tr>
+        <tr>
+            <td>India</td>
+            <td>1.9%</td>
+        </tr>
+        <tr>
+            <td>France</td>
+            <td>1.5%</td>
+        </tr>
+        </table><br>
+        <button class="w3-btn">More Countries  <i class="fa fa-arrow-right"></i></button>
+    </div>
+    <hr>
+
+    
+    <!-- End page content -->
+    </main>
+    <br>
+
+            <!-- Footer -->
         <footer>
+            <section class="w3-container w3-theme-d3 w3-padding-16">
+                <section class="w3-content">
+                    <article class="w3-container w3-third">
+                        <h5 class="w3-bottombar w3-border-green">Company</h5>
+                        <p>About</p>
+                        <p>Careers</p>
+                        <p>Policies</p>
+                        <p>Terms and Conditions</p>
+                        <p>Privacy</p>
+                    </article>
+                    <article class="w3-container w3-third">
+                        <h5 class="w3-bottombar w3-border-green">Discover</h5>
+                        <p>Safety</p>
+                        <p>Business Travel</p>
+                        <p>Sitemap</p>
+                    </article>
+                    <diarticlev class="w3-container w3-third">
+                        <h5 class="w3-bottombar w3-border-green">Guiding</h5>
+                        <p>Why guiding</p>
+                        <p>Hospitality</p>
+                        <p>Responsibilities</p>
+                    </article>
+                </section>
+            </section>
+            <section class="w3-container w3-theme-d5">
+                <p>Copyright © 2016 Wanderland Inc. All rights reserved.</p>
+            </section>
         </footer>
+
+    <script>
+    // Get the Sidenav
+    var mySidenav = document.getElementById("mySidenav");
+
+    // Get the DIV with overlay effect
+    var overlayBg = document.getElementById("myOverlay");
+
+    // Toggle between showing and hiding the sidenav, and add overlay effect
+    function w3_open() {
+        if (mySidenav.style.display === 'block') {
+            mySidenav.style.display = 'none';
+            overlayBg.style.display = "none";
+        } else {
+            mySidenav.style.display = 'block';
+            overlayBg.style.display = "block";
+        }
+    }
+
+    // Close the sidenav with the close button
+    function w3_close() {
+        mySidenav.style.display = "none";
+        overlayBg.style.display = "none";
+    }
+    </script>
+
     </body>
 </html>
-
-
 
