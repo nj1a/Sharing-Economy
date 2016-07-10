@@ -23,9 +23,137 @@ input[type=text]:focus {
     margin-top:51px
 }
 
-.main {
-    margin-top:80px;
+.main-wrap{
+    height:600px;
+    position:relative;
+    margin-bottom: 200px;
 }
+
+.main-content{
+    height:550px;
+    padding-bottom:104px;
+    top:50px;
+    position:relative;
+    color:white;
+    z-index:2;
+}
+
+.main-background {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    overflow:hidden;
+    position: absolute;
+}
+
+
+.background-image {
+    width:100%;
+    height:100%;
+}
+
+.search-background{
+    bottom:0;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    right:0;
+    left:0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+}
+
+header {
+    background: transparent none repeat scroll 0 0;
+    position:absolute;
+    width:100%;
+    z-index:1;
+
+}
+header a{
+    margin-left:10px;
+    float:right;
+    margin-right:10px;
+    color:white;
+}
+
+header a:visited {
+    text-decoration: none;
+}
+header a:link {
+    text-decoration: none;
+}
+header a:hover {
+    text-decoration: underline;
+}
+#pop-wrap1, #pop-wrap2 {
+    display:none;
+    width:100%;
+    height:100%;
+    opacity:.95;
+    top:0;
+    left:0;
+    
+    position:fixed;
+    background-color:#313131;
+    overflow:auto;
+    z-index:20;
+}
+
+#login-pop, #sign-pop{
+    position:absolute;
+    left:42%;
+    top:17%;
+       
+}
+
+.error {
+    color:red;
+}
+
+form.existing, form.newmember {
+max-width:300px;
+min-width:250px;
+padding:10px 50px;
+border:2px solid gray;
+border-radius:10px;
+background-color:#fff;
+}
+
+.button {
+    height: 40px;
+    width: 80px;
+    background-color: #ff5a5f ;
+    border-color: #ff5a5f #ff5a5f #e00007;
+    color:white;
+}
+
+.search-bar {
+    height:40px;
+    width:400px;
+
+}
+
+.text-center{
+    text-align: center;
+}
+
+.v-center{
+    vertical-align:middle;
+    display:table-cell;
+}
+
+.v-wrap {
+    display:table;
+    position:relative;
+    width:100%;
+    height:100%;
+}
+
+
+
+
 
 /*#resultMain {
     margin-left:300px;

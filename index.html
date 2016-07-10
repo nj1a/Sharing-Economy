@@ -1,28 +1,125 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>index</title>
-        <!-- css -->
-        <link href="assets/css/style_barry.css" rel="stylesheet">
-        <!-- jQuery liberary -->
-        <script src="assets/js/jQuery-3.0.0.js"></script>
-        <!-- script -->
-        <script src=""></script>
-        <!-- font -->
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
-    </head>
-    <header class="header">
-        <a class="top" href="#"> Inbox </a>
-        <a class="top" href="#"> Log In/Sign Up </a>
-    </header>
-    <body>
-        <form class="text-centre">
-            <h1>What do you want today?</h1>
-            <input class="search_bar" type="text" name="search_info" value=""><br>
-            <input class="button" type="submit" value="search"> <br>
-        </form>
-    </body>
+<html>
+	<head>
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-indigo.css">
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"> <!-- CSS -->
+
+        <script type="text/javascript" src="assets/js/script_eddie_1.js" defer> 
+        </script>
+
+        <script src="assets/js/jquery-2.2.4.min.js" ></script>
+	</head>
+	<body>
+        <section class="body-wrap">
+
+            <header> 
+                <a id="Help" href="#"> Help </a>
+                <a id="Sign-Up" href="#" onclick="show_sign_pop()"> Sign Up</a>
+                <a id="Log-In" href="#" onclick="show_login_pop()"> Log In </a>
+
+            </header>
+    		<main id="root-content">
+                
+                    <div  id="pop-wrap1">
+                        <section  id="login-pop">
+                            <form class="existing" action="/index/" method="post">
+                                <section class="span12 text-centre"> 
+                                    <h3 class= "inputField" > Login </h3>
+                                </section>
+                                <section class= "inputField">
+                                    <label class= "inputField" for="email"> Email address </label>
+                                    <input  class= "inputField" id ="emailEx" type="email" name ="email" placeholder="Enter your email">
+
+                                    <label for="password"> Password</label>
+                                    <input class= "inputField" id="passwordEx" type="password" name="password">
+                                </section>
+
+                                <section class="span12 text-centre">
+                                    <a class="hover underlined" href="#"> Forgot your password? </a>
+                                </section>
+
+                                <section class="span12 text-centre">
+                                    <input id="existingClient" class="button" type="submit" value="LOGIN">
+                                </section>
+                                            
+                            </form> 
+
+                        </section>
+                    </div>
+
+                    <div id="pop-wrap2">
+
+                        <section id="sign-pop">
+
+
+                            <form class="newmember" action="/index/" method="post">             
+                                <section class="span12 text-centre"> 
+                                    <h3 class= "inputField"> Sign Up </h3>
+                                </section>
+                                <section class="inputField">
+                                    <label for="email"> Email address </label>
+                                    <input class= "inputField" id="emailNew" type="email" name ="email" placeholder="Enter your email">
+                                </section>
+
+                                <section class="inputField"> 
+                                    <label for="password"> Password </label>
+                                    <input class= "inputField" id="passwordNew" type="password" name="password">
+                                </section>
+
+                                <section id="passnew" class="inputField"> 
+                                    <label for="password"> Confirm password </label>
+                                    <input class= "inputField" id="passwordNewConfirm" type="password" name="confirmpassword">
+                                </section>
+
+                                <section class="span12 text-centre">
+                                    <input id="newClient" class="button" type="submit" value="SIGN UP">
+                                </section>
+                            
+                            </form>
+                        </section>
+                    </div>
+                
+
+                <div id="main-contents" class="main-wrap"> 
+                    <section class="main-background">
+                        <image src="assets/images/London_eye.jpg" class="background-image"> </image>
+                        <image src="assets/images/Paris.jpg" class="background-image"> </image>
+                        <image src="assets/images/Greece.jpg" class="background-image"> </image>
+                        
+                    </section>
+                    <section class="main-content text-center">
+                        <section class="v-wrap">
+                            <section class="v-center"> 
+                                <section class="main-text"> 
+                                    <h2> TRAVEL ANYWHERE </h2>
+                                    <h4> hahahahaha hahahahaha </h4>
+
+                                </section>
+
+                            </section>
+                        </section>
+                        <section class="search-background">
+                            <form action="#" method="get">
+                                <input class="search-bar" type="text" name="search-bar">
+                                <input class="button" type="submit" value="search">   
+                            </form>
+                        </section>
+                    </section>
+
+                </div>
+    			<footer> 
+    				<section class="w3-container w3-theme-d3 w3-padding-16">
+    				    <h5>Footer</h5>
+    				</section>
+    				<section class="w3-container w3-theme-d5">
+    				    <p>Copuright 2016</p>
+    				</section>
+    			</footer>
+    		</main>
+        </section>
+	</body>
 </html>
