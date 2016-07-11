@@ -115,7 +115,7 @@ body {
 	padding-left: 15px;
 	padding-right: 15px;
 	font-size: 2vw;
-	background-color: #232A74;
+	background-color: #176457;
 	bottom: 5px;
 
 }
@@ -131,13 +131,12 @@ body {
 
 #contact_seller_button {
 	position: absolute;
-	left: 20px;
+	width: 40%;
+	left: 30%;
+
 }
 
-#buy_button {
-	position: absolute;
-	right: 20px;
-}
+
 
 #show_more {
 	text-align: center;
@@ -145,7 +144,7 @@ body {
 	font-size: 2vw;
 	width: 40%;
 	border: solid gray 1px;
-	margin-left: 30%;
+	margin-left: 30vw;
 }
 #product_rating {
 	display: inline-block;
@@ -225,5 +224,8 @@ body {
 	font-size: 1.5rem;
 	position: absolute;
 	left: 45%;
-	top: 45%;
+	top: 0;
+	width: 50%;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
