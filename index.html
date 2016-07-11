@@ -8,26 +8,26 @@
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"> <!-- CSS -->
 
-        <script type="text/javascript" src="assets/js/script_eddie_1.js" defer> 
+        <script type="text/javascript" src="assets/js/script_eddie_1.js" defer>
         </script>
 
         <script src="assets/js/jquery-2.2.4.min.js" ></script>
 	</head>
-	<body>
+	<body class="w3-theme-l5">
         <section class="body-wrap">
 
-            <header> 
+            <header>
                 <a id="Help" href="#"> Help </a>
                 <a id="Sign-Up" href="#" onclick="show_sign_pop()"> Sign Up</a>
                 <a id="Log-In" href="#" onclick="show_login_pop()"> Log In </a>
 
             </header>
     		<main id="root-content">
-                
+
                     <div  id="pop-wrap1">
                         <section  id="login-pop">
                             <form class="existing" action="/index/" method="post">
-                                <section class="span12 text-centre"> 
+                                <section class="span12 text-centre">
                                     <h3 class= "inputField" > Login </h3>
                                 </section>
                                 <section class= "inputField">
@@ -45,8 +45,8 @@
                                 <section class="span12 text-centre">
                                     <input id="existingClient" class="button" type="submit" value="LOGIN">
                                 </section>
-                                            
-                            </form> 
+
+                            </form>
 
                         </section>
                     </div>
@@ -56,8 +56,8 @@
                         <section id="sign-pop">
 
 
-                            <form class="newmember" action="/index/" method="post">             
-                                <section class="span12 text-centre"> 
+                            <form class="newmember" action="/index/" method="post">
+                                <section class="span12 text-centre">
                                     <h3 class= "inputField"> Sign Up </h3>
                                 </section>
                                 <section class="inputField">
@@ -65,12 +65,12 @@
                                     <input class= "inputField" id="emailNew" type="email" name ="email" placeholder="Enter your email">
                                 </section>
 
-                                <section class="inputField"> 
+                                <section class="inputField">
                                     <label for="password"> Password </label>
                                     <input class= "inputField" id="passwordNew" type="password" name="password">
                                 </section>
 
-                                <section id="passnew" class="inputField"> 
+                                <section id="passnew" class="inputField">
                                     <label for="password"> Confirm password </label>
                                     <input class= "inputField" id="passwordNewConfirm" type="password" name="confirmpassword">
                                 </section>
@@ -78,23 +78,23 @@
                                 <section class="span12 text-centre">
                                     <input id="newClient" class="button" type="submit" value="SIGN UP">
                                 </section>
-                            
+
                             </form>
                         </section>
                     </div>
-                
 
-                <div id="main-contents" class="main-wrap"> 
+
+                <div id="main-contents" class="main-wrap">
                     <section class="main-background">
                         <image src="assets/images/London_eye.jpg" class="background-image"> </image>
                         <image src="assets/images/Paris.jpg" class="background-image"> </image>
                         <image src="assets/images/Greece.jpg" class="background-image"> </image>
-                        
+
                     </section>
                     <section class="main-content text-center">
                         <section class="v-wrap">
-                            <section class="v-center"> 
-                                <section class="main-text"> 
+                            <section class="v-center">
+                                <section class="main-text">
                                     <h2> TRAVEL ANYWHERE </h2>
                                     <h4> hahahahaha hahahahaha </h4>
 
@@ -105,21 +105,43 @@
                         <section class="search-background">
                             <form action="#" method="get">
                                 <input class="search-bar" type="text" name="search-bar">
-                                <input class="button" type="submit" value="search">   
+                                <input class="button" type="submit" value="search">
                             </form>
                         </section>
                     </section>
 
                 </div>
-    			<footer> 
-    				<section class="w3-container w3-theme-d3 w3-padding-16">
-    				    <h5>Footer</h5>
-    				</section>
-    				<section class="w3-container w3-theme-d5">
-    				    <p>Copuright 2016</p>
-    				</section>
-    			</footer>
     		</main>
+            <!-- Footer -->
+            <footer>
+                <section class="w3-container w3-theme-d3 w3-padding-16">
+                    <section class="w3-content">
+                        <article class="w3-container w3-third">
+                            <h5 class="w3-bottombar w3-border-green">Company</h5>
+                            <p>About</p>
+                            <p>Careers</p>
+                            <p>Policies</p>
+                            <p>Terms and Conditions</p>
+                            <p>Privacy</p>
+                        </article>
+                        <article class="w3-container w3-third">
+                            <h5 class="w3-bottombar w3-border-green">Discover</h5>
+                            <p>Safety</p>
+                            <p>Business Travel</p>
+                            <p>Sitemap</p>
+                        </article>
+                        <diarticlev class="w3-container w3-third">
+                            <h5 class="w3-bottombar w3-border-green">Guiding</h5>
+                            <p>Why guiding</p>
+                            <p>Hospitality</p>
+                            <p>Responsibilities</p>
+                        </article>
+                    </section>
+                </section>
+                <section class="w3-container w3-theme-d5">
+                    <p>Copyright © 2016 Wanderland Inc. All rights reserved.</p>
+                </section>
+            </footer>
         </section>
 	</body>
 </html>
