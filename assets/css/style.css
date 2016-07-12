@@ -207,7 +207,7 @@ background-color:#fff;
     
 }
 .middle-wall{
-    
+    top:0;
     border-right: 2px #e9ebee solid;
     display:inline-block;
     height:100%;
@@ -218,12 +218,14 @@ background-color:#fff;
 
 .old{
     margin-left:7.5%;
+    margin-top:2.5%;
 
     
 }
 
 .new{
     margin-left:15%;
+    margin-top:2.5%;
 }
 
 .top{
@@ -235,6 +237,16 @@ background-color:#fff;
 
 #Log-In{
     border: 2px white sold;
+}
+
+#existingClient, #newClient {
+    width:80px;
+    height:30px;
+    border-color: #009688 #009688;
+}
+
+#newClient{
+    margin-top: 10px;
 }
 /*#resultMain {
     margin-left:300px;
