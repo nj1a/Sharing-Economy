@@ -26,7 +26,7 @@ input[type=email], input[type=password] {
 .main {
     margin-top:80px;
 }
- 
+
 
 #navS {
     margin-top:51px
@@ -82,14 +82,14 @@ header {
 }
 header a{
     padding: 3px 5px 3px 5px;
-    
+
     float:right;
-    
+
     margin:7px 10px 0 10px;
     color:white;
     border: 3px white solid;
     border-radius: 5px;
-    
+
 }
 
 header a:visited {
@@ -109,7 +109,7 @@ header a:hover {
     opacity:.95;
     top:0;
     left:0;
-    
+
     position:fixed;
     background-color:#313131;
     overflow:auto;
@@ -128,8 +128,8 @@ header a:hover {
     border-radius:20px;
     background-color:#fff;
 
-    
-       
+
+
 }
 
 .error {
@@ -191,7 +191,7 @@ background-color:#fff;
 
 .span3{
     width:35%;
-} 
+}
 
 .login-box [class*="span"] {
     box-sizing: border-box;
@@ -204,7 +204,7 @@ background-color:#fff;
     height:100%;
     background-color: #fff;
     border-radius:10px;
-    
+
 }
 .middle-wall{
     top:0;
@@ -220,7 +220,7 @@ background-color:#fff;
     margin-left:7.5%;
     margin-top:2.5%;
 
-    
+
 }
 
 .new{
@@ -232,7 +232,7 @@ background-color:#fff;
     font-size: 13px;
     border-radius:20px;
     background-color:#fff;
-    
+
 }
 
 #Log-In{
@@ -247,6 +247,11 @@ background-color:#fff;
 
 #newClient{
     margin-top: 10px;
+}
+
+#create_post {
+    margin-left: 30%;
+    width: 30%;
 }
 /*#resultMain {
     margin-left:300px;
