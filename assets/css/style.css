@@ -140,6 +140,10 @@ background-color:#fff;
 
 }
 
+#search-box{
+    border: 3px solid  #00766a;
+}
+
 .text-center{
     text-align: center;
 }
