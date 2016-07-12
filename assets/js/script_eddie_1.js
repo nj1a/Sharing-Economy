@@ -3,8 +3,9 @@ window.slideNum = 1;
 $(document).ready(function() {
 
 	startSlide();
+
 	$("input[type='submit']#existingClient").click(function(e){
-		
+				
 		return validateEmailandPassword("existing");
 	});
 
@@ -14,22 +15,22 @@ $(document).ready(function() {
 	});
 
 	$(document.getElementById("root-content")).click(function(e){
-
+		//alert(e.target.class);
 	
 		if (e.target.className != "existing" &&
 			e.target.className != "inputField" &&
 			e.target.className != "hover underlined" &&
-			e.target.className != "span12 text-centre" &&
+			e.target.className != "span12 text-center" &&
 			e.target.className != "newmember" &&
-			e.target.className != "background-image") {
+			e.target.className != "background-image" &&
+			e.target.className != "login-box span12" &&
+			e.target.id != "inputField") {
 
-			if (document.getElementById("pop-wrap1").style.display == "block") {
+			if (document.getElementById("pop-wrap").style.display == "block") {
 			
 				close_login_pop();
 				
-			} else if (document.getElementById("pop-wrap2").style.display == "block"){
-				close_sign_pop();
-			}
+			} 
 
 		}
 		
@@ -45,6 +46,7 @@ $(document).ready(function() {
 
 		if (client == "existing"){
 			inputEmail = $("input#emailEx").val();
+			//alert(inputEmail);
 			inputPassword = $("input#passwordEx").val();
 		} else {
 			inputEmail = $("input#emailNew").val();
@@ -75,7 +77,7 @@ $(document).ready(function() {
 			isValid = false;
 
 		} else if (inputPassword == "" && client =="new") {
-			$("input#passwordNew").after("<span class='error'>Provide a password.<br></span>");
+			$("section#passnew").after("<span class='error span'>Provide a password.<br></span>");
 			isValid = false;
 
 		} else if ( inputPassword.length < 8 && client == "existing") {
@@ -119,19 +121,19 @@ $(document).ready(function() {
 
 
 function show_login_pop(){
-	document.getElementById("pop-wrap1").style.display = "block";
+	document.getElementById("pop-wrap").style.display = "block";
 }
 
 function show_sign_pop(){
-	document.getElementById("pop-wrap2").style.display = "block";
+	document.getElementById("pop-wrap").style.display = "block";
 }
 
 function close_login_pop() {
-	document.getElementById("pop-wrap1").style.display = "none";
+	document.getElementById("pop-wrap").style.display = "none";
 }
 
 function close_sign_pop() {
-	document.getElementById("pop-wrap2").style.display = "none";
+	document.getElementById("pop-wrap").style.display = "none";
 }
 
 function startSlide(){
