@@ -12,6 +12,14 @@ $(document).ready(function() {
 
     // $('nav').load('../assets/common/nav.html');
     // $('#navS').load('../assets/common/navS.html');
-    
+
     // $('footer').load('../assets/common/footer.html');
 });
+
+function show_login_pop(){
+    document.getElementById("pop-wrap").style.display = "block";
+}
+
+function close_login_pop() {
+    document.getElementById("pop-wrap").style.display = "none";
+}
