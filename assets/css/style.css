@@ -128,8 +128,6 @@ header a:hover {
     border-radius:20px;
     background-color:#fff;
 
-
-
 }
 
 .error {
@@ -249,10 +247,45 @@ background-color:#fff;
     margin-top: 10px;
 }
 
-#create_post {
-    margin-left: 30%;
-    width: 30%;
+#post-form {
+    position:absolute;
+    width:60%;
+    margin-left:20%;
+    background-color: #fff;
+    top:10%;
+    height: 700px;
+    border-radius:20px;
+    background-color:#fff;
+
 }
+
+#post-form button {
+    display: inline;
+    margin-left:45%;
+}
+
+#post-form input {
+    border-color: #009688;
+}
+
+#post-type {
+    width: 80%;
+    margin-left: 10%;
+    border: 2px solid #009688;
+}
+
+#post-form p {
+    font-size: 120%;
+    color: #009688;
+}
+
+.radio-inline {
+    padding: 10px;
+}
+
+
+
+
 /*#resultMain {
     margin-left:300px;
 }*/
