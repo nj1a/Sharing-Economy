@@ -5,8 +5,6 @@
 input[type=text] {
     width: 30%;
     box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 2px;
     font-size: 18px;
     background-color: white;
     padding: 5px 20px 5px 20px;
@@ -15,8 +13,16 @@ input[type=text] {
     transition: width 0.4s ease-in-out;
 }
 
+select {
+    display: inline-block;
+    margin-left: 50px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
 input[type=text]:focus {
-    width: 50%;
+    width: 35%;
 }
 
 input[type=email], input[type=password] {
@@ -253,6 +259,8 @@ background-color:#fff;
     margin-left: 30%;
     width: 30%;
 }
-/*#resultMain {
-    margin-left:300px;
-}*/
+
+.avatar {
+    height:25px;
+    width:25px;
+}
