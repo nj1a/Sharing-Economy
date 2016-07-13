@@ -118,18 +118,28 @@ header a:hover {
 }
 
 #login-pop/*, #sign-pop*/{
-    position:absolute;
+    position:fixed;
     width:60%;
     margin-left:20%;
     background-color: #fff;
     top:17%;
-    height:45%;
+    height:40%;
+    min-height:40vh;
+
     font-size: 13px;
     border-radius:20px;
     background-color:#fff;
+    overflow: visible;
+    
+    
 
 
 
+}
+#login-pop::after{
+    content:"";
+    height:100%;
+    visibility:hidden;
 }
 
 .error {
@@ -239,6 +249,10 @@ background-color:#fff;
     border: 2px white sold;
 }
 
+#existingClient {
+    margin-bottom:10px;
+}
+
 #existingClient, #newClient {
     width:80px;
     height:30px;
@@ -252,6 +266,14 @@ background-color:#fff;
 #create_post {
     margin-left: 30%;
     width: 30%;
+}
+
+#close_pop{
+    border:none;
+    background:white;
+    color:red;
+    margin-left:3px;
+    margin-top:3px;
 }
 /*#resultMain {
     margin-left:300px;
