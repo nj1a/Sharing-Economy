@@ -297,13 +297,13 @@ background-color:#fff;
     padding: 10px;
 }
 
-#close_pop{
+.close_pop{
     border:none;
     background:white;
     color:red;
-    margin-left:3px;
     margin-top:3px;
 }
+
 /*#resultMain {
     margin-left:300px;
 }*/
