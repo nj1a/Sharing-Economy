@@ -16,6 +16,7 @@ function showSlides(n){
 	   images[i].style.display = "none";
 	}
 	images[slideIndex-1].style.display = "block";
+
 }
 
 function plusDivs(n) {

@@ -186,6 +186,7 @@ body {
 	display: inline-block;
 	margin-left: 3%;	
 	margin-top: 5%;
+	margin-bottom: 2%;
 	border: solid gray 2px;
 	width: 55vw;
 	height: 45vw;
@@ -205,6 +206,7 @@ body {
 	border: solid gray 2px;
 	display: inline-block;
 	margin-left: 3.5%;
+	margin-bottom: 2%;
 	width: 35vw;
 	height: 45vw;
 	vertical-align: bottom;
