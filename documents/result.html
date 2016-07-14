@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Search Results</title>
+        <title>Results</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-teal.css">
@@ -19,7 +19,7 @@
         <nav class="w3-top">
             <ul class="w3-navbar w3-theme-d2 w3-left-align w3-large">
                 <li><a href="#" class="w3-padding-large w3-hover-white"><i class="fa fa-home"></i></a></li>
-                <li class=""><a href="#" class="w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a></li>
+                <li class="w3-hide-small"><a href="#" class="w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a></li>
                 <li class="w3-hide-small"><a href="#" class="w3-padding-large w3-hover-white" title="Inbox"><i class="fa fa-envelope"></i></a></li>
                 <li class="w3-hide-small"><a href="#" class="w3-padding-large w3-hover-white" title="Notifications"><i class="fa fa-bell"></i></a></li>
                 <li class="w3-hide-small"><a href="#" class="w3-padding-large w3-hover-white" title="Admin Panel"><i class="fa fa-eye"></i></a></li>
@@ -31,18 +31,18 @@
         <main class="w3-content main">
 
             <!-- Filter -->
-            <section class="w3-container  w3-bottombar w3-padding-16">
+            <section class="w3-container w3-padding-16">
                 <span class="w3-margin-right">Filter:</span>
                 <button class="w3-btn">ALL</button>
-                <button class="w3-btn w3-white"><i class="fa fa-diamond w3-margin-right"></i>Pens</button>
-                <button class="w3-btn w3-white w3-hide-small"><i class="fa fa-photo w3-margin-right"></i>Pencils</button>
-                <button class="w3-btn w3-white w3-hide-small"><i class="fa fa-map-pin w3-margin-right"></i>Caluclators</button>
+                <button class="w3-btn w3-white">Europe</button>
+                <button class="w3-btn w3-white"></i>North America</button>
+                <button class="w3-btn w3-white"></i>Asia</button>
             </section>
 
             <!-- First Photo Grid-->
-            <section class="w3-row-padding">
+            <section class="w3-row-padding w3-margin-bottom">
                 <section class="w3-third w3-container w3-margin-bottom">
-                    <img src="../assets/images/nature.jpg" alt="nature" style="width:100%" class="w3-hover-opacity">
+                    <img src="../assets/images/nature.jpg" alt="nature" class="w3-hover-opacity result">
                     <article class="w3-container w3-white">
                         <p><b>Lorem Ipsum</b></p>
                         <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo
@@ -51,7 +51,7 @@
                     </article>
                 </section>
                 <section class="w3-third w3-container w3-margin-bottom">
-                    <img src="../assets/images/nature2.jpg" alt="nature" style="width:100%" class="w3-hover-opacity">
+                    <img src="../assets/images/nature2.jpg" alt="nature" class="w3-hover-opacity result">
                     <article class="w3-container w3-white">
                         <p><b>Lorem Ipsum</b></p>
                         <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo
@@ -60,12 +60,11 @@
                     </article>
                 </section>
                 <section class="w3-third w3-container">
-                    <img src="../assets/images/Beijing.jpg" alt="Beijing" style="width:100%" class="w3-hover-opacity">
+                    <img src="../assets/images/Beijing.jpg" alt="Beijing" class="w3-hover-opacity result">
                     <article class="w3-container w3-white">
                         <p><b>Lorem Ipsum</b></p>
                         <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo
-                            condimentum, porta lectus vitae, ultricies congue gravida
-                            diam non fringilla.</p>
+                            condimentum.</p>
                     </article>
                 </section>
             </section>
@@ -73,7 +72,7 @@
             <!-- Second Photo Grid-->
             <section class="w3-row-padding">
                 <section class="w3-third w3-container w3-margin-bottom">
-                    <img src="../assets/images/London_eye.jpg" alt="London_eye" style="width:100%" class="w3-hover-opacity">
+                    <img src="../assets/images/London_eye.jpg" alt="London_eye" class="w3-hover-opacity result">
                     <article class="w3-container w3-white">
                         <p><b>Lorem Ipsum</b></p>
                         <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo
@@ -82,7 +81,7 @@
                     </article>
                 </section>
                 <section class="w3-third w3-container w3-margin-bottom">
-                    <img src="../assets/images/Paris.jpg" alt="Paris" style="width:100%" class="w3-hover-opacity">
+                    <img src="../assets/images/Paris.jpg" alt="Paris" class="w3-hover-opacity result">
                     <article class="w3-container w3-white">
                         <p><b>Lorem Ipsum</b></p>
                         <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo
@@ -91,7 +90,7 @@
                     </article>
                 </section>
                 <section class="w3-third w3-container">
-                    <img src="../assets/images/Greece.jpg" alt="Greece" style="width:100%" class="w3-hover-opacity">
+                    <img src="../assets/images/Greece.jpg" alt="Greece" class="w3-hover-opacity result">
                     <article class="w3-container w3-white">
                         <p><b>Lorem Ipsum</b></p>
                         <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo
