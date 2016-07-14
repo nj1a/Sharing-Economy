@@ -327,3 +327,11 @@ background-color:#fff;
     color:red;
     margin-top:3px;
 }
+
+footer a:link {
+    text-decoration: none;
+}
+
+footer a:hover{
+    text-decoration: underline;
+}
