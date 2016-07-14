@@ -1,5 +1,7 @@
 var slideIndex = 1;
+var attractionIndex = 1;
 showSlides(slideIndex);
+showAttractions(attractionIndex);
 
 function showSlides(n){
 	var i;
@@ -18,4 +20,23 @@ function showSlides(n){
 
 function plusDivs(n) {
   showSlides(slideIndex += n);
+}
+
+function showAttractions(n){
+	var i;
+	var images = document.getElementsByClassName("attraction_image");
+	if (n > images.length) {
+		attractionIndex = 1
+	}
+	if (n < 1) {
+		attractionIndex = images.length
+	}
+	for (i = 0; i < images.length; i++) {
+	   images[i].style.display = "none";
+	}
+	images[attractionIndex-1].style.display = "block";
+}
+
+function plusDivsAttraction(n){
+	showAttractions(attractionIndex += n);
 }

@@ -7,10 +7,10 @@
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-teal.css">
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"> 
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"> <!-- CSS -->
 
-        <script type="text/javascript" src="assets/js/index_script.js" defer> 
+        <script type="text/javascript" src="assets/js/index_script.js" defer>
         </script>
 
         <script src="assets/js/jquery-3.1.0.js" ></script>
@@ -18,21 +18,21 @@
 	<body>
         <section class="body-wrap">
 
-            <header> 
+            <header>
                 <a id="Help" href="#"> Help </a>
-                
+
                 <a id="Log-In" href="#" onclick="show_login_pop()"> Log In/Sign Up </a>
 
             </header>
     		<main id="root-content">
                 <div  id="pop-wrap">
                     <section  id="login-pop">
-                                             
+
                             <section class="login-box span12">
-                                <button id="close_pop" onclick="close_login_pop()"> [close] </button>
+                                <button class="close_pop" onclick="close_login_pop()"> [close] </button>
                                 <section id="inputField" class="old span3">
                                     <form class="existing" action="documents/account.html" method="post">
-                                        <section class="span12 text-center"> 
+                                        <section class="span12 text-center">
                                             <h3 id="inputField"> Login </h3>
                                         </section>
                                         <section id="inputField" class="span12">
@@ -49,19 +49,19 @@
                                         <section class="span12 text-center">
                                             <input id="existingClient" class="button" type="submit" value="Login">
                                         </section>
-                                                    
+
                                     </form>
-                                    <section class="middle-wall"> 
+                                    <section class="middle-wall">
                                     </section>
-                                    
+
                                 </section>
 
-                                
+
                                 <section id="inputField" class="new span3">
 
 
-                                    <form class="newmember" action="documents/profile.html" method="post">               
-                                        <section class="span12 text-center"> 
+                                    <form class="newmember" action="documents/profile.html" method="post">
+                                        <section class="span12 text-center">
                                             <h3 class="inputField"> Sign Up </h3>
                                         </section>
                                         <section id="inputField" class="span12">
@@ -69,12 +69,12 @@
                                             <input id="emailNew" class="inputField" type="email" name ="email" placeholder="Enter your email">
                                         </section>
 
-                                        <section id="inputField" class="span6"> 
+                                        <section id="inputField" class="span6">
                                             <label class="inputField" for="password"> Password </label>
                                             <input class="inputField" id="passwordNew" type="password" name="password">
                                         </section>
-                                        
-                                            <section id="inputField" class="span6"> 
+
+                                            <section id="inputField" class="span6">
                                                 <label id="inputField" for="password"> Confirm password </label>
                                                 <input id="passwordNewConfirm" class="inputField" type="password"  name="confirmpassword">
                                             </section>
@@ -83,29 +83,35 @@
                                         <section class="span12 text-center">
                                             <input id="newClient" class="button" type="submit" value="Sign Up">
                                         </section>
-                                    
+
                                     </form>
                                 </section>
 
                             </section>
 
-                            
+
 
                     </section>
 
                 </div>
 
-                <div id="main-contents" class="main-wrap"> 
+                <div id="main-contents" class="main-wrap">
                     <section class="main-background">
+
                         <image src="assets/images/London_eye.jpg" class="background-image" alt="london picture"> </image>
                         <image src="assets/images/Paris.jpg" class="background-image" alt="paris picture"> </image>
                         <image src="assets/images/Beijing1.jpg" class="background-image" alt="beijing picture"> </image>
                         
+
+                        <image src="assets/images/London_eye.jpg" class="background-image"> </image>
+                        <image src="assets/images/Paris.jpg" class="background-image"> </image>
+                        <image src="assets/images/Beijing1.jpg" class="background-image"> </image>
+
                     </section>
                     <section class="main-content text-center">
                         <section class="v-wrap">
-                            <section class="v-center"> 
-                                <section class="main-text"> 
+                            <section class="v-center">
+                                <section class="main-text">
                                     <h2> Travel Anywhere </h2>
                                     <h4> with Wanderland </h4>
 
@@ -116,18 +122,18 @@
                         <section class="search-background">
                             <form action="documents/result.html" method="post">
                                 <input id="search-box" class="search-bar" type="text" name="search-bar" placeholder="Search">
-                                <button  class="button"  value="search"> 
-                                     
-                                        <i 3 class="w3-large fa fa-search"> 
+                                <button  class="button"  value="search">
+
+                                        <i 3 class="w3-large fa fa-search">
                                         </i>
-                                    
-                                </button>   
+
+                                </button>
                             </form>
                         </section>
                     </section>
 
                 </div>
-    			<footer> 
+    			<footer>
     				<section class="w3-container w3-theme-d3 w3-padding-16">
                         <section class="w3-content">
                             <article class="w3-container w3-third">

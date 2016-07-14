@@ -18,43 +18,12 @@
         <!-- Navbar -->
         <nav class="w3-top">
             <ul class="w3-navbar w3-theme-d2 w3-left-align w3-large">
-            <li class="w3-hide-medium w3-hide-large w3-opennav w3-right">
-                <a id="clickNav" class="w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()">
-                    <i class="fa fa-bars"></i>
-                </a>
-            </li>
-            <li><a href="#" class="w3-padding-large w3-theme-d4">
-                <i class="fa fa-home w3-margin-right"></i>
-                Logo
-                </a>
-            </li>
-            <li class="w3-hide-small">
-                <a href="#" class="w3-padding-large w3-hover-white" title="News">
-                    <i class="fa fa-globe"></i>
-                </a>
-            </li>
-            <li class="w3-hide-small"><a href="#" class="w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a></li>
-            <li class="w3-hide-small"><a href="#" class="w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a></li>
-            <li class="w3-hide-small w3-dropdown-hover">
-                <a href="#" class="w3-padding-large w3-hover-white" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></a>
-                <section class="w3-dropdown-content w3-white w3-card-4">
-                    <a href="#">One new friend request</a>
-                    <a href="#">John Doe posted on your wall</a>
-                    <a href="#">Jane likes your post</a>
-                </section>
-            </li>
-            <li class="w3-hide-small w3-right"><a href="#" class="w3-padding-large w3-hover-white" title="My Account"><img src="http://www.shockmansion.com/wp-content/myimages/2016/03/rr231.jpg" class="w3-circle" style="height:25px;width:25px" alt="Avatar"></a></li>
-            <input type="text" name="search" placeholder="Search..">
-            </ul>
-        </nav>
-
-        <!-- Navbar on small screens -->
-        <nav id="navS" class="w3-hide w3-hide-large w3-hide-medium w3-top">
-            <ul class="w3-navbar w3-left-align w3-large w3-theme">
-                <li><a class="w3-padding-large" href="#">Link 1</a></li>
-                <li><a class="w3-padding-large" href="#">Link 2</a></li>
-                <li><a class="w3-padding-large" href="#">Link 3</a></li>
-                <li><a class="w3-padding-large" href="#">My Profile</a></li>
+                <li><a href="#" class="w3-padding-large w3-hover-white"><i class="fa fa-home"></i></a></li>
+                <li class=""><a href="#" class="w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a></li>
+                <li class="w3-hide-small"><a href="#" class="w3-padding-large w3-hover-white" title="Inbox"><i class="fa fa-envelope"></i></a></li>
+                <li class="w3-hide-small"><a href="#" class="w3-padding-large w3-hover-white" title="Notifications"><i class="fa fa-bell"></i></a></li>
+                <li class="w3-hide-small"><a href="#" class="w3-padding-large w3-hover-white" title="Admin Panel"><i class="fa fa-eye"></i></a></li>
+                <li class="w3-hide-small w3-right"><a href="#" class="w3-padding-large w3-hover-white" title="My Account"><img src="../assets/images/avatar.jpg" class="w3-circle avatar" alt="Avatar"></a></li>
             </ul>
         </nav>
 
@@ -72,14 +41,14 @@
                             <section class="w3-card-2 w3-round w3-white">
                                 <section class="w3-container w3-padding">
                                     <h6 class="w3-opacity">Looking for a travel buddy or tour guide?</h6>
-                                    <a href="./create_post.html"><i class="fa fa-pencil"></i>Post</a>
+                                    <a id="post" href="#" onclick="show_login_pop()"><i class="fa fa-pencil"></i>Post</a>
                                 </section>
                             </section>
                         </section>
                     </article>
 
                     <article class="w3-container w3-card-2 w3-white w3-round w3-margin"><br>
-                        <img src="../assets/images/avatar.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+                        <img src="../assets/images/avatar.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right avatarL">
                         <span class="w3-right w3-opacity">1 min</span>
                         <h4>John Doe</h4><br>
                         <hr class="w3-clear">
@@ -88,19 +57,19 @@
                             dolore magna aliqua. Ut enim ad minim veniam, quis
                             nostrud exercitation ullamco laboris nisi ut aliquip
                             ex ea commodo consequat.</p>
-                        <section class="w3-row-padding" style="margin:0 -16px">
+                        <section class="w3-row-padding special">
                             <section class="w3-half">
-                                <img src="../assets/images/northern_light.jpg" style="width:100%" alt="Northern Lights" class="w3-margin-bottom">
+                                <img src="../assets/images/northern_light.jpg" alt="Northern Lights" class="w3-margin-bottom fullWidth">
                             </section>
                             <section class="w3-half">
-                                <img src="../assets/images/nature.jpn" style="width:100%" alt="Nature" class="w3-margin-bottom">
+                                <img src="../assets/images/nature.jpg" alt="Nature" class="w3-margin-bottom fullWidth">
                             </section>
                         </section>
 
                     </article>
                     <article class="w3-container w3-card-2 w3-white w3-round w3-margin"><br>
 
-                        <img src="../assets/images/avatar.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+                        <img src="../assets/images/avatar.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right avatarL">
                         <span class="w3-right w3-opacity">16 min</span>
                         <h4>Jane Doe</h4><br>
                         <hr class="w3-clear">
@@ -112,12 +81,12 @@
                     </article>
 
                     <article class="w3-container w3-card-2 w3-white w3-round w3-margin"><br>
-                        <img src="../assets/images/avatar.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+                        <img src="../assets/images/avatar.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right avatarL">
                         <span class="w3-right w3-opacity">32 min</span>
                         <h4>Angie Jane</h4><br>
                         <hr class="w3-clear">
                         <p>Have you seen this?</p>
-                        <img src="../assets/images/nature2.jpg" style="width:100%" class="w3-margin-bottom">
+                        <img src="../assets/images/nature2.jpg" class="w3-margin-bottom fullWidth">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing
                             elit, sed do eiusmod tempor incididunt ut labore et
                             dolore magna aliqua. Ut enim ad minim veniam, quis
@@ -135,12 +104,53 @@
         </main>
         <br>
 
-            <!-- Footer -->
+        <div id="pop-wrap">
+            <section id="post-form">
+                <button class="close_pop" onclick="close_login_pop()"> [close] </button>
+                <br>
+                <form>
+                    <section id="post-type">
+                        <p>Post Type</p>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio">Looking For Travel Guide
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio">Looking For Travel Buddy
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio">Looking For Tourists
+                        </label>
+                    </section>
+                    <br>
+
+
+                    <input type="text" name="Destination Country" placeholder="Destination Country"><br>
+                    <input type="text" name="Destination City" placeholder="Destination City"><br>
+                    <input type="text" name="Departure City" placeholder="Departure City"><br>
+
+                    <input type="text" name="Travelling Method" placeholder="Travelling Method"><br>
+                    <input type="text" name="Travelling Date" placeholder="Travelling Date"><br>
+                    <input type="text" name="Travel Type" placeholder="Travel Type"><br>
+
+                    <input type="text" name="Approximate Cost" placeholder="Travelling Method"><br>
+                    <input type="text" name="Partner requirements" placeholder="Partner"><br>
+                    <input type="text" name="Requirement" placeholder="Requirement"><br>
+                    <input type="text" name="Date Listed" placeholder="Date Listed"><br>
+                    <input type="text" name="Description" placeholder="Description"><br>
+                </form>
+                <br>
+                <button type="button" onclick="show_login_pop()" class="w3-btn w3-theme"><i class="fa fa-pencil"></i>  Post</button>
+                <br>
+            </section>
+        </div>
+
+
+        <!-- Footer -->
         <footer>
             <section class="w3-container w3-theme-d3 w3-padding-16">
                 <section class="w3-content">
                     <article class="w3-container w3-third">
-                        <h5 class="w3-bottombar w3-border-green">Company</h5>
+                        <h5 class="w3-border-green">Company</h5>
                         <p>About</p>
                         <p>Careers</p>
                         <p>Policies</p>
@@ -148,13 +158,13 @@
                         <p>Privacy</p>
                     </article>
                     <article class="w3-container w3-third">
-                        <h5 class="w3-bottombar w3-border-green">Discover</h5>
+                        <h5>Discover</h5>
                         <p>Safety</p>
                         <p>Business Travel</p>
                         <p>Sitemap</p>
                     </article>
                     <diarticlev class="w3-container w3-third">
-                        <h5 class="w3-bottombar w3-border-green">Guiding</h5>
+                        <h5>Guiding</h5>
                         <p>Why guiding</p>
                         <p>Hospitality</p>
                         <p>Responsibilities</p>

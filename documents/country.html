@@ -1,70 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
+        <title>Country</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-teal.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
         <link rel="stylesheet" href="../assets/css/style.css">
-        <link rel="stylesheet" href="../assets/css/product_style.css">
+        <link rel="stylesheet" href="../assets/css/country_style.css">
 
         <script src="../assets/js/jQuery-3.0.0.js" defer></script>
         <script src="../assets/js/script.js" defer></script>
         <script src="../assets/js/product_script.js" defer></script>
-        
-        <title>Post Page</title>
-</head>
+    </head>
 <div id="wrap">
 
 <body id="entity">
 
+        <!-- Navbar -->
         <nav class="w3-top">
             <ul class="w3-navbar w3-theme-d2 w3-left-align w3-large">
-            <li class="w3-hide-medium w3-hide-large w3-opennav w3-right">
-                <a id="clickNav" class="w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()">
-                    <i class="fa fa-bars"></i>
-                </a>
-            </li>
-            <li><a href="#" class="w3-padding-large w3-theme-d4">
-                <i class="fa fa-home w3-margin-right"></i>
-                Logo
-                </a>
-            </li>
-            <li class="w3-hide-small">
-                <a href="#" class="w3-padding-large w3-hover-white" title="News">
-                    <i class="fa fa-globe"></i>
-                </a>
-            </li>
-            <li class="w3-hide-small"><a href="#" class="w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a></li>
-            <li class="w3-hide-small"><a href="#" class="w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a></li>
-            <li class="w3-hide-small w3-dropdown-hover">
-                <a href="#" class="w3-padding-large w3-hover-white" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></a>
-                <section class="w3-dropdown-content w3-white w3-card-4">
-                    <a href="#">One new friend request</a>
-                    <a href="#">John Doe posted on your wall</a>
-                    <a href="#">Jane likes your post</a>
-                </section>
-            </li>
-            <li class="w3-hide-small w3-right"><a href="#" class="w3-padding-large w3-hover-white" title="My Account"><img src="img_avatar2.png" class="w3-circle" style="height:25px;width:25px" alt="Avatar"></a></li>
-            <input type="text" name="search" placeholder="Search..">
-            </ul>        
-        </nav>
-
-        <!-- Navbar on small screens -->
-        <nav id="navS" class="w3-hide w3-hide-large w3-hide-medium w3-top">
-            <ul class="w3-navbar w3-left-align w3-large w3-theme">
-                <li><a class="w3-padding-large" href="#">Link 1</a></li>
-                <li><a class="w3-padding-large" href="#">Link 2</a></li>
-                <li><a class="w3-padding-large" href="#">Link 3</a></li>
-                <li><a class="w3-padding-large" href="#">My Profile</a></li>
+                <li><a href="#" class="w3-padding-large w3-hover-white"><i class="fa fa-home"></i></a></li>
+                <li class=""><a href="#" class="w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a></li>
+                <li class="w3-hide-small"><a href="#" class="w3-padding-large w3-hover-white" title="Inbox"><i class="fa fa-envelope"></i></a></li>
+                <li class="w3-hide-small"><a href="#" class="w3-padding-large w3-hover-white" title="Notifications"><i class="fa fa-bell"></i></a></li>
+                <li class="w3-hide-small"><a href="#" class="w3-padding-large w3-hover-white" title="Admin Panel"><i class="fa fa-eye"></i></a></li>
+                <li class="w3-hide-small w3-right"><a href="#" class="w3-padding-large w3-hover-white" title="My Account"><img src="../assets/images/avatar.jpg" class="w3-circle avatar" alt="Avatar"></a></li>
             </ul>
         </nav>
         
         <div id='product_page'>
             <!-- Need to have a word limit -->
             <div id='product_title'>
-                Londan, UK
+                Londan, England
             </div>
             <div id='product_image'>
                 <img src="../assets/images/product_1.jpg" class="slide_image" alt="">
@@ -86,7 +55,7 @@
                         </tr>
                         <tr>
                             <td>Country:</td>
-                            <td><a href="">United Kindom</a></td>
+                            <td><a href="">England</a></td>
                         </tr>
                         <tr>
                             <td>Rating:</td>
@@ -97,93 +66,34 @@
                             <td>City</td>
                         </tr>
                         <tr>
-                            <td>
-                                Travelling Date:
-                            </td>
-                            <td>
-                                July 7, 2016 - July 27, 2016 (20 days)
-                            </td>
+                            <td>Population:</td>
+                            <td>8,673,713</td>
                         </tr>
                         <tr>
-                            <td>
-                                Travel Type:
-                            </td>
-                            <td>
-                                City Exploring
-                            </td>
+                            <td>Time Zone:</td>
+                            <td>GMT</td>
                         </tr>
-                        <tr>
-                            <td>
-                                Travelling Method:
-                            </td>
-                            <td>
-                                Plane
-                            </td>
-                        </tr>   
-                        <tr>
-                            <td>Approximate Cost: </td>
-                            <td>$5000</td>
-                        </tr>
-                        <tr>
-                            <td>Partner Requirement:</td>
-                            <td>Must be clean, around 25 years old. Preferrbly someone who likes to go to art museum and watch opera. </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Date Listed:
-                            </td>
-                            <td>
-                                July 1, 2016
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Description:
-                            </td>
-                            <td>
-                               I am looking for 2 people to travel with me to Australia. We will be living in hostels. Message me for a detailed travelling plan. See my profile page to know more about me.
-                            </td>
-                        </tr>
+                        
                     </table>
-                    <h1>Poster Info</h1>
-                    <table>
-                        <tr>
-                            <td>Username:</td>
-                            <td><a href="">Iamgod420</a></td>
-                        </tr>
-                        <tr>
-                            <td>Email:</td>
-                            <td>imgod420@gmail.com</td>
-                        </tr>
-                        <tr>
-                            <td>Poster Rating:</td>
-                            <td>&#9733;&#9733;&#9733;&#9733;&#9734;</td>
-                        </tr>
-                        <tr>
-                            <td>Gender: </td>
-                            <td>Male</td>
-                        </tr>
-                        <tr>
-                            <td>Age: </td>
-                            <td>24</td>
-                        </tr>
-
-                        <tr>
-                            <td>Date Joined:</td>
-                            <td>Decemeber 29 2015</td>
-                        </tr>
-                    </table>
-                    <div id='contact_seller_button' class='product_info_button'>
-                        <a href="">Contact Poster</a>
-                    </div>
                 </div>
             </div>
-            <a href="#product_rating">
-                <div id='show_more'>
-                    Show more
-                </div>              
-            </a>
-
+            <div id='attractions'>
+                <h1>Attractions</h1>
+                <div class='attraction_image'>
+                    <img src="../assets/images/product_1.jpg" alt="">
+                    British Museum    
+                </div>
+                <div class='attraction_image'>
+                    <img src="../assets/images/product_2.jpg" alt="">    
+                    Big Ben
+                </div>
+                <div class='attraction_image'>
+                    <img src="../assets/images/product_3.jpg" alt="">    
+                    Tower of Londan
+                </div>
+                <a class"attraction_button" id="left_attraction_button" onclick="plusDivsAtrraction(-1)">&lt;</a>
+                <a class="attraction_button" id="right_attraction_button" onclick="plusDivsAttraction(1)">&gt;</a>
+            </div>
             <div id='product_rating'>
                 <h1>Travelling Experience</h1>
                 <div id='product_rating_text'>
@@ -208,7 +118,7 @@
                                     July 6, 2016
                                 </span>
                                 <div class='comment'>
-                                        We went to Germany together, it was a blast, he is a nice guy.
+                                    Very traditional. The whole city is like a live museum.
                                 </div>
                             </div>
                             <div class='customer_rating'>
@@ -223,7 +133,7 @@
                                 </span>
                                 <br>
                                 <div class='comment'>
-                                    Japan is a unique country, though I don't like the culture and food. The poster is a good guy, he is kind and helpful. We had a lot of interesting conversation. I would recommend to travel with him. 
+                                        Not too shabby. 
                                 </div>
                             </div>
                             <div class='customer_rating'>
@@ -238,7 +148,7 @@
                                 </span>
                                 <br>
                                 <div class='comment'>
-                                    Japan is a unique country, though I don't like the culture and food. The poster is a good guy, he is kind and helpful. We had a lot of interesting conversation. I would recommend to travel with him. 
+                                    Food is expensive there.
                                 </div>
                             </div>
                             
@@ -254,25 +164,10 @@
                                 </span>
                                 <br>
                                 <div class='comment'>
-                                    Japan is a unique country, though I don't like the culture and food. The poster is a good guy, he is kind and helpful. We had a lot of interesting conversation. I would recommend to travel with him. 
+                                    Love the accent
                                 </div>
                             </div>
                             
-                            <div class='customer_rating'>
-                                <span class='comment_username'>
-                                    <a href="">User2</a>
-                                </span>
-                                <span class='comment_rating'>
-                                    &#9733;&#9733;&#9733;&#9734;&#9734;
-                                </span>
-                                <span class='comment_date'>
-                                    July 5, 2016
-                                </span>
-                                <br>
-                                <div class='comment'>
-                                    Japan is a unique country, though I don't like the culture and food. The poster is a good guy, he is kind and helpful. We had a lot of interesting conversation. I would recommend to travel with him. 
-                                </div>
-                            </div>
                             
                             <div class='customer_rating'>
                                 <span class='comment_username'>
@@ -286,7 +181,7 @@
                                 </span>
                                 <br>
                                 <div class='comment'>
-                                    We had a fight when we were drunk. He broke my shoulder. Thanks Obama.
+                                    People aren't friendly there.
                                 </div>
                             </div>
                         </div>
@@ -302,7 +197,7 @@
                         <div class='related_product'>
                             <img src="../assets/images/related_product_1.jpg" alt="">
                             <span class='related_product_title'>
-                                Looking for a tour guide
+                                Looking for a tour guide in London, UK
                             </span>
                         </div>
                     </a>
@@ -310,7 +205,7 @@
                         <div class='related_product'>
                             <img src="../assets/images/related_product_2.jpg" alt="">
                             <span class='related_product_title'>
-                                Offering tour in Vancouver BC
+                                Offering tour in England
                             </span>
                         </div>
                     </a>
@@ -318,21 +213,44 @@
                         <div class='related_product'>
                             <img src="../assets/images/related_product_3.png" alt="">
                             <span class='related_product_title'>
-                                England!
+                                Partner to travel with
                             </span>
                         </div>
                     </a>
 
                 </div>
             </div>
-            <footer>
-                <section class="w3-container w3-theme-d3 w3-padding-16">
-                    <h5>Footer</h5>
+
+        <!-- Footer -->
+        <footer>
+            <section class="w3-container w3-theme-d3 w3-padding-16">
+                <section class="w3-content">
+                    <article class="w3-container w3-third">
+                        <h5 class="w3-border-green">Company</h5>
+                        <p>About</p>
+                        <p>Careers</p>
+                        <p>Policies</p>
+                        <p>Terms and Conditions</p>
+                        <p>Privacy</p>
+                    </article>
+                    <article class="w3-container w3-third">
+                        <h5>Discover</h5>
+                        <p>Safety</p>
+                        <p>Business Travel</p>
+                        <p>Sitemap</p>
+                    </article>
+                    <diarticlev class="w3-container w3-third">
+                        <h5>Guiding</h5>
+                        <p>Why guiding</p>
+                        <p>Hospitality</p>
+                        <p>Responsibilities</p>
+                    </article>
                 </section>
-                <section class="w3-container w3-theme-d5">
-                    <p>Copuright 2016</p>
-                </section>
-            </footer>
+            </section>
+            <section class="w3-container w3-theme-d5">
+                <p>Copyright © 2016 Wanderland Inc. All rights reserved.</p>
+            </section>
+        </footer>
         </div>
     </body>
 </html>
