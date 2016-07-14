@@ -284,8 +284,17 @@ background-color:#fff;
     width:25px;
 }
 
-.result {
+.avatarL {
+    width:60px;
+    height: 60px;
+}
+
+.fullWidth {
     width: 100%;
+}
+
+.special {
+    margin:0 -16px;
 }
 
 #post-form button {
