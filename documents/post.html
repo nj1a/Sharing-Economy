@@ -8,21 +8,19 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
         <link rel="stylesheet" href="../assets/css/style.css">
-        <link rel="stylesheet" href="../assets/css/product_style.css">
+        <link rel="stylesheet" href="../assets/css/post_style.css">
 
         <script src="../assets/js/jQuery-3.1.0.js" defer></script>
         <script src="../assets/js/script.js" defer></script>
-        <script src="../assets/js/product_script.js" defer></script>
+        <script src="../assets/js/post_script.js" defer></script>
 
         <!-- List of pictures were used in the following document -->
         <!-- http://www.shockmansion.com/wp-content/myimages/2016/03/rr231.jpg -->
 
     </head>
-<div id="wrap">
 
-<body id="entity">
+    <body id="entity" class="w3-theme-l5">
 
-        <!-- Navbar -->
         <nav class="w3-top">
             <ul class="w3-navbar w3-theme-d2 w3-left-align w3-large">
                 <li><a href="#" class="w3-padding-large w3-hover-white"><i class="fa fa-home"></i></a></li>
@@ -34,22 +32,22 @@
             </ul>
         </nav>
 
-        <div id='product_page'>
+        <main class="main" id='product_page'>
             <!-- Need to have a word limit -->
-            <div id='product_title'>
+            <section id='product_title'>
                 Looking for travel partner from Toronto to Germany
-            </div>
-            <div id='product_image'>
+            </section>
+            <section id='product_image'>
                 <img src="../assets/images/product_1.jpg" class="slide_image" alt="">
                 <img src="../assets/images/product_2.jpg" class="slide_image" alt="">
                 <img src="../assets/images/product_3.jpg" class="slide_image" alt="">
 
                 <a class"slide_button" id="left_slide_button" onclick="plusDivs(-1)">&lt;</a>
                 <a class="slide_button" id="right_slide_button" onclick="plusDivs(1)">&gt;</a>
-            </div>
+            </section>
 
-            <div id='product_info'>
-                <div id='product_info_text'>
+            <section id='product_info'>
+                <article id='product_info_text'>
                     <h1>Description</h1>
                     <table>
 
@@ -146,20 +144,21 @@
                             <td>Decemeber 29 2015</td>
                         </tr>
                     </table>
-                    <div id='contact_seller_button' class='product_info_button'>
+                    <section id='contact_seller_button' class='product_info_button'>
                         <a href="">Contact Poster</a>
-                    </div>
-                </div>
-            </div>
+                    </section>
+                </article>
+            </section>
+
             <a href="#product_rating">
-                <div id='show_more'>
+                <section id='show_more'>
                     Show more
-                </div>
+                </section>
             </a>
 
-            <div id='product_rating'>
+            <section id='product_rating'>
                 <h1>Travelling Experience</h1>
-                <div id='product_rating_text'>
+                <article id='product_rating_text'>
                     <span>Overall Rating: &#9733;&#9733;&#9733;&#9733;&#9734;</span> <br>
                     <textarea name="comment" cols="30" rows="10" form='review_submission' id='review_box'>Type your travellng experience with this poster here</textarea>
                     <span>Rate this poster: </span>
@@ -167,10 +166,10 @@
                     <form action="" id='review_submission'>
                         <input type="submit" value='Submit'>
                     </form>
-                    <div id='customer_rating'>
+                    <section id='customer_rating'>
                         <h2>Other ratings</h2>
-                        <div id='customer_rating_text'>
-                            <div class='customer_rating'>
+                        <section id='customer_rating_text'>
+                            <section class='customer_rating'>
                                 <span class='comment_username'>
                                     <a href="">User1</a>
                                 </span>
@@ -180,42 +179,12 @@
                                 <span class='comment_date'>
                                     July 6, 2016
                                 </span>
-                                <div class='comment'>
+                                <section class='comment'>
                                         We went to Germany together, it was a blast, he is a nice guy.
-                                </div>
-                            </div>
-                            <div class='customer_rating'>
-                                <span class='comment_username'>
-                                    <a href="">User2</a>
-                                </span>
-                                <span class='comment_rating'>
-                                    &#9733;&#9733;&#9733;&#9734;&#9734;
-                                </span>
-                                <span class='comment_date'>
-                                    July 5, 2016
-                                </span>
-                                <br>
-                                <div class='comment'>
-                                    Japan is a unique country, though I don't like the culture and food. The poster is a good guy, he is kind and helpful. We had a lot of interesting conversation. I would recommend to travel with him.
-                                </div>
-                            </div>
-                            <div class='customer_rating'>
-                                <span class='comment_username'>
-                                    <a href="">User2</a>
-                                </span>
-                                <span class='comment_rating'>
-                                    &#9733;&#9733;&#9733;&#9734;&#9734;
-                                </span>
-                                <span class='comment_date'>
-                                    July 5, 2016
-                                </span>
-                                <br>
-                                <div class='comment'>
-                                    Japan is a unique country, though I don't like the culture and food. The poster is a good guy, he is kind and helpful. We had a lot of interesting conversation. I would recommend to travel with him.
-                                </div>
-                            </div>
+                                </section>
+                            </section>
 
-                            <div class='customer_rating'>
+                            <section class='customer_rating'>
                                 <span class='comment_username'>
                                     <a href="">User2</a>
                                 </span>
@@ -226,12 +195,12 @@
                                     July 5, 2016
                                 </span>
                                 <br>
-                                <div class='comment'>
+                                <section class='comment'>
                                     Japan is a unique country, though I don't like the culture and food. The poster is a good guy, he is kind and helpful. We had a lot of interesting conversation. I would recommend to travel with him.
-                                </div>
-                            </div>
+                                </section>
+                            </section>
 
-                            <div class='customer_rating'>
+                            <section class='customer_rating'>
                                 <span class='comment_username'>
                                     <a href="">User2</a>
                                 </span>
@@ -242,12 +211,44 @@
                                     July 5, 2016
                                 </span>
                                 <br>
-                                <div class='comment'>
+                                <section class='comment'>
                                     Japan is a unique country, though I don't like the culture and food. The poster is a good guy, he is kind and helpful. We had a lot of interesting conversation. I would recommend to travel with him.
-                                </div>
-                            </div>
+                                </section>
+                            </section>
 
-                            <div class='customer_rating'>
+                            <section class='customer_rating'>
+                                <span class='comment_username'>
+                                    <a href="">User2</a>
+                                </span>
+                                <span class='comment_rating'>
+                                    &#9733;&#9733;&#9733;&#9734;&#9734;
+                                </span>
+                                <span class='comment_date'>
+                                    July 5, 2016
+                                </span>
+                                <br>
+                                <section class='comment'>
+                                    Japan is a unique country, though I don't like the culture and food. The poster is a good guy, he is kind and helpful. We had a lot of interesting conversation. I would recommend to travel with him.
+                                </section>
+                            </section>
+
+                            <section class='customer_rating'>
+                                <span class='comment_username'>
+                                    <a href="">User2</a>
+                                </span>
+                                <span class='comment_rating'>
+                                    &#9733;&#9733;&#9733;&#9734;&#9734;
+                                </span>
+                                <span class='comment_date'>
+                                    July 5, 2016
+                                </span>
+                                <br>
+                                <section class='comment'>
+                                    Japan is a unique country, though I don't like the culture and food. The poster is a good guy, he is kind and helpful. We had a lot of interesting conversation. I would recommend to travel with him.
+                                </section>
+                            </section>
+
+                            <section class='customer_rating'>
                                 <span class='comment_username'>
                                     <a href="">User3</a>
                                 </span>
@@ -258,48 +259,47 @@
                                     July 5, 2016
                                 </span>
                                 <br>
-                                <div class='comment'>
+                                <section class='comment'>
                                     We had a fight when we were drunk. He broke my shoulder. Thanks Obama.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                </section>
+                            </section>
+                        </section>
+                    </section>
+                </article>
+            </section>
 
-
-            </div>
-            <div id='recommendation'>
+            <section id='recommendation'>
                 <h1>Related Post</h1>
-                <div id='related_product_list'>
+                <article id='related_product_list'>
                     <a href="">
-                        <div class='related_product'>
+                        <section class='related_product'>
                             <img src="../assets/images/product_1.jpg" alt="">
                             <span class='related_product_title'>
                                 Looking for a tour guide
                             </span>
-                        </div>
+                        </section>
                     </a>
                     <a href="">
-                        <div class='related_product'>
+                        <section class='related_product'>
                             <img src="../assets/images/product_2.jpg" alt="">
                             <span class='related_product_title'>
                                 Offering tour in Vancouver BC
                             </span>
-                        </div>
+                        </section>
                     </a>
                     <a href="">
-                        <div class='related_product'>
+                        <section class='related_product'>
                             <img src="../assets/images/product_3.jpg" alt="">
                             <span class='related_product_title'>
                                 England!
                             </span>
-                        </div>
+                        </section>
                     </a>
+                </article>
+            </section>
+        </main>
+        <br>
 
-                </div>
-            </div>
-
-        <!-- Footer -->
         <footer>
             <section class="w3-container w3-theme-d3 w3-padding-16">
                 <section class="w3-content">
@@ -329,6 +329,5 @@
                 <p>Copyright © 2016 Wanderland Inc. All rights reserved.</p>
             </section>
         </footer>
-        </div>
-    </body>
+    <body>
 </html>

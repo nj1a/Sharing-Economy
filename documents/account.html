@@ -34,15 +34,9 @@
             </ul>
         </nav>
 
-        <!-- Page Container -->
         <main class="w3-container w3-content main">
-            <!-- The Grid -->
             <div class="w3-row">
-
-
-                <!-- Right Column -->
                 <section class="w3-col m12">
-
                     <article class="w3-row-padding">
                         <section class="w3-col m12">
                             <section class="w3-card-2 w3-round w3-white">
@@ -100,59 +94,51 @@
                             nostrud exercitation ullamco laboris nisi ut aliquip
                             ex ea commodo consequat.</p>
                     </article>
-
-                <!-- End Right Column -->
                 </section>
 
+                <section id="pop-wrap">
+                    <section id="post-form">
+                        <button class="close_pop" onclick="close_login_pop()"> [close] </button>
+                        <br>
+                        <form>
+                            <section id="post-type">
+                                <p>Post Type</p>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio">Looking For Travel Guide
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio">Looking For Travel Buddy
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio">Looking For Tourists
+                                </label>
+                            </section>
+                            <br>
+
+                            <input type="text" name="Destination Country" placeholder="Destination Country"><br>
+                            <input type="text" name="Destination City" placeholder="Destination City"><br>
+                            <input type="text" name="Departure City" placeholder="Departure City"><br>
+
+                            <input type="text" name="Travelling Method" placeholder="Travelling Method"><br>
+                            <input type="text" name="Travelling Date" placeholder="Travelling Date"><br>
+                            <input type="text" name="Travel Type" placeholder="Travel Type"><br>
+
+                            <input type="text" name="Approximate Cost" placeholder="Travelling Method"><br>
+                            <input type="text" name="Partner requirements" placeholder="Partner"><br>
+                            <input type="text" name="Requirement" placeholder="Requirement"><br>
+                            <input type="text" name="Date Listed" placeholder="Date Listed"><br>
+                            <input type="text" name="Description" placeholder="Description"><br>
+                        </form>
+                        <br>
+                        <button type="button" onclick="show_login_pop()" class="w3-btn w3-theme"><i class="fa fa-pencil"></i>  Post</button>
+                        <br>
+                    </section>
+                </section>
             <!-- End Grid -->
             </div>
-
-        <!-- End Page Container -->
         </main>
         <br>
 
-        <div id="pop-wrap">
-            <section id="post-form">
-                <button class="close_pop" onclick="close_login_pop()"> [close] </button>
-                <br>
-                <form>
-                    <section id="post-type">
-                        <p>Post Type</p>
-                        <label class="radio-inline">
-                            <input type="radio" name="optradio">Looking For Travel Guide
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="optradio">Looking For Travel Buddy
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="optradio">Looking For Tourists
-                        </label>
-                    </section>
-                    <br>
-
-
-                    <input type="text" name="Destination Country" placeholder="Destination Country"><br>
-                    <input type="text" name="Destination City" placeholder="Destination City"><br>
-                    <input type="text" name="Departure City" placeholder="Departure City"><br>
-
-                    <input type="text" name="Travelling Method" placeholder="Travelling Method"><br>
-                    <input type="text" name="Travelling Date" placeholder="Travelling Date"><br>
-                    <input type="text" name="Travel Type" placeholder="Travel Type"><br>
-
-                    <input type="text" name="Approximate Cost" placeholder="Travelling Method"><br>
-                    <input type="text" name="Partner requirements" placeholder="Partner"><br>
-                    <input type="text" name="Requirement" placeholder="Requirement"><br>
-                    <input type="text" name="Date Listed" placeholder="Date Listed"><br>
-                    <input type="text" name="Description" placeholder="Description"><br>
-                </form>
-                <br>
-                <button type="button" onclick="show_login_pop()" class="w3-btn w3-theme"><i class="fa fa-pencil"></i>  Post</button>
-                <br>
-            </section>
-        </div>
-
-
-        <!-- Footer -->
         <footer>
             <section class="w3-container w3-theme-d3 w3-padding-16">
                 <section class="w3-content">
