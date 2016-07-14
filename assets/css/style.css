@@ -129,8 +129,8 @@ header a:hover {
     margin-left:20%;
     background-color: #fff;
     top:17%;
-    height:40%;
-    min-height:40vh;
+    height:45%;
+    min-height:45vh;
 
     font-size: 13px;
     border-radius:20px;
@@ -150,15 +150,6 @@ header a:hover {
     color:red;
     width:100% !important;
 }
-
-/*form.existing, form.newmember {
-max-width:360px;
-min-width:250px;
-padding:10px 50px;
-border:2px solid gray;
-border-radius:10px;
-background-color:#fff;
-}*/
 
 .button {
     height: 40px;
