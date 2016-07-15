@@ -15,9 +15,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // define routes
-app.use(require('./new'));
+var router = require('./new');
+app.use(router);
 
 // start the server
-app.listen(1337, function () {
-    console.log('listen on port 1337');
+var port = process.env.PORT || 1337;
+app.listen(port, function () {
+    console.log('listen on port ' + port);
 });
