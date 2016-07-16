@@ -5,6 +5,8 @@ SET SEARCH_PATH TO wanderland;
 
 CREATE DOMAIN five_level AS int CHECK (VALUE BETWEEN 1 AND 5);
 CREATE DOMAIN password_len AS varchar(128) CHECK (length(value) <= 8);
+CREATE DOMAIN phone_num_len AS int CHECK (1 <= length(value) <= 15);
+
 
 CREATE TYPE gender_type AS ENUM ('m', 'f', 'o');
 CREATE TYPE post_type AS ENUM ('guide', 'buddy');
@@ -21,7 +23,7 @@ create table user_account(
     last_name varchar(128),
     profile_pic varchar(255),
     gender gender_type,
-    phone_num int check (phone_num <= 15),
+    phone_num phone_num_len,
     city varchar(255),
     country varchar(255),
     date_of_birth date,
@@ -39,7 +41,7 @@ create table admin_account (
     last_name varchar(128),
     profile_pic varchar(255),
     gender gender_type,
-    phone_num int check (phone_num <= 15),
+    phone_num phone_num_len,
     city varchar(255),
     country varchar(255),
     date_of_birth date,
