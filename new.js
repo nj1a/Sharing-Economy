@@ -35,7 +35,7 @@ router.get('/db', function (req, res) {
                 res.send("Error " + err); 
             }
             else { 
-                res.render('pages/db', {
+                res.render('db', {
                     results: result.rows
                 }); 
             }
