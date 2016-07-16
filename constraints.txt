@@ -1,0 +1,10 @@
+username: length <= 28 char
+password: 8 char <= length <= 128 
+email: [a-zA-Z0-9]*)([@]{1})([a-zA-Z0-9]*, len <= 254 char
+phone: len <= 15
+gender m/f/o
+first_name: 128 <= char
+last_name: 128 <= char
+date_joined: date_of_birth
+age: <= 13 years old
+all descriptions are optional
