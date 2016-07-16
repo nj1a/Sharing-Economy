@@ -4,7 +4,7 @@ CREATE SCHEMA wanderland;
 SET SEARCH_PATH TO wanderland;
 
 CREATE DOMAIN five_level AS int CHECK (VALUE BETWEEN 1 AND 5);
-CREATE DOMAIN password_len AS int CHECK (VALUE BETWEEN 8 AND 128);
+CREATE DOMAIN password_len AS varchar(128) CHECK (length(value) <= 8);
 
 CREATE TYPE gender_type AS ENUM ('m', 'f', 'o');
 CREATE TYPE post_type AS ENUM ('guide', 'buddy');
@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS user_account CASCADE;
 create table user_account(
     username varchar(28),
     email varchar(254) check (email ~* '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$'),
-    password varchar(128) password_len,
+    password password_len,
     first_name varchar(128),
     last_name varchar(128),
     profile_pic varchar(255),
@@ -34,7 +34,7 @@ DROP TABLE IF EXISTS admin_account CASCADE;
 create table admin_account (
     username varchar(28),
     email varchar(254) check (email ~* '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$'),
-    password varchar(128) password_len,
+    password password_len,
     first_name varchar(128),
     last_name varchar(128),
     profile_pic varchar(255),
