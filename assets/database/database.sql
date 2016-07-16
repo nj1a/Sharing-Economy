@@ -4,8 +4,8 @@ CREATE SCHEMA wanderland;
 SET SEARCH_PATH TO wanderland;
 
 CREATE DOMAIN five_level AS int CHECK (VALUE BETWEEN 1 AND 5);
-CREATE DOMAIN password_len AS varchar(128) CHECK (length(value) <= 8);
-CREATE DOMAIN phone_num_len AS int CHECK (1 <= length(value) <= 15);
+CREATE DOMAIN password_len AS varchar(128) CHECK (length(value) >= 8);
+CREATE DOMAIN phone_num_len AS varchar(15) CHECK (length(value) >= 1);
 
 
 CREATE TYPE gender_type AS ENUM ('m', 'f', 'o');
