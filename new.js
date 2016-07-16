@@ -28,7 +28,7 @@ router.post('/add', function(req, res) {
 
 router.get('/db', function (req, res) {
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        client.query('SELECT * FROM user_account inner join city on city.name = user_account.city and city.country = user_account.country', function(err, result) {
+        client.query('SELECT * FROM wanderland.user_account inner join wanderland.city on wanderland.city.name = wanderland.user_account.city and wanderland.city.country = wanderland.user_account.country', function(err, result) {
             done();
             if (err) { 
                 console.error(err); 
