@@ -13,6 +13,14 @@ CREATE TYPE post_type AS ENUM ('guide', 'buddy');
 CREATE TYPE continent_type AS ENUM('Asia', 'Africa', 'North America',
                                     'South America', 'Antarctica',
                                     'Europe', 'Oceania');
+DROP TABLE IF EXISTS city CASCADE;
+create table city (
+    name varchar(255),
+    country varchar(255),
+    continent continent_type,
+    description varchar(255),
+    primary key (name, country)
+);
 
 DROP TABLE IF EXISTS user_account CASCADE;
 create table user_account(
@@ -29,7 +37,8 @@ create table user_account(
     date_of_birth date,
     date_joined date check (date_joined > date_of_birth),
     description varchar (255),
-    primary key (username)
+    primary key (username),
+    foreign key (city, country) references city (name, country)
 );
 
 DROP TABLE IF EXISTS admin_account CASCADE;
@@ -47,16 +56,8 @@ create table admin_account (
     date_of_birth date,
     date_joined date check (date_joined > date_of_birth),
     description varchar (255),
-    primary key (username)
-);
-
-DROP TABLE IF EXISTS city CASCADE;
-create table city (
-    name varchar(255),
-    country varchar(255),
-    continent continent_type,
-    description varchar(255),
-    primary key (name, country)
+    primary key (username),
+    foreign key (city, country) references city (name, country)
 );
 
 DROP TABLE IF EXISTS city_rating CASCADE;
