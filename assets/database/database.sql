@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS user_account CASCADE;
 create table user_account(
     username varchar(28),
     email varchar(254) check (email ~* '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$'),
-    password password_len,
+    password varchar(128) password_len,
     first_name varchar(128),
     last_name varchar(128),
     profile_pic varchar(255),
@@ -34,7 +34,7 @@ DROP TABLE IF EXISTS admin_account CASCADE;
 create table admin_account (
     username varchar(28),
     email varchar(254) check (email ~* '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$'),
-    password password_len,
+    password varchar(128) password_len,
     first_name varchar(128),
     last_name varchar(128),
     profile_pic varchar(255),
