@@ -45,7 +45,7 @@ router.post('/signup', function(req, res){
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'" , function(err, result) {
               done();
-              console.log("hahahahahahahahaha fuck youuuuuuu             "+result.rows);
+              console.log("hahahahahahahahaha fuck youuuuuuu  111111           "+result);
               if (err) {
                  console.error(err); 
                  res.send("Error " + err); 
