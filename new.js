@@ -20,7 +20,31 @@ router.get('/', function(req, res) {
 });
 
 router.post('/account', function(req, res){
-    
+    var account = req.body.email;
+    var password = req.body.password;
+
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+        client.query('SELECT * FROM user_account WHERE user_account.email = ' + '"' + account + '"' +  ' AND user_account.password =' + '"' + password + '"';, function(err, result) {
+              done();
+              if (err) { 
+                 console.error(err); 
+                 res.send("Error " + err); 
+             }
+             else {
+                 if (result.length == 0) {
+                    res.render('account', {
+                        results: null
+                    }); 
+                 } else {
+                    res.render('account', {
+                        results: result
+                    });
+                 }
+                  
+             }
+         });
+    });
+    /*
     var result = res;
     var account = req.body.email;
     //console.log(account);
@@ -49,7 +73,7 @@ router.post('/account', function(req, res){
             
            
         });
-
+*/
 
 });
 
