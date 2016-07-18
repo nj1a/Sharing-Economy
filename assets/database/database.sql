@@ -13,6 +13,7 @@ CREATE TYPE post_type AS ENUM ('guide', 'buddy');
 CREATE TYPE continent_type AS ENUM('Asia', 'Africa', 'North America',
                                     'South America', 'Antarctica',
                                     'Europe', 'Oceania');
+
 DROP TABLE IF EXISTS city CASCADE;
 create table city (
     name varchar(255),
@@ -24,6 +25,7 @@ create table city (
 
 DROP TABLE IF EXISTS user_account CASCADE;
 create table user_account(
+    id SERIAL,
     username varchar(28),
     email varchar(254) check (email ~* '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$'),
     password password_len,
@@ -37,12 +39,15 @@ create table user_account(
     date_of_birth date,
     date_joined date check (date_joined > date_of_birth),
     description varchar (255),
-    primary key (username),
-    foreign key (city, country) references city (name, country)
+    primary key (id),
+    foreign key (city, country) references city (name, country),
+    UNIQUE(username),
+    UNIQUE(email)
 );
 
 DROP TABLE IF EXISTS admin_account CASCADE;
 create table admin_account (
+    id SERIAL,
     username varchar(28),
     email varchar(254) check (email ~* '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$'),
     password password_len,
@@ -56,8 +61,10 @@ create table admin_account (
     date_of_birth date,
     date_joined date check (date_joined > date_of_birth),
     description varchar (255),
-    primary key (username),
-    foreign key (city, country) references city (name, country)
+    primary key (id),
+    foreign key (city, country) references city (name, country),
+    UNIQUE(username),
+    UNIQUE(email)
 );
 
 DROP TABLE IF EXISTS city_rating CASCADE;
@@ -98,11 +105,3 @@ create table product_post (
     primary key (post_id),
     foreign key (username) references user_account(username)
 );
-
-INSERT INTO city (name, country, continent, description) VALUES ('toronto', 'canada', 'North America', 'haha');
-
-INSERT INTO user_account (username, email, password, first_name, last_name, 
-    profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) 
-    VALUES ('tcsbears', 'sang.ahn@mail.utoronto.ca', '12345678', 'Sang Jun', 'Ahn', 
-        'null', 'm', '6472223333', 'toronto', 'canada', '20130909', '20160909', 'haha' );
-
