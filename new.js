@@ -45,6 +45,7 @@ router.post('/signup', function(req, res){
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query(query , function(err, result) {
               done();
+              console.log("hahahahahahahahaha fuck youuuuuuu             "+result.rows);
               if (err) {
                  console.error(err); 
                  res.send("Error " + err); 
