@@ -38,11 +38,13 @@ input[type=email], input[type=password] {
     margin-top:51px
 }
 
+.body-wrap{
+    width: 100%;
+    margin: auto;
+}
 .main-wrap{
     height:600px;
     position:relative;
-    width: 100%;
-    margin: auto;
 }
 
 .main-content{
