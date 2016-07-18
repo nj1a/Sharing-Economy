@@ -19,7 +19,7 @@ create table user_account(
     city varchar(255),
     country varchar(255),
     date_of_birth date,
-    date_joined date check (date_joined > date_of_birth),
+    date_joined date ,
     description varchar (255),
     primary key (username),
     foreign key (city, country) references city (name, country)
@@ -94,3 +94,8 @@ INSERT INTO user_account (username, email, password, first_name, last_name,
 profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) 
 VALUES ('lakefieldLosers', 'scottyang@mail.utoronto.ca', '12345678', 'scott', 'yang', 
     'null', 'm', '6471223333', 'toronto', 'canada', '20110909', '20130909', 'haha' );
+
+INSERT INTO user_account (username, email, password, first_name, last_name, 
+    profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) 
+VALUES ("hahadasfaha", "sangn2@mail.utoronto.ca", "12345678", "a", "b", 
+    "null", "m", "123456789", "toronto", "canada", "20130909", "20130909", "a");

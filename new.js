@@ -23,12 +23,12 @@ router.post('/account', function(req, res){
     
     var result = res;
     var account = req.body.email;
-    console.log(account);
+    //console.log(account);
 
     var password = req.body.password;
-    console.log(password);
+    //console.log(password);
     var query = 'SELECT * FROM user_account WHERE user_account.email = ' + '"' + account + '"' +  ' AND user_account.password =' + '"' + password + '"';
-    console.log(query);
+    //console.log(query);
 
     db.query(query).spread( function(packages, metadata) {
             if (packages.length == 0) {
@@ -44,6 +44,53 @@ router.post('/account', function(req, res){
                 results: packages
 
                 });
+                //console.log(packages);
+            }
+            
+           
+        });
+
+
+});
+
+router.post('/signup', function(req, res){
+    
+    var result = res;
+    var account = req.body.email;
+    console.log(account);
+
+    var password = req.body.password;
+    console.log(password);
+    var query = 'SELECT * FROM user_account WHERE user_account.email = ' + '"' + account + '"' +  ' AND user_account.password =' + '"' + password + '"';
+    //console.log(query);
+
+    db.query(query).spread( function(packages, metadata) {
+            if (packages.length == 0) {
+                console.log(12002001010101);
+                query = 'INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + '"'+ account + '"' + ', "' + account + '"' + ', "' + password + '"' +', "null", "null", "null", "null", "null", "toronto", "canada", "null", "null", "null");';
+                console.log(query);
+                db.query(query);
+                query = 'SELECT * FROM user_account WHERE user_account.email = ' + '"' + account + '"' +  ' AND user_account.password =' + '"' + password + '"';
+                db.query(query).spread( function(packages, metadata) {
+
+                     result.render('account', {
+
+                    results: packages
+
+                }); });
+                
+               
+            
+             
+        }
+    
+            
+            else {
+                console.log(999999999999);
+                result.render('account', {
+                results: null
+
+                });
                 console.log(packages);
             }
             
@@ -52,6 +99,8 @@ router.post('/account', function(req, res){
 
 
 });
+
+
 
 router.post('/add', function(req, res) {
     var newItem = req.body.newItem;
