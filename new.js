@@ -51,13 +51,13 @@ router.post('/signup', function(req, res){
                  res.send("Error " + err); 
              }
              else {
-                  console.log("hahahahahahahahaha fuck youuuuuuu             "+result.rows);
+                  console.log("hahahahahahahahaha fuck youuuuuuu             "+ JSON.stringify(result.rows));
                  if (result.length === 0) {
                     query = 'INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + ", '" + account + "'" + ", '" + password + "'" +', "null", "null", "null", "null", "null", "toronto", "canada", "null", "null", "null");';
                     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                         client.query(query, function(err, result) {
                             done();
-                            console.log("hahahahahahahahaha fuck youuuuuuu             "+result.rows);
+                            console.log("hahahahahahahahaha fuck youuuuuuu             "+JSON.stringify(result.rows));
                             if (err) {
                                  console.error(err); 
                                  res.send("Error " + err); 
