@@ -36,10 +36,12 @@ router.post('/account', function(req, res){
              else {
 
                  if (result.length == 0) {
+                    console.log(result);
                     res.render('account', {
                         results: null
                     }); 
                  } else {
+                    console.log(result);
                     res.render('account', {
                         results: result
                     });
