@@ -41,8 +41,7 @@ create table user_account(
     description varchar (255),
     primary key (id),
     foreign key (city, country) references city (name, country),
-    UNIQUE(username),
-    UNIQUE(email)
+    UNIQUE(username, email)
 );
 
 DROP TABLE IF EXISTS admin_account CASCADE;
