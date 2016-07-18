@@ -29,6 +29,9 @@ input[type=email], input[type=password] {
     width: 100% !important;
 }
 
+body{
+    margin: auto;
+}
 .main {
     /*margin-top:80px;*/
 }
