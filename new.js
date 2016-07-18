@@ -28,7 +28,7 @@ router.post('/account', function(req, res){
     //var query = 'SELECT * FROM user_account WHERE user_account.email = ? AND user.account.password = ?';
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        client.query('SELECT * FROM user_account WHERE user_account.email = ? AND user.account.password = ?', [account], [password], function(err, result) {
+        client.query('SELECT * FROM user_account', function(err, result) {
               done();
               if (err) {
                 //console.log(result);
@@ -36,7 +36,7 @@ router.post('/account', function(req, res){
                  res.send("Error " + err); 
              }
              else {
-                    console.log(result.rows);
+                    console.log("hohohoho" + result.rows);
                  //if (result.length === 0) {
                    // console.log(result);
                  //   res.render('account', {
