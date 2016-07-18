@@ -1,0 +1,112 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        title= pageTitle
+        link(rel="stylesheet", href="profile_style.css", type="text/css")
+        script(src="jquery-3.1.0.js", defer)
+        script(src="profile_script.js", defer)
+    body
+        ul
+            if results == null
+             li="user does not exist"
+            else
+
+
+
+             for result in results
+                main(class="w3-content main")
+                    figure(class="text-centre")
+                        img(src="qwmma.png")
+                    section(class="botmargin20 text-centre")
+                        span(class="user")=result.username
+                    section(class="profile-section")
+                        section(class="profile-wrapper")
+                            section(id="about" class="title") About
+                            section(class="information")
+                                section(class="info-contents-wrapper")
+                                    section(class="contents")
+                                        section(id="contact-info" class="profile-info selected")
+                                            span(class="work-list")
+                                                ul
+                                                    li
+                                                        section(class="info-key")
+                                                            span Name
+                                                        section(class="info-value")
+                                                            span=result.first_name + " " + result.last_name
+                                                        section(class="info-key")
+                                                            span E-mail
+                                                        section(class="info-value")
+                                                            span=result.email
+                                                        section(class="info-key")
+                                                            span Phone number
+                                                        section(class="info-value")
+                                                            span=result.phone_num
+                                                        section(class="info-key")
+                                                            span Address
+                                                        section(class="info-value")
+                                                            span=result.city + " " + result.country
+
+                                        section(id="basic-info" class="profile-info")
+                                            span(class="work-list")
+                                                ul
+                                                    li
+                                                        section(class="info-key")
+                                                            span Gender
+                                                        section(class="info-value")
+                                                            span=result.gender
+                                                        section(class="info-key")
+                                                            span Birth city
+                                                        section(class="info-value")
+                                                            span=result.city
+                                                        section(class="info-key")
+                                                            span Country
+                                                        section(class="info-value")
+                                                            span=result.country
+                                                        section(class="info-key")
+                                                            span Date of birth
+                                                        section(class="info-value")
+                                                            span=result.date_of_birth
+                                                        section(class="info-key")
+                                                            span Description
+                                                        section(class="info-value")
+                                                            span=result.description
+
+
+                                        section(id="account-info" class="profile-info")
+                                            span(class="work-list")
+                                                ul
+                                                    li
+                                                        section(class="info-key")
+                                                            span Nickname
+                                                        section(class="info-value")
+                                                            span=result.username
+                                                        section(class="info-key")
+                                                            span Email address
+                                                        section(class="info-value")
+                                                            span=result.email
+                                                        section(class="info-key")
+                                                            span password
+                                                        section(class="info-value")
+                                                            span=result.password
+                                                        section(class="info-key")
+                                                            span Profile picture
+                                                        section(class="info-value")
+                                                            span=result.profile_pic
+                                                        section(class="info-key")
+                                                            span Date joined
+                                                        section(class="info-value")
+                                                            span=result.date_joined
+
+                                section(class="info-nav")
+                                    ul
+                                        li(class="nav-menu selected")
+                                            a(id="nav1" href="#")  
+                                                span(class="pl_8") Contact Information
+                                        li(class="nav-menu") 
+                                            a(id="nav2" href="#")
+                                                span(class="pl_8") Basic Information
+                                        li(class="nav-menu") 
+                                            a(id="nav3" href="#")
+                                                span(class="pl_8") Account Information
+

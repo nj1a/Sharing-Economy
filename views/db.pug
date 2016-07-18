@@ -7,5 +7,8 @@ html(lang="en")
         script(src="jquery-3.1.0.js", defer)
     body
         ul
-            for result in results
+            if results == null
+             li="haha"
+            else
+             for result in results
                 li=result.username + " - " + result.city

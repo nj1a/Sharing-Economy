@@ -3,14 +3,62 @@ html(lang="en")
     head
         meta(charset="utf-8")
         title= pageTitle
-        link(rel="stylesheet", href="style.css")
+        link(rel="stylesheet", href="style.css", type="text/css")
         script(src="jquery-3.1.0.js", defer)
+        script(src="index_script.js", defer)
     body
-        h1= title
-        ul
-            for item in items
-                li= item.desc
-        form(action="/add", method="post")
-            input(type="text", name="newItem")
-            input(type="submit")
-            
+        section(class="body-wrap")
+            header
+                a(id="Help" href="#") Help
+                a(id="Log-In" href="#" onclick="show_login_pop()") Log In/Sign Up
+            main(id="root-content")
+                section(id="pop-wrap")
+                    section(id="login-pop")
+                        section(class="login-box span12")
+                            button(class="close_pop" onclick="close_login_pop()") [close] 
+                            section(id="inputField" class="old span3")
+                                form(class="existing" action="account" method="post")
+                                    section(class="span12 text-center")
+                                        h3(id="inputField") Login                         
+                                    section(id="inputField" class="span12")
+                                        label(for="email" class="inputField") Email address 
+                                        input(id="emailEx" class="inputField" type="email" name ="email" placeholder="Enter your email")
+                                        label(id="inputField" for="password") Password
+                                        input(id="passwordEx" class="inputField" type="password" name="password")
+                                    section(class="span12 text-center")
+                                        a(id="inputField" class="hover underlined" href="#") Forgot your password?
+                                    section(class="span12 text-center")
+                                        input(id="existingClient" class="button" type="submit" value="Login")
+                                section(class="middle-wall")
+                            section(id="inputField" class="new span3")
+                                form(class="newmember" action="documents/profile.html" method="post")
+                                    section(class="span12 text-center")
+                                        h3(class="inputField") Sign Up                                    
+                                    section(id="inputField" class="span12")
+                                        label(class="inputField" for="email") Email address
+                                        input(id="emailNew" class="inputField" type="email" name ="email" placeholder="Enter your email")                                
+                                    section(id="inputField" class="span6")
+                                        label(class="inputField" for="password") Password 
+                                        input(class="inputField" id="passwordNew" type="password" name="password")
+                                    section(id="inputField" class="span6")
+                                        label(id="inputField" for="password") Confirm password
+                                        input(id="passwordNewConfirm" class="inputField" type="password"  name="confirmpassword")                                        
+                                    section(id="passnew" class="span12")
+                                    section(class="span12 text-center")
+                                        input(id="newClient" class="button" type="submit" value="Sign Up")
+                section(id="main-contents" class="main-wrap")
+                    section(class="main-background")
+                        image(src="London_eye.jpg", class="background-image", alt="london picture") 
+                        image(src="Paris.jpg" class="background-image" alt="paris picture")
+                        image(src="Beijing1.jpg", class="background-image", alt="beijing picture")                     
+                    section(class="main-content text-center")
+                        section(class="v-wrap")
+                            section(class="v-center")
+                                section(class="main-text")
+                                    h2 Travel Anywhere
+                                    h4 with Wanderland                                 
+                        section(class="search-background")
+                            form(action="documents/result.html" method="post")
+                                input(id="search-box" class="search-bar" type="text" name="search-bar" placeholder="Search")
+                                button(class="button" value="search")
+                                 i(class="w3-large fa fa-search")
