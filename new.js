@@ -22,6 +22,8 @@ router.get('/', function(req, res) {
 router.post('/account', function(req, res){
     var account = req.body.email;
     var password = req.body.password;
+    console.log(account);
+    console.log(password);
     //var query = 'SELECT * FROM user_account WHERE user_account.email = ' + '"' + account + '"' +  ' AND user_account.password =' + '"' + password + '"';
     //var query = 'SELECT * FROM user_account WHERE user_account.email = ? AND user.account.password = ?';
 
