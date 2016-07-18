@@ -37,6 +37,7 @@ router.post('/account', function(req, res){
              }
              else {
                     console.log("hohohoho" + result.rows);
+                    console.log("kakakakakaka" + result.rows.email);
                  //if (result.length === 0) {
                    // console.log(result);
                  //   res.render('account', {
