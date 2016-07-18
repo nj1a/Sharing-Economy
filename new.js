@@ -24,27 +24,25 @@ router.post('/account', function(req, res){
     var password = req.body.password;
     console.log(account);
     console.log(password);
-    //var query = 'SELECT * FROM user_account WHERE user_account.email = ' + '"' + account + '"';// +  ' AND user_account.password =' + '"' + password + '"';
-    //var query = 'SELECT * FROM user_account WHERE user_account.email = ? AND user.account.password = ?';
+   
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('SELECT * FROM user_account WHERE user_account.email = ' +  "'"+ account + "'" +  ' AND user_account.password =' + "'" + password + "'" , function(err, result) {
               done();
               if (err) {
-                //console.log(result);
+                
                  console.error(err); 
                  res.send("Error " + err); 
              }
              else {
-                    //console.log("hohohoho" + JSON.stringify(result.rows));
-                    //console.log("kakakakakaka" + result.rows.email);
+
                  if (result.length === 0) {
-                   // console.log(result);
+                 
                     res.render('account', {
                         results: null
                     }); 
                  } else {
-                    //console.log(result);
+                   
                     res.render('account', {
                         results: result.rows
                     });
