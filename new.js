@@ -26,11 +26,13 @@ router.post('/account', function(req, res){
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('SELECT * FROM user_account WHERE user_account.email = ' + '"' + account + '"' +  ' AND user_account.password =' + '"' + password + '"', function(err, result) {
               done();
-              if (err) { 
+              if (err) {
+                console.log(result);
                  console.error(err); 
                  res.send("Error " + err); 
              }
              else {
+
                  if (result.length == 0) {
                     res.render('account', {
                         results: null
