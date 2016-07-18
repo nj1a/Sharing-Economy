@@ -30,7 +30,7 @@ input[type=email], input[type=password] {
 }
 
 .main {
-    margin-top:80px;
+    /*margin-top:80px;*/
 }
 
 
@@ -41,6 +41,8 @@ input[type=email], input[type=password] {
 .main-wrap{
     height:600px;
     position:relative;
+    width: 100%;
+    margin: auto;
 }
 
 .main-content{
