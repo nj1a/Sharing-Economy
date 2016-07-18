@@ -22,28 +22,31 @@ router.get('/', function(req, res) {
 router.post('/account', function(req, res){
     var account = req.body.email;
     var password = req.body.password;
-    //var query = 'SELECT * FROM user_account WHERE user_account.email = ' + '"' + account + '"' +  ' AND user_account.password =' + '"' + password + '"';
+    console.log(account);
+    console.log(password);
+    //var query = 'SELECT * FROM user_account WHERE user_account.email = ' + '"' + account + '"';// +  ' AND user_account.password =' + '"' + password + '"';
     //var query = 'SELECT * FROM user_account WHERE user_account.email = ? AND user.account.password = ?';
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        client.query('SELECT * FROM user_account WHERE user_account.email = ? AND user.account.password = ?;', [account], [password], function(err, result) {
+        client.query('SELECT * FROM user_account WHERE user_account.email = ' +  "'"+ account + "'" +  ' AND user_account.password =' + "'" + password + "'" , function(err, result) {
               done();
               if (err) {
-                console.log(result);
+                //console.log(result);
                  console.error(err); 
                  res.send("Error " + err); 
              }
              else {
-
-                 if (result.length == 0) {
-                    console.log(result);
+                    //console.log("hohohoho" + JSON.stringify(result.rows));
+                    //console.log("kakakakakaka" + result.rows.email);
+                 if (result.length === 0) {
+                   // console.log(result);
                     res.render('account', {
                         results: null
                     }); 
                  } else {
-                    console.log(result);
+                    //console.log(result);
                     res.render('account', {
-                        results: result
+                        results: result.rows
                     });
                  }
                   
@@ -152,7 +155,7 @@ router.get('/db', function (req, res) {
                 city.country = user_account.country and user_account.username = "tcsbearss";')
         .spread( function(packages, metadata) {
             if (packages.length == 0) {
-                
+                console.log(packages);
                 result.render('db', {
 
                 results: null
@@ -160,6 +163,7 @@ router.get('/db', function (req, res) {
             } 
             
             result.render('db', {
+
                 results: packages
             });
             
