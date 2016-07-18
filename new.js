@@ -28,7 +28,7 @@ router.post('/account', function(req, res){
     //var query = 'SELECT * FROM user_account WHERE user_account.email = ? AND user.account.password = ?';
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        client.query('SELECT * FROM user_account WHERE user_account.email = ' +  "'"+ account + "'" , function(err, result) {
+        client.query('SELECT * FROM user_account WHERE user_account.email = ' +  "'"+ account + "'" +  ' AND user_account.password =' + "'" + password + "'" , function(err, result) {
               done();
               if (err) {
                 //console.log(result);
@@ -36,19 +36,19 @@ router.post('/account', function(req, res){
                  res.send("Error " + err); 
              }
              else {
-                    console.log("hohohoho" + JSON.stringify(result.rows));
-                    console.log("kakakakakaka" + result.rows.email);
-                 //if (result.length === 0) {
+                    //console.log("hohohoho" + JSON.stringify(result.rows));
+                    //console.log("kakakakakaka" + result.rows.email);
+                 if (result.length === 0) {
                    // console.log(result);
-                 //   res.render('account', {
-                   //     results: null
-                    //}); 
-                 //} else {
+                    res.render('account', {
+                        results: null
+                    }); 
+                 } else {
                     //console.log(result);
                     res.render('account', {
                         results: result.rows
                     });
-                 //}
+                 }
                   
              }
          });
