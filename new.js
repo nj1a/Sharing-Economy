@@ -31,23 +31,23 @@ router.post('/account', function(req, res){
         client.query('SELECT * FROM user_account', function(err, result) {
               done();
               if (err) {
-                console.log(result);
+                //console.log(result);
                  console.error(err); 
                  res.send("Error " + err); 
              }
              else {
 
-                 if (result.length === 0) {
-                    console.log(result);
+                 //if (result.length === 0) {
+                   // console.log(result);
+                 //   res.render('account', {
+                   //     results: null
+                    //}); 
+                 //} else {
+                    //console.log(result);
                     res.render('account', {
-                        results: null
-                    }); 
-                 } else {
-                    console.log(result);
-                    res.render('account', {
-                        results: result
+                        results: result.rows
                     });
-                 }
+                 //}
                   
              }
          });
