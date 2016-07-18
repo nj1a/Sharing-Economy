@@ -53,8 +53,9 @@ router.post('/signup', function(req, res){
                  if (result.length === 0) {
                     query = 'INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + ", '" + account + "'" + ", '" + password + "'" +', "null", "null", "null", "null", "null", "toronto", "canada", "null", "null", "null");';
                     client.query(query);
+
                     query = 'SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'";
-                    client.query(query, function(){
+                    client.query(query, function(err, result){
                         done();
                         if (err) {
                             console.error(err); 
