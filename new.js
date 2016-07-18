@@ -36,7 +36,7 @@ router.post('/account', function(req, res){
                  res.send("Error " + err); 
              }
              else {
-                    console.log("hohohoho" + result.rows);
+                    console.log("hohohoho" + JSON.stringify(result.rows));
                     console.log("kakakakakaka" + result.rows.email);
                  //if (result.length === 0) {
                    // console.log(result);
