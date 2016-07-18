@@ -41,7 +41,7 @@ input[type=email], input[type=password] {
 .main-wrap{
     height:600px;
     position:relative;
-    /*margin-bottom: 200px;*/
+    margin-bottom: 200px;
 }
 
 .main-content{
