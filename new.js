@@ -36,7 +36,7 @@ router.post('/account', function(req, res){
                  res.send("Error " + err); 
              }
              else {
-
+                    console.log(result);
                  //if (result.length === 0) {
                    // console.log(result);
                  //   res.render('account', {
@@ -154,7 +154,7 @@ router.get('/db', function (req, res) {
                 city.country = user_account.country and user_account.username = "tcsbearss";')
         .spread( function(packages, metadata) {
             if (packages.length == 0) {
-                
+                console.log(packages);
                 result.render('db', {
 
                 results: null
@@ -162,6 +162,7 @@ router.get('/db', function (req, res) {
             } 
             
             result.render('db', {
+
                 results: packages
             });
             
