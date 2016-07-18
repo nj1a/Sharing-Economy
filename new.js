@@ -40,10 +40,10 @@ router.post('/signup', function(req, res){
 
     var password = req.body.password;
     //console.log(password);
-    var query = 'SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'";
+    //var query = 'SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'";
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        client.query(query , function(err, result) {
+        client.query('SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'" , function(err, result) {
               done();
               console.log("hahahahahahahahaha fuck youuuuuuu             "+result.rows);
               if (err) {
