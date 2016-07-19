@@ -65,9 +65,9 @@ router.post('/signup', function(req, res){
                         });
                     });
 
-                    query = 'SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'";
+                    //query = 'SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'";
                     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-                        client.query(query, function(err, result){
+                        client.query('SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'", function(err, result){
                             console.log("hahahahahahahahaha fuck youuuuuuu    2222222         "+ JSON.stringify(result.rows));
                         done();
                         if (err) {
