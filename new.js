@@ -57,6 +57,7 @@ router.post('/signup', function(req, res){
                     client.query('INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + ", '" + account + "'" + ", '" + password + "'" +', "null", "null", "null", "null", "null", "toronto", "canada", "null", "null", "null");', function(err, result) {
                     });
                     client.query('SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'", function(err, result){ 
+                        console.log("hahahahahahahahaha fuck youuuuuuu    2222222         "+ JSON.stringify(result.rows));
                         res.render('account', {
                                 results: result.rows
                             });
@@ -99,7 +100,7 @@ router.post('/signup', function(req, res){
                 else {
                     console.log("hahahahahahahahaha fuck youuuuuuu    44444444444       "+ JSON.stringify(result.rows));
                     res.render('account', {
-                        results: result.rows
+                        results: null
                     });
                  }
              }
