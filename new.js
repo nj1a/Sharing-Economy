@@ -52,14 +52,7 @@ router.post('/signup', function(req, res){
                  console.error(err); 
                  res.send("Error " + err); 
              } else {
-                if (result.length === 0) {
-                    console.log("                                 2                       "+ JSON.stringify(result.rows));
-                    
-                    res.render('account', {
-                            results: result.rows
-                    });
-                   
-                }
+                
                   
                 // if (result.length === 0) {
 
@@ -94,12 +87,12 @@ router.post('/signup', function(req, res){
                      
 
               //   } else {
-                else {
+                
                    console.log("                                 3                      "+ JSON.stringify(result.rows));
                     res.render('account', {
                         results: result.rows
                     });
-                }
+               
             }
              
         });
