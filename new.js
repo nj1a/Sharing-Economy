@@ -87,7 +87,7 @@ router.post('/signup', function(req, res){
               //   } else {
                     console.log("hahahahahahahahaha fuck youuuuuuu    44444444444       "+ JSON.stringify(result.rows));
                     res.render('account', {
-                        results: null
+                        results: result.rows
                     });
                  }
              
