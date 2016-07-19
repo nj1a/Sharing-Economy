@@ -52,6 +52,11 @@ router.post('/signup', function(req, res){
                  console.error(err); 
                  res.send("Error " + err); 
              } else {
+                if (result.length === 0) {
+                    res.render('account', {
+                        results: "haha"
+                    });
+                }
                   
                 // if (result.length === 0) {
 
@@ -84,12 +89,15 @@ router.post('/signup', function(req, res){
                     });*/
                     
                      
+
               //   } else {
+                else {
                     console.log("hahahahahahahahaha fuck youuuuuuu    44444444444       "+ JSON.stringify(result.rows));
                     res.render('account', {
                         results: result.rows
                     });
                  }
+             }
              
          });
     });
