@@ -18,7 +18,7 @@ router.post('/account', function(req, res){
                  res.send("Error " + err); 
              }
              else {
-               // console.log("from acc  the result is :  " + JSON.stringify(result.rows)  + "and length is :  " + result.rows.length);
+               
                  if (JSON.stringify(result.rows) === "[]") {
                     res.render('account', {
                         results: '-1'
@@ -32,7 +32,7 @@ router.post('/account', function(req, res){
          });
     });
 });
-/*
+
 router.post('/signup', function(req, res){
     
     var account = req.body.email;
@@ -46,27 +46,34 @@ router.post('/signup', function(req, res){
         client.query('SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'" , function(err, result) {
               done();
 
-              console.log("                                 1                      "+ result.rows.email);
+              //console.log("                                 1                      "+ result.rows.email);
               if (err) {
                  console.error(err); 
                  res.send("Error " + err); 
              } else {
+                if (JSON.stringify(result.rows) === "[]") {
+                    client.query('INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + ", '" + account + "'" + ", '" + password + "'" +', "null", "null", "null", "null", "null", "toronto", "canada", "null", "null", "null");'{
+
+                    });
+                    
+                 } else {
+                    res.render('account', {
+                        results: "-1"
+                    });
+                 }
                 
                   
               
               
-                console.log("                                 2                      "+ result.rows.length);
-                   console.log("                                 3                      "+ result.rows.first_name);
-                    res.render('account', {
-                        results: result.rows
-                    });
-               
+                //console.log("                                 2                      "+ result.rows.length);
+                   //console.log("                                 3                      "+ result.rows.first_name);
+                                   
             }
              
         });
     });
 });
-*/
+
 module.exports = router;
 
  /*  db.query(query).spread( function(packages, metadata) {
