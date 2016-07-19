@@ -30,7 +30,7 @@ body{
     padding-left: 12px;
 }
 
-.info-value::after, .info-value::before{
+.info-value::before, .info-value::after{
     clear: both;
     content: ".";
     display: block;
