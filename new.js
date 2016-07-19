@@ -19,7 +19,7 @@ router.post('/account', function(req, res){
              }
              else {
                 console.log("from acc  the result is :  " + JSON.stringify(result.rows)  + "and length is :  " + result.rows.length);
-                 if (result.rows.length === 0) {
+                 if (JSON.stringify(result.rows) === "[]") {
                     res.render('account', {
                         results: null
                     }); 
