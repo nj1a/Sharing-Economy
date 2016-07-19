@@ -47,13 +47,13 @@ router.post('/signup', function(req, res){
         client.query('SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'" , function(err, result) {
               done();
 
-              console.log("                                 1                      "+ JSON.stringify(result));
+              console.log("                                 1                      "+ JSON.stringify(result.rows));
               if (err) {
                  console.error(err); 
                  res.send("Error " + err); 
              } else {
                 if (result.length === 0) {
-                    console.log("                                 2                       "+ JSON.stringify(result));
+                    console.log("                                 2                       "+ JSON.stringify(result.rows));
                     
                     res.render('account', {
                             results: result.rows
@@ -95,18 +95,15 @@ router.post('/signup', function(req, res){
 
               //   } else {
                 else {
-                   console.log("                                 3                      "+ JSON.stringify(result));
+                   console.log("                                 3                      "+ JSON.stringify(result.rows));
                     res.render('account', {
                         results: null
                     });
                 }
-             }
+            }
              
-         });
+        });
     });
-
-
- 
 });
 
 module.exports = router;
