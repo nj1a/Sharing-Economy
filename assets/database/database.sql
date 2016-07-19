@@ -39,33 +39,17 @@ create table user_account(
     date_of_birth date,
     date_joined date check (date_joined > date_of_birth),
     description varchar (255),
+    is_admin boolean,
     primary key (id),
     foreign key (city, country) references city (name, country),
     UNIQUE(username),
     UNIQUE(email)
 );
 
-DROP TABLE IF EXISTS admin_account CASCADE;
-create table admin_account (
-    id SERIAL,
-    username varchar(28),
-    email varchar(254) check (email ~* '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$'),
-    password password_len,
-    first_name varchar(128),
-    last_name varchar(128),
-    profile_pic varchar(255),
-    gender gender_type,
-    phone_num phone_num_len,
-    city varchar(255),
-    country varchar(255),
-    date_of_birth date,
-    date_joined date check (date_joined > date_of_birth),
-    description varchar (255),
-    primary key (id),
-    foreign key (city, country) references city (name, country),
-    UNIQUE(username),
-    UNIQUE(email)
-);
+
+DROP view IF EXISTS admin_account CASCADE;
+create view admin_account as
+    select * where is_admin = 1;
 
 DROP TABLE IF EXISTS city_rating CASCADE;
 create table city_rating (
