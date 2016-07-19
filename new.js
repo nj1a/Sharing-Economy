@@ -20,7 +20,7 @@ router.post('/account', function(req, res){
              else {
                  if (result.rows.length === 0) {
                     res.render('account', {
-                        results: 'null'
+                        results: null
                     }); 
                  } else {
                     res.render('account', {
