@@ -34,7 +34,6 @@ router.post('/account', function(req, res){
 
 router.post('/signup', function(req, res){
     
-    var final;
     var account = req.body.email;
     //console.log(account);
 
@@ -87,7 +86,7 @@ router.post('/signup', function(req, res){
                      
 
               //   } else {
-                
+                console.log("                                 2                      "+ result.length);
                    console.log("                                 3                      "+ JSON.stringify(result.rows));
                     res.render('account', {
                         results: 'null'
