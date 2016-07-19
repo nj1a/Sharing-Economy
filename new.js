@@ -90,7 +90,7 @@ router.post('/signup', function(req, res){
                         results: null
                     });
                  }
-             }
+             
          });
     });
 
