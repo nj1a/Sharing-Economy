@@ -210,15 +210,7 @@ header a:hover {
     min-height: 1px;
     padding-left: 12px;
 }
-.info-key::after{
-    clear: both;
-    content: ".";
-    display: block;
-    font-size: 0;
-    height: 0;
-    line-height: 0;
-    visibility: hidden;
-}
+
 .login-box{
     height:100%;
     background-color: #fff;
