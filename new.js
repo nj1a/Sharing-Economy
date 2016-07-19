@@ -54,7 +54,7 @@ router.post('/signup', function(req, res){
                 if (JSON.stringify(result.rows) === "[]") {
                     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                         var query = 'INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + "," + "'" + account + "'" + "," + "'" + password + "'" + "," + 'null' + ', ' + 'null, ' + 'null, ' + 'null, ' + ' null, ' + "'" + 'toronto'+ "'" + ', canada, ' + 'null, ' + 'null, ' + 'null' + ');';
-                        console.log(query);
+                        console.log("hahaha   " + query);
 
                         client.query('INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + ", '" + account + "'" + ", '" + password + "'" +', ' + 'null' + ', ' + 'null, ' + 'null, ' + 'null, ' + ' null, ' + "'" + 'toronto' + "'" + 'canada, ' + 'null, ' + 'null, ' + 'null' + ');', function(err, result){
                             done();
