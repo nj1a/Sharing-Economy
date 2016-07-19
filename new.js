@@ -46,7 +46,7 @@ router.post('/signup', function(req, res){
         client.query('SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'" , function(err, result) {
               done();
 
-              console.log("                                 1                      "+ JSON.stringify(result.rows.email));
+              console.log("                                 1                      "+ JSON.stringify(result.email));
               if (err) {
                  console.error(err); 
                  res.send("Error " + err); 
