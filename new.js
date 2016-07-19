@@ -46,23 +46,19 @@ router.post('/signup', function(req, res){
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'" , function(err, result) {
               done();
-              var query = 'INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + ", '" + account + "'" + ", '" + password + "'" +', "null", "null", "null", "null", "null", "toronto", "canada", "null", "null", "null");';
-              console.log("hohohohohoohhooh                     " + query);
-              console.log("hahahahahahahahaha fuck youuuuuuu  111111           "+ final);
+
+              console.log("                                 1                      "+ result);
               if (err) {
                  console.error(err); 
                  res.send("Error " + err); 
              } else {
                 if (result.length === 0) {
-                    console.log("hahahahahahahahaha fuck youuuuuuu    2222222");
-                    client.query('INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + ", '" + account + "'" + ", '" + password + "'" +', "null", "null", "null", "null", "null", "toronto", "canada", "null", "null", "null");', function(err, result) {
+                    console.log("                                 2                       "+ result);
+                    
+                    res.render('account', {
+                            results: result.rows
                     });
-                    client.query('SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'", function(err, result){ 
-                        console.log("hahahahahahahahaha fuck youuuuuuu    2222222         "+ JSON.stringify(result.rows));
-                        res.render('account', {
-                                results: result.rows
-                            });
-                    });
+                   
                 }
                   
                 // if (result.length === 0) {
@@ -99,11 +95,11 @@ router.post('/signup', function(req, res){
 
               //   } else {
                 else {
-                    console.log("hahahahahahahahaha fuck youuuuuuu    44444444444       "+ JSON.stringify(result.rows));
+                   console.log("                                 3                      "+ result);
                     res.render('account', {
                         results: null
                     });
-                 }
+                }
              }
              
          });
