@@ -30,8 +30,8 @@ body{
     padding-left: 12px;
 }
 
-.info-key::after{
-    clear: right;
+.info-value::after, .info-value::before{
+    clear: both;
     content: ".";
     display: block;
     font-size: 0;
