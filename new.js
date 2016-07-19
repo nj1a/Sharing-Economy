@@ -18,9 +18,10 @@ router.post('/account', function(req, res){
                  res.send("Error " + err); 
              }
              else {
-                 if (result.length === 0) {
+               
+                 if (JSON.stringify(result.rows) === "[]") {
                     res.render('account', {
-                        results: null
+                        results: '-1'
                     }); 
                  } else {
                     res.render('account', {
@@ -34,80 +35,75 @@ router.post('/account', function(req, res){
 
 router.post('/signup', function(req, res){
     
-    var final;
     var account = req.body.email;
-    //console.log(account);
+   
 
     var password = req.body.password;
 
-    //console.log(password);
-    //var query = 'SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'";
+   
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'" , function(err, result) {
               done();
-              final = result;
-              console.log("hahahahahahahahaha fuck youuuuuuu  111111           "+ final);
+
+              //console.log("                                 1                      "+ result.rows.email);
               if (err) {
                  console.error(err); 
                  res.send("Error " + err); 
              } else {
-                if (result.length === 0) {
-                    client.query('INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + ", '" + account + "'" + ", '" + password + "'" +', "null", "null", "null", "null", "null", "toronto", "canada", "null", "null", "null");', function(err, result) {
-                    });
-                    client.query('SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'", function(err, result){ 
-                        res.render('account', {
-                                results: result.rows
-                            });
-                    });
-                }
-                  
-                // if (result.length === 0) {
-
-                    /*console.log("WHYYYY!!!!!");
+                if (JSON.stringify(result.rows) === "[]") {
                     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-                        client.query('INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + ", '" + account + "'" + ", '" + password + "'" +', "null", "null", "null", "null", "null", "toronto", "canada", "null", "null", "null");', function(err, result) {
+                        //var query = 'INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + "," + "'" + account + "'" + "," + "'" + password + "'" + "," + 'null' + ', ' + 'null, ' + 'null, ' + 'null, ' + ' null, ' + "'" + 'toronto'+ "'" + "'" + ', canada,' + "'"  + 'null, ' + 'null, ' + 'null' + ');';
+                       // console.log("hahaha   " + query);
+
+                        client.query('INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + ", '" + account + "'" + ", '" + password + "'" +', ' + 'NULL' + ', ' + 'NULL, ' + 'NULL, ' + 'NULL, ' + ' NULL, ' + "'" + 'toronto' + "'" + "," + "'" + 'canada' + "'" + ',NULL, ' + 'NULL, ' + 'NULL' + ');', function(err, result){
                             done();
-                            console.log("hahahahahahahahaha fuck youuuuuuu     3333333        "+JSON.stringify(result.rows));
                             if (err) {
-                                 console.error(err); 
-                                 res.send("Error " + err); 
-                             } 
+                                console.error(err); 
+                                res.send("Error " + err);
+                            }
                         });
+                        
                     });
 
                     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-                        client.query('SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'", function(err, result){
-                            console.log("hahahahahahahahaha fuck youuuuuuu    2222222         "+ JSON.stringify(result.rows));
-                        done();
-                        if (err) {
-                            console.error(err); 
-                            res.send("Error " + err);
-                        } else {
-                            res.render('account', {
-                                results: result.rows
-                            });
-                        }
-                    });
-                        
-                    });*/
-                    
-                     
+                        //var query = 'INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + "," + "'" + account + "'" + "," + "'" + password + "'" + "," + 'null' + ', ' + 'null, ' + 'null, ' + 'null, ' + ' null, ' + "'" + 'toronto'+ "'" + "'" + ', canada,' + "'"  + 'null, ' + 'null, ' + 'null' + ');';
+                       // console.log("hahaha   " + query);
 
-              //   } else {
-                else {
-                    console.log("hahahahahahahahaha fuck youuuuuuu    44444444444       "+ JSON.stringify(result.rows));
+                        client.query('SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'", function(err, result){
+                            done();
+                            if (err) {
+                                console.error(err); 
+                                res.send("Error " + err);
+                            } else {
+                                console.log(JSON.stringify(result.rows));
+                                res.render('account', {
+                                    results: result.rows
+                                });
+                            }
+                        });
+                        
+                    });
+
+
+    
+                    
+                 } else {
                     res.render('account', {
-                        results: result.rows
+                        results: "-1"
                     });
                  }
-             }
+                
+                  
+              
+              
+                //console.log("                                 2                      "+ result.rows.length);
+                   //console.log("                                 3                      "+ result.rows.first_name);
+                                   
+            }
              
-         });
+        });
     });
-
-
- 
 });
 
 module.exports = router;
