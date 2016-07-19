@@ -29,6 +29,16 @@ body{
     min-height: 1px;
     padding-left: 12px;
 }
+
+.info-key::after{
+    clear: both;
+    content: ".";
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+}
 .profile-section{
 	width:981px;
 	
