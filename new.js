@@ -90,7 +90,7 @@ router.post('/signup', function(req, res){
                 
                    console.log("                                 3                      "+ JSON.stringify(result.rows));
                     res.render('account', {
-                        results: result.rows
+                        results: null
                     });
                
             }
