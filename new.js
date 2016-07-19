@@ -20,7 +20,7 @@ router.post('/account', function(req, res){
              else {
                  if (result.length === 0) {
                     res.render('account', {
-                        results: null
+                        results: 'null'
                     }); 
                  } else {
                     res.render('account', {
@@ -90,7 +90,7 @@ router.post('/signup', function(req, res){
                 
                    console.log("                                 3                      "+ JSON.stringify(result.rows));
                     res.render('account', {
-                        results: null
+                        results: 'null'
                     });
                
             }
