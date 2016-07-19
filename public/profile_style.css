@@ -30,7 +30,7 @@ body{
     padding-left: 12px;
 }
 
-.info-value::before, .info-value::after{
+.info-value > span::before, .info-value > span::after{
     clear: both;
     content: ".";
     display: block;
