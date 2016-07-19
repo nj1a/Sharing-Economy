@@ -32,16 +32,15 @@ router.post('/account', function(req, res){
          });
     });
 });
-
+/*
 router.post('/signup', function(req, res){
     
     var account = req.body.email;
-    //console.log(account);
+   
 
     var password = req.body.password;
 
-    //console.log(password);
-    //var query = 'SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'";
+   
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'" , function(err, result) {
@@ -54,39 +53,8 @@ router.post('/signup', function(req, res){
              } else {
                 
                   
-                // if (result.length === 0) {
-
-                    /*console.log("WHYYYY!!!!!");
-                    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-                        client.query('INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + ", '" + account + "'" + ", '" + password + "'" +', "null", "null", "null", "null", "null", "toronto", "canada", "null", "null", "null");', function(err, result) {
-                            done();
-                            console.log("hahahahahahahahaha fuck youuuuuuu     3333333        "+JSON.stringify(result.rows));
-                            if (err) {
-                                 console.error(err); 
-                                 res.send("Error " + err); 
-                             } 
-                        });
-                    });
-
-                    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-                        client.query('SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'", function(err, result){
-                            console.log("hahahahahahahahaha fuck youuuuuuu    2222222         "+ JSON.stringify(result.rows));
-                        done();
-                        if (err) {
-                            console.error(err); 
-                            res.send("Error " + err);
-                        } else {
-                            res.render('account', {
-                                results: result.rows
-                            });
-                        }
-                    });
-                        
-                    });*/
-                    
-                     
-
-              //   } else {
+              
+              
                 console.log("                                 2                      "+ result.rows.length);
                    console.log("                                 3                      "+ result.rows.first_name);
                     res.render('account', {
@@ -98,7 +66,7 @@ router.post('/signup', function(req, res){
         });
     });
 });
-
+*/
 module.exports = router;
 
  /*  db.query(query).spread( function(packages, metadata) {
