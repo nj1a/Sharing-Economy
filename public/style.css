@@ -210,7 +210,7 @@ header a:hover {
     min-height: 1px;
     padding-left: 12px;
 }
-.info-key {
+.info-key::after{
     clear: both;
     content: ".";
     display: block;
