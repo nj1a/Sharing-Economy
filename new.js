@@ -53,7 +53,7 @@ router.post('/signup', function(req, res){
                  res.send("Error " + err); 
              } else {
                   
-                 if (final.length === 0) {
+                 if (result.rows.length === 0) {
                     console.log("WHYYYY!!!!!");
                     //query = 'INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + ", '" + account + "'" + ", '" + password + "'" +', "null", "null", "null", "null", "null", "toronto", "canada", "null", "null", "null");';
                     //pg.connect(process.env.DATABASE_URL, function(err, client, done) {
