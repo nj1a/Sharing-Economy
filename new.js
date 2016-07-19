@@ -76,6 +76,7 @@ router.post('/signup', function(req, res){
                                 console.error(err); 
                                 res.send("Error " + err);
                             } else {
+                                console.log(JSON.stringify(result.rows));
                                 res.render('account', {
                                     results: result.rows
                                 });
