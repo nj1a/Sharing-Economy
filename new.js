@@ -56,7 +56,7 @@ router.post('/signup', function(req, res){
                         var query = 'INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + "," + "'" + account + "'" + "," + "'" + password + "'" + "," + 'null' + ', ' + 'null, ' + 'null, ' + 'null, ' + ' null, ' + "'" + 'toronto'+ "'" + "'" + ', canada,' + "'"  + 'null, ' + 'null, ' + 'null' + ');';
                         console.log("hahaha   " + query);
 
-                        client.query('INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + ", '" + account + "'" + ", '" + password + "'" +', ' + 'null' + ', ' + 'null, ' + 'null, ' + 'null, ' + ' null, ' + "'" + 'toronto' + "'" + "'" + ', canada,' + "'" + 'null, ' + 'null, ' + 'null' + ');', function(err, result){
+                        client.query('INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + ", '" + account + "'" + ", '" + password + "'" +', ' + 'NULL' + ', ' + 'NULL, ' + 'NULL, ' + 'NULL, ' + ' NULL, ' + "'" + 'toronto' + "'" + "," + "'" + 'canada' + "'" + ',NULL, ' + 'NULL, ' + 'NULL' + ');', function(err, result){
                             done();
                             if (err) {
                                 console.error(err); 
