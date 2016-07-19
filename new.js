@@ -53,8 +53,12 @@ router.post('/signup', function(req, res){
                  res.send("Error " + err); 
              } else {
                 if (result.length === 0) {
-                    res.render('account', {
-                        results: "haha"
+                    client.query('INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + ", '" + account + "'" + ", '" + password + "'" +', "null", "null", "null", "null", "null", "toronto", "canada", "null", "null", "null");', function(err, result) {
+                    });
+                    client.query('SELECT * FROM user_account WHERE user_account.email = ' + "'" + account + "'" +  ' AND user_account.password =' + "'" + password + "'", function(err, result){ 
+                        res.render('account', {
+                                results: result.rows
+                            });
                     });
                 }
                   
