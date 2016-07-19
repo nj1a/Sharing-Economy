@@ -8,11 +8,11 @@ html(lang="en")
         script(src="profile_script.js", defer)
     body
         ul
-            
+            if results == null
+                    li user not available
+                else    
             for result in results
-                if result == null
-                    li user not availabe
-                else
+                
                     main(class="w3-content main")
                         figure(class="text-centre")
                             img(src="qwmma.png")
