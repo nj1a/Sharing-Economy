@@ -41,7 +41,8 @@ create table user_account(
     description varchar (255),
     primary key (id),
     foreign key (city, country) references city (name, country),
-    UNIQUE(username, email)
+    UNIQUE(username),
+    UNIQUE(email)
 );
 
 DROP TABLE IF EXISTS admin_account CASCADE;
@@ -94,13 +95,13 @@ create table user_rating (
 
 DROP TABLE IF EXISTS product_post CASCADE;
 create table product_post (
-    post_id int,
-    username varchar(28),
+    post_id SERIAL,
+    user_id int,
     type post_type,
     post_date date,
     way_of_travelling varchar(28),
     travel_start_date date,
     travel_end_date date,
     primary key (post_id),
-    foreign key (username) references user_account(username)
+    foreign key (user_id) references user_account(id)
 );
