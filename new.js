@@ -53,8 +53,7 @@ router.post('/signup', function(req, res){
              } else {
                 if (JSON.stringify(result.rows) === "[]") {
                     client.query('INSERT INTO user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + "'"+ account + "'" + ", '" + account + "'" + ", '" + password + "'" +', "null", "null", "null", "null", "null", "toronto", "canada", "null", "null", "null");');
-
-                    
+    
                     
                  } else {
                     res.render('account', {
