@@ -18,7 +18,7 @@ router.post('/account', function(req, res){
                  res.send("Error " + err); 
              }
              else {
-                 if (result.length === 0) {
+                 if (result.rows.length === 0) {
                     res.render('account', {
                         results: 'null'
                     }); 
