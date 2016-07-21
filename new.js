@@ -106,6 +106,10 @@ router.post('/signup', function(req, res){
     });
 });
 
+router.get('/post/:postId', function(req, res){
+    res.send('This is post page with id is '+req.params.postId);
+});
+
 module.exports = router;
 
  /*  db.query(query).spread( function(packages, metadata) {
