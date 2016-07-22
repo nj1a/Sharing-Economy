@@ -2,9 +2,6 @@
   "name": "wanderland",
   "version": "1.0.0",
   "description": "A travel site",
-  "engines": {
-    "node": "6.2.1"
-  },
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -18,6 +15,21 @@
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+
+  "jshintConfig": {
+        "bitwise": true,
+        "curly": true,
+        "eqeqeq": true,
+        "undef": true,
+        "unused": true,
+        "globals": {
+            "jQuery": true
+        },
+        "esversion": 6,
+        "node": true,
+        "mocha": true,
+        "expr": true
+    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/njia95/Sharing-Economy.git"

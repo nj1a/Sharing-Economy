@@ -7,6 +7,7 @@ var update_handler = require("./handle_update.js");
 
 
 var pg = require('pg');
+
 var expressValidator = require('express-validator');
 
 var sess;
@@ -134,6 +135,9 @@ router.post('/login', function(req, res){
         });    
 });
 
+
+
+var tool = require('./public/assets/js/db_function');
 
 
 router.get('/', function(req, res) {
@@ -529,6 +533,31 @@ router.post('/update_email', function(req, res){
 
 });
 });
+});
+// Post page
+router.get('/post/:postId', function(req, res){
+    var username, type, post_date, way_of_travelling, travel_start_date, travel_end_date;
+
+    tool.get_info_by_post_id(req.params.postId, function(result){
+        if (result === 'error') {
+          res.send('No such result in database');
+        }else{
+          // res.send(result['post_date']);
+          // console.log('result[0]: '+result[0]);
+          console.log('result.username: '+result.username);
+
+          // username = result['username'];
+          // post_date = result['post_date'];
+          // console.log('username: '+username);
+          // console.log('post_date: '+post_date);
+          res.render('post', {result: result});
+
+        };
+    });
+    // console.log(typeof post_date.toISOString());
+    // post_date = post_date.toISOString();
+    // tool.tmp();
+    // res.send('This is post page with id is '+req.params.postId);
 });
 
 
