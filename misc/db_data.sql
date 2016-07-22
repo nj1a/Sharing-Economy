@@ -1,11 +1,9 @@
-INSERT INTO city (name, country, continent, description) VALUES ('toronto', 'canada', 'North America', 'haha');
+INSERT INTO country (name) VALUES('Canada');
+
+INSERT INTO city (country_id, name, continent, description) VALUES(1, 'Toronto', 'North America', 'Best City in the world');
 
 INSERT INTO user_account (username, email, password, first_name, last_name,
-    profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description)
-    VALUES ('tcsbears', 'sang.ahn@mail.utoronto.ca', '12345678', 'Sang Jun', 'Ahn',
-        'null', 'm', '6472223333', 'toronto', 'canada', '20130909', '20160909', 'haha' );
-
-INSERT INTO user_account (username, email, password, first_name, last_name,
-    profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description)
-    VALUES ('tcsbearsaaa', 'aaa.ahn@mail.utoronto.ca', '12345678', 'Sang Jun', 'Ahn',
-        'null', 'm', '6472223333', 'toronto', 'canada', '20130909', '20160909', 'haha' );
+    profile_pic, gender, phone_num, city_id, country_id, date_of_birth,
+    date_joined, description, is_admin)
+VALUES('Bob123', 'bob@email.com', 'abcdef123456', 'Bob', 'Martin',
+        './pic.png', 'm', 1234567890, 1, 1, '12/12/1980', '12/12/2014', 'Hi, I am Bob', false);

@@ -26,7 +26,6 @@ create table city (
     city_id SERIAL,
     country_id int,
     name varchar(255),
-    country varchar(255),
     continent continent_type,
     description varchar(255),
     primary key (city_id),
