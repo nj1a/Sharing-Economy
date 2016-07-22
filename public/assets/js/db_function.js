@@ -7,18 +7,13 @@ module.exports = {
 			      done();
 			      if (err) {
 			         console.error(err); 
-			         res.send("Error " + err); 
 			     }
 			     else {
 			       
 			         if (JSON.stringify(result.rows) === "[]") {
-			            res.render('account', {
-			                results: '-1'
-			            }); 
+			         	return '-1';
 			         } else {
-			            res.render('account', {
-			                results: result.rows
-			            });
+			         	return result.rows;
 			         }
 			     }
 			 });
