@@ -114,11 +114,12 @@ router.get('/post/:postId', function(req, res){
         if (result === 'error') {
           res.send('No such result in database');
         }else{
-          username = result['username'];
-          post_date = result['post_date'];
-          console.log('username: '+username);
-          console.log('post_date: '+post_date);
-          res.render('post', {username: username, post_date: post_date});
+          res.send(result['post_date']);
+          // username = result['username'];
+          // post_date = result['post_date'];
+          // console.log('username: '+username);
+          // console.log('post_date: '+post_date);
+          // res.render('post', {username: username, post_date: post_date});
 
         };
     });
