@@ -12,7 +12,7 @@ module.exports = {
 						callback('error');
 					} else {
 						// console.log(result.rows[0]);
-						callback(JSON.stringify(result.rows));
+						callback(result.rows[0]);
 					}
 				}
 			});
