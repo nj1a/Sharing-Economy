@@ -116,7 +116,7 @@ router.get('/post/:postId', function(req, res){
         }else{
           // res.send(result['post_date']);
 
-          res.send(result['username']);
+          res.send(result[0]['username']);
           // username = result['username'];
           // post_date = result['post_date'];
           // console.log('username: '+username);
