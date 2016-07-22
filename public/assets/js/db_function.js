@@ -13,8 +13,10 @@ module.exports = {
 						console.log('-1');
 						return '-1';
 					} else {
-						console.log('this is result.row: '+result.rows);
-						console.log('this is result.row[0]: '+result.rows[0]);
+						console.log(result.rows);
+						console.log(result.rows[0]);
+						console.log(result.rows.anonymous);
+						console.log(result.rows.anonymous.post_date);
 						return result.rows[0];
 					}
 				}
