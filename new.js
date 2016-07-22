@@ -108,15 +108,16 @@ router.post('/signup', function(req, res){
 });
 // Post page
 router.get('/post/:postId', function(req, res){
-    var user_id, type, post_date, way_of_travelling, travel_start_date, travel_end_date;
+    var username, type, post_date, way_of_travelling, travel_start_date, travel_end_date;
 
     tool.get_info_by_post_id(req.params.postId, function(result){
         if (result === 'error') {
           res.send('No such result in database');
         }else{
-          res.send(result);
-        }
-    })
+          res.render('post', {result: result});
+
+        };
+    });
     // console.log(typeof post_date.toISOString());
     // post_date = post_date.toISOString();
     // tool.tmp();
