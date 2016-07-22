@@ -353,8 +353,8 @@ router.post('/signup', function(req, res){
                             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                             
 
-                            client.query('INSERT INTO wanderland.user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city_id, country_id, date_of_birth, date_joined, description) VALUES (' + 
-                                "'" + username + "'" +  ", '" + account + "'" + ", '" + password + "'" +', ' + 'NULL' + ', ' + 'NULL, ' + 'NULL, ' + 'NULL, ' + ' NULL, ' + "'" + 'NULL' + "'" + "," + "'" + 'NULL' + "'" + ',NULL, ' + 
+                            client.query('INSERT INTO wanderland.user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + 
+                                "'" + username + "'" +  ", '" + account + "'" + ", '" + password + "'" +', ' + 'NULL' + ', ' + 'NULL, ' + 'NULL, '  + 'NULL, ' + ' NULL, ' + "'" + 'toronto' + "'" + "," + "'" + 'canada' + "'" + ',NULL, ' + 
                                 'NULL, ' + 'NULL' + ');', function(err, result){
                                 done();
 
@@ -362,6 +362,9 @@ router.post('/signup', function(req, res){
                                     console.error(err); 
                                     res.send("Error " + err);
                                 }
+
+                                sess.email = account;
+                                console.log(sess.email);
 
                             });                            
                         });
@@ -376,10 +379,12 @@ router.post('/signup', function(req, res){
                                         console.error(err); 
                                         res.send("Error " + err);
                                     } else {
-                                        console.log(JSON.stringify(result.rows));
-                                        sess.email = account;
+                                        console.log("11111111111   " + JSON.stringify(result.rows));
+                                        //sess.email = account;
                                         res.render('profile', {
-                                            results: result.rows
+                                            results: result.rows,
+                                            errors: ''
+
                                         });
                                     }
                             });                            
@@ -461,7 +466,7 @@ router.post('/updatePassword', function(req, res){
                                                 if (err) {
                                                     console.error(err); 
                                                     res.send("Error " + err); 
-                                                 }
+                                                }
                                                 else {  
                                                     res.render('profile', {
 
