@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var pg = require('pg');
+var tool = require('./assets/js/db_function.js');
 
 router.get('/', function(req, res) {
     res.render('index');
@@ -107,7 +108,7 @@ router.post('/signup', function(req, res){
 });
 // Post page
 router.get('/post/:postId', function(req, res){
-    var country = 'hi';
+    var country = tool.tmp;
     res.send(country);
     // res.send('This is post page with id is '+req.params.postId);
 });
