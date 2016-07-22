@@ -41,7 +41,6 @@ create table user_account(
     password password_len,
     first_name varchar(128),
     last_name varchar(128),
-    profile_pic varchar(255),
     gender gender_type,
     phone_num phone_num_len,
     city_id int,
