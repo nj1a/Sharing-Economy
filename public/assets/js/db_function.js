@@ -1,7 +1,7 @@
 var pg = require('pg');
 var client = 
 module.exports = {
-	get_info_by_post_id : function(post_id){
+	get_info_by_post_id : function(post_id, callback){
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 			client.query('SELECT * FROM product_post WHERE post_id ='+post_id, function(err, result){
 				done();
@@ -11,11 +11,11 @@ module.exports = {
 				else{
 					if (JSON.stringify(result.rows) === "[]") {
 						console.log('-1');
-						return '-1';
+						callback('-1');
 					} else {
 						console.log(result.rows[0].type);
 						console.log('1: '+typeof result.rows[0].type);
-						return result.rows[0].type;
+						callback(result.rows[0].type);
 					}
 				}
 			});
