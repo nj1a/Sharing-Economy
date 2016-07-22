@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var Model = require('../model/base');
+var Model = require('../models/base');
 var dbMockup = {};
 
 describe('Models', function() {
