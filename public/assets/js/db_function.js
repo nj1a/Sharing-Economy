@@ -13,11 +13,7 @@ module.exports = {
 						console.log('-1');
 						return '-1';
 					} else {
-						console.log(result.rows);
-						console.log(result.rows[0]);
-						console.log(result.rows[0].anonymous);
-						console.log(result.rows[0].post_date);
-						return result.rows[0];
+						return result.rows[0].post_date;
 					}
 				}
 			});
