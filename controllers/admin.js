@@ -12,7 +12,14 @@ module.exports = baseController.extend({
                     title: 'Administration',
                     content: 'Welcome to the control panel'
                 });
-            });         
+    
+            });    
+            req.session.destroy(function(err) {
+                if(err) {
+                    console.log(err);
+                    res.end(err);                
+                }
+            });     
         } else {
             var v = new View(res, 'admin');
             v.render({
