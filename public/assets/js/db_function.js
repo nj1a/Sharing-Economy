@@ -15,8 +15,8 @@ module.exports = {
 					} else {
 						console.log(result.rows);
 						console.log(result.rows[0]);
-						console.log(result.rows.anonymous);
-						console.log(result.rows.post_date);
+						console.log(result.rows[0][0]);
+						console.log(result.rows[0][1]);
 						return result.rows[0];
 					}
 				}
