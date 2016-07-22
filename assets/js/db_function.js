@@ -5,4 +5,4 @@ module.exports = {
 		console.log('Hello I have been called');
 		return 'hello';
 	}
-}
+};
