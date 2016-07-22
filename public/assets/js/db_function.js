@@ -13,9 +13,9 @@ module.exports = {
 						console.log('-1');
 						callback('-1');
 					} else {
-						console.log(result.rows[0].type);
-						console.log('1: '+typeof result.rows[0].type);
-						callback(result.rows[0].type);
+						console.log(result.rows[0].post_date);
+						console.log('1: '+typeof result.rows[0].post_date);
+						callback(result.rows[0].post_date);
 					}
 				}
 			});
