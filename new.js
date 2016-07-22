@@ -107,8 +107,9 @@ router.post('/signup', function(req, res){
 });
 // Post page
 router.get('/post/:postId', function(req, res){
-    var country = 
-    res.send('This is post page with id is '+req.params.postId);
+    var country = 'hi';
+    res.send(country);
+    // res.send('This is post page with id is '+req.params.postId);
 });
 
 module.exports = router;
