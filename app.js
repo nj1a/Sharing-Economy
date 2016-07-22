@@ -5,7 +5,7 @@ var pg = require('pg');
 
 var app = express();
 
-var Admin = require('controllers/admin');
+var Admin = require('./controllers/admin');
 // configure environemnt
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
