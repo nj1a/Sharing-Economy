@@ -353,7 +353,7 @@ router.post('/signup', function(req, res){
                             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                             
 
-                            client.query('INSERT INTO wanderland.user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + 
+                            client.query('INSERT INTO wanderland.user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city_id, country_id, date_of_birth, date_joined, description) VALUES (' + 
                                 "'" + username + "'" +  ", '" + account + "'" + ", '" + password + "'" +', ' + 'NULL' + ', ' + 'NULL, ' + 'NULL, ' + 'NULL, ' + ' NULL, ' + "'" + 'toronto' + "'" + "," + "'" + 'canada' + "'" + ',NULL, ' + 
                                 'NULL, ' + 'NULL' + ');', function(err, result){
                                 done();
