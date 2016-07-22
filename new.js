@@ -353,8 +353,8 @@ router.post('/signup', function(req, res){
                             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                             
 
-                            client.query('INSERT INTO wanderland.user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city, country, date_of_birth, date_joined, description) VALUES (' + 
-                                "'" + username + "'" +  ", '" + account + "'" + ", '" + password + "'" +', ' + 'NULL' + ', ' + 'NULL, ' + 'NULL, '  + 'NULL, ' + ' NULL, ' + "'" + 'toronto' + "'" + "," + "'" + 'canada' + "'" + ',NULL, ' + 
+                            client.query('INSERT INTO wanderland.user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city_id, country_id, date_of_birth, date_joined, description) VALUES (' + 
+                                "'" + username + "'" +  ", '" + account + "'" + ", '" + password + "'" +', ' + 'NULL' + ', ' + 'NULL, ' + 'NULL, '  + 'NULL, ' + ' NULL, ' +  'NULL'  + ', '  + 'NULL' +  ',NULL, ' + 
                                 'NULL, ' + 'NULL' + ');', function(err, result){
                                 done();
 
@@ -364,16 +364,14 @@ router.post('/signup', function(req, res){
                                 }
 
                                 sess.email = account;
-                                console.log(sess.email);
+                                console.log("111111122222" + sess.email);
 
-                            });                            
-                        });
-
-                        pg.connect(process.env.DATABASE_URL, function(err, client, done) {                           
+                                pg.connect(process.env.DATABASE_URL, function(err, client, done) {                           
                             client.query('SELECT * FROM wanderland.user_account WHERE user_account.email = ' + 
                                 "'" + account + "'" +  ' AND wanderland.user_account.password =' + "'" + 
                                 password + "'" +  ' AND wanderland.user_account.username =' + "'" + 
                                 username + "'", function(err, result){
+                                    console.log("55555555       " + JSON.stringify(result.rows));
                                     done();
                                     if (err) {
                                         console.error(err); 
@@ -389,6 +387,11 @@ router.post('/signup', function(req, res){
                                     }
                             });                            
                         });
+
+                            });                            
+                        });
+                            
+                        
 
                         }                            
                 }             

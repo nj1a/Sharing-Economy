@@ -20,9 +20,10 @@ app.use(bodyParser.json());
 // define routes
 
 pg.connect(process.env.DATABASE_URL, function(err, client) {
-    if (err) {
+    /*if (err) {
+        console.log(err);
         console.log('Some error occured');
-    } else {
+    } else {*/
         var attachedDb = function(req, res, next) {
             req.db = client;
             next();
@@ -37,7 +38,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
         app.listen(port, function () {
             console.log('listen on port ' + port);
         });
-    }
+  // }
 });
 
 
