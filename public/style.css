@@ -2,7 +2,7 @@
     font-family: "Open Sans", sans-serif;
 }
 
-input[type=text] {
+/*input[type=text] {
     width: 30%;
     box-sizing: border-box;
     font-size: 18px;
@@ -11,6 +11,11 @@ input[type=text] {
     margin-top: 3px;
     margin-left: 100px;
     transition: width 0.4s ease-in-out;
+}*/
+
+input:invalid {
+  outline: 2px solid red;
+  background-color: #FFC6B3;
 }
 
 select {
@@ -19,6 +24,10 @@ select {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+input[type=text] {
+    width: 100% !important;
 }
 
 input[type=text]:focus {
@@ -35,8 +44,25 @@ body{
 .main {
     /*margin-top:80px;*/
 }
+/*
+input#usernameNew {
+    width: inherit !important;
+    box-sizing: inherit !important;
+    font-size: inherit !important;
+    background-color: inherit !important;
+    padding: inherit !important;
+    margin-top: inherit !important;;
+    margin-left: inherit !important;
+    transition: inherit !important;
+    width:100% !important;
 
+}
 
+input#usernameNew:focus{
+    width:inherit !important;
+}
+
+*/
 #navS {
     margin-top:51px
 }

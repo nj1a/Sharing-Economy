@@ -10,33 +10,42 @@ html(lang="en")
         section(class="body-wrap")
             header
                 a(id="Help" href="#") Help
-                a(id="Log-In" href="#" onclick="show_login_pop()") Log In/Sign Up
+                button(id="Log-In" onclick="show_login_pop()") Log In/Sign Up
             main(id="root-content")
-                section(id="pop-wrap")
+                section(id="pop-wrap" style=errors.status)
                     section(id="login-pop")
                         section(class="login-box span12")
                             button(class="close_pop" onclick="close_login_pop()") [close] 
                             section(id="inputField" class="old span3")
-                                form(class="existing" action="account" method="post")
+                                form(class="existing" action="/account" method="post")
                                     section(class="span12 text-center")
                                         h3(id="inputField") Login                         
                                     section(id="inputField" class="span12")
                                         label(for="email" class="inputField") Email address 
-                                        input(id="emailEx" class="inputField" type="email" name ="email" placeholder="Enter your email")
+                                            input(id="emailEx" class="inputField" type="email" name ="email" placeholder="Enter your email")
+                                            span(class="error")=errors.error_email 
+                                            </br>
                                         label(id="inputField" for="password") Password
                                         input(id="passwordEx" class="inputField" type="password" name="password")
                                     section(class="span12 text-center")
                                         a(id="inputField" class="hover underlined" href="#") Forgot your password?
                                     section(class="span12 text-center")
-                                        input(id="existingClient" class="button" type="submit" value="Login")
+                                        input(id="existingClient" class="button" type="button" value="Login")
                                 section(class="middle-wall")
                             section(id="inputField" class="new span3")
                                 form(class="newmember" action="signup" method="post")
                                     section(class="span12 text-center")
-                                        h3(class="inputField") Sign Up                                    
+                                        h3(class="inputField") Sign Up
+                                    section(id="inputField" class="span12")
+                                        label(class="inputField" for="username") Username
+                                            input(id="usernameNew" class="inputField" type="text" name ="username" placeholder="Choose a Username")
+                                            span(class="error")=errors.error_username
+                                            </br>                                  
                                     section(id="inputField" class="span12")
                                         label(class="inputField" for="email") Email address
-                                        input(id="emailNew" class="inputField" type="email" name ="email" placeholder="Enter your email")                                
+                                            input(id="emailNew" class="inputField" type="email" name ="emailNew" placeholder="Enter your email")
+                                            span(class="error")=errors.error_emailNew
+                                            </br>                                 
                                     section(id="inputField" class="span6")
                                         label(class="inputField" for="password") Password 
                                         input(class="inputField" id="passwordNew" type="password" name="password")
