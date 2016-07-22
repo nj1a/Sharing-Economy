@@ -5,9 +5,6 @@ var pg = require('pg');
 var update_handler = require("./handle_update.js");
 var expressValidator = require('express-validator');
 
-
-
-
 var router = express.Router();
 var sess;
 
@@ -31,7 +28,7 @@ router.use(expressValidator({
 
         isCorrectPW: function(value, q) {
 
-            if (q == undefined || JSON.parse(q).password != value  ) {
+            if (q === undefined || JSON.parse(q).password !== value  ) {
                 return false;
             }
 
@@ -40,11 +37,12 @@ router.use(expressValidator({
         },
 
         doesExist: function(value, q) {
-            if (q == undefined) {
+            if (q === undefined) {
                 return true;
             } else {
-                if (value == JSON.parse(q).email)
+                if (value === JSON.parse(q).email) {
                     return false;
+                }
                 else {
                     return true;
                 }
@@ -52,17 +50,18 @@ router.use(expressValidator({
         }, 
 
         doesNotExist: function(value, q) {
-            if (q == undefined) {
+            if (q === undefined) {
                 return false;
             } else {
-                if (value == JSON.parse(q).email)
+                if (value === JSON.parse(q).email) {
                     return true ;
+                }
             }
         }, 
 
         usernameAvailable: function(value, q) {
            
-            if (q == undefined || JSON.parse(q).username != value ){
+            if (q === undefined || JSON.parse(q).username !== value ){
                 return true;
             } else{
                 return false;
@@ -210,10 +209,14 @@ router.post('/signup', function(req, res){
                             errorMsgs.errors.status = "display: block";
                             
 
-                            if ( mappedErrors.username ) 
+                            if ( mappedErrors.username ) {
                                 errorMsgs.errors.error_username = mappedErrors.username.msg;
-                            if ( mappedErrors.emailNew ) 
+                            }
+                                
+                            if ( mappedErrors.emailNew ) {
                                 errorMsgs.errors.error_emailNew = mappedErrors.emailNew.msg;
+                            }
+                                
                             
                             res.render('index', errorMsgs);
 
@@ -226,7 +229,7 @@ router.post('/signup', function(req, res){
 
                             client.query('INSERT INTO wanderland.user_account (username, email, password, first_name, last_name, gender, phone_num, city_id, country_id, date_of_birth, date_joined, description) VALUES (' + 
                                 "'" + username + "'" +  ", '" + account + "'" + ", '" + password + "'" +', ' + 'NULL' + ', '  + 'NULL, '  + 'NULL, ' + ' NULL, ' +  'NULL'  + ', '  + 'NULL' +  ',NULL, ' + 
-                                'NULL, ' + 'NULL' + ');', function(err, result){
+                                'NULL, ' + 'NULL' + ');', function(err){
                                 done();
 
                                 if (err) {
@@ -291,10 +294,10 @@ router.post('/updatePassword', function(req, res){
                             
                             var errorMsgs = { "errors": {} };
                         
-                            if ( mappedErrors.cpassword ) 
+                            if ( mappedErrors.cpassword ) {
                                 errorMsgs.errors.error_npw = mappedErrors.cpassword.msg;
-                            
-                            
+                            }
+
                             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                                         client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +  
                                             "'"+ sess.email + "'" , function(err, result) {
@@ -313,7 +316,7 @@ router.post('/updatePassword', function(req, res){
                             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                             
 
-                            client.query('UPDATE wanderland.user_account SET password = ' + "'" + newPW + "'" + 'WHERE user_account.email = ' +  "'"+ sess.email + "'" , function(err, result){
+                            client.query('UPDATE wanderland.user_account SET password = ' + "'" + newPW + "'" + 'WHERE user_account.email = ' +  "'"+ sess.email + "'" , function(err){
                                 done();
 
                                 if (err) {
@@ -377,9 +380,11 @@ router.post('/update_email', function(req, res){
 
                             var errorMsgs = { "errors": {} };                            
                             
-                            if ( mappedErrors.newEmailValue ) 
+                            if ( mappedErrors.newEmailValue ) {
                                 errorMsgs.errors.error_newEmailValue = mappedErrors.newEmailValue.msg;
                                 update_handler.sendDefault(sess.email, errorMsgs.errors, req, res);
+                            }
+                                
 
                         }  else {
                             
@@ -404,9 +409,9 @@ router.get('/post/:postId', function(req, res){
     tool.get_info_by_post_id(req.params.postId, function(result){
         if (result === 'error') {
           res.send('No such result in database');
-        }else{
+        } else{
           res.render('post', {result: result});
-        };
+        }
     });
    
 });
