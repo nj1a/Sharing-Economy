@@ -114,7 +114,7 @@ router.get('/post/:postId', function(req, res){
         if (result === 'error') {
           res.send('No such result in database');
         }else{
-          res.render('post', {username: result['username'], post_date: result['post_date']});
+          res.render('post', {result: result});
 
         };
     });
