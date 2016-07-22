@@ -10,9 +10,6 @@ CREATE DOMAIN phone_num_len AS varchar(15) CHECK (length(value) >= 1);
 
 CREATE TYPE gender_type AS ENUM ('m', 'f', 'o');
 CREATE TYPE post_type AS ENUM ('guide', 'buddy');
-CREATE TYPE continent_type AS ENUM('Asia', 'Africa', 'North America',
-                                    'South America', 'Antarctica',
-                                    'Europe', 'Oceania');
 
 DROP TABLE IF EXISTS country CASCADE;
 CREATE TABLE country (
@@ -26,7 +23,6 @@ create table city (
     city_id SERIAL,
     country_id int,
     name varchar(255),
-    continent continent_type,
     description varchar(255),
     primary key (city_id),
     foreign key (country_id) references country(country_id)
