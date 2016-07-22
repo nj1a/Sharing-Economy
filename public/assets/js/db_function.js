@@ -14,7 +14,7 @@ module.exports = {
 						return '-1';
 					} else {
 						console.log(result.rows[0].post_date);
-						return result.rows[0].post_date.toISOString();
+						return result.rows[0].post_date;
 					}
 				}
 			});
