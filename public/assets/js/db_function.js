@@ -11,8 +11,10 @@ module.exports = {
 			     else {
 			       
 			         if (JSON.stringify(result.rows) === "[]") {
+			         	console.log('-1');
 			         	return '-1';
 			         } else {
+			         	console.log(result.rows);
 			         	return result.rows;
 			         }
 			     }
