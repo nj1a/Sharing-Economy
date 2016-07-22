@@ -1,24 +1,24 @@
 var pg = require('pg');
 var client = 
 module.exports = {
-	tmp : function(){
+	get_info_by_post_id : function(post_id){
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-			client.query('SELECT * FROM user_account', function(err, result) {
-			      done();
-			      if (err) {
-			         console.error(err); 
-			     }
-			     else {
-			       
-			         if (JSON.stringify(result.rows) === "[]") {
-			         	console.log('-1');
-			         	return '-1';
-			         } else {
-			         	console.log(result.rows);
-			         	return result.rows;
-			         }
-			     }
-			 });
+			client.query('SELECT post_date FROM product_post WHERE post_id ='+post_id, function(err, result){
+				done();
+				if (err) {
+					console.log(err);
+				}
+				else{
+					if (JSON.stringify(result.rows) === "[]") {
+						console.log('-1');
+						return '-1';
+					} else {
+						console.log(result.rows);
+						return result.rows[0];
+					}
+				}
+			});
+
 		});
 
 		console.log('i have been called');

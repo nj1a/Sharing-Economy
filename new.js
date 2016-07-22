@@ -108,8 +108,10 @@ router.post('/signup', function(req, res){
 });
 // Post page
 router.get('/post/:postId', function(req, res){
-    var country = tool.tmp();
-    res.send(country);
+
+    var post_date = tool.get_info_by_post_id(req.params.postId);
+    console.log('This is new.js: '+post_date);
+    res.send(post_date);
     // tool.tmp();
     // res.send('This is post page with id is '+req.params.postId);
 });
