@@ -22,7 +22,7 @@ module.exports = {
 			         }
 			     }
 			 });
-		}
+		});
 
 		console.log('i have been called');
 	}
