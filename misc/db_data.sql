@@ -48,17 +48,6 @@ INSERT INTO city VALUES(1, 'Ankara', 'Best City in the world');
 INSERT INTO city VALUES(1, 'Durban', 'Best City in the world');
 INSERT INTO city VALUES(1, 'Porto Alegre', 'Best City in the world');
 
-
-
-
-
-
-
-
-
-
-
-
 INSERT INTO user_account VALUES('Bob123', 'bob@email.com', 'abcdef123456', 'Bob', 'Martin',
         './pic.png', 'm', 1234567890, 1, 1, '12/12/1980', '12/12/2014', 'Hi, I am Bob', false);
 
