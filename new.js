@@ -111,8 +111,8 @@ router.get('/post/:postId', function(req, res){
 
     var post_date = tool.get_info_by_post_id(req.params.postId);
     console.log(typeof post_date);
-    console.log(typeof post_date.toISOString());
-    post_date = post_date.toISOString();
+    // console.log(typeof post_date.toISOString());
+    // post_date = post_date.toISOString();
     console.log('This is new.js: '+post_date);
     res.send(post_date);
     // tool.tmp();

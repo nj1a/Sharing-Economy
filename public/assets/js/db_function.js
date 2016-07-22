@@ -14,6 +14,7 @@ module.exports = {
 						return '-1';
 					} else {
 						console.log(result.rows[0].post_date);
+						console.log('1: '+typeof result.rows[0].post_date);
 						return result.rows[0].post_date;
 					}
 				}
