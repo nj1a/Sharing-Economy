@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var pg = require('pg');
-var tool = require('./assets/js/db_function.js');
+var tool = require('public/assets/js/db_function.js');
 
 router.get('/', function(req, res) {
     res.render('index');
