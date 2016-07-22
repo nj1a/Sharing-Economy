@@ -8,28 +8,28 @@
     "chai": "^3.5.0",
     "express": "^4.14.0",
     "pg": "^6.0.2",
-    "pug": "^2.0.0-beta3"
+    "pug": "^2.0.0-beta3",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {},
   "scripts": {
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-
   "jshintConfig": {
-        "bitwise": true,
-        "curly": true,
-        "eqeqeq": true,
-        "undef": true,
-        "unused": true,
-        "globals": {
-            "jQuery": true
-        },
-        "esversion": 6,
-        "node": true,
-        "mocha": true,
-        "expr": true
+    "bitwise": true,
+    "curly": true,
+    "eqeqeq": true,
+    "undef": true,
+    "unused": true,
+    "globals": {
+      "jQuery": true
     },
+    "esversion": 6,
+    "node": true,
+    "mocha": true,
+    "expr": true
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/njia95/Sharing-Economy.git"

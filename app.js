@@ -24,6 +24,10 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
             next();
         };
 
+        app.all('/admin*', attachedDb, function(req, res, next) {
+			Admin.run(req, res, next);
+		});
+
         // start the server
         var port = process.env.PORT || 1337;
         app.listen(port, function () {
