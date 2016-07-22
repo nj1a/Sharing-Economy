@@ -354,7 +354,7 @@ router.post('/signup', function(req, res){
                             
 
                             client.query('INSERT INTO wanderland.user_account (username, email, password, first_name, last_name, profile_pic, gender, phone_num, city_id, country_id, date_of_birth, date_joined, description) VALUES (' + 
-                                "'" + username + "'" +  ", '" + account + "'" + ", '" + password + "'" +', ' + 'NULL' + ', ' + 'NULL, ' + 'NULL, ' + 'NULL, ' + ' NULL, ' + "'" + 'toronto' + "'" + "," + "'" + 'canada' + "'" + ',NULL, ' + 
+                                "'" + username + "'" +  ", '" + account + "'" + ", '" + password + "'" +', ' + 'NULL' + ', ' + 'NULL, ' + 'NULL, ' + 'NULL, ' + ' NULL, ' + "'" + 'NULL' + "'" + "," + "'" + 'NULL' + "'" + ',NULL, ' + 
                                 'NULL, ' + 'NULL' + ');', function(err, result){
                                 done();
 
