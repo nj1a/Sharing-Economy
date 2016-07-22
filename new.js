@@ -116,6 +116,8 @@ router.get('/post/:postId', function(req, res){
         }else{
           username = result['username'];
           post_date = result['post_date'];
+          console.log('username: '+username);
+          console.log('post_date: '+post_date);
           res.render('post', {username: username, post_date: post_date});
 
         };
