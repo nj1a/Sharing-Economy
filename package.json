@@ -2,9 +2,6 @@
   "name": "wanderland",
   "version": "1.0.0",
   "description": "A travel site",
-  "engines": {
-    "node": "6.2.1"
-  },
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.15.2",
