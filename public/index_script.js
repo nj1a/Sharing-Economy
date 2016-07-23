@@ -1,10 +1,16 @@
 window.slideNum = 1;
 
 $(document).ready(function() {
-	var x = document.getElementById("adminMain");
-	if (x===null){
-		startSlide();
-	} 
+	var reqType;
+	var x;
+	//$(document).onload(function(){
+		x = document.getElementById("adminMain");
+		if (x===null){
+			startSlide();
+		} 
+
+	//});
+	
 
 		
 	
@@ -15,16 +21,19 @@ $(document).ready(function() {
 
 
 	$("input[type='button']#existingClient").click(function(e){
+		reqType = 1;
 		return validateEmailandPassword("existing");
 	});
 
 	
 	$("input[type='button']#newClient").click(function(e){
+		reqType = 2;
 		return validateEmailandPassword("new");
 	});
 
 
 	$("input[type='button']#adminLogin").click(function(e){
+		reqType = 3;
 		return validateEmailandPassword("admin");
 	});
 
@@ -70,7 +79,7 @@ $(document).ready(function() {
 
 		if ($("span.error").length) $("span.error").remove();
 
-		var inputEmail, inputPassword, inputPasswordConfirm;
+		var inputEmail, inputPassword, inputPasswordConfirm, username;
 
 		if (client == "existing"){
 			inputEmail = $("input#emailEx");
@@ -110,18 +119,23 @@ $(document).ready(function() {
 			}
 		}		
 
-		if (x===null){
+		if (reqType === 1){
             email=$("#emailEx").val();
         	pass=$("#passwordEx").val();
-		} else{
+		} else if (reqType === 2) {
+			email=$("#emailNew").val();
+			pass=$("#passwordNew").val();
+			username=$("#usernameNew").val();
+		}else{
 			email=$("#adminEmail").val();
 			pass=$("#adminPass").val();
 		}
-		alert("email: " + email + " pass: " + pass);
-		
 
-		$.post("/login",{email:email,pass:pass},function(data){        
-            if(data==='done')           
+		alert("email: " + email + " pass: " + pass + " username: " + username);
+
+		if (reqType===2) {
+			$.post("/signup", {emailNew:email, password:pass, username:username}, function(data){
+				if(data==='done')           
             {	
             	alert(1);
                 window.location.href="/profile";
@@ -135,10 +149,40 @@ $(document).ready(function() {
             	isValid = false;
 
             }
-    	});
+			});
+
+			return isValid;
+
+		} else {
+
+			$.post("/login",{email:email,pass:pass},function(data){        
+	            if(data==='done')           
+	            {	
+	            	alert(1);
+	                window.location.href="/profile";
+	            } else {
+	            	alert(2);
+	            	if (x===null){
+	            		show_login_pop();
+						
+					} 
+	            	
+	            	isValid = false;
+
+	            }
+	    	});
 
 
 		return isValid;
+
+
+		}
+
+
+		
+		
+
+		
 	
 	}
 	
