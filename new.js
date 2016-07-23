@@ -190,7 +190,7 @@ router.post('/signup', function(req, res){
     var account = req.body.emailNew; 
     var password = req.body.password;
     var username = req.body.username;
-    console.log("email: " + account + " pass: " + password + " username: " + username)
+    
     sess = req.session;
 
    
@@ -235,7 +235,7 @@ router.post('/signup', function(req, res){
                             }
                                 
                            
-                            //res.render('index', errorMsgs);
+                            
                             res.send("signup failed");
 
 
@@ -252,32 +252,14 @@ router.post('/signup', function(req, res){
                                 done();
 
                                 if (err) {
+                                    
 
                                     res.send("Error " + err);
                                 }
 
                                 sess.email = account;
+                                res.send('done');
                                 
-
-                                pg.connect(process.env.DATABASE_URL, function(err, client, done) {                           
-                                    client.query('SELECT * FROM wanderland.user_account WHERE user_account.email = ' + 
-                                    "'" + account + "'" +  ' AND wanderland.user_account.password =' + "'" + 
-                                    password + "'" +  ' AND wanderland.user_account.username =' + "'" + 
-                                    username + "'", function(err, result){
-                                         console.log("ahaha" + JSON.stringify(result.rows[0]));
-                                        done();
-                                        if (err) {
-                                            res.send("Error " + err);
-                                        } else {
-
-                                            res.render('profile', {
-                                                results: result.rows,
-                                                errors: ''
-
-                                            });
-                                        }
-                                    });                            
-                                });
 
                             });                            
                         });
