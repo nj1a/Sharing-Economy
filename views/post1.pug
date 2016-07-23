@@ -30,7 +30,7 @@ html(lang="en")
             a.w3-padding-large.w3-hover-white(href='#', title='My Account')
               img.w3-circle.avatar(src='../assets/images/avatar.jpg', alt='Avatar')
       main#product_page.main
-        section#product_title  Looking for travel partner from Toronto to Germany
+        section#product_title=result.title
         section#product_image
           img.slide_image(src='../assets/images/product_1.jpg', alt='')
           |  
@@ -48,43 +48,47 @@ html(lang="en")
               tr
                 td Destination Country:
                 td
-                  a(href='') Australia
+                  a(href='')=result.destination_country
               tr
                 td Destination City:
                 td
-                  a(href='') Sydney
-                  | , 
-                  a(href='') Melbourne
+                  a(href='')=result.destination_city
+              tr
+                td Departure Country:
+                td
+                  a(href='')=result.departure_country
               tr
                 td Departure City:
                 td
-                  a(href='') Toronto
+                  a(href='')=result.departure_city
               tr
                 td Post Type:
-                td Travel Partner
+                td=result.post_type
               tr
-                td  Travelling Date:
-                td  July 7, 2016 - July 27, 2016 (20 days)
+                td  Start Date:
+                td=result.travel_start_date
+              tr
+                td  End Date:
+                td=result.travel_end_date
               tr
                 td  Travel Type:
-                td  City Exploring
+                td=result.trave_type
               tr
                 td  Travelling Method:
-                td  Plane
+                td=result.way_of_travelling
               tr
                 td Approximate Cost:
                 td $5000
               tr
                 td Partner Requirement:
-                td
-                  | Must be clean, around 25 years old. Preferrbly someone who likes to go to art museum and watch opera.
+                td=result.partner_requirement
               tr
                 td  Date Listed:
-                td  July 1, 2016
+                td=result.post_date
               tr
                 td  Description:
-                td
-                  | I am looking for 2 people to travel with me to Australia. We will be living in hostels. Message me for a detailed travelling plan. See my profile page to know more about me.
+                td=result.description
+
             h1 Poster Info
             table
               tr
