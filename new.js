@@ -116,6 +116,7 @@ router.post('/login', function(req, res){
 
 
 var tool = require('./public/db_function');
+var glob = require('glob');
 
 
 router.get('/', function(req, res) {
@@ -308,7 +309,8 @@ router.post('/updatePassword', function(req, res){
                                                 if (err) {
                                                     res.send("Error " + err); 
                                                  }
-                                                else {  
+                                                else {
+
                                                     res.render('profile', {results: result.rows, errors: errorMsgs.errors});
                                                 }
                                             }); 
@@ -412,6 +414,10 @@ router.get('/post/:postId', function(req, res){
         if (result === 'error') {
           res.send('No such result in database');
         } else{
+            glob('../assets/images/post_images/'+req.params.postID+'_*.jpg', function(er, files){
+                if (er) throw er;
+                console.log('Hey i got this files: '+files);
+            });
           res.render('post1', {result: result});
         }
     });

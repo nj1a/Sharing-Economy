@@ -9,7 +9,7 @@ CREATE DOMAIN phone_num_len AS varchar(15) CHECK (length(value) >= 1);
 
 
 CREATE TYPE gender_type AS ENUM ('m', 'f', 'o');
-CREATE TYPE post_type AS ENUM ('guide', 'buddy');
+CREATE TYPE post_type AS ENUM ('guide', 'buddy', 'offer_guide');
 
 DROP TABLE IF EXISTS country CASCADE;
 CREATE TABLE country (
@@ -93,20 +93,16 @@ create table product_post (
     post_date date,
     way_of_travelling varchar(28),
     travel_start_date date,
-    travel_end_date date,
-    from_country int,
+    travel_end_date date check (travel_end_date > travel_start_date),
     from_city int,
-    to_country int,
     to_city int,
     description varchar(255),
-    title varchar(80),
+    title varchar(80) NOT NULL,
     travel_type varchar(80),
     partner_requirement text[],
     primary key (post_id),
     foreign key (user_id) references user_account(user_id),
-    foreign key (from_country) references country(country_id),
     foreign key (from_city) references city(city_id),
-    foreign key (to_country) references country(country_id),
     foreign key (to_city) references city(city_id),
-    foreign key (user_id) references user_account(user_id),
+    foreign key (user_id) references user_account(user_id)
 );
