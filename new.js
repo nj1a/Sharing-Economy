@@ -417,8 +417,8 @@ router.get('/post/:postId', function(req, res){
             glob('public/assets/images/post_images/'+req.params.postId+'_*.jpg', function(er, files){
                 if (er) throw er;
                 console.log('2: '+files);
+                res.render('post1', {result: result, images: files});
             })
-          res.render('post1', {result: result});
         }
     });
    
