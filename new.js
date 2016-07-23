@@ -410,7 +410,7 @@ router.get('/post/:postId', function(req, res){
         if (result === 'error') {
           res.send('No such result in database');
         } else{
-          res.render('post', {result: result, email: sess.email});
+          res.render('post1', {result: result, email: sess.email});
         }
     });
    
