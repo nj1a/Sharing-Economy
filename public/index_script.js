@@ -1,9 +1,19 @@
 window.slideNum = 1;
 
 $(document).ready(function() {
+	var reqType;
+	var x;
+	//$(document).onload(function(){
+		x = document.getElementById("adminMain");
+		if (x===null){
+			startSlide();
+		} 
 
-	startSlide();
-	var clicked=false;
+	//});
+	
+
+		
+	
 
 	var email,pass;
    
@@ -11,20 +21,20 @@ $(document).ready(function() {
 
 
 	$("input[type='button']#existingClient").click(function(e){
-		
-		clicked=true;
-			
-			
+		reqType = 1;
 		return validateEmailandPassword("existing");
-		
-		
 	});
 
 	
-
-	$("input[type='submit']#newClient").click(function(e){
-
+	$("input[type='button']#newClient").click(function(e){
+		reqType = 2;
 		return validateEmailandPassword("new");
+	});
+
+
+	$("input[type='button']#adminLogin").click(function(e){
+		reqType = 3;
+		return validateEmailandPassword("admin");
 	});
 
 
@@ -42,7 +52,7 @@ $(document).ready(function() {
 
 			if (document.getElementById("pop-wrap").style.display == "block") {
 			
-				close_login_pop();
+				//close_login_pop();
 				
 			} 
 
@@ -69,82 +79,110 @@ $(document).ready(function() {
 
 		if ($("span.error").length) $("span.error").remove();
 
-		var inputEmail, inputPassword, inputPasswordConfirm;
+		var inputEmail, inputPassword, inputPasswordConfirm, username;
 
 		if (client == "existing"){
-			inputEmail = $("input#emailEx").val();
-			//alert(inputEmail);
-			inputPassword = $("input#passwordEx").val();
-		} else {
-			inputEmail = $("input#emailNew").val();
-			inputPassword = $("input#passwordNew").val();
-			inputPasswordConfirm = $("input#passwordNewConfirm").val();
+			inputEmail = $("input#emailEx");
+			inputPassword = $("input#passwordEx");
+		} else if (client =="admin") {
+			inputEmail = $("input#adminEmail");
+			inputPassword = $("input#adminPass");
+		}else {
+			inputEmail = $("input#emailNew");
+			inputPassword = $("input#passwordNew");
+			inputPasswordConfirm = $("input#passwordNewConfirm");
 		}
+		
+		if ( inputEmail.val() === "") {
+			inputEmail.after("<span class='error'>Provide an email address. </br></span>");
+			return false;
+		}  
 
-		if ( inputEmail == "" && client =="existing") {
-			$('input#emailEx').after("<span class='error'>Provide a username.<br></span>");
+		if (!is_email(inputEmail.val())) {
+			inputEmail.after("<span class='error'>Invalid format. </br></span>");
 			return false;
 
-		} else if (inputEmail == "" && client =="new") {
-			$('input#emailNew').after("<span class='error'>Provide a username.<br></span>");
-			return false;
-
-		} else if ( is_email(inputEmail) != true && client =="existing") {
+		} if ( inputPassword.val().length < 8) {
+			inputPassword.after("<span class='error'> password must be at least 8 character. </br></span>");
 			
-			$('input#emailEx').after("<span class='error'>Invalid format<br></span>");
 			return false;
-
-		} else if (is_email(inputEmail) != true  && client =="new") {
-			$('input#emailNew').after("<span class='error'>Invalid format<br></span>");
+		} if (client == "new" && inputPasswordConfirm.val().length < 8){
+			$("section#passnew").after("<span class='error span'> this field cannot be empty </br></span>");
 			return false;
-		} 
-
-		if ( inputPassword == "" && client =="existing"){
-			$("input#passwordEx").after("<span class='error'>Provide a password.<br></span>");
-			return false;
-
-		} else if (inputPassword == "" && client =="new") {
-			$("section#passnew").after("<span class='error span'>Provide a password.<br></span>");
-			return false;
-
-		} else if ( inputPassword.length < 8 && client == "existing") {
-			$("input#passwordEx").after("<span class='error'>Password must be at least 8 characters<br></span>");
-			return false;
-
-		} else if (inputPassword.length < 8 && client =="new"){
-			$("section#passnew").after("<span class='error span'>Password must be at least 8 characters<br></span>");
-			return false;
-		}
+		}	
 
 		if (client == "new") {
 			if (inputPassword.length >= 8 && (inputPassword != inputPasswordConfirm)) {
-				$("section#passnew").after("<span class='error span'>Password must match<br></span>");
+				$("section#passnew").after("<span class='error span'>Password must match</br></span>");
 				return false;
 
 			}
+		}		
 
+		if (reqType === 1){
+            email=$("#emailEx").val();
+        	pass=$("#passwordEx").val();
+		} else if (reqType === 2) {
+			email=$("#emailNew").val();
+			pass=$("#passwordNew").val();
+			username=$("#usernameNew").val();
+		}else{
+			email=$("#adminEmail").val();
+			pass=$("#adminPass").val();
 		}
 
-		email=$("#emailEx").val();
-        pass=$("#passwordEx").val();
+		alert("email: " + email + " pass: " + pass + " username: " + username);
 
-        //alert(email);
-        //alert(pass);
-		$.post("/login",{email:email,pass:pass},function(data){        
-            if(data==='done')           
+		if (reqType===2) {
+			$.post("/signup", {emailNew:email, password:pass, username:username}, function(data){
+				if(data==='done')           
             {	
-            	//alert(1);
+            	alert(1);
                 window.location.href="/profile";
             } else {
-            	//alert(2);
-            	show_login_pop();
+            	alert(2);
+            	if (x===null){
+            		show_login_pop();
+					
+				} 
+            	
             	isValid = false;
 
             }
-    	});
+			});
+
+			return isValid;
+
+		} else {
+
+			$.post("/login",{email:email,pass:pass},function(data){        
+	            if(data==='done')           
+	            {	
+	            	alert(1);
+	                window.location.href="/profile";
+	            } else {
+	            	alert(2);
+	            	if (x===null){
+	            		show_login_pop();
+						
+					} 
+	            	
+	            	isValid = false;
+
+	            }
+	    	});
 
 
 		return isValid;
+
+
+		}
+
+
+		
+		
+
+		
 	
 	}
 	

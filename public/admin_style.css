@@ -1,0 +1,30 @@
+.wrap-content {
+	width:60%;
+	margin-left: auto;
+	margin-right:auto;
+
+
+}
+
+.text-center{
+	text-align: center;
+}
+
+.error {
+	color: red;
+}
+
+.login-box{
+}
+
+.m_t_25p{
+	margin-top:25%;
+}
+
+.m_t_20x{
+	margin-top:20px;
+}
+
+.m_b_20x {
+	margin-bottom:20px;
+}

@@ -79,6 +79,7 @@ router.post('/login', function(req, res){
         client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +  
             "'"+ req.body.email + "'" +  ' AND wanderland.user_account.password =' + "'" + 
             req.body.pass + "'" , function(err, result) {
+                console.log(JSON.stringify(result.rows[0]));
                 done();
                 if (err) {   
                     res.send("Error " + err); 
@@ -98,6 +99,7 @@ router.post('/login', function(req, res){
                         if ( mappedErrors.email ) {
                             errorMsgs.errors.error_email = mappedErrors.email.msg;                            
                         }
+                        console.log("hoho");
                     
                         res.end('loginFail');
 
@@ -127,6 +129,21 @@ router.get('/', function(req, res) {
             res.render('index', {errors: sess.error_msg});
         } else {
             res.render('index', {errors: sess.error_msg.errors});
+        }
+    }
+});
+
+router.get('/admin', function(req, res) {
+    sess = req.session;
+
+    if (sess.email) {
+        res.redirect('/profile');
+    } else {
+        if (!sess.error_msg) {
+            sess.error_msg = '';
+            res.render('admin', {errors: sess.error_msg});
+        } else {
+            res.render('admin', {errors: sess.error_msg.errors});
         }
     }
 });
@@ -173,7 +190,7 @@ router.post('/signup', function(req, res){
     var account = req.body.emailNew; 
     var password = req.body.password;
     var username = req.body.username;
-
+    
     sess = req.session;
 
    
@@ -217,8 +234,9 @@ router.post('/signup', function(req, res){
                                 errorMsgs.errors.error_emailNew = mappedErrors.emailNew.msg;
                             }
                                 
+                           
                             
-                            res.render('index', errorMsgs);
+                            res.send("signup failed");
 
 
                         } else {
@@ -229,35 +247,19 @@ router.post('/signup', function(req, res){
 
                             client.query('INSERT INTO wanderland.user_account (username, email, password, first_name, last_name, gender, phone_num, city_id, country_id, date_of_birth, date_joined, description) VALUES (' + 
                                 "'" + username + "'" +  ", '" + account + "'" + ", '" + password + "'" +', ' + 'NULL' + ', '  + 'NULL, '  + 'NULL, ' + ' NULL, ' +  'NULL'  + ', '  + 'NULL' +  ',NULL, ' + 
-                                'NULL, ' + 'NULL' + ');', function(err){
+                                'NULL, ' + 'NULL' + ');', function(err, result){
+                                    
                                 done();
 
                                 if (err) {
+                                    
+
                                     res.send("Error " + err);
                                 }
 
                                 sess.email = account;
+                                res.send('done');
                                 
-
-                                pg.connect(process.env.DATABASE_URL, function(err, client, done) {                           
-                                    client.query('SELECT * FROM wanderland.user_account WHERE user_account.email = ' + 
-                                    "'" + account + "'" +  ' AND wanderland.user_account.password =' + "'" + 
-                                    password + "'" +  ' AND wanderland.user_account.username =' + "'" + 
-                                    username + "'", function(err, result){
-                                    
-                                        done();
-                                        if (err) {
-                                            res.send("Error " + err);
-                                        } else {
-
-                                            res.render('profile', {
-                                                results: result.rows,
-                                                errors: ''
-
-                                            });
-                                        }
-                                    });                            
-                                });
 
                             });                            
                         });
