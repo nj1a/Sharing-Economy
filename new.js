@@ -79,6 +79,7 @@ router.post('/login', function(req, res){
         client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +  
             "'"+ req.body.email + "'" +  ' AND wanderland.user_account.password =' + "'" + 
             req.body.pass + "'" , function(err, result) {
+                console.log(JSON.stringify(result.rows[0]));
                 done();
                 if (err) {   
                     res.send("Error " + err); 
@@ -98,6 +99,7 @@ router.post('/login', function(req, res){
                         if ( mappedErrors.email ) {
                             errorMsgs.errors.error_email = mappedErrors.email.msg;                            
                         }
+                        console.log("hoho");
                     
                         res.end('loginFail');
 
@@ -127,6 +129,21 @@ router.get('/', function(req, res) {
             res.render('index', {errors: sess.error_msg});
         } else {
             res.render('index', {errors: sess.error_msg.errors});
+        }
+    }
+});
+
+router.get('/admin', function(req, res) {
+    sess = req.session;
+
+    if (sess.email) {
+        res.redirect('/profile');
+    } else {
+        if (!sess.error_msg) {
+            sess.error_msg = '';
+            res.render('admin', {errors: sess.error_msg});
+        } else {
+            res.render('admin', {errors: sess.error_msg.errors});
         }
     }
 });

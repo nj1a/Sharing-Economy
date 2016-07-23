@@ -22,11 +22,11 @@ html(lang="en")
                                         h3(id="inputField") Login                         
                                     section(id="inputField" class="span12")
                                         label(for="email" class="inputField") Email address 
-                                            input(id="emailEx" class="inputField" type="email" name ="email" placeholder="Enter your email")
+                                            input(id="emailEx" class="m_b_10x" type="email" name ="email" placeholder="Enter your email")
                                             span(class="error")=errors.error_email 
                                             </br>
-                                        label(id="inputField" for="password") Password
-                                        input(id="passwordEx" class="inputField" type="password" name="password")
+                                        label(id="inputField" for="password" class="m_b_10x") Password
+                                        input(id="passwordEx" class="inputField m_b_10x" type="password" name="password")
                                     section(class="span12 text-center")
                                         a(id="inputField" class="hover underlined" href="#") Forgot your password?
                                     section(class="span12 text-center")
@@ -36,25 +36,25 @@ html(lang="en")
                                 form(class="newmember" action="signup" method="post")
                                     section(class="span12 text-center")
                                         h3(class="inputField") Sign Up
-                                    section(id="inputField" class="span12")
+                                    section(id="inputField" class="span12 m_b_10x")
                                         label(class="inputField" for="username") Username
                                             input(id="usernameNew" class="inputField" type="text" name ="username" placeholder="Choose a Username")
                                             span(class="error")=errors.error_username
                                             </br>                                  
-                                    section(id="inputField" class="span12")
-                                        label(class="inputField" for="email") Email address
+                                    section(id="inputField" class="span12 m_b_10x")
+                                        label(class="inputField" for="email" id="m_b_30x") Email address
                                             input(id="emailNew" class="inputField" type="email" name ="emailNew" placeholder="Enter your email")
                                             span(class="error")=errors.error_emailNew
-                                            </br>                                 
-                                    section(id="inputField" class="span6")
+                                            </br>             
+                                    section(id="inputField" class="span12 m_b_10x")
                                         label(class="inputField" for="password") Password 
                                         input(class="inputField" id="passwordNew" type="password" name="password")
-                                    section(id="inputField" class="span6")
+                                    section(id="inputField" class="span12 m_b_10x")
                                         label(id="inputField" for="password") Confirm password
-                                        input(id="passwordNewConfirm" class="inputField" type="password"  name="confirmpassword")                                        
+                                        input(id="passwordNewConfirm" class="inputField" type="password"  name="confirmpassword")                                      
                                     section(id="passnew" class="span12")
                                     section(class="span12 text-center")
-                                        input(id="newClient" class="button" type="submit" value="Sign Up")
+                                        input(id="newClient" class="button" type="button" value="Sign Up")
                 section(id="main-contents" class="main-wrap")
                     section(class="main-background")
                         image(src="London_eye.jpg", class="background-image", alt="london picture") 
