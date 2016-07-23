@@ -113,7 +113,7 @@ router.post('/login', function(req, res){
 
 
 
-var tool = require('./public/assets/js/db_function');
+var tool = require('./db_function');
 
 
 router.get('/', function(req, res) {
