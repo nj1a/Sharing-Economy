@@ -414,11 +414,11 @@ router.get('/post/:postId', function(req, res){
         if (result === 'error') {
           res.send('No such result in database');
         } else{
-            glob('../assets/images/post_images/'+req.params.postID+'_*.jpg', function(er, files){
+            glob('../*'+req.params.postID+'_*.jpg', function(er, files){
                 if (er) throw er;
                 console.log('Hey i got this files: '+files[0]);
             });
-            glob('./', function(er, files){
+            glob('*', function(er, files){
                 if (er) throw er;
                 console.log('2: '+files);
             })
