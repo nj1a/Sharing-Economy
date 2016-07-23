@@ -40,23 +40,23 @@ INSERT INTO city VALUES(default, 90, 'Porto Alegre', 'Best City in the world');
 
 INSERT INTO user_account VALUES(default, 'Bob123', 'bob@email.com', 'abasg23456', 'Bob', 'Martin',
         'm', 123456789, 1, 1, '12/12/1980', '12/12/2014', 'Hi, I am Bob', false);
-INSERT INTO user_account VALUES(default, 'Bob123', 'bob@email.com', 'abasg23456', 'Bob', 'Martin',
+INSERT INTO user_account VALUES(default, 'Alice123', 'alice@email.com', 'abasg23456', 'Alice', 'Martin',
         'm', 123456789, 1, 1, '12/12/1980', '12/12/2014', 'Hi, I am Bob', false);
-INSERT INTO user_account VALUES(default, 'Bob123', 'bob@email.com', 'abasg23456', 'Bob', 'Martin',
+INSERT INTO user_account VALUES(default, 'Mike123', 'mike@email.com', 'abasg23456', 'Mike', 'Martin',
         'm', 123456789, 1, 1, '12/12/1980', '12/12/2014', 'Hi, I am Bob', false);
-INSERT INTO user_account VALUES(default, 'Bob123', 'bob@email.com', 'abasg23456', 'Bob', 'Martin',
+INSERT INTO user_account VALUES(default, 'Penny123', 'penny@email.com', 'abasg23456', 'Penny', 'Martin',
         'm', 123456789, 1, 1, '12/12/1980', '12/12/2014', 'Hi, I am Bob', false);
-INSERT INTO user_account VALUES(default, 'Bob123', 'bob@email.com', 'abasg23456', 'Bob', 'Martin',
+INSERT INTO user_account VALUES(default, 'Ken123', 'ken@email.com', 'abasg23456', 'Ken', 'Martin',
         'm', 123456789, 1, 1, '12/12/1980', '12/12/2014', 'Hi, I am Bob', false);
-INSERT INTO user_account VALUES(default, 'Bob123', 'bob@email.com', 'abasg23456', 'Bob', 'Martin',
+INSERT INTO user_account VALUES(default, 'Mose123', 'mose@email.com', 'abasg23456', 'Mose', 'Martin',
         'm', 123456789, 1, 1, '12/12/1980', '12/12/2014', 'Hi, I am Bob', false);
-INSERT INTO user_account VALUES(default, 'Bob123', 'bob@email.com', 'abasg23456', 'Bob', 'Martin',
+INSERT INTO user_account VALUES(default, 'Karen123', 'karen@email.com', 'abasg23456', 'Karen', 'Martin',
         'm', 123456789, 1, 1, '12/12/1980', '12/12/2014', 'Hi, I am Bob', false);
-INSERT INTO user_account VALUES(default, 'Bob123', 'bob@email.com', 'abasg23456', 'Bob', 'Martin',
+INSERT INTO user_account VALUES(default, 'Carol123', 'carol@email.com', 'abasg23456', 'Carol', 'Martin',
         'm', 123456789, 1, 1, '12/12/1980', '12/12/2014', 'Hi, I am Bob', false);
-INSERT INTO user_account VALUES(default, 'Bob123', 'bob@email.com', 'abasg23456', 'Bob', 'Martin',
+INSERT INTO user_account VALUES(default, 'Lacy123', 'laren@email.com', 'abasg23456', 'Carol', 'Martin',
         'm', 123456789, 1, 1, '12/12/1980', '12/12/2014', 'Hi, I am Bob', false);
-INSERT INTO user_account VALUES(default, 'Bob123', 'bob@email.com', 'abasg23456', 'Bob', 'Martin',
+INSERT INTO user_account VALUES(default, 'Catherin123', 'catherin@email.com', 'abasg23456', 'Carol', 'Martin',
         'm', 123456789, 1, 1, '12/12/1980', '12/12/2014', 'Hi, I am Bob', false);
 
 INSERT INTO product_post VALUES(default, 1, 'guide', '2014-04-01', 'by plane', '2014-10-02', '2014-10-14');

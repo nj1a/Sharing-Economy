@@ -14,7 +14,8 @@ CREATE TYPE post_type AS ENUM ('guide', 'buddy');
 DROP TABLE IF EXISTS country CASCADE;
 CREATE TABLE country (
     country_id SERIAL,
-    name varchar(255),
+    country_code varchar(2) NOT NULL default '',
+    country_name varchar(100) NOT NULL default '',
     primary key (country_id)
 );
 
@@ -88,11 +89,24 @@ DROP TABLE IF EXISTS product_post CASCADE;
 create table product_post (
     post_id SERIAL,
     user_id int,
-    type post_type,
+    post_type post_type,
     post_date date,
     way_of_travelling varchar(28),
     travel_start_date date,
     travel_end_date date,
+    from_country int,
+    from_city int,
+    to_country int,
+    to_city int,
+    description varchar(255),
+    title varchar(80),
+    travel_type varchar(80),
+    partner_requirement text[],
     primary key (post_id),
-    foreign key (user_id) references user_account(user_id)
+    foreign key (user_id) references user_account(user_id),
+    foreign key (from_country) references country(country_id),
+    foreign key (from_city) references city(city_id),
+    foreign key (to_country) references country(country_id),
+    foreign key (to_city) references city(city_id),
+    foreign key (user_id) references user_account(user_id),
 );

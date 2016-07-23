@@ -115,7 +115,7 @@ router.post('/login', function(req, res){
 
 
 
-var tool = require('./public/assets/js/db_function');
+var tool = require('./public/db_function');
 
 
 router.get('/', function(req, res) {
@@ -427,7 +427,7 @@ router.get('/post/:postId', function(req, res){
         if (result === 'error') {
           res.send('No such result in database');
         } else{
-          res.render('post', {result: result});
+          res.render('post1', {result: result});
         }
     });
    
