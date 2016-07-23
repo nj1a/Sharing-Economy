@@ -46,7 +46,7 @@ INSERT INTO user_account VALUES(default, 'Mike123', 'mike@email.com', 'abasg2345
         'm', 123456789, 1, 1, '12/12/1980', '12/12/2014', 'Hi, I am Bob', false);
 INSERT INTO user_account VALUES(default, 'Penny123', 'penny@email.com', 'abasg23456', 'Penny', 'Martin',
         'm', 123456789, 1, 1, '12/12/1980', '12/12/2014', 'Hi, I am Bob', false);
-INSERT INTO user_account VALUES(default, 'Ken123', 'karen@email.com', 'abasg23456', 'Ken', 'Martin',
+INSERT INTO user_account VALUES(default, 'Ken123', 'ken@email.com', 'abasg23456', 'Ken', 'Martin',
         'm', 123456789, 1, 1, '12/12/1980', '12/12/2014', 'Hi, I am Bob', false);
 INSERT INTO user_account VALUES(default, 'Mose123', 'mose@email.com', 'abasg23456', 'Mose', 'Martin',
         'm', 123456789, 1, 1, '12/12/1980', '12/12/2014', 'Hi, I am Bob', false);
