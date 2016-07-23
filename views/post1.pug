@@ -7,231 +7,151 @@ html
     link(rel='stylesheet', href='http://www.w3schools.com/lib/w3-theme-teal.css')
     link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans')
     link(rel='stylesheet', href='http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css')
-    link(rel='stylesheet', href='../assets/css/style.css')
-    link(rel='stylesheet', href='../assets/css/post_style.css')
-    script(src='../assets/js/jQuery-3.1.0.js', defer='')
-    script(src='../assets/js/script.js', defer='')
-    script(src='../assets/js/post_script.js', defer='')
+    link(rel="stylesheet", href="./style.css", type="text/css")
+    script(src="./jquery-3.1.0.js", defer)
+    link(rel='stylesheet', href='./assets/css/post_style.css')
+    script(src='assets/js/script.js', defer='')
+    script(src='assets/js/post_script.js', defer='')
   body#entity.w3-theme-l5
-    nav.w3-top
-      ul.w3-navbar.w3-theme-d2.w3-left-align.w3-large
-        li
-          a.w3-padding-large.w3-hover-white(href='#')
-            i.fa.fa-home
-        li
-          a.w3-padding-large.w3-hover-white(href='#', title='Account Settings')
-            i.fa.fa-user
-        li.w3-hide-small
-          a.w3-padding-large.w3-hover-white(href='#', title='Inbox')
-            i.fa.fa-envelope
-        li.w3-hide-small
-          a.w3-padding-large.w3-hover-white(href='#', title='Notifications')
-            i.fa.fa-bell
-        li.w3-hide-small
-          a.w3-padding-large.w3-hover-white(href='#', title='Admin Panel')
-            i.fa.fa-eye
-        li.w3-hide-small.w3-right
-          a.w3-padding-large.w3-hover-white(href='#', title='My Account')
-            img.w3-circle.avatar(src='../assets/images/avatar.jpg', alt='Avatar')
-    main#product_page.main
-      section#product_title  Looking for travel partner from Toronto to Germany
-      section#product_image
-        img.slide_image(src='../assets/images/product_1.jpg', alt='')
-        |  
-        img.slide_image(src='../assets/images/product_2.jpg', alt='')
-        |  
-        img.slide_image(src='../assets/images/product_3.jpg', alt='')
-        |  
-        a#left_slide_button(onclick='plusDivs(-1)') &lt;
-        |  
-        a#right_slide_button.slide_button(onclick='plusDivs(1)') &gt;
-      section#product_info
-        article#product_info_text
-          h1 Description
-          table
-            tr
-              td Destination Country:
-              td
-                a(href='') Australia
-            tr
-              td Destination City:
-              td
-                a(href='') Sydney
-                | , 
-                a(href='') Melbourne
-            tr
-              td Departure City:
-              td
-                a(href='') Toronto
-            tr
-              td Post Type:
-              td Travel Partner
-            tr
-              td  Travelling Date:
-              td  July 7, 2016 - July 27, 2016 (20 days)
-            tr
-              td  Travel Type:
-              td  City Exploring
-            tr
-              td  Travelling Method:
-              td  Plane
-            tr
-              td Approximate Cost:
-              td $5000
-            tr
-              td Partner Requirement:
-              td
-                | Must be clean, around 25 years old. Preferrbly someone who likes to go to art museum and watch opera.
-            tr
-              td  Date Listed:
-              td  July 1, 2016
-            tr
-              td  Description:
-              td
-                | I am looking for 2 people to travel with me to Australia. We will be living in hostels. Message me for a detailed travelling plan. See my profile page to know more about me.
-          h1 Poster Info
-          table
-            tr
-              td Username:
-              td
-                a(href='') Iamgod420
-            tr
-              td Email:
-              td imgod420@gmail.com
-            tr
-              td Poster Rating:
-              td &starf;&starf;&starf;&starf;&star;
-            tr
-              td Gender:
-              td Male
-            tr
-              td Age:
-              td 24
-            tr
-              td Date Joined:
-              td Decemeber 29 2015
-          section#contact_seller_button.product_info_button
-            a(href='') Contact Poster
-      a(href='#product_rating')
-        section#show_more  Show more
-      section#product_rating
-        h1 Travelling Experience
-        article#product_rating_text
-          span Overall Rating: &starf;&starf;&starf;&starf;&star;
-          br
+      nav.w3-top
+        ul.w3-navbar.w3-theme-d2.w3-left-align.w3-large
+          li
+            a.w3-padding-large.w3-hover-white(href='#')
+              i.fa.fa-home
+          li
+            a.w3-padding-large.w3-hover-white(href='#', title='Account Settings')
+              i.fa.fa-user
+          li.w3-hide-small
+            a.w3-padding-large.w3-hover-white(href='#', title='Inbox')
+              i.fa.fa-envelope
+          li.w3-hide-small
+            a.w3-padding-large.w3-hover-white(href='#', title='Notifications')
+              i.fa.fa-bell
+          li.w3-hide-small
+            a.w3-padding-large.w3-hover-white(href='#', title='Admin Panel')
+              i.fa.fa-eye
+          li.w3-hide-small.w3-right
+            a.w3-padding-large.w3-hover-white(href='#', title='My Account')
+              img.w3-circle.avatar(src='../assets/images/avatar.jpg', alt='Avatar')
+      main#product_page.main
+        section#product_title  Looking for travel partner from Toronto to Germany
+        section#product_image
+          img.slide_image(src='../assets/images/product_1.jpg', alt='')
           |  
-          textarea#review_box(name='comment', cols='30', rows='10', form='review_submission') Type your travellng experience with this poster here
+          img.slide_image(src='../assets/images/product_2.jpg', alt='')
           |  
-          span Rate this poster:
+          img.slide_image(src='../assets/images/product_3.jpg', alt='')
           |  
-          span#star
-            span#star1 &star;
-            span#star2 &star;
-            span#star3 &star;
-            span#star4 &star;
-            span#star5 &star;
-          form#review_submission(action='')
-            input(type='submit', value='Submit')
-          section#customer_rating
-            h2 Other ratings
-            section#customer_rating_text
-              section.customer_rating
-                span.comment_username
-                  a(href='') User1
+          a#left_slide_button(onclick='plusDivs(-1)') &lt;
+          |  
+          a#right_slide_button.slide_button(onclick='plusDivs(1)') &gt;
+        section#product_info
+          article#product_info_text
+            h1 Description
+            table
+              tr
+                td Destination Country:
+                td
+                  a(href='') Australia
+              tr
+                td Destination City:
+                td
+                  a(href='') Sydney
+                  | , 
+                  a(href='') Melbourne
+              tr
+                td Departure City:
+                td
+                  a(href='') Toronto
+              tr
+                td Post Type:
+                td Travel Partner
+              tr
+                td  Travelling Date:
+                td  July 7, 2016 - July 27, 2016 (20 days)
+              tr
+                td  Travel Type:
+                td  City Exploring
+              tr
+                td  Travelling Method:
+                td  Plane
+              tr
+                td Approximate Cost:
+                td $5000
+              tr
+                td Partner Requirement:
+                td
+                  | Must be clean, around 25 years old. Preferrbly someone who likes to go to art museum and watch opera.
+              tr
+                td  Date Listed:
+                td  July 1, 2016
+              tr
+                td  Description:
+                td
+                  | I am looking for 2 people to travel with me to Australia. We will be living in hostels. Message me for a detailed travelling plan. See my profile page to know more about me.
+            h1 Poster Info
+            table
+              tr
+                td Username:
+                td
+                  a(href='') Iamgod420
+              tr
+                td Email:
+                td imgod420@gmail.com
+              tr
+                td Poster Rating:
+                td &starf;&starf;&starf;&starf;&star;
+              tr
+                td Gender:
+                td Male
+              tr
+                td Age:
+                td 24
+              tr
+                td Date Joined:
+                td Decemeber 29 2015
+            section#contact_seller_button.product_info_button
+              a(href='') Contact Poster
+        section#recommendation
+          h1 Related Post
+          article#related_product_list
+            a(href='')
+              section.related_product
+                img(src='../assets/images/product_1.jpg', alt='')
                 |  
-                span.comment_rating &starf;&starf;&starf;&starf;&starf;
+                span.related_product_title Looking for a tour guide
+            a(href='')
+              section.related_product
+                img(src='../assets/images/product_2.jpg', alt='')
                 |  
-                span.comment_date July 6, 2016
-                section.comment  We went to Germany together, it was a blast, he is a nice guy.
-              section.customer_rating
-                span.comment_username
-                  a(href='') User2
+                span.related_product_title Offering tour in Vancouver BC
+            a(href='')
+              section.related_product
+                img(src='../assets/images/product_3.jpg', alt='')
                 |  
-                span.comment_rating &starf;&starf;&starf;&star;&star;
-                |  
-                span.comment_date July 5, 2016
-                br
-                section.comment
-                  | Japan is a unique country, though I don&apos;t like the culture and food. The poster is a good guy, he is kind and helpful. We had a lot of interesting conversation. I would recommend to travel with him.
-              section.customer_rating
-                span.comment_username
-                  a(href='') User2
-                |  
-                span.comment_rating &starf;&starf;&starf;&star;&star;
-                |  
-                span.comment_date July 5, 2016
-                br
-                section.comment
-                  | Japan is a unique country, though I don&apos;t like the culture and food. The poster is a good guy, he is kind and helpful. We had a lot of interesting conversation. I would recommend to travel with him.
-              section.customer_rating
-                span.comment_username
-                  a(href='') User2
-                |  
-                span.comment_rating &starf;&starf;&starf;&star;&star;
-                |  
-                span.comment_date July 5, 2016
-                br
-                section.comment
-                  | Japan is a unique country, though I don&apos;t like the culture and food. The poster is a good guy, he is kind and helpful. We had a lot of interesting conversation. I would recommend to travel with him.
-              section.customer_rating
-                span.comment_username
-                  a(href='') User2
-                |  
-                span.comment_rating &starf;&starf;&starf;&star;&star;
-                |  
-                span.comment_date July 5, 2016
-                br
-                section.comment
-                  | Japan is a unique country, though I don&apos;t like the culture and food. The poster is a good guy, he is kind and helpful. We had a lot of interesting conversation. I would recommend to travel with him.
-              section.customer_rating
-                span.comment_username
-                  a(href='') User3
-                |  
-                span.comment_rating &starf;&star;&star;&star;&star;
-                |  
-                span.comment_date July 5, 2016
-                br
-                section.comment  We had a fight when we were drunk. He broke my shoulder. Thanks Obama.
-      section#recommendation
-        h1 Related Post
-        article#related_product_list
-          a(href='')
-            section.related_product
-              img(src='../assets/images/product_1.jpg', alt='')
-              |  
-              span.related_product_title Looking for a tour guide
-          a(href='')
-            section.related_product
-              img(src='../assets/images/product_2.jpg', alt='')
-              |  
-              span.related_product_title Offering tour in Vancouver BC
-          a(href='')
-            section.related_product
-              img(src='../assets/images/product_3.jpg', alt='')
-              |  
-              span.related_product_title England!
-    br
-    footer
-      section.w3-container.w3-theme-d3.w3-padding-16
-        section.w3-content
-          article.w3-container.w3-third
-            h5.w3-border-green Company
-            p About
-            p Careers
-            p Policies
-            p Terms and Conditions
-            p Privacy
-          article.w3-container.w3-third
-            h5 Discover
-            p Safety
-            p Business Travel
-            p Sitemap
-          diarticlev.w3-container.w3-third
-            h5 Guiding
-            p Why guiding
-            p Hospitality
-            p Responsibilities
-      section.w3-container.w3-theme-d5
-        p Copyright &copy; 2016 Wanderland Inc. All rights reserved.
-    body
+                span.related_product_title England!
+      br
+      footer
+        section.w3-container.w3-theme-d3.w3-padding-16
+          section.w3-content
+            article.w3-container.w3-third
+              h5.w3-border-green Company
+              p About
+              p Careers
+              p Policies
+              p Terms and Conditions
+              p Privacy
+            article.w3-container.w3-third
+              h5 Discover
+              p Safety
+              p Business Travel
+              p Sitemap
+            diarticlev.w3-container.w3-third
+              h5 Guiding
+              p Why guiding
+              p Hospitality
+              p Responsibilities
+        section.w3-container.w3-theme-d5
+          p Copyright &copy; 2016 Wanderland Inc. All rights reserved.
+      body
 
