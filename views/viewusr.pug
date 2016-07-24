@@ -24,17 +24,13 @@ html(lang="en")
                     form(action="/profile" method="get")
                         div(class="back")
                             input(type="submit" class="main-title" value="signed as " + type)
-                    
-                
-
-                
 
             section(class="main-wrap")
                 section(class="main-nav bdb-lg h100") 
                     div(class="main-nav-button-wrap vert-cent")
                         div(id="account" class="main-nav-button selected")
                             a(id="nav1" href="#")
-                                span(class="nav-title") Account Settings                                 
+                                span(class="nav-title") Account Info                               
                         div(id="personal" class="main-nav-button m_l_r_10")
                             a(id="nav2" href="#")
                                 span(class="nav-title") Personal Information                        
@@ -48,13 +44,14 @@ html(lang="en")
                         else
                             div(id="friends-list" class="main-nav-button")
                                 a(id="nav3" href="#")
-                                    span(class="nav-title") My Friends
+                                    span(class="nav-title")="Friends of " + results[0].username
                 ul(id="account-settings" class="profile-info selected")
                     li(id="profile-manage" class="bdb-lg profile-contents")
                         section(class="container-content")
                             section(class="content-key")
-                                span(class="sub-title") My Profile 
-                                span(class="sub-description") some description.... 
+                                span(class="sub-title") Account
+                                //="Account Information for " + results[0].username 
+                                
                             
                             section(class="content-value")
                                 div(class="picture")
@@ -72,10 +69,7 @@ html(lang="en")
                                                     section(class="edit-box e1")
                                                         div(class="edit-disable" id="ed1")
                                                             span(class="email-value edit-line" id="email-attr")=results[0].email
-                                                            span(class="edit-icon")
-                                                                img(src="edit_icon.png" class="edit-img" id="edit-button1")
                                                             
-                                        span(class="error" id="newEmailError")=errors.error_emailNew
 
 
                                         
@@ -90,67 +84,9 @@ html(lang="en")
                                                                 span(class="name-value edit-line")=results[0].first_name + " " + results[0].last_name 
                                                             else
                                                                 span(class="name-value edit-line")
-                                                            span(class="edit-icon")
-                                                                img(src="edit_icon.png" class="edit-img" id="edit-button2")
-
-                                        span(class="error" id="newNameError")=errors.error_newNameValue
-                                                            
-                                        div(class="avatar mt10")
-                                            form(action="/file-upload" method="post" enctype="multipart/form-data")
-                                                label(class="profile-label") Change Profile Picture 
-                                                section(class="file-section mt10")
-                                                    input(class="bdb-lg bp10"  type="file" name="avatar")
-                                                    div(class="mt10")
-                                                        input(class="button" type="submit" value="Upload")
-
-                    li(id="password-manage" class="bdb-lg profile-contents")
-                        section(class="container-content")
-                            section(class="content-key")
-                                span(class="sub-title") Password
-                                span(class="sub-description") some description.... 
                             
-                            section(class="content-value")
-                                div(class="edit-password")
-                                    form(action="updatePassword" method="post")
-                                        section(class="m_b_15")
-                                            label(class="profile-label") Current Password
-                                            div(class="edit-box")
-                                                input(type="password" name="cpassword" id="cpw")
 
-                                        section(class="m_b_15")
-                                            label(class="profile-label") New Password
-                                            div(class="edit-box")
-                                                input(type="password" name="npassword" id="npw")
-
-                                        section(class="confirm-pw m_b_15")
-                                            label(class="profile-label") Confirm New Password
-                                            div(class="edit-box")
-                                                input(type="password" name="ncpassword" id="ncpw")
-                                        span(class="error pw")
-                                        span(class="error")=errors.error_npw
-
-                                        div(class="mt10")
-                                            input(id="updatePW" class="button" type="submit" disabled = "true" value="UPDATE")
-
-
-
-
-
-                    li(id="two-factor-manage" class="bdb-lg profile-contents")
-                        section(class="container-content")
-                            section(class="content-key")
-                                span(class="sub-title") Two-factor Authentication
-                                span(class="sub-description") some description.... 
-                            
-                            section(class="content-value")
-
-                    li(id="privacy-manage" class="bdb-lg profile-contents")
-                        section(class="container-content")
-                            section(class="content-key")
-                                span(class="sub-title") Privacy Settings
-                                span(class="sub-description") some description.... 
-                            
-                            section(class="content-value")
+                    
                 
                 ul(id="personal-info" class="profile-info")
                     li(class="profile-contents")
@@ -170,25 +106,20 @@ html(lang="en")
                                                         section(class="edit-box e3")
                                                             div(class="edit-disable")
                                                                 span(id="addr-val" class="address-value edit-line")=results[0].city + ", " + results[0].country
-                                                                span(class="edit-icon")
-                                                                    img(src="edit_icon.png" class="edit-img" id="edit-button3")
+                                                                
 
                                                     div(class="mb20")
                                                         label(class="profile-label") Phone Number
                                                         section(class="edit-box e4")
                                                             div(class="edit-disable")
                                                                 span(id="phone-val" class="address-value edit-line")=results[0].phone_num
-                                                                span(class="edit-icon")
-                                                                    img(src="edit_icon.png" class="edit-img" id="edit-button4")
-
+                                                                
                                                     div(class="mb20")
                                                         label(class="profile-label") Date of Birth
                                                         section(class="edit-box e5")
                                                             div(class="edit-disable")
                                                                 span(id="dob-val" class="address-value edit-line")=results[0].date_of_birth
-                                                                span(class="edit-icon")
-                                                                    img(src="edit_icon.png" class="edit-img" id="edit-button5")
-
+                                                                
                                                     div(class="mb20")
                                                         label(class="profile-label") Gender
                                                         section(class="edit-box e6")
@@ -199,8 +130,7 @@ html(lang="en")
                                                                     span(id="gender-val" class="address-value edit-line") Female
                                                                 else
                                                                     span(id="gender-val" class="address-value edit-line") Other
-                                                                span(class="edit-icon")
-                                                                    img(src="edit_icon.png" class="edit-img" id="edit-button6")
+                                                                
 
                                                     div(class="mb20")
                                                         label(class="profile-label") Date Joined Wanderland
@@ -217,15 +147,11 @@ html(lang="en")
                                                                 p(id="desc-val" class="address-value bdb_lg")
                                                                     span(class="descval edit-line")=results[0].description
 
-                                                                    span(class="edit-icon")
-                                                                        img(src="edit_icon.png" class="edit-img" id="edit-button7")
+                                                                    
 
-                                                    span(class="error" id="newDescError")=errors.error_newDescValue
+                                                  
 
-                                                    //span(class="edit-icon")
-                                                      //  button(class="edit-img button") Edit 
-                                                        //button(class="update-personal-info hidden") Update
-                                                        //button(class="cancel-edit hidden") Cancel
+                                                    
 
                 ul(id="friends" class="profile-info")
                     li(class="profile-contents")
