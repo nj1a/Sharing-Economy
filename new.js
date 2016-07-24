@@ -74,11 +74,12 @@ router.use(expressValidator({
 
 router.post('/login', function(req, res){
     sess = req.session;
+    var email = req.body.email;
     var password = req.body.pass;
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +
-            "'"+ req.body.email + "'" +  ' AND wanderland.user_account.password =' + "'" +
+            "'"+ email + "'" +  ' AND wanderland.user_account.password =' + "'" +
             password + "'" , function(err, result) {
                 console.log(JSON.stringify(result.rows[0]));
                 done();
@@ -102,7 +103,7 @@ router.post('/login', function(req, res){
                         }
                         res.end('loginFail');
                     } else {
-                        sess.email = req.body.email;
+                        sess.email = email;
                         sess.pass = password;
                         res.end('done');
                     }
@@ -153,15 +154,19 @@ router.get('/admin_manage', function(req, res) {
 router.post('/enter_data', function(req, res) {
     var country = req.body.country;
     var city = req.body.city;
+    var country_code = req.body.country_code;
 
-    // pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-    // ]client.query('SELECT * FROM wanderland.user_account WHERE wanderland.country.country_name = ' +
-    //         "'"+ country + "'" +  ' AND wanderland.city.name =' + "'" +
-    //         req.body.city + "'" , function(err, result) {
-    //             console.log(JSON.stringify(result.rows[0]));
-    //             done();
-    //         });
-    //     });
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    client.query("INSERT INTO wanderland.country VALUES (" + "default" + "," +
+        + "'" + country_code + "'" + "," + "'" + country + "'" +
+        ");", function(err, result){
+        done();
+        if (err) {
+            res.send("Error " + err);
+        }
+        res.send('done');
+        });
+    });
 });
 
 router.get('/admin', function(req, res) {
