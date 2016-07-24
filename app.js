@@ -201,7 +201,6 @@ io.sockets.on("connection", function (socket) {
 			sizeRooms = _.size(rooms);
 			io.sockets.emit("update-people", {people: people, count: sizePeople});
 			socket.emit("roomList", {rooms: rooms, count: sizeRooms});
-			socket.emit("joined"); //extra emit for GeoLocation
 			sockets.push(socket);
 		}
 	});
@@ -251,7 +250,6 @@ io.sockets.on("connection", function (socket) {
 				socket.emit("update", "Can't find " + whisperTo);
 			}
 		} else {
-			console.log(people[socket.id]);
 			if (people[socket.id].inroom !== undefined ) {
 				io.sockets.in(socket.room).emit("chat", msTime, people[socket.id], msg);
 				socket.emit("isTyping", false);
