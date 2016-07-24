@@ -146,7 +146,7 @@ router.post('/result', function(req, res) {
                 res.send(JSON.stringify(result));
             }
         })
-        // res.send(req.body.from_date);
+    // s
     }
     // res.render('result', { title: 'result', message: 'results'});
 });
