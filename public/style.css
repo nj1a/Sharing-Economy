@@ -112,9 +112,11 @@ input#usernameNew:focus{
 }
 
 .search-background form * {
-    margin-left: 2%;
+    margin-left: 1vw;
     display: inline-block;
 }
+
+
 header {
     background: transparent none repeat scroll 0 0;
     position:absolute;
