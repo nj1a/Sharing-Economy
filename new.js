@@ -99,7 +99,7 @@ router.post('/login', function(req, res){
                         if ( mappedErrors.email ) {
                             errorMsgs.errors.error_email = mappedErrors.email.msg;                            
                         }
-                        console.log("hoho");
+                        
                     
                         res.end('loginFail');
 
@@ -163,7 +163,8 @@ router.get('/profile', function(req, res){
                 else {  
                     res.render('profile', {
                         results: result.rows,
-                        errors: ' '
+                        errors: ' ',
+                        type: 'own'
                     });
 
                 }
@@ -173,6 +174,65 @@ router.get('/profile', function(req, res){
     } else {
         res.redirect('/');
     }
+});
+
+router.get('/viewusr/:username', function(req, res){
+
+    sess=req.session;
+    targetUser= req.params.username;
+
+    //console.log(targetUser);
+
+    //res.send(targetUser);
+
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+        client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.username = ' +  
+            "'"+ targetUser + "'" , function(err, result) {
+            done();
+            if (err) {
+                res.send("Error " + err); 
+             }
+            else {  
+               //console.log(JSON.stringify(result.rows[0]));
+                //res.render('profile', {
+                    //results: result.rows,
+                    //errors: ' '
+               // });
+               //res.redirect('/')
+               sess.targetUser = result.rows[0].email;
+               console.log("hahahah" + sess.targetUser);
+               res.send("good");
+            }
+        });
+    });
+
+   
+        //res.redirect('/');
+    
+});
+
+router.get('/showusr', function(req, res){
+
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+            client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +  
+                "'"+ sess.targetUser + "'" , function(err, result) {
+                done();
+                if (err) {
+                    res.send("Error " + err); 
+                 }
+                else {  
+                    res.render('profile', {
+                        results: result.rows,
+                        errors: ' ',
+                        type: 'own'
+                    });
+
+                }
+            });
+        });
+
+
+
 });
 
 router.get('/logout',function(req,res){
@@ -309,7 +369,7 @@ router.post('/updatePassword', function(req, res){
                                                     res.send("Error " + err); 
                                                  }
                                                 else {  
-                                                    res.render('profile', {results: result.rows, errors: errorMsgs.errors});
+                                                    res.render('profile', {results: result.rows, errors: errorMsgs.errors, type: 'other'});
                                                 }
                                             }); 
                                     });
@@ -338,7 +398,8 @@ router.post('/updatePassword', function(req, res){
                                                 res.render('profile', {
 
                                                     results: result.rows,
-                                                    errors: ''
+                                                    errors: '',
+                                                    type: 'other'
                                                     });
 
                                             }

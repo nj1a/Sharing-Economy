@@ -131,16 +131,16 @@ $(document).ready(function() {
 			pass=$("#adminPass").val();
 		}
 
-		alert("email: " + email + " pass: " + pass + " username: " + username);
+		//alert("email: " + email + " pass: " + pass + " username: " + username);
 
 		if (reqType===2) {
 			$.post("/signup", {emailNew:email, password:pass, username:username}, function(data){
 				if(data==='done')           
             {	
-            	alert(1);
+            	//alert(1);
                 window.location.href="/profile";
             } else {
-            	alert(2);
+            	//alert(2);
             	if (x===null){
             		show_login_pop();
 					
@@ -158,10 +158,10 @@ $(document).ready(function() {
 			$.post("/login",{email:email,pass:pass},function(data){        
 	            if(data==='done')           
 	            {	
-	            	alert(1);
+	            	//alert(1);
 	                window.location.href="/profile";
 	            } else {
-	            	alert(2);
+	            	//alert(2);
 	            	if (x===null){
 	            		show_login_pop();
 						
