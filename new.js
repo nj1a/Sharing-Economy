@@ -418,6 +418,7 @@ router.get('/post/:postId', function(req, res){
                 if (er) throw er;
                 // Format the file path
                 for (var i = 0; i < files.length; i++) {
+                    console.log('looped');
                     files[i] = files[i].replace('public', '..');
                 };
                 console.log('2: '+files);
