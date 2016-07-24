@@ -175,7 +175,7 @@ $(document).ready(function() {
 	$('input.city-field').typeahead({
 		name: 'from_city',
 		remote: 'https://wander-land.herokuapp.com/city?key=%QUERY',
-		limit: 10
+		limit: 3
 	});
 
 });
