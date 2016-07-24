@@ -170,14 +170,14 @@ router.post('/enter_data', function(req, res) {
     var country = req.body.country;
     var city = req.body.city;
 
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-    ]client.query('SELECT * FROM wanderland.user_account WHERE wanderland.country.country_name = ' +
-            "'"+ country + "'" +  ' AND wanderland.city.name =' + "'" +
-            req.body.city + "'" , function(err, result) {
-                console.log(JSON.stringify(result.rows[0]));
-                done();
-            });
-        });
+    // pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    // ]client.query('SELECT * FROM wanderland.user_account WHERE wanderland.country.country_name = ' +
+    //         "'"+ country + "'" +  ' AND wanderland.city.name =' + "'" +
+    //         req.body.city + "'" , function(err, result) {
+    //             console.log(JSON.stringify(result.rows[0]));
+    //             done();
+    //         });
+    //     });
 });
 
 router.get('/admin', function(req, res) {
