@@ -166,7 +166,9 @@ router.post('/enter-data', function(req, res) {
             ");", function(err, result){
                 done();
                 if (err) {
-                    res.send("Error " + err);
+                    res.send("Error " + err + "INSERT INTO wanderland.country VALUES (" + "default" + "," +
+                        + "'" + country_code + "'" + "," + "'" + country + "'" +
+                        ");");
                     // change the erro message later
                 }
                 res.send('done');
