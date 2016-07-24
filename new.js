@@ -131,7 +131,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/result', function(req, res) {
-    if (typeof req.body.from_date === "undefined") {
+    if (typeof req.body.from_date !== "string" || typeof req.body.to_date !== "string") {
         res.send('No req.body');
     }
     else{
@@ -139,7 +139,7 @@ router.post('/result', function(req, res) {
         var to_date = req.body.to_date.replace(/\//g, '-');
         console.log(req.body);
         tool.get_result(req.body.post_type, from_date, to_date, req.body.from_city, req.body.to_city, function(result){
-            if (result === 'eror') {
+            if (result === 'error') {
                 res.send('No matching result');
             }
             else{
