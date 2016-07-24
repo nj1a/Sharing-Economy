@@ -1,3 +1,8 @@
+/* HTML5 magic
+- GeoLocation
+- WebSpeech
+*/
+
 //WebSpeech API
 var final_transcript = '';
 var recognizing = false;
@@ -76,7 +81,7 @@ function timeFormat(msTime) {
 
 $(document).ready(function() {
   //setup "global" variables first
-  var socket = io();
+  var socket = io.connect("127.0.0.1:1337");
   var myRoomID = null;
 
   $("form").submit(function(event) {
@@ -180,6 +185,7 @@ $(document).ready(function() {
       $("#keyboard").remove();
     }
   });
+
   socket.on("isTyping", function(data) {
     if (data.typing) {
       if ($("#keyboard").length === 0)
