@@ -110,7 +110,9 @@ input#usernameNew:focus{
     padding-bottom: 30px;
 
 }
-
+.search-background * {
+    display: inline-block;
+}
 header {
     background: transparent none repeat scroll 0 0;
     position:absolute;

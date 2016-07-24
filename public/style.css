@@ -13,20 +13,9 @@
     transition: width 0.4s ease-in-out;
 }*/
 
-.m_b_10x{
-    margin-bottom:10px;
-}
-
-#m_b_30x{
-    margin-bottom:30px;
-}
 input:invalid {
   outline: 2px solid red;
   background-color: #FFC6B3;
-}
-
-.pw-container > .span4{
-    padding-left: 0 !important;
 }
 
 select {
@@ -122,6 +111,12 @@ input#usernameNew:focus{
 
 }
 
+.search-background form * {
+    margin-left: 1vw;
+    display: inline-block;
+}
+
+
 header {
     background: transparent none repeat scroll 0 0;
     position:absolute;
@@ -168,7 +163,7 @@ header a:hover {
 
 #login-pop/*, #sign-pop*/{
     position:fixed;
-    width:70%;
+    width:60%;
     margin-left:20%;
     background-color: #fff;
     top:17%;
@@ -183,8 +178,6 @@ header a:hover {
 
 
 }
-
-
 #login-pop::after{
     content:"";
     height:100%;
@@ -205,11 +198,14 @@ header a:hover {
 }
 
 .search-bar {
+    display: inline;
     height:40px;
     width:400px;
 
 }
-
+.search-bar-content {
+    display: inline;
+}
 #search-box{
     border: 3px solid  #00766a;
 }
@@ -237,10 +233,6 @@ header a:hover {
 
 .span6 {
     width:50%;
-}
-
-.span4{
-    width:47.5%;
 }
 
 .span3{
