@@ -4,8 +4,11 @@ html(lang="en")
         meta(charset="utf-8")
         title= Index
         link(rel="stylesheet", href="style.css", type="text/css")
+        link(rel='stylesheet', href='assets/js/jquery-ui/jquery-ui.css', type='text/css')
         script(src="jquery-3.1.0.js", defer)
         script(src="index_script.js", defer)
+        script(type='text/javascript', src='assets/js/jquery-ui/jquery-ui.js')
+
     body
         section(class="body-wrap")
             header
@@ -66,8 +69,26 @@ html(lang="en")
                                 section(class="main-text")
                                     h2 Travel Anywhere
                                     h4 with Wanderland                                 
-                        section(class="search-background")
-                            form(action="documents/result.html" method="post")
-                                input(id="search-box" class="search-bar" type="text" name="search-bar" placeholder="Search")
-                                button(class="button" value="search")
-                                 i(class="w3-large fa fa-search")
+                        section.search-background
+                          form(action='documents/result.html', method='post')
+                            div
+                              | I am looking for: 
+                              select#post-type-bar(name='post-type-bar')
+                                option(value='buddy') Looking for someone to travel with
+                                option(value='guide') Looking for a tour guide
+                            div
+                              | From: 
+                              input#from-date.datepicker(type='text', name='from-date', value='what day')
+                            div
+                              | To: 
+                              input#to-date.datepicker(type='text', name='to-date', value='what day')
+                            div
+                              | From: 
+                              input#from-city.city-field(type='text', name='from-city', value='what city')
+                            div
+                              | To: 
+                              input#to-city.city-field(type='text', name='to-city', value='what city')
+                            |  
+                            button.button(value='search')
+                              i.w3-large.fa.fa-search(3='')
+

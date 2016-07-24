@@ -201,7 +201,9 @@ $(document).ready(function() {
 
 		return false;
 	}
-	
+	$('.city-field').focus(function(){
+		$(this).val('');
+	});
 });
 
 
