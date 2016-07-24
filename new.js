@@ -136,11 +136,14 @@ router.get('/', function(req, res) {
 
 router.post('/result', function(req, res) {
     if (typeof req.body.from_date === "undefined") {
-        res.send('No from_date');
+        res.send('No req.body');
     }
     else{
         console.log(req.body);
         res.send(req.body);
+        tool.get_result(req.body.post_type, req.body.from_date, req.body.to_date, req.body.from_city, req.body.to_city, function(result){
+            res.send(JSON.stringify(result));
+        })
         // res.send(req.body.from_date);
     }
     // res.render('result', { title: 'result', message: 'results'});
