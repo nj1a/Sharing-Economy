@@ -21,14 +21,14 @@ module.exports = {
 	},
 	get_result: function(post_type, start_date, end_date, start_city, end_city, callback){
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-			client.query('SELECT * FROM product_post WHERE post_type = '+post_type+' AND travel_start_date = '+start_date+ ' AND trave_end_date = '+end_date+ ' AND from_city = '+start_city+ ' AND to_city = '+end_city, function(err, result){
+			client.query('SELECT * FROM product_post WHERE post_type = '+post_type+' AND travel_start_date = '+start_date+ ' AND travel_end_date = '+end_date+ ' AND from_city = '+start_city+ ' AND to_city = '+end_city, function(err, result){
 				done();
 				if (err) throw err;
 				else{
 					if (JSON.stringify(result.rows) === "[]") {
 						console.log('No matching row in database');
 						callback('error');
-					} else {
+					} else {x
 						console.log(result.rows[0]);
 						callback(result.rows[0]);
 					}
