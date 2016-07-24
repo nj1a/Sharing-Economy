@@ -154,7 +154,7 @@ router.post('/result', function(req, res) {
         res.send(req.body);
         tool.get_result(req.body.post_type, from_date, to_date, req.body.from_city, req.body.to_city, function(result){
             res.send(JSON.stringify(result));
-        })
+        });
         // res.send(req.body.from_date);
     }
     // res.render('result', { title: 'result', message: 'results'});
@@ -181,13 +181,13 @@ router.get('/admin', function(req, res) {
 
 router.get('/profile', function(req, res){
     sess=req.session;
-    var userEmail; 
+    var userEmail;
 
     if (sess.email){
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 
-            client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +  
+            client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +
                 "'"+ sess.email + "'" , function(err, result1) {
 
 
@@ -196,15 +196,15 @@ router.get('/profile', function(req, res){
                     res.send("Error " + err);
                  }
 
-                else {  
+                else {
 
                     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                         client.query('select user_id from wanderland.user_account where email = ' + "'" + sess.email + "'", function(err, result){
-                                    
+
                             done();
 
                             if (err) {
-                                
+
 
                                 res.send("Error " + err);
                             }
@@ -213,12 +213,12 @@ router.get('/profile', function(req, res){
                             if (fs.existsSync(__dirname + '/public/assets/images/profile_images/' + "profile_" + usrID + ".jpg")) {
                                 path = '/assets/images/profile_images/' + "profile_" + usrID + ".jpg";
                             } else {
-                                path = '/assets/images/profile_images/default_profile.jpg' 
+                                path = '/assets/images/profile_images/default_profile.jpg'
                             }
-                             
+
 
                             res.render('profile', {
-                            
+
                         results: result1.rows,
 
                         errors: ' ',
@@ -257,11 +257,11 @@ router.get('/viewusr/:username', function(req, res){
                 res.send("Error " + err);
              }
 
-            else {  
-               
+            else {
+
 
                sess.targetUser = result.rows[0].email;
-               
+
                res.send("good");
             }
         });
@@ -273,7 +273,7 @@ router.get('/showusr', function(req, res){
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 
-            client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +  
+            client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +
                 "'"+ sess.targetUser + "'" , function(err, result1) {
 
                 done();
@@ -281,16 +281,16 @@ router.get('/showusr', function(req, res){
                     res.send("Error " + err);
                  }
 
-                else {  
-                    
+                else {
+
 
                     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                         client.query('select user_id from wanderland.user_account where email = ' + "'" + sess.targetUser + "'", function(err, result){
-                                    
+
                             done();
 
                             if (err) {
-                                
+
 
                                 res.send("Error " + err);
                             }
@@ -299,12 +299,12 @@ router.get('/showusr', function(req, res){
                             if (fs.existsSync(__dirname + '/public/assets/images/profile_images/' + "profile_" + usrID + ".jpg")) {
                                 path = '/assets/images/profile_images/' + "profile_" + usrID + ".jpg";
                             } else {
-                                path = '/assets/images/profile_images/default_profile.jpg' 
+                                path = '/assets/images/profile_images/default_profile.jpg'
                             }
-                             
+
 
                             res.render('viewusr', {
-                            
+
                         results: result1.rows,
                         errors: ' ',
                         type: sess.email,
@@ -425,26 +425,26 @@ router.post('/file-upload', function(req, res, next){
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('select user_id from wanderland.user_account where email = ' + "'" + userEmail + "'", function(err, result){
-                                    
+
             done();
 
             if (err) {
-                
+
 
                 res.send("Error " + err);
             }
-           
+
             usrID = JSON.stringify(result.rows[0].user_id);
 
     var fstream;
     req.pipe(req.busboy);
     req.busboy.on('file', function (fieldname, file, filename) {
-        console.log("Uploading: " + filename); 
+        console.log("Uploading: " + filename);
         fstream = fs.createWriteStream(__dirname + '/public/assets/images/profile_images/' + "profile_" + usrID + ".jpg");
         file.pipe(fstream);
         fstream.on('close', function () {
 
-           
+
             res.redirect('/profile');
             //res.send(__dirname + '/public/assets/images/profile_images/' + "profile_" + usrID + ".jpg");
         });
@@ -611,48 +611,48 @@ router.get('/post/:postId', function(req, res){
     });
 
 });
-router.get("/removeFriend/:username", function(req, res){ 
+router.get("/removeFriend/:username", function(req, res){
     var currUsr = sess.email;
     var usr = req.params.username;
     //res.send(currUsr + " " + usr);
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('select user_id from wanderland.user_account where email = ' + "'" + currUsr + "'", function(err, result){
-                                    
+
             done();
 
             if (err) {
-                
+
 
                 res.send("Error " + err);
             }
-           
-            usrID = JSON.stringify(result.rows[0].user_id); 
+
+            usrID = JSON.stringify(result.rows[0].user_id);
 
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-                client.query('delete from wanderland.friendship where first_user_id =' + "'" + usrID + "'" + ' AND second_user_id =' + "'" + usr + "'", function(err, result){ 
-                                done();         
+                client.query('delete from wanderland.friendship where first_user_id =' + "'" + usrID + "'" + ' AND second_user_id =' + "'" + usr + "'", function(err, result){
+                                done();
                         console.log('delete from wanderland.friendship where first_user_id =' + "'" + currUsr + "'" + ' AND second_user_id =' + "'" + usr + "'");
 
                         if (err) {
-                            console.log("err");                        
+                            console.log("err");
 
                             res.send("Error " + err);
                         }
-                
+
                         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-                            client.query('delete from wanderland.friendship where first_user_id =' + "'" + usr + "'" + 'AND second_user_id =' + "'" + usrID + "'", function(err, result){ 
-                                            
+                            client.query('delete from wanderland.friendship where first_user_id =' + "'" + usr + "'" + 'AND second_user_id =' + "'" + usrID + "'", function(err, result){
+
                             done();
 
                         if (err) {
-                        
+
 
                             res.send("Error " + err);
                         }
                     res.send("good");
                 });
-                
+
             });
         });
 
@@ -667,26 +667,26 @@ router.get("/getFriends/:username", function(req, res){
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('select user_id from wanderland.user_account where username = ' + "'" + usr + "'", function(err, result){
-                                    
+
             done();
 
             if (err) {
-                
+
 
                 res.send("Error " + err);
             }
-           
+
             usrID = JSON.stringify(result.rows[0].user_id);
             // console.log("hahahah   " + usrID);
             //res.send(usrID);
 
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 client.query('select username, user_id from wanderland.user_account where user_id in (select second_user_id from wanderland.friendship where first_user_id = ' + "'" + usrID + "'" + ')', function(err, result){
-                                    
+
                     done();
 
                     if (err) {
-                        
+
 
                         res.send("Error " + err);
                     }
@@ -697,24 +697,24 @@ router.get("/getFriends/:username", function(req, res){
                         if (fs.existsSync(__dirname + '/public/assets/images/profile_images/' + "profile_" + user + ".jpg")) {
                                 path = '/assets/images/profile_images/' + "profile_" + user + ".jpg";
                             } else {
-                                path = '/assets/images/profile_images/default_profile.jpg' 
+                                path = '/assets/images/profile_images/default_profile.jpg'
                             }
-                        
+
                         result.rows[i].pic = path;
                         console.log(result.rows[i].pic);
                     }
                     //console.log(result.rows);
-                
-                    res.send(result.rows);
-            
 
-                });                            
+                    res.send(result.rows);
+
+
+                });
             });
 
 
-            
 
-        });                            
+
+        });
     });
 
 
@@ -723,7 +723,7 @@ router.get("/getFriends/:username", function(req, res){
 
 
 
-    
+
     //res.send(usr);
 
 });
