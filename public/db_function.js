@@ -41,6 +41,7 @@ module.exports = {
 		});
 	},
 	get_city: function(keyword, callback){
+		var data = [];
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
 			console.log("This is get_city keyword: "+keyword);
 			var query_string = "select name||', '||country_name as city from city, country where city.country_id = country.country_id and name ilike \'"+keyword+"%\'";
@@ -54,7 +55,10 @@ module.exports = {
 						callback('error');
 					} else {
 						console.log(result.rows);
-						callback(result.rows);
+						for (var i = 0; i < result.rows.length; i++) {
+							data.push(result.rows[i].city);
+						};
+						callback(data);
 					}
 				}
 			});
