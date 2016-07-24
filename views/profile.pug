@@ -13,15 +13,21 @@ html(lang="en")
               //  li user not available
             //else 
               //  for result in results
-        main(id="type")
+        main(id=type)
             section(class="top-nav bdb-lg")
+                div
+                    
+                    form(class="anchor-wrap flt_r w30p" action="/logout" method="get")
+                        //button(type="submit" value="logout" class="flt_r logoButton")= "(" + logout ")"
+                        //div(class="anchor-wrap")
+                        input(type="submit" class="flt_r m_l_5" id="logoutButton" value="logout")
+                    form(action="/profile" method="get")
+                        div(class="back")
+                            input(type="submit" class="main-title" value="signed as " + results[0].username)
+                    
                 
 
-                form(action="/logout" method="get")
-                    //button(type="submit" value="logout" class="flt_r logoButton")= "(" + logout ")"
-                    div(class="anchor-wrap")
-                        input(type="submit" class="flt_r m_l_5" id="logoutButton" value="logout")
-                        span(class="main-title flt_r m_r_5 p_t_5")= "Signed as "+ results[0].username
+                
 
             section(class="main-wrap")
                 section(class="main-nav bdb-lg h100") 
@@ -34,13 +40,13 @@ html(lang="en")
                                 span(class="nav-title") Personal Information                        
                         if results[0].is_admin
                             div(id="manageUser" class="main-nav-button m_l_r_10")
-                                a(id="nav4" href="#")
+                                a(id="nav3" href="#")
                                     span(class="nav-title") Manage User
                             div(id="manageData" class="main-nav-button m_l_r_10")
-                                a(id="nav5" href="#")
+                                a(id="nav4" href="#")
                                     span(class="nav-title") Manage Database
                         else
-                            div(id="friends-list" class="main-nav-button m_l_r_10")
+                            div(id="friends-list" class="main-nav-button")
                                 a(id="nav3" href="#")
                                     span(class="nav-title") My Friends
                 ul(id="account-settings" class="profile-info selected")
@@ -52,7 +58,7 @@ html(lang="en")
                             
                             section(class="content-value")
                                 div(class="picture")
-                                    img(class="profile_pic" src="default_profile.jpg")                        
+                                    img(class="profile_pic" src=pic)                        
                                 div(class="acc-info") 
                                     div(class="perma")
                                         label(class="profile-label") Username
@@ -94,8 +100,9 @@ html(lang="en")
                                                 label(class="profile-label") Change Profile Picture 
                                                 section(class="file-section mt10")
                                                     input(class="bdb-lg bp10"  type="file" name="avatar")
-                                                    div(class="mt10")
-                                                        input(class="button" type="submit" value="Upload")
+                                                    input( type="submit")
+                                                    //div(class="mt10")
+                                                        //input(class="button" type="submit" value="Upload")
 
                     li(id="password-manage" class="bdb-lg profile-contents")
                         section(class="container-content")
@@ -230,18 +237,22 @@ html(lang="en")
 
                             section(class="content-value")                       
                                 div(class="info-content")
-                                    ul(class="flt_l w50p")
-                                        li(class="fr-pro-wrap") 
-                                            form(action="/profile/a")
-                                                
-                                                img(class="profile-thumb"  src="default_profile.jpg" alt="Jackie's Face")
-                                                input(id="submitButton"  value="asdfasdaa")
-                                                
-                                        li hoho
+                                    div(id="resultWrap")
+                                        div(id="resultField")
+                                            
 
-                                    ul(class="flt_r w50p")
-                                        li haha
-                                        li hoho
+                ul(id="manusr" class="profile-info")
+                    li(class="profile-contents")
+                        section(class="container-content bdb-lg")
+                            section(class="content-key")
+                                span(class="sub-title") usr mgmt 
+                                span(class="sub-description") Visit your friends profile!
 
+                ul(id="mandata" class="profile-info")
+                    li(class="profile-contents")
+                        section(class="container-content bdb-lg")
+                            section(class="content-key") 
+                                span(class="sub-title") data mgmt
+                                span(class="sub-description") Visit your friends profile!
 
 

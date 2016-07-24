@@ -17,6 +17,10 @@ a.underlined:hover{
 
 
 
+
+
+
+
 input#logoutButton{
 	position:absolute;
 	bottom: 0;
@@ -42,25 +46,46 @@ input#logoutButton:focus{
 }
 
 
-input#submitButton{
+input.submitButton{
 	font-size:20px;
 	border:none;
     -webkit-appearance:none;
+
 }
 
-input#submitButton:hover{
+input.submitButton:hover{
 	cursor:pointer;
 	text-decoration: underline;
 }
 
-input#submitButton:focus{
+input.submitButton:focus{
+	outline: none;
+}
+
+input.removeButton{
+
+	font-size:14px;
+	padding-top:10px;
+	border:none;
+    -webkit-appearance:none;
+
+}
+
+input.removeButton:hover{
+	cursor:pointer;
+	text-decoration: underline;
+}
+
+input.removeButton:focus{
 	outline: none;
 }
 textarea{
 	width: 300px;
 	height: 400px;
 }
-
+.b_p_50{
+	padding-bottom: 80px;
+}
 .anchor-wrap{
 	position:relative;
 	min-height: 47px;
@@ -100,8 +125,21 @@ textarea{
 }
 
 .main-title{
-	color:#95B9C7	;
+	color:#95B9C7;
+	font-size:17px;
+	border:none;
+	background-color: #354458;
+	-webkit-appearance:none;
+}
 
+.main-title:hover{
+	cursor:pointer;
+	text-decoration: underline;
+
+}
+
+.main-title:focus{
+	outline: none;
 }
 
 .main-wrap{
@@ -124,7 +162,8 @@ textarea{
 }
 
 
-#account, #personal{
+
+#account, #personal, #manageUser{
 	margin-right: 15px;
 }
 .m_b_15 {
@@ -136,6 +175,10 @@ textarea{
 }
 .m_r_5{
 	margin-right:5px;
+}
+
+.m_t_10{
+	padding-top:20px;
 }
 
 .main-contents {
@@ -321,6 +364,9 @@ li.fr-pro-wrap{
 	position: relative;
   top: 50%;
   transform: translateY(-50%);
+}
+.w30p{
+	width:30%;
 }
 .w50p{
 	width:33%;

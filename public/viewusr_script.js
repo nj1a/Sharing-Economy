@@ -2,8 +2,15 @@
 
 $(document).ready(function() {
 //{username: event.target.value}
-	$("#submitButton").on("click", function(event){
-		//alert(event.target.value);
+ 	//$("#friends-list").on("click", function(){
+ 		
+
+ 	//});
+	
+
+
+	/*$("#submitButton").on("click", function(event){
+		alert(event.target.value);
 		$.get("/viewusr/" + event.target.value, function(data){
 			if (data==="good"){
 				window.location.href="/showusr";
@@ -11,7 +18,7 @@ $(document).ready(function() {
 		});
 
 		//alert(result);
-	});
+	});*/
 
 	//var renderType = document.getElementById("own");
 	//var editButtons = document.getElementsByClass("edit-icon");
