@@ -416,8 +416,13 @@ router.get('/post/:postId', function(req, res){
         } else{
             glob('public/assets/images/post_images/'+req.params.postId+'_*.jpg', function(er, files){
                 if (er) throw er;
+                // Format the file path
+                for (var i = 0; i < files.length; i++) {
+                    console.log('looped');
+                    files[i] = files[i].replace('public', '..');
+                };
                 console.log('2: '+files);
-                res.render('post1', {result: result, images: files});
+                res.render('post2', {result: result, images: files});
             })
         }
     });
