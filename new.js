@@ -139,7 +139,9 @@ router.post('/result', function(req, res) {
         res.send('No from_date');
     }
     else{
-        res.send(req.body.from_date);
+        console.log(req.body);
+        res.send(req.body);
+        // res.send(req.body.from_date);
     }
     // res.render('result', { title: 'result', message: 'results'});
 });
