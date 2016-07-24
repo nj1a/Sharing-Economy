@@ -33,7 +33,7 @@ html(lang="en")
         section#product_title=result.title
         section#product_image
           each val, index in result.images
-            img.slide_image(src= '../assets/images/post_images/'+val, alt='')
+            span= val
 
           a#left_slide_button(onclick='plusDivs(-1)') &lt;
           |  
