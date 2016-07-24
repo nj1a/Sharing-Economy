@@ -111,6 +111,9 @@ input#usernameNew:focus{
 
 }
 
+.search-background * {
+    display: inline-block;
+}
 header {
     background: transparent none repeat scroll 0 0;
     position:absolute;
