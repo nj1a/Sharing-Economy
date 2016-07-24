@@ -5,13 +5,17 @@ html(lang="en")
         title=adminManage
         link(rel="stylesheet", href="admin_style.css", type="text/css")
         script(src="jquery-3.1.0.js", defer)
+        link(rel="stylesheet", href="style.css", type="text/css")
+        link(rel='stylesheet', href='assets/js/jquery-ui/jquery-ui.css', type='text/css')
     body
-        main(id="adminManage")
-            div(class="wrap-content")
-                section(class="h1 text-center m_t_25p")
-                    h1 Wanderland Admin
-                form(method="post")
-                    input(id="country" type="country" name="country" placeholder="country")
-                    button(class="button" value="country") enter
-                    input(id="city" type="city" name="city" placeholder="city")
-                    button(class="button" value="city") enter
+
+        main(id="adminManage" class="w3-content main")
+            section(class="w3-responsive")
+                div(class="wrap-content")
+                    section(class="h1 text-center m_t_25p")
+                        h1 Wanderland Admin
+                    form(method="post")
+                        input(id="country" type="country" name="country" placeholder="country")
+                        button(class="button" value="country") enter
+                        input(id="city" type="city" name="city" placeholder="city")
+                        button(class="button" value="city") enter
