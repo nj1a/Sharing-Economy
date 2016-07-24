@@ -135,7 +135,13 @@ router.get('/', function(req, res) {
 });
 
 router.get('/result', function(req, res) {
-    res.render('result', { title: 'result', message: 'results'});
+    if (typeof req.body.from_date === "undefined") {
+        res.send('No from_date');
+    }
+    else{
+        res.send(req.body.from_date);
+    }
+    // res.render('result', { title: 'result', message: 'results'});
 });
 
 router.get('/admin_manage', function(req, res) {
