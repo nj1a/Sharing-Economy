@@ -1,0 +1,154 @@
+doctype html
+html(lang="en")
+  head
+
+    title= pageTitle
+    link(rel="stylesheet", href="../assets/css/style.css", type="text/css")
+    link(rel="stylesheet", href="../assets/css/post_style.css", type="text/css")
+    script(src="../jquery-3.1.0.js", defer)
+    script(src="../assets/js/script.js", defer)
+    script(src="../assets/js/post_script.js", defer)
+  body#entity.w3-theme-l5
+      nav.w3-top
+        ul.w3-navbar.w3-theme-d2.w3-left-align.w3-large
+          li
+            a.w3-padding-large.w3-hover-white(href='#')
+              i.fa.fa-home
+          li
+            a.w3-padding-large.w3-hover-white(href='#', title='Account Settings')
+              i.fa.fa-user
+          li.w3-hide-small
+            a.w3-padding-large.w3-hover-white(href='#', title='Inbox')
+              i.fa.fa-envelope
+          li.w3-hide-small
+            a.w3-padding-large.w3-hover-white(href='#', title='Notifications')
+              i.fa.fa-bell
+          li.w3-hide-small
+            a.w3-padding-large.w3-hover-white(href='#', title='Admin Panel')
+              i.fa.fa-eye
+          li.w3-hide-small.w3-right
+            a.w3-padding-large.w3-hover-white(href='#', title='My Account')
+              img.w3-circle.avatar(src='../assets/images/avatar.jpg', alt='Avatar')
+      main#product_page.main
+        section#product_title=result.title
+        section#product_image
+          each val, index in images
+            img.slide_image(src= val, alt='')
+
+          a#left_slide_button(onclick='plusDivs(-1)') &lt;
+          |  
+          a#right_slide_button.slide_button(onclick='plusDivs(1)') &gt;
+        section#product_info
+          article#product_info_text
+            h1 Description
+            table
+              tr
+                td Destination Country:
+                td
+                  a(href='')=result.destination_country
+              tr
+                td Destination City:
+                td
+                  a(href='')=result.destination_city
+              tr
+                td Departure Country:
+                td
+                  a(href='')=result.departure_country
+              tr
+                td Departure City:
+                td
+                  a(href='')=result.departure_city
+              tr
+                td Post Type:
+                td=result.post_type
+              tr
+                td  Start Date:
+                td=result.travel_start_date
+              tr
+                td  End Date:
+                td=result.travel_end_date
+              tr
+                td  Travel Type:
+                td=result.travel_type
+              tr
+                td  Travelling Method:
+                td=result.way_of_travelling
+              tr
+                td Approximate Cost:
+                td $5000
+              tr
+                td Partner Requirement:
+                td=result.partner_requirement
+              tr
+                td  Date Listed:
+                td=result.post_date
+              tr
+                td  Description:
+                td=result.description
+
+            h1 Poster Info
+            table
+              tr
+                td Username:
+                td
+                  a(href='')=result.username
+              tr
+                td Email:
+                td=result.email
+              tr
+                td Poster Rating:
+                td &starf;&starf;&starf;&starf;&star;
+              tr
+                td Gender:
+                td=result.gender
+              tr
+                td Age:
+                td 24
+              tr
+                td Date Joined:
+                td=result.date_joined
+            section#contact_seller_button.product_info_button
+              a(href='') Contact Poster
+        section#recommendation
+          h1 Related Post
+          article#related_product_list
+            a(href='')
+              section.related_product
+                img(src='../assets/images/product_1.jpg', alt='')
+                |  
+                span.related_product_title Looking for a tour guide
+            a(href='')
+              section.related_product
+                img(src='../assets/images/product_2.jpg', alt='')
+                |  
+                span.related_product_title Offering tour in Vancouver BC
+            a(href='')
+              section.related_product
+                img(src='../assets/images/product_3.jpg', alt='')
+                |  
+                span.related_product_title England!
+      br
+      footer
+        section.w3-container.w3-theme-d3.w3-padding-16
+          section.w3-content
+            article.w3-container.w3-third
+              h5.w3-border-green Company
+              p About
+              p Careers
+              p Policies
+              p Terms and Conditions
+              p Privacy
+            article.w3-container.w3-third
+              h5 Discover
+              p Safety
+              p Business Travel
+              p Sitemap
+            diarticlev.w3-container.w3-third
+              h5 Guiding
+              p Why guiding
+              p Hospitality
+              p Responsibilities
+        section.w3-container.w3-theme-d5
+          p Copyright &copy; 2016 Wanderland Inc. All rights reserved.
+      body
+

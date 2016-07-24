@@ -59,13 +59,13 @@ INSERT INTO user_account VALUES(default, 'Lacy123', 'laren@email.com', 'abasg234
 INSERT INTO user_account VALUES(default, 'Catherin123', 'catherin@email.com', 'abasg23456', 'Carol', 'Martin',
         'm', 123456789, 1, 1, '12/12/1980', '12/12/2014', 'Hi, I am Bob', false);
 
-INSERT INTO product_post VALUES(default, 1, 'guide', '2014-04-01', 'by plane', '2014-10-02', '2014-10-14');
-INSERT INTO product_post VALUES(default, 2, 'guide', '2014-05-02', 'by train', '2014-11-11', '2014-11-04');
-INSERT INTO product_post VALUES(default, 3, 'guide', '2014-05-03', 'by plane', '2014-12-01', '2015-01-01');
-INSERT INTO product_post VALUES(default, 4, 'buddy', '2014-06-04', 'by plane', '2015-01-01', '2014-01-23');
-INSERT INTO product_post VALUES(default, 5, 'guide', '2014-07-05', 'by foot', '2015-02-23', '2014-04-05');
-INSERT INTO product_post VALUES(default, 6, 'buddy', '2014-08-06', 'by ferry', '2015-05-01', '2014-06-21');
-INSERT INTO product_post VALUES(default, 7, 'guide', '2014-09-07', 'by ferry', '2015-06-03', '2014-08-17');
-INSERT INTO product_post VALUES(default, 8, 'buddy', '2015-04-08', 'by plane', '2015-08-30', '2015-09-01');
-INSERT INTO product_post VALUES(default, 9, 'guide', '2015-05-09', 'by train', '2015-09-01', '2015-09-18');
-INSERT INTO product_post VALUES(default, 10, 'guide', '2015-11-10', 'by plane', '2015-12-25', '2016-01-13');
+INSERT INTO product_post VALUES(default, 1, 'guide', '2014-04-01', 'by plane', '2014-10-02', '2014-10-14', 1, 17, 'I am precisely looking for a tour guide', 'Looking for tour guide!', 'Sightseeing', NULL);
+INSERT INTO product_post VALUES(default, 2, 'guide', '2014-05-02', 'by train', '2014-11-11', '2014-11-17', 3, 36, 'I need a tour guide once arrived', 'Tour guide in Rome', 'Hiking', NULL);
+INSERT INTO product_post VALUES(default, 3, 'offer_guide', '2014-05-03', 'by plane', '2014-12-01', '2015-01-01', 6, 32, 'Description', 'This is Title', 'Test', NULL);
+INSERT INTO product_post VALUES(default, 4, 'buddy', '2014-06-04', 'by plane', '2014-01-01', '2014-01-23', 6, 23, 'Description', 'This is Title', 'Test', NULL);
+INSERT INTO product_post VALUES(default, 5, 'guide', '2014-07-05', 'by foot', '2015-02-23', '2015-04-05', 24, 1, 'Description', 'This is Title', 'Test', NULL);
+INSERT INTO product_post VALUES(default, 6, 'buddy', '2014-08-06', 'by ferry', '2015-05-01', '2015-06-21', 2, 3, 'Description', 'This is Title', 'Test', NULL);
+INSERT INTO product_post VALUES(default, 7, 'offer_guide', '2014-09-07', 'by ferry', '2015-06-03', '2015-08-17', 1, 1, 'Description', 'This is Title', 'Test', NULL);
+INSERT INTO product_post VALUES(default, 8, 'buddy', '2015-04-08', 'by plane', '2015-08-30', '2015-09-01', 27, 29, 'Description', 'This is Title', 'Test', NULL);
+INSERT INTO product_post VALUES(default, 9, 'guide', '2015-05-09', 'by train', '2015-09-01', '2015-09-18', 20, 19, 'Description', 'This is Title', 'Test', NULL);
+INSERT INTO product_post VALUES(default, 10, 'guide', '2015-11-10', 'by plane', '2015-12-25', '2016-01-13', 15, 39, 'Description', 'This is Title', 'Test', NULL);
