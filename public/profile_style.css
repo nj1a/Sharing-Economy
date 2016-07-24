@@ -15,11 +15,56 @@ a.underlined:hover{
 	text-decoration:underline;
 }
 
+
+
+input#logoutButton{
+	position:absolute;
+	bottom: 0;
+	right:0;
+	font-size:13px;
+	color:white;
+	border:none;
+	background-color: #354458;
+	-webkit-appearance:none;
+}
+
+
+
+input#logoutButton:hover{
+	cursor:pointer;
+	text-decoration: underline;
+	
+}
+
+input#logoutButton:focus{
+	outline: none;
+
+}
+
+
+input#submitButton{
+	font-size:20px;
+	border:none;
+    -webkit-appearance:none;
+}
+
+input#submitButton:hover{
+	cursor:pointer;
+	text-decoration: underline;
+}
+
+input#submitButton:focus{
+	outline: none;
+}
 textarea{
 	width: 300px;
 	height: 400px;
 }
 
+.anchor-wrap{
+	position:relative;
+	min-height: 47px;
+}
 #desc-val{
 	width:40%;
 }
@@ -36,6 +81,7 @@ textarea{
 	display:none;
 }
 
+
 .new-input{
 	width:70%;
 }
@@ -50,9 +96,11 @@ textarea{
 
 .top-nav{
 	height:50px;
+	background-color: #354458;
 }
 
 .main-title{
+	color:#95B9C7	;
 
 }
 
@@ -62,20 +110,32 @@ textarea{
 
 .main-nav{
 
+
 }
 
 .main-nav-button{
 	display:inline-block;
 }
 
-.m_l_r_10{
-	margin-left: 10px;
-	margin-right: 10px;
-	
+.main-nav-button.selected{
+
+	border-bottom: 2px solid #005892;
+
 }
 
+
+#account, #personal{
+	margin-right: 15px;
+}
 .m_b_15 {
 	margin-bottom:45px;
+}
+
+.m_l_5{
+	margin-left:5px;
+}
+.m_r_5{
+	margin-right:5px;
 }
 
 .main-contents {
@@ -83,7 +143,17 @@ textarea{
 	margin-top:30px;
 }
 
-#account-settings, #personal-info, .main-nav-button-wrap, .top-nav{
+li.fr-pro-wrap{
+	list-style: none;
+}
+
+.profile-thumb{
+	width:70px;
+	height:70px;
+}
+
+#account-settings, #personal-info, #friends, .main-nav-button-wrap, .main-nav, .top-nav{
+	min-width:1000px;
 	max-width: 1200px;
 	width:100%;
 	margin-right: auto;
@@ -132,12 +202,21 @@ textarea{
 	font-size: 17px;
 	color: #596981;
 }
+
+.mb5{
+	padding-bottom:5px;
+}
+
 .mt10{
 	margin-top: 10px;
 }
 
 .mb20 {
 	margin-bottom:20px;
+}
+
+.p_t_5{
+	padding-top:5px;
 }
 
 .acc-info{
@@ -162,6 +241,13 @@ textarea{
 	height: 30px;
 	width: 100px;
 	color: #009688;
+}
+
+.logoutButton{
+	width: 8
+	0px;
+	height: 40px;
+	color:black;
 }
 .username-container{
 	margin-top:10px;
@@ -211,11 +297,33 @@ textarea{
 	cursor: pointer;
 }
 
+.flt_l {
+	float:left;
+}
+
+.flt_r {
+	float:right;
+}
+
 .profile-info{
 	display: none;
 }
 
 .profile-info.selected{
 	display:block;
+}
+
+.h100{
+	height:45px;
+}
+
+.vert-cent{
+	position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.w50p{
+	width:33%;
+
 }
 

@@ -18,15 +18,15 @@ html(lang="en")
                 section(id="pop-wrap" style=errors.status)
                     section(id="login-pop")
                         section(class="login-box span12")
-                            button(class="close_pop" onclick="close_login_pop()") [close] 
+                            button(class="close_pop" onclick="close_login_pop()") [close]
                             section(id="inputField" class="old span3")
                                 form(class="existing" action="/account" method="post")
                                     section(class="span12 text-center")
-                                        h3(id="inputField") Login                         
+                                        h3(id="inputField") Login
                                     section(id="inputField" class="span12")
-                                        label(for="email" class="inputField") Email address 
+                                        label(for="email" class="inputField") Email address
                                             input(id="emailEx" class="m_b_10x" type="email" name ="email" placeholder="Enter your email")
-                                            span(class="error")=errors.error_email 
+                                            span(class="error")=errors.error_email
                                             </br>
                                         label(id="inputField" for="password" class="m_b_10x") Password
                                         input(id="passwordEx" class="inputField m_b_10x" type="password" name="password")
@@ -43,31 +43,32 @@ html(lang="en")
                                         label(class="inputField" for="username") Username
                                             input(id="usernameNew" class="inputField" type="text" name ="username" placeholder="Choose a Username")
                                             span(class="error")=errors.error_username
-                                            </br>                                  
+                                            </br>
                                     section(id="inputField" class="span12 m_b_10x")
                                         label(class="inputField" for="email" id="m_b_30x") Email address
                                             input(id="emailNew" class="inputField" type="email" name ="emailNew" placeholder="Enter your email")
                                             span(class="error")=errors.error_emailNew
-                                            </br>             
+                                            </br>
                                     section(id="inputField" class="span12 m_b_10x")
-                                        label(class="inputField" for="password") Password 
+                                        label(class="inputField" for="password") Password
                                         input(class="inputField" id="passwordNew" type="password" name="password")
                                     section(id="inputField" class="span12 m_b_10x")
                                         label(id="inputField" for="password") Confirm password
-                                        input(id="passwordNewConfirm" class="inputField" type="password"  name="confirmpassword")                                      
+                                        input(id="passwordNewConfirm" class="inputField" type="password"  name="confirmpassword")
                                     section(id="passnew" class="span12")
                                     section(class="span12 text-center")
                                         input(id="newClient" class="button" type="button" value="Sign Up")
                 section(id="main-contents" class="main-wrap")
                     section(class="main-background")
-                        image(src="London_eye.jpg", class="background-image", alt="london picture") 
+                        image(src="London_eye.jpg", class="background-image", alt="london picture")
                         image(src="Paris.jpg" class="background-image" alt="paris picture")
-                        image(src="Beijing1.jpg", class="background-image", alt="beijing picture")                     
+                        image(src="Beijing1.jpg", class="background-image", alt="beijing picture")
                     section(class="main-content text-center")
                         section(class="v-wrap")
                             section(class="v-center")
                                 section(class="main-text")
                                     h2 Travel Anywhere
+<<<<<<< HEAD
                                     h4 with Wanderland                                 
                         section.search-background
                           form(action='documents/result.html', method='post')
@@ -92,3 +93,11 @@ html(lang="en")
                             button.button(value='search')
                               i.w3-large.fa.fa-search(3='')
 
+=======
+                                    h4 with Wanderland
+                        section(class="search-background")
+                            form(action="result" method="get")
+                                input(id="search-box" class="search-bar" type="text" name="search-bar" placeholder="Search")
+                                button(class="button" value="search") Search
+                                 i(class="w3-large fa fa-search")
+>>>>>>> db17f7e9207e3edabe4aa91b6b3794adb4f534b2

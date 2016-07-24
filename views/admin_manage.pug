@@ -1,0 +1,17 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        title=adminManage
+        link(rel="stylesheet", href="admin_style.css", type="text/css")
+        script(src="jquery-3.1.0.js", defer)
+    body
+        main(id="adminManage")
+            div(class="wrap-content")
+                section(class="h1 text-center m_t_25p")
+                    h1 Wanderland Admin
+                form(method="post")
+                    input(id="country" type="country" name="country" placeholder="country")
+                    button(class="button" value="country") enter
+                    input(id="city" type="city" name="city" placeholder="city")
+                    button(class="button" value="city") enter
