@@ -177,7 +177,11 @@ $(document).ready(function() {
 		remote: 'https://wander-land.herokuapp.com/city?key=%QUERY',
 		limit: 10
 	});
-
+	$('input.typeahead').typeahead({
+		name: 'typeahead',
+		remote: 'https://wander-land.herokuapp.com/city?key=%QUERY',
+		limit: 10
+	});
 });
 
 
