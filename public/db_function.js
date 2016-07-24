@@ -43,7 +43,7 @@ module.exports = {
 	get_city: function(keyword, callback){
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
 			console.log("This is get_city keyword: "+keyword);
-			var query_string = "select name||', '||country_name as city from city, country where city.country_id = country.country_id";
+			var query_string = "select name||', '||country_name as city from city, country where city.country_id = country.country_id and name ilike \'"+keyword+"%\'";
 			console.log(query_string);
 			client.query(query_string, function(err, result){
 				done();
