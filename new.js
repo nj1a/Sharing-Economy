@@ -135,7 +135,11 @@ router.get('/', function(req, res) {
 });
 
 router.get('/result', function(req, res) {
-    res.render('result', { title: 'result', message: 'Hello there!'});
+    res.render('result', { title: 'result', message: 'results'});
+});
+
+router.get('/admin_manage', function(req, res) {
+    res.render('admin_manage', { title: 'admin_manage', message: 'adminManage'});
 });
 
 router.get('/admin', function(req, res) {
