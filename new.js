@@ -147,11 +147,11 @@ router.post('/result', function(req, res) {
     // res.render('result', { title: 'result', message: 'results'});
 });
 
-router.get('/admin_manage', function(req, res) {
-    res.render('admin_manage', { title: 'admin_manage', message: 'adminManage'});
+router.get('/admin-manage', function(req, res) {
+    res.render('admin-manage', { title: 'admin_manage', message: 'adminManage'});
 });
 
-router.post('/enter_data', function(req, res) {
+router.post('/enter-data', function(req, res) {
     var country = req.body.country;
     var city = req.body.city;
     var country_code = req.body.country_code;
@@ -160,6 +160,7 @@ router.post('/enter_data', function(req, res) {
         var query = "INSERT INTO wanderland.country VALUES (" + "default" + "," +
             + "'" + country_code + "'" + "," + "'" + country + "'" +
             ");";
+        // console.log(query);
         client.query(query, function(err, result){
                 done();
                 if (err) {
