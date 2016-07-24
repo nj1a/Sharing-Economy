@@ -154,7 +154,7 @@ router.post('/result', function(req, res) {
         res.send(req.body);
         tool.get_result(req.body.post_type, from_date, to_date, req.body.from_city, req.body.to_city, function(result){
             res.send(JSON.stringify(result));
-        });
+        })
         // res.send(req.body.from_date);
     }
     // res.render('result', { title: 'result', message: 'results'});
