@@ -134,7 +134,7 @@ router.get('/', function(req, res) {
     }
 });
 
-router.get('/result', function(req, res) {
+router.post('/result', function(req, res) {
     if (typeof req.body.from_date === "undefined") {
         res.send('No from_date');
     }
