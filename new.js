@@ -134,7 +134,7 @@ router.get('/', function(req, res) {
     }
 });
 
-router.post('/result', function(req, res) {
+router.get('/result', function(req, res) {
     res.render('result', { title: 'result', message: 'Hello there!'});
 });
 
