@@ -60,7 +60,7 @@ function toggleChatWindow() {
 
 $(document).ready(function() {
   //setup "global" variables first
-  var socket = io.connect("192.168.56.102:3000");
+  var socket = io();
   var myRoomID = null;
 
   $("form").submit(function(event) {
@@ -282,6 +282,7 @@ socket.on("exists", function(data) {
 });
 
 socket.on("joined", function() {
+  $("#errors").hide();
   if (navigator.geolocation) { //get lat lon of user
     navigator.geolocation.getCurrentPosition(positionSuccess, positionError, { enableHighAccuracy: true });
   } else {
