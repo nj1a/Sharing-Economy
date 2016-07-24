@@ -83,7 +83,7 @@ router.use(expressValidator({
 
 router.post('/login', function(req, res){
     sess = req.session;
-    var password = sha256(req.body.pass);
+    var password = req.body.pass;
 
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
