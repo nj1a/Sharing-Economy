@@ -135,7 +135,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/result', function(req, res) {
-    res.render('result');
+    res.render('result', { title: 'result', message: 'Hello there!'});
 });
 
 router.get('/admin', function(req, res) {
