@@ -131,7 +131,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/result', function(req, res) {
-    if (typeof req.body.from_date !== "string" || typeof req.body.to_date !== "string") {
+    if (typeof req.body.from_date === "undefined") {
         res.send('No req.body');
     }
     else{
@@ -139,7 +139,7 @@ router.post('/result', function(req, res) {
         var to_date = req.body.to_date.replace(/\//g, '-');
         console.log(req.body);
         tool.get_result(req.body.post_type, from_date, to_date, req.body.from_city, req.body.to_city, function(result){
-            if (result === 'error') {
+            if (result === 'eror') {
                 res.send('No matching result');
             }
             else{
@@ -173,15 +173,15 @@ router.post('/enter-data', function(req, res) {
     var country_code = req.body.country_code;
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        client.query("INSERT INTO wanderland.country VALUES (" + "default" + "," +
-            + "'" + country_code + "'" + "," + "'" + country + "'" +
-            ");", function(err, result){
+        client.query('INSERT INTO wanderland.country VALUES (' + 'default' + ','
+            + "'" + country_code + "'" + ',' + "'" + country + "'" +
+            ');', function(err, result){
                 done();
                 if (err) {
                     res.send("Error " + err);
                     // change the erro message later
                 }
-                res.send('done');
+                res.redirect('/admin-manage');
                 });
     });
 });
