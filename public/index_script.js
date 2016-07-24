@@ -1,24 +1,13 @@
 window.slideNum = 1;
 
 $(document).ready(function() {
-	var reqType;
-	var x;
-	//$(document).onload(function(){
-		x = document.getElementById("adminMain");
-		if (x===null){
-			startSlide();
-		} 
-
-	//});
+	var reqType, x, email, pass;
 	
-
-		
 	
-
-	var email,pass;
-   
-
-
+	x = document.getElementById("adminMain");
+	if (x===null){
+		startSlide();
+	} 
 
 	$("input[type='button']#existingClient").click(function(e){
 		reqType = 1;
@@ -37,8 +26,6 @@ $(document).ready(function() {
 		return validateEmailandPassword("admin");
 	});
 
-
-
 	$(document.getElementById("root-content")).click(function(e){
 		
 		if (e.target.className != "existing" &&
@@ -51,14 +38,8 @@ $(document).ready(function() {
 			e.target.id != "inputField") {
 
 			if (document.getElementById("pop-wrap").style.display == "block") {
-			
-				//close_login_pop();
-				
 			} 
-
 		}
-		
-
 	});
 
 	function checkError(arg){
@@ -67,11 +48,6 @@ $(document).ready(function() {
 		}
 		return true;
 	}
-
-	
-
-
-
 
 	function validateEmailandPassword(client) {
 		var isValid = true;
@@ -177,16 +153,7 @@ $(document).ready(function() {
 
 
 		}
-
-
-		
-		
-
-		
-	
 	}
-	
-
 	function is_email(email) {
 		
 		var regex = new RegExp("([a-zA-Z0-9]*)([@]{1})([a-zA-Z0-9]*)");

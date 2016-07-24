@@ -2,15 +2,11 @@ $(document).ready(function(){
 
 	var navs = document.getElementsByClassName("main-nav-button");
 	var info = document.getElementsByClassName("profile-info");
-
 	var disabledBox = document.getElementsByClassName("edit-disable");
 	var editButtons =document.getElementsByClassName("edit-img");
 
-	//window.history.pushState("object or string", "Title", "/asshole");
 
 
-
-	
 	for (i=0; i < editButtons.length+1; i++) {
 
 		$("#edit-button" + i).click(function(event){
@@ -19,16 +15,25 @@ $(document).ready(function(){
 			$("#newEmailError").html(" ");
 			enableEdit(disabledBox, curr);			
 		});
-
-
 	}
 
 	for (i=1; i < navs.length+1; i++){
+
+
 		$("a#nav" + i).click(function(event){
 			var curr = this.id.substring(3);
-			//alert(curr);
+			
 			processMenu(curr, navs);
-			listInfo(curr, info);
+			if (navs.length === 4 && curr === '3') {
+				listInfo(4, info);
+			} else if (navs.length === 4 && curr === '4'){
+				listInfo(5, info);
+			} else if (navs.length === 3 && curr == '3'){
+				listInfo(curr, info);
+				listFriends();
+			}  else {
+				listInfo(curr, info);
+			}
 		});
 	}
 	
@@ -41,10 +46,6 @@ $(document).ready(function(){
 			$("#updatePW").attr("disabled", true);
 		}
 	});
-
-	
-	
-
 
 	$("#npw").on("input", function(event) {
 		if (event.target.value != $("#ncpw").val() && $("#ncpw").val().length != 0 && event.target.value.length != 0 ) {
@@ -74,8 +75,6 @@ $(document).ready(function(){
 	});
 
 
-
-
 });
 
 function enableEdit(disabledBox, i){
@@ -89,49 +88,43 @@ function enableEdit(disabledBox, i){
 			input_type = "email";
 			input_name = "newEmailValue";
 			placeholder = "Email Address";
-			//input_value = " ";
+			
 			break;
 		case "2":
 			actionURL = "/update_name";
 			input_type = "text";
 			input_name = "newNameFirst";
 			placeholder = "First Name";
-			//input_value = "First Name";
-			break;
+			
 		case "3":
 			actionURL = "/update_address";
 			input_type = "text";
 			input_name = "newCity";
 			placeholder = "city";
-			//input_value = $("#addr-val").val();
 			break;
 		case "4":
 			actionURL = "/update_phone";
 			input_type = "text";
 			input_name = "newPhone";
 			placeholder = "phone number...";
-			//input_value = $("#phone-val").val();
 			break;
 		case "5":
 			actionURL = "/update_dob";
 			input_type = "text";
 			input_name = "newDOB";
 			placeholder = "Day-Month-Date-Year";
-			//input_value = $("#dob-val").val();
 			break;
 		case "6":
 			actionURL = "/update_gender";
 			input_type = "text";
 			input_name = "newGender";
 			placeholder = "Enter M or F or O";
-			//input_value = $("#gender-val").val();
 			break;
 		case "7":
 			actionURL = "/update_desc";
 			input_type = "text";
 			input_name = "newDesc";
 			placeholder = "Description....";
-			//input_value = $("#desc-val").val();
 			break;		
 		default:
 			alert("not catched");
@@ -278,9 +271,118 @@ function listInfo(n, info){
 		
 
 	} else if (n==3){
+		
 		info[2].className += " selected";
 		
 	} else if (n==4){
 		info[3].className += " selected";
+
+	} else if (n==5){
+		info[4].className += " selected";
 	}
+}
+
+function listFriends(){
+	$("#resultField").remove();
+	$('<div>', {
+		"id":"resultField",
+		
+	}).appendTo("#resultWrap");
+
+	$('<ul>', {
+		"class":"flt_l w50p",
+		"id":"left_column"
+	}).appendTo("#resultField");
+
+	/*$('<ul>', {
+		"class": "flt_l w50p"	
+	}).appendTo("#resultField");*/
+
+	/*$('<>', {
+				"class":
+			}).appendTo();*/
+
+
+	var usr = $(".username-field").html();
+	
+	$.get("/getFriends/" + usr,  function(result){
+		for(i=0; i < result.length ; i++) {
+
+			$('<li>', {
+				"class": "fr-pro-wrap b_p_50",
+				"id": "usr_" + i
+			}).appendTo("#left_column");
+
+			$('<form>', {
+				"action": "/profile/a",
+				"id": "prof_" + i
+			}).appendTo("#usr_" + i);
+
+			$('<div>', {
+				"class": "picture" ,
+				"id": "pic-container" + i
+			}).appendTo("#prof_" + i);
+
+
+
+			$('<img>', {
+				"class": "profile_pic",
+				"src": result[i].pic
+
+			}).appendTo("#pic-container" + i);
+
+			$('<div>', {
+				"class": "acc-info" ,
+				"id": "acc" + i
+			}).appendTo("#prof_" + i);
+
+			$('<input>', {
+				"class": "submitButton",
+				"id": "submitButton_" + i,
+				"value": result[i].username
+			}).appendTo("#acc" + i);
+
+			$('<input>', {
+				"class": "removeButton " + result[i].user_id,
+				"id": "removeButton_" + i,
+				"value": "unfriend " + result[i].username
+			}).appendTo("#acc" + i);
+
+
+			
+		}
+		var submitButtons = document.getElementsByClassName("submitButton");
+
+		var removeButtons = document.getElementsByClassName("removeButton");
+		
+
+		for (i=0; i < submitButtons.length; i++){
+
+			$("#submitButton_" + i).click(function(event){
+
+				$.get("/viewusr/" + event.target.value, function(data){
+					if (data==="good"){
+						window.location.href="/showusr";
+					}
+				});
+			});
+		
+		}
+
+		for (i=0; i < removeButtons.length; i++){
+
+			$("#removeButton_" + i).click(function(event){
+				var username= this.className.substring(13);
+				//alert(username);
+				$.get("/removeFriend/" + username, function(data){
+					
+					//alert(data);	
+					if (data==="good"){
+						window.location.href="/profile";
+					}
+				});
+			});
+		
+		}
+	});
 }
