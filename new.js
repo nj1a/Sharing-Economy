@@ -169,7 +169,7 @@ router.post('/enter-data', function(req, res) {
                     res.send("Error " + err);
                     // change the erro message later
                 }
-                res.send('done');
+                res.redirect('/admin-manage');
                 });
     });
 });
