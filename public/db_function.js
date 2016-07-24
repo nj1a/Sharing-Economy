@@ -28,7 +28,7 @@ module.exports = {
 					if (JSON.stringify(result.rows) === "[]") {
 						console.log('No matching row in database');
 						callback('error');
-					} else {x
+					} else {
 						console.log(result.rows[0]);
 						callback(result.rows[0]);
 					}
