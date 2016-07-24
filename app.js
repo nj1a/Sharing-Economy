@@ -251,7 +251,8 @@ io.sockets.on("connection", function (socket) {
 				socket.emit("update", "Can't find " + whisperTo);
 			}
 		} else {
-			if (io.rooms.roomClients[socket.id]['/'+socket.room] !== undefined ) {
+			console.log(people[socket.id]);
+			if (people[socket.id].inroom !== undefined ) {
 				io.sockets.in(socket.room).emit("chat", msTime, people[socket.id], msg);
 				socket.emit("isTyping", false);
 				if (_.size(chatHistory[socket.room]) > 10) {
@@ -259,9 +260,9 @@ io.sockets.on("connection", function (socket) {
 				} else {
 					chatHistory[socket.room].push(people[socket.id].name + ": " + msg);
 				}
-		    	} else {
-				socket.emit("update", "Please connect to a room.");
-		    	}
+			} else {
+			socket.emit("update", "Please connect to a room.");
+			}
 		}
 	});
 
