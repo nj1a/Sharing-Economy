@@ -83,13 +83,13 @@ router.use(expressValidator({
 
 router.post('/login', function(req, res){
     sess = req.session;
-    var hashedPassword = sha256(req.body.pass);
+    var password = sha256(req.body.pass);
 
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +
             "'"+ req.body.email + "'" +  ' AND wanderland.user_account.password =' + "'" +
-            hashedPassword + "'" , function(err, result) {
+            password + "'" , function(err, result) {
                 console.log(JSON.stringify(result.rows[0]));
                 done();
                 if (err) {
@@ -116,7 +116,7 @@ router.post('/login', function(req, res){
 
                     } else {
                         sess.email = req.body.email;
-                        sess.pass = hashedPassword;
+                        sess.pass = password;
                         res.end('done');
                     }
                 }
@@ -351,7 +351,7 @@ router.get('/logout',function(req,res){
 router.post('/signup', function(req, res){
 
     var account = req.body.emailNew;
-    var hashedPassword = sha256(req.body.password);
+    var password = sha256(req.body.password);
     var username = req.body.username;
 
     sess = req.session;
