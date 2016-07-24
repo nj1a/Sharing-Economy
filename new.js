@@ -161,14 +161,12 @@ router.post('/enter-data', function(req, res) {
     var country_code = req.body.country_code;
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        var query = "INSERT INTO wanderland.country VALUES (" + "default" + "," +
+        client.query("INSERT INTO wanderland.country VALUES (" + "default" + "," +
             + "'" + country_code + "'" + "," + "'" + country + "'" +
-            ");";
-        // console.log(query);
-        client.query(query, function(err, result){
+            ");", function(err, result){
                 done();
                 if (err) {
-                    res.send("Error " + err + query);
+                    res.send("Error " + err);
                     // change the erro message later
                 }
                 res.send('done');
