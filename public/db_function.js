@@ -39,6 +39,27 @@ module.exports = {
 			});
 
 		});
+	},
+	get_city: function(keyword, callback){
+		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
+			console.log("This is get_city keyword: "+keyword);
+			var query_string = "select name||', '||country_name as city from city, country where city.country_id = country.country_id";
+			console.log(query_string);
+			client.query(query_string, function(err, result){
+				done();
+				if (err) throw err;
+				else{
+					if (JSON.stringify(result.rows) === "[]") {
+						console.log('No matching row in database');
+						callback('error');
+					} else {
+						console.log(result.rows[0]);
+						callback(result.rows[0]);
+					}
+				}
+			});
+
+		});
 	}
 
 };

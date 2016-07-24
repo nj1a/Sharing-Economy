@@ -151,6 +151,18 @@ router.post('/result', function(req, res) {
     // res.render('result', { title: 'result', message: 'results'});
 });
 
+router.get('/city', function(req, res){
+    tool.get_city(req.query.key, function(result){
+        if (result === 'error') {
+            res.send('No matching result');
+        }
+        else{
+            res.send(JSON.stringify(result));
+        }
+    });
+
+})
+
 router.get('/admin-manage', function(req, res) {
     res.render('admin-manage', { title: 'admin_manage', message: 'adminManage'});
 });

@@ -171,6 +171,13 @@ $(document).ready(function() {
 	$('.city-field').focus(function(){
 		$(this).val('');
 	});
+
+	$('input#from-city').typeahead({
+		name: 'from_city',
+		remote: 'https://wander-land.herokuapp.com/city?key=%QUERY',
+		limit: 10
+	});
+
 });
 
 
