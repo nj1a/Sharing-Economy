@@ -1,17 +1,54 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Chat</title>
-    <link rel="stylesheet" href="chat.css"> 
-    <script src="/socket.io/socket.io.js" defer></script>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous" defer></script>
-    <script src="chat.js" defer></script>
-  </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+	<script src="chat.js"></script>
+</head>
+<body>
 
-  <body>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
-  </body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <!-- names & rooms-->
+      <ul id="rooms" class="list-group"></ul>
+      <p id="createRoom"><button id="showCreateRoom" class="btn btn-warning btn-lg">Create room</button></p>
+      <form class="form-inline" id="createRoomForm"><input type="text" class="form-control input-lg"  placeholder="Room name" id="createRoomName"><button id="createRoomBtn" class="btn btn-success btn-lg">Create room</button></form>
+      <ul id="people" class="list-group"></ul>
+    </div>
+    <div class="col-md-8">
+      <!-- the main chat screen -->
+      <div class="alert alert-danger" id="errors"></div>
+      <div id="login">
+        <form class="form-inline">
+          <div class="form-group">
+            <input type="text" class="form-control input-lg" placeholder="Your name" id="name">
+          </div>
+          <input type="button" name="join" id="join" value="Join" class="btn btn-primary btn-lg">
+        </form>
+      </div>
+
+      <div id="chat">
+        <form id="2" class="form-inline">
+          <div class="input-group">
+            <span class="input-group-addon">Whisper? <input type="checkbox" id="whisper"></span>
+            <input type="text" class="form-control input-lg" placeholder="Your message" id="msg">
+          </div>
+          
+          <input type="button" name="send" id="send" value="Send" class="btn btn-success btn-lg">
+          <input type="button" name="leave" id="leave" value="Leave Room" class="btn btn-warning btn-lg">
+        </form>
+      </div>
+       <div class="conversation">
+        <ul id="msgs" class="list-unstyled"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
 </html>
