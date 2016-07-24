@@ -7,6 +7,7 @@ var update_handler = require("./handle_update.js");
 var busboy = require('connect-busboy');
 var expressValidator = require('express-validator');
 var path = require('path');
+var sha256 = require('js-sha256');
 
 var router = express.Router();
 //router.use(express.static(path.join(__dirname, 'public')));
@@ -82,12 +83,13 @@ router.use(expressValidator({
 
 router.post('/login', function(req, res){
     sess = req.session;
+    var hashedPassword = sha256(req.body.pass);
 
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +
             "'"+ req.body.email + "'" +  ' AND wanderland.user_account.password =' + "'" +
-            req.body.pass + "'" , function(err, result) {
+            hashedPassword + "'" , function(err, result) {
                 console.log(JSON.stringify(result.rows[0]));
                 done();
                 if (err) {
@@ -114,7 +116,7 @@ router.post('/login', function(req, res){
 
                     } else {
                         sess.email = req.body.email;
-                        sess.pass = req.body.pass;
+                        sess.pass = hashedPassword;
                         res.end('done');
                     }
                 }
@@ -162,6 +164,20 @@ router.post('/result', function(req, res) {
 
 router.get('/admin_manage', function(req, res) {
     res.render('admin_manage', { title: 'admin_manage', message: 'adminManage'});
+});
+
+router.post('/enter_data', function(req, res) {
+    var country = req.body.country;
+    var city = req.body.city;
+
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    ]client.query('SELECT * FROM wanderland.user_account WHERE wanderland.country.country_name = ' +
+            "'"+ country + "'" +  ' AND wanderland.city.name =' + "'" +
+            req.body.city + "'" , function(err, result) {
+                console.log(JSON.stringify(result.rows[0]));
+                done();
+            });
+        });
 });
 
 router.get('/admin', function(req, res) {
@@ -335,7 +351,7 @@ router.get('/logout',function(req,res){
 router.post('/signup', function(req, res){
 
     var account = req.body.emailNew;
-    var password = req.body.password;
+    var hashedPassword = sha256(req.body.password);
     var username = req.body.username;
 
     sess = req.session;
