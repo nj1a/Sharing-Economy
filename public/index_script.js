@@ -172,16 +172,12 @@ $(document).ready(function() {
 		$(this).val('');
 	});
 
-	$('input#from-city').typeahead({
+	$('input.city-field').typeahead({
 		name: 'from_city',
 		remote: 'https://wander-land.herokuapp.com/city?key=%QUERY',
 		limit: 10
 	});
-	$('input.typeahead').typeahead({
-		name: 'typeahead',
-		remote: 'https://wander-land.herokuapp.com/city?key=%QUERY',
-		limit: 10
-	});
+
 });
 
 
