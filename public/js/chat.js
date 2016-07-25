@@ -1,12 +1,3 @@
-/* HTML5 magic
-- GeoLocation
-*/
-
-var last10messages = []; //to be populated later
-
-/*
-Functions
-*/
 function toggleNameForm() {
    $("#login-screen").toggle();
 }

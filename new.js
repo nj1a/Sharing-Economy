@@ -120,7 +120,7 @@ router.post('/login', function(req, res){
         });
 });
 
-var tool = require('./public/db_function');
+var tool = require('./db_function');
 var glob = require('glob');
 
 router.get('/', csrfProtection, function(req, res) {
