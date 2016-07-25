@@ -163,7 +163,7 @@ router.post('/result', function(req, res) {
 
                         }else{
                             // res.send(JSON.stringify(result));
-                            res.render("result", result: result3);
+                            res.render("result", {result: result3});
                         }
                     });  
 
