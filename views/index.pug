@@ -2,8 +2,10 @@ doctype html
 html(lang="en")
     head
         meta(charset="utf-8")
+        meta(name="google-signin-client_id" content="541812798719-dg2tn8dqj5skgu9kqg5jpb3g7hdu9ip0.apps.googleusercontent.com")
         title= Index
         link(rel="stylesheet", href="style.css", type="text/css")
+        script(src="https://apis.google.com/js/platform.js" async defer)
         script(src="jquery-3.1.0.js")
         script(src="index_script.js")
         script(type='text/javascript', src='assets/js/jquery-ui/jquery-ui.js')
@@ -36,7 +38,8 @@ html(lang="en")
                                         label(id="inputField" for="password" class="m_b_10x") Password
                                         input(id="passwordEx" class="inputField m_b_10x" type="password" name="password")
                                     section(class="span12 text-center")
-                                        a(id="inputField" class="hover underlined" href="#") Forgot your password?
+                                       div(class="g-signin2" data-onsuccess="onSignIn")
+
                                     section(class="span12 text-center")
                                         input(id="existingClient" class="button" type="button" value="Login")
                                 section(class="middle-wall")
