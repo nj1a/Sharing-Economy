@@ -2,12 +2,14 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
-var pg = require('pg');
+
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
-var Room = require('./room');  
+var Room = require('./controllers/room');  
 var uuid = require('node-uuid');
+var pg = require('pg');
 var _ = require('underscore')._;
+
 
 
 // configure environemnt
@@ -22,11 +24,25 @@ app.use('/img', express.static(path.join(__dirname + 'img')));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+
+
+// define routes
+
+
+
+// start the server
+var port = process.env.PORT || 1337;
+server.listen(port, function () {
+	console.log('listen on port ' + port);
+});
+
+// var m = require('./controllers/message');
+
 // message
 app.get('/message', function(req, res) {
   	res.render('message');
+	  
 });
-
 
 var people = {};
 var rooms = {};
@@ -172,172 +188,158 @@ function purge(s, action) {
 		}		
 	}
 }
+        io.on("connection", function (socket) {
 
-io.on("connection", function (socket) {
+            socket.on("joinserver", function(name, device) {
+                var exists = false;
+                var ownerRoomID = null;
+                var inRoomID = null;
 
-	socket.on("joinserver", function(name, device) {
-		var exists = false;
-		var ownerRoomID = null;
-		var inRoomID = null;
+                _.find(people, function(key,value) {
+                    if (key.name.toLowerCase() === name.toLowerCase()) {
+                        return exists = true;
+                    }
+                        
+                });
+                if (exists) {//provide unique username:
+                    var randomNumber=Math.floor(Math.random()*1001);
+                    var proposedName;
+                    do {
+                        proposedName= name+randomNumber;
+                        _.find(people, function(key,value) {
+                            if (key.name.toLowerCase() === proposedName.toLowerCase()) {
+                                return exists = true;
+                            }
+                                
+                        });
+                    } while (!exists);
+                    socket.emit("exists", {msg: "The username already exists, please pick another one.", proposedName: proposedName});
+                } else {
+                    people[socket.id] = {"name" : name, "owns" : ownerRoomID, "inroom": inRoomID, "device": device};
+                    socket.emit("update", "You have connected to the server.");
+                    io.sockets.emit("update", people[socket.id].name + " is online.");
+                    var sizePeople = _.size(people);
+                    var sizeRooms = _.size(rooms);
+                    io.sockets.emit("update-people", {people: people, count: sizePeople});
+                    socket.emit("roomList", {rooms: rooms, count: sizeRooms});
+                    sockets.push(socket);
+                }
+            });
 
-		_.find(people, function(key,value) {
-			if (key.name.toLowerCase() === name.toLowerCase()) {
-				return exists = true;
-			}
-				
-		});
-		if (exists) {//provide unique username:
-			var randomNumber=Math.floor(Math.random()*1001);
-			var proposedName;
-			do {
-				 proposedName= name+randomNumber;
-				_.find(people, function(key,value) {
-					if (key.name.toLowerCase() === proposedName.toLowerCase()) {
-						return exists = true;
-					}
-						
-				});
-			} while (!exists);
-			socket.emit("exists", {msg: "The username already exists, please pick another one.", proposedName: proposedName});
-		} else {
-			people[socket.id] = {"name" : name, "owns" : ownerRoomID, "inroom": inRoomID, "device": device};
-			socket.emit("update", "You have connected to the server.");
-			io.sockets.emit("update", people[socket.id].name + " is online.");
-			var sizePeople = _.size(people);
-			var sizeRooms = _.size(rooms);
-			io.sockets.emit("update-people", {people: people, count: sizePeople});
-			socket.emit("roomList", {rooms: rooms, count: sizeRooms});
-			sockets.push(socket);
-		}
-	});
+            socket.on("getOnlinePeople", function(fn) {
+                        fn({people: people});
+                });
 
-	socket.on("getOnlinePeople", function(fn) {
-                fn({people: people});
+            socket.on("typing", function(data) {
+                if (typeof people[socket.id] !== "undefined") {
+                    io.sockets.in(socket.room).emit("isTyping", {isTyping: data, person: people[socket.id].name});
+                }
+                    
+            });
+            
+            socket.on("send", function(msTime, msg) {
+                if (people[socket.id].inroom !== undefined ) {
+                        io.sockets.in(socket.room).emit("message", msTime, people[socket.id], msg);
+                        socket.emit("isTyping", false);
+                        if (_.size(messageHistory[socket.room]) > 10) {
+                            messageHistory[socket.room].splice(0,1);
+                        } else {
+                            messageHistory[socket.room].push(people[socket.id].name + ": " + msg);
+                        }
+                } else {
+                socket.emit("update", "Please connect to a room.");
+                }
+                
+            });
+            
+            socket.on("disconnect", function() {
+                if (typeof people[socket.id] !== "undefined") { //this handles the refresh of the name screen
+                    purge(socket, "disconnect");
+                }
+            });
+
+            //Room functions
+            socket.on("createRoom", function(name) {
+                if (people[socket.id].inroom) {
+                    socket.emit("update", "You are in a room. Please leave it first to create your own.");
+                } else if (!people[socket.id].owns) {
+                    var id = uuid.v4();
+                    var room = new Room(name, id, socket.id);
+                    rooms[id] = room;
+                    var sizeRooms = _.size(rooms);
+                    io.sockets.emit("roomList", {rooms: rooms, count: sizeRooms});
+                    //add room to socket, and auto join the creator of the room
+                    socket.room = name;
+                    socket.join(socket.room);
+                    people[socket.id].owns = id;
+                    people[socket.id].inroom = id;
+                    room.addPerson(socket.id);
+                    socket.emit("update", "Welcome to " + room.name + ".");
+                    socket.emit("sendRoomID", {id: id});
+                    messageHistory[socket.room] = [];
+                } else {
+                    socket.emit("update", "You have already created a room.");
+                }
+            });
+
+            socket.on("check", function(name, fn) {
+                var match = false;
+                _.find(rooms, function(key,value) {
+                    if (key.name === name) {
+                        return match = true;
+                    }	
+                });
+                fn({result: match});
+            });
+
+            socket.on("removeRoom", function(id) {
+                var room = rooms[id];
+                if (socket.id === room.owner) {
+                    purge(socket, "removeRoom");
+                } else {
+                            socket.emit("update", "Only the owner can remove a room.");
+                }
+            });
+
+            socket.on("joinRoom", function(id) {
+                if (typeof people[socket.id] !== "undefined") {
+                    var room = rooms[id];
+                    if (socket.id === room.owner) {
+                        socket.emit("update", "You are the owner of this room and you have already been joined.");
+                    } else {
+                        if (_.contains((room.people), socket.id)) {
+                            socket.emit("update", "You have already joined this room.");
+                        } else {
+                            if (people[socket.id].inroom !== null) {
+                                    socket.emit("update", "You are already in a room ("+rooms[people[socket.id].inroom].name+"), please leave it first to join another room.");
+                                } else {
+                                room.addPerson(socket.id);
+                                people[socket.id].inroom = id;
+                                socket.room = room.name;
+                                socket.join(socket.room);
+                                var user = people[socket.id];
+                                io.sockets.in(socket.room).emit("update", user.name + " has connected to " + room.name + " room.");
+                                socket.emit("update", "Welcome to " + room.name + ".");
+                                socket.emit("sendRoomID", {id: id});
+                                var keys = _.keys(messageHistory);
+                                if (_.contains(keys, socket.room)) {
+                                    socket.emit("history", messageHistory[socket.room]);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    socket.emit("update", "Please enter a valid name first.");
+                }
+            });
+
+            socket.on("leaveRoom", function(id) {
+                var room = rooms[id];
+                if (room) {
+                    purge(socket, "leaveRoom");
+                }
+            });
         });
-
-	socket.on("typing", function(data) {
-		if (typeof people[socket.id] !== "undefined") {
-			io.sockets.in(socket.room).emit("isTyping", {isTyping: data, person: people[socket.id].name});
-		}
-			
-	});
-	
-	socket.on("send", function(msTime, msg) {
-		if (people[socket.id].inroom !== undefined ) {
-				io.sockets.in(socket.room).emit("message", msTime, people[socket.id], msg);
-				socket.emit("isTyping", false);
-				if (_.size(messageHistory[socket.room]) > 10) {
-					messageHistory[socket.room].splice(0,1);
-				} else {
-					messageHistory[socket.room].push(people[socket.id].name + ": " + msg);
-				}
-		} else {
-		socket.emit("update", "Please connect to a room.");
-		}
-		
-	});
-	
-	socket.on("disconnect", function() {
-		if (typeof people[socket.id] !== "undefined") { //this handles the refresh of the name screen
-			purge(socket, "disconnect");
-		}
-	});
-
-	//Room functions
-	socket.on("createRoom", function(name) {
-		if (people[socket.id].inroom) {
-			socket.emit("update", "You are in a room. Please leave it first to create your own.");
-		} else if (!people[socket.id].owns) {
-			var id = uuid.v4();
-			var room = new Room(name, id, socket.id);
-			rooms[id] = room;
-			var sizeRooms = _.size(rooms);
-			io.sockets.emit("roomList", {rooms: rooms, count: sizeRooms});
-			//add room to socket, and auto join the creator of the room
-			socket.room = name;
-			socket.join(socket.room);
-			people[socket.id].owns = id;
-			people[socket.id].inroom = id;
-			room.addPerson(socket.id);
-			socket.emit("update", "Welcome to " + room.name + ".");
-			socket.emit("sendRoomID", {id: id});
-			messageHistory[socket.room] = [];
-		} else {
-			socket.emit("update", "You have already created a room.");
-		}
-	});
-
-	socket.on("check", function(name, fn) {
-		var match = false;
-		_.find(rooms, function(key,value) {
-			if (key.name === name) {
-				return match = true;
-			}	
-		});
-		fn({result: match});
-	});
-
-	socket.on("removeRoom", function(id) {
-		 var room = rooms[id];
-		 if (socket.id === room.owner) {
-			purge(socket, "removeRoom");
-		} else {
-                	socket.emit("update", "Only the owner can remove a room.");
-		}
-	});
-
-	socket.on("joinRoom", function(id) {
-		if (typeof people[socket.id] !== "undefined") {
-			var room = rooms[id];
-			if (socket.id === room.owner) {
-				socket.emit("update", "You are the owner of this room and you have already been joined.");
-			} else {
-				if (_.contains((room.people), socket.id)) {
-					socket.emit("update", "You have already joined this room.");
-				} else {
-					if (people[socket.id].inroom !== null) {
-				    		socket.emit("update", "You are already in a room ("+rooms[people[socket.id].inroom].name+"), please leave it first to join another room.");
-				    	} else {
-						room.addPerson(socket.id);
-						people[socket.id].inroom = id;
-						socket.room = room.name;
-						socket.join(socket.room);
-						var user = people[socket.id];
-						io.sockets.in(socket.room).emit("update", user.name + " has connected to " + room.name + " room.");
-						socket.emit("update", "Welcome to " + room.name + ".");
-						socket.emit("sendRoomID", {id: id});
-						var keys = _.keys(messageHistory);
-						if (_.contains(keys, socket.room)) {
-							socket.emit("history", messageHistory[socket.room]);
-						}
-					}
-				}
-			}
-		} else {
-			socket.emit("update", "Please enter a valid name first.");
-		}
-	});
-
-	socket.on("leaveRoom", function(id) {
-		var room = rooms[id];
-		if (room) {
-			purge(socket, "leaveRoom");
-		}
-	});
-});
-
-// define routes
-
-
-
-// start the server
-var port = process.env.PORT || 1337;
-server.listen(port, function () {
-	console.log('listen on port ' + port);
-});
-
-
-
 
 
 var router = require('./new');
