@@ -131,7 +131,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/result', function(req, res) {
-    if (typeof req.body.from_date === "undefined" || typeof req.body.to_date === "undefined" || typeof req.body.from_city === "undefined" || typeof req.body.to_city_id === "undefined") {
+    if (typeof req.body.from_date === "undefined" || typeof req.body.to_date === "undefined" || typeof req.body.from_city === "undefined" || typeof req.body.to_city === "undefined") {
         res.send('No req.body');
     }
     else{
