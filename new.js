@@ -611,7 +611,12 @@ router.get('/create_post', function(req, res){
         // res.send(sess.email);
     }
 
+// Process create_post request
+router.post('/create_post', function(req, res){
 
+
+
+});
 
 });
 router.get("/removeFriend/:username", function(req, res){

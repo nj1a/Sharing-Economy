@@ -85,6 +85,26 @@ module.exports = {
 			});
 
 		});
+	},
+	create_post: function(user_id, post_type, post_date, way_of_travelling, travel_start_date, travel_end_date, from_city, to_city, description, title, trave_type){
+		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
+			var query_string = "INSERT INTO product_post VALUE (default, "+user_id+", "+post_type+", "+way_of_travelling+", "+travel_start_date+", "+travel_end_date+", "+from_city+", "+to_city+", "+description+", "+title+", "+travel_start_date+", null RETURNING post_id";
+			console.log(query_string);
+			client.query(query_string, function(err, result){
+				done();
+				if (err) throw err;
+				else{
+					if (JSON.stringify(result.rows) === "[]") {
+						console.log('No matching row in database');
+						callback('error');
+					} else {
+						console.log(result.rows);
+						callback(result.rows[0]);
+					}
+				}
+			});
+
+		});
 	}
 
 };
