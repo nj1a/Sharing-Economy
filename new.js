@@ -142,7 +142,7 @@ router.post('/result', function(req, res) {
         var to_city = req.body.to_city.split(", ")[0];
         var to_country = req.body.to_city.split(", ")[1];
         // Get the city ids from city name and country name
-        var from_city_id, var to_city_id;
+        var from_city_id, to_city_id;
         tool.get_city_id(from_city, from_country, function(result1){
             from_city_id = result1.city_id;
 
