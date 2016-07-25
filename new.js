@@ -607,8 +607,8 @@ router.get('/create_post', function(req, res){
     if (typeof sess.email === 'undefined') {
         res.send('You need to sign in first');
     }else{
-        // res.render('create_post');
-        res.send(sess.email);
+        res.render('create_post');
+        // res.send(sess.email);
     }
 
 
