@@ -10,8 +10,16 @@ var sha256 = require('js-sha256');
 
 var router = express.Router();
 
+// Security
+var csrf = require('csurf');
+var cookieParser = require('cookie-parser');
+var sanitizer = require('sanitizer');
+var bodyParser = require('body-parser');
 
-router.use(busboy());
+var csrfProtection = csrf({ cookie: true });
+var parseForm = bodyParser.urlencoded({ extended: false });
+
+router.use(cookieParser());
 
 var sess;
 
@@ -115,7 +123,7 @@ router.post('/login', function(req, res){
 var tool = require('./public/db_function');
 var glob = require('glob');
 
-router.get('/', function(req, res) {
+router.get('/', csrfProtection, function(req, res) {
     sess = req.session;
 
     if (sess.email) {
@@ -123,9 +131,15 @@ router.get('/', function(req, res) {
     } else {
         if (!sess.error_msg) {
             sess.error_msg = '';
-            res.render('index', {errors: sess.error_msg});
+            res.render('index', {
+                errors: sess.error_msg,
+                csrfToken: req.csrfToken()
+            });
         } else {
-            res.render('index', {errors: sess.error_msg.errors});
+            res.render('index', {
+                errors: sess.error_msg.errors,
+                csrfToken: req.csrfToken()
+            });
         }
     }
 });
@@ -166,7 +180,7 @@ router.post('/result', function(req, res) {
                             console.log('This is result object: ', result3);
                             res.render("result", {result: result3});
                         }
-                    });  
+                    });
 
                 });
 
