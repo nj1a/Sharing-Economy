@@ -564,7 +564,7 @@ router.get('/post/:postId', function(req, res){
     });
 
 });
-router.post('/create_post', function(req, res){
+router.get('/create_post', function(req, res){
 
     if (typeof sess.email === 'undefined') {
         res.send('You need to sign in first');
