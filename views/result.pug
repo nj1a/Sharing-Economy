@@ -7,4 +7,11 @@ html(lang="en")
 		script(src="jquery-3.1.0.js", defer)
 	main
 		each val, index in result
-			span= val
+			div.result_item
+				table
+					tr
+						td Post ID:
+						td= val.post_id
+					tr
+						td Title:
+						td= val.title
