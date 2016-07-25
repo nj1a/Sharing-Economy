@@ -9,7 +9,6 @@ var Room = require('./room');
 var uuid = require('node-uuid');
 var _ = require('underscore')._;
 
-var Admin = require('./controllers/admin');
 
 // configure environemnt
 app.set('view engine', 'pug');
@@ -19,6 +18,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/js', express.static(path.join(__dirname + 'js')));
 app.use('/css', express.static(path.join(__dirname + 'css')));
+app.use('/img', express.static(path.join(__dirname + 'img')));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
