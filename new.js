@@ -574,7 +574,7 @@ router.post('/update_email', function(req, res){
 });
 
 // Post page
-router.get('/post/:postId', function(req, res){
+router.get('/post/:postId', csrfProtection, function(req, res){
     var username, type, post_date, way_of_travelling, travel_start_date, travel_end_date;
 
     tool.get_info_by_post_id(req.params.postId, function(result){
@@ -602,7 +602,7 @@ router.get('/post/:postId', function(req, res){
 
 });
 // Create post form
-router.get('/create_post', function(req, res){
+router.get('/create_post', csrfProtection, function(req, res){
 
     if (typeof sess.email === 'undefined' || typeof sess === 'undefined') {
         res.send('You need to sign in first');
