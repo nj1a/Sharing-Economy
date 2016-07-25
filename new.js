@@ -156,14 +156,14 @@ router.post('/result', function(req, res) {
                 tool.get_city_id(to_city, to_country, function(result2){
                     to_city_id = result2.city_id;
 
-                    tool.get_result(req.body.post_type, from_date, to_date, from_city_id, to_city_id, function(result){
+                    tool.get_result(req.body.post_type, from_date, to_date, from_city_id, to_city_id, function(result3){
 
-                        if (result === 'error' || result1 === 'error' || result2 === 'error') {
+                        if (result3 === 'error' || result1 === 'error' || result2 === 'error') {
                             res.send('No matching result');
 
                         }else{
                             // res.send(JSON.stringify(result));
-                            res.render(result_page);
+                            res.render(result);
                         }
                     });  
 
