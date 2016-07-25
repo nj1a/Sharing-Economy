@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 
 // chat
 app.get('/chat', function(req, res){
-  res.sendfile('./public/chat.html');
+  res.sendFile(path.join(__dirname, 'public/chat.html'));
 });
 
 
