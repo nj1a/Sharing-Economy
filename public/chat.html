@@ -3,6 +3,7 @@
 <head>
 	<title></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
     <link rel="stylesheet" href="css/chat.css">
     <link rel="stylesheet" href="css/flags.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" defer></script>
@@ -16,8 +17,7 @@
   <div class="main col-md-6 col-md-offset-3">
     <div class="alert alert-danger" id="errors"></div>
     <div id="login-screen">
-      <p class="lead">Chat application - using node.js and socket.io</p>
-      <p>Please enter your name below and click 'Join' or hit the 'Enter' key.</p>
+      <p>Please enter your name below</p>
         <form class="form-inline" id="nameForm">
           <div class="form-group">
             <input type="text" class="form-control input-lg" placeholder="Your name" id="name">
@@ -41,7 +41,6 @@
             <input type="text" class="form-control input-lg" placeholder="Your message" id="msg">
           </div>
           <input type="submit" name="send" id="send" value="Send" class="btn btn-success btn-lg">
-          <input type="button" name="start_button" id="start_button" value="Record" onclick="startButton(event)" class="btn btn-info btn-lg">
           <div class="btn-group">
             <button type="button" class="btn btn-lg btn-info dropdown-toggle" data-toggle="dropdown" >
               Actions <span class="caret"></span>

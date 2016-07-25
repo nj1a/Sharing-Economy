@@ -201,7 +201,6 @@ io.sockets.on("connection", function (socket) {
 			sizeRooms = _.size(rooms);
 			io.sockets.emit("update-people", {people: people, count: sizePeople});
 			socket.emit("roomList", {rooms: rooms, count: sizeRooms});
-			socket.emit("joined"); //extra emit for GeoLocation
 			sockets.push(socket);
 		}
 	});
@@ -246,12 +245,12 @@ io.sockets.on("connection", function (socket) {
 				var whisperTo = whisperStr[1];
 				var whisperMsg = whisperStr[2];
 				socket.emit("whisper", {name: "You"}, whisperMsg);
-				io.sockets.socket(whisperId).emit("whisper", msTime, people[socket.id], whisperMsg);
+				io.to(whisperId).emit("whisper", msTime, people[socket.id], whisperMsg);
 			} else {
 				socket.emit("update", "Can't find " + whisperTo);
 			}
 		} else {
-			if (io.sockets.manager.roomClients[socket.id]['/'+socket.room] !== undefined ) {
+			if (people[socket.id].inroom !== undefined ) {
 				io.sockets.in(socket.room).emit("chat", msTime, people[socket.id], msg);
 				socket.emit("isTyping", false);
 				if (_.size(chatHistory[socket.room]) > 10) {
@@ -259,9 +258,9 @@ io.sockets.on("connection", function (socket) {
 				} else {
 					chatHistory[socket.room].push(people[socket.id].name + ": " + msg);
 				}
-		    	} else {
-				socket.emit("update", "Please connect to a room.");
-		    	}
+			} else {
+			socket.emit("update", "Please connect to a room.");
+			}
 		}
 	});
 

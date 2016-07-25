@@ -6,15 +6,13 @@ var fs = require('fs');
 var update_handler = require("./handle_update.js");
 var busboy = require('connect-busboy');
 var expressValidator = require('express-validator');
-var path = require('path');
+var sha256 = require('js-sha256');
 
 var router = express.Router();
-//router.use(express.static(path.join(__dirname, 'public')));
-//
+
 
 router.use(busboy());
 
-//router.use(bodyParser({uploadDir:'./pulbic/assets/images/profile_images'}));
 var sess;
 
 router.use(session({secret: 'shhhhh',
@@ -34,17 +32,14 @@ router.use(expressValidator({
             }
             return false;
         },
-
         isCorrectPW: function(value, q) {
 
             if (q === undefined || JSON.parse(q).password !== value  ) {
                 return false;
             }
-
             return true;
 
         },
-
         doesExist: function(value, q) {
             if (q === undefined) {
                 return true;
@@ -57,7 +52,6 @@ router.use(expressValidator({
                 }
             }
         },
-
         doesNotExist: function(value, q) {
             if (q === undefined) {
                 return false;
@@ -67,7 +61,6 @@ router.use(expressValidator({
                 }
             }
         },
-
         usernameAvailable: function(value, q) {
 
             if (q === undefined || JSON.parse(q).username !== value ){
@@ -79,15 +72,15 @@ router.use(expressValidator({
     }
 }));
 
-
 router.post('/login', function(req, res){
     sess = req.session;
-
+    var email = req.body.email;
+    var password = req.body.pass;
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +
-            "'"+ req.body.email + "'" +  ' AND wanderland.user_account.password =' + "'" +
-            req.body.pass + "'" , function(err, result) {
+            "'"+ email + "'" +  ' AND wanderland.user_account.password =' + "'" +
+            password + "'" , function(err, result) {
                 console.log(JSON.stringify(result.rows[0]));
                 done();
                 if (err) {
@@ -108,13 +101,10 @@ router.post('/login', function(req, res){
                         if ( mappedErrors.email ) {
                             errorMsgs.errors.error_email = mappedErrors.email.msg;
                         }
-
-
                         res.end('loginFail');
-
                     } else {
-                        sess.email = req.body.email;
-                        sess.pass = req.body.pass;
+                        sess.email = email;
+                        sess.pass = password;
                         res.end('done');
                     }
                 }
@@ -122,11 +112,8 @@ router.post('/login', function(req, res){
         });
 });
 
-
-
 var tool = require('./public/db_function');
 var glob = require('glob');
-
 
 router.get('/', function(req, res) {
     sess = req.session;
@@ -144,24 +131,84 @@ router.get('/', function(req, res) {
 });
 
 router.post('/result', function(req, res) {
-    if (typeof req.body.from_date === "undefined") {
+    console.log(req.body);
+    console.log('Type: '+ typeof req.body.from_date + ' '+ typeof req.body.to_date + ' ' + typeof req.body.from_city + ' ' + typeof req.body.to_city);
+    if (typeof req.body.from_date === "undefined" || typeof req.body.to_date === "undefined" || typeof req.body.from_city === "undefined" || typeof req.body.to_city === "undefined" || req.body.to_date == 'what day' || req.body.from_date == 'what day' || req.body.from_city == 'what city' || req.body.to_city == 'what city') {
         res.send('No req.body');
     }
     else{
-        var from_date = req.body.from_date.replace(/\//g, '-');
-        var to_date = req.body.to_date.replace(/\//g, '-');
-        console.log(req.body);
-        res.send(req.body);
-        tool.get_result(req.body.post_type, from_date, to_date, req.body.from_city, req.body.to_city, function(result){
-            res.send(JSON.stringify(result));
-        })
-        // res.send(req.body.from_date);
+        var from_date = req.body.from_date;
+        var to_date = req.body.to_date;
+        var from_city = req.body.from_city.split(", ")[0];
+        var from_country = req.body.from_city.split(", ")[1];
+        var to_city = req.body.to_city.split(", ")[0];
+        var to_country = req.body.to_city.split(", ")[1];
+        console.log("Type2: "+ typeof from_city + ' '+typeof to_city_id + ' '+typeof from_country + ' '+ typeof to_country);
+        if (typeof from_city === 'undefined' || typeof to_city === 'undefined' || typeof from_country === 'undefined' || typeof to_country === 'undefined') {
+            res.send('Please enter both city and country name');
+        }
+        else{
+            // Get the city ids from city name and country name
+            var from_city_id, to_city_id;
+            tool.get_city_id(from_city, from_country, function(result1){
+                from_city_id = result1.city_id;
+
+                tool.get_city_id(to_city, to_country, function(result2){
+                    to_city_id = result2.city_id;
+
+                    tool.get_result(req.body.post_type, from_date, to_date, from_city_id, to_city_id, function(result3){
+
+                        if (result3 === 'error' || result1 === 'error' || result2 === 'error') {
+                            res.send('No matching result');
+
+                        }else{
+                            // res.send(JSON.stringify(result));
+                            console.log('This is result object: ', result3);
+                            res.render("result", {result: result3});
+                        }
+                    });  
+
+                });
+
+            });
+        }
     }
     // res.render('result', { title: 'result', message: 'results'});
 });
 
-router.get('/admin_manage', function(req, res) {
-    res.render('admin_manage', { title: 'admin_manage', message: 'adminManage'});
+router.get('/get_city', function(req, res){
+    tool.get_city(req.query.key, function(result){
+        if (result === 'error') {
+            res.send('No matching result');
+        }
+        else{
+            res.send(JSON.stringify(result));
+        }
+    });
+
+})
+
+router.get('/admin-manage', function(req, res) {
+    res.render('admin-manage', { title: 'admin_manage', message: 'adminManage'});
+});
+
+router.post('/enter-data', function(req, res) {
+    var country = req.body.country;
+    var city = req.body.city;
+    var country_code = req.body.country_code;
+
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+        client.query('INSERT INTO wanderland.country VALUES (' + 'default' + ','
+            + "'" + country_code + "'" + ',' + "'" + country + "'" +
+            ');', function(err, result){
+                done();
+                if (err) {
+                    res.send("Error " + err);
+                    // change the erro message later
+                }
+                res.redirect('/admin-manage');
+                });
+    });
 });
 
 router.get('/admin', function(req, res) {
@@ -181,31 +228,23 @@ router.get('/admin', function(req, res) {
 
 router.get('/profile', function(req, res){
     sess=req.session;
-    var userEmail; 
+    var userEmail;
 
     if (sess.email){
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 
-            client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +  
+            client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +
                 "'"+ sess.email + "'" , function(err, result1) {
-
 
                 done();
                 if (err) {
                     res.send("Error " + err);
-                 }
-
-                else {  
-
+                } else {
                     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                         client.query('select user_id from wanderland.user_account where email = ' + "'" + sess.email + "'", function(err, result){
-                                    
                             done();
-
                             if (err) {
-                                
-
                                 res.send("Error " + err);
                             }
                             usrID = JSON.stringify(result.rows[0].user_id);
@@ -213,12 +252,9 @@ router.get('/profile', function(req, res){
                             if (fs.existsSync(__dirname + '/public/assets/images/profile_images/' + "profile_" + usrID + ".jpg")) {
                                 path = '/assets/images/profile_images/' + "profile_" + usrID + ".jpg";
                             } else {
-                                path = '/assets/images/profile_images/default_profile.jpg' 
+                                path = '/assets/images/profile_images/default_profile.jpg'
                             }
-                             
-
                             res.render('profile', {
-                            
                         results: result1.rows,
 
                         errors: ' ',
@@ -227,10 +263,6 @@ router.get('/profile', function(req, res){
                     });
                         });
                     });
-
-
-
-
                 }
             });
         });
@@ -245,10 +277,6 @@ router.get('/viewusr/:username', function(req, res){
     sess=req.session;
     targetUser= req.params.username;
 
-    //console.log(targetUser);
-
-    //res.send(targetUser);
-
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.username = ' +
             "'"+ targetUser + "'" , function(err, result) {
@@ -256,12 +284,8 @@ router.get('/viewusr/:username', function(req, res){
             if (err) {
                 res.send("Error " + err);
              }
-
-            else {  
-               
-
+            else {
                sess.targetUser = result.rows[0].email;
-               
                res.send("good");
             }
         });
@@ -270,28 +294,18 @@ router.get('/viewusr/:username', function(req, res){
 });
 
 router.get('/showusr', function(req, res){
-
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-
-            client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +  
+            client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +
                 "'"+ sess.targetUser + "'" , function(err, result1) {
-
                 done();
                 if (err) {
                     res.send("Error " + err);
                  }
-
-                else {  
-                    
-
+                else {
                     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                         client.query('select user_id from wanderland.user_account where email = ' + "'" + sess.targetUser + "'", function(err, result){
-                                    
                             done();
-
                             if (err) {
-                                
-
                                 res.send("Error " + err);
                             }
                             usrID = JSON.stringify(result.rows[0].user_id);
@@ -299,12 +313,9 @@ router.get('/showusr', function(req, res){
                             if (fs.existsSync(__dirname + '/public/assets/images/profile_images/' + "profile_" + usrID + ".jpg")) {
                                 path = '/assets/images/profile_images/' + "profile_" + usrID + ".jpg";
                             } else {
-                                path = '/assets/images/profile_images/default_profile.jpg' 
+                                path = '/assets/images/profile_images/default_profile.jpg'
                             }
-                             
-
                             res.render('viewusr', {
-                            
                         results: result1.rows,
                         errors: ' ',
                         type: sess.email,
@@ -317,9 +328,6 @@ router.get('/showusr', function(req, res){
                 }
             });
         });
-
-
-
 });
 
 router.get('/logout',function(req,res){
@@ -335,11 +343,10 @@ router.get('/logout',function(req,res){
 router.post('/signup', function(req, res){
 
     var account = req.body.emailNew;
-    var password = req.body.password;
+    var password = sha256(req.body.password);
     var username = req.body.username;
 
     sess = req.session;
-
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('SELECT * FROM wanderland.user_account WHERE user_account.email = ' +
@@ -349,29 +356,23 @@ router.post('/signup', function(req, res){
                 if (err) {
                     console.error(err);
                     res.send("Error " + err);
-
                  } else {
-
                     if (result.rows.length === 2) {
                         req.checkBody("username", "Username already exists. Please choose another username.").usernameAvailable(JSON.stringify(result.rows[1]));
                         req.checkBody("username", "Special characters are not allowed in Username.").isValid();
                         req.checkBody("emailNew", 'Email already exists. Plese choose another email address.').doesExist(JSON.stringify(result.rows[0]));
                     } else {
-
                         req.checkBody("username", "Username already exists. Please choose another username.").usernameAvailable(JSON.stringify(result.rows[0]));
                         req.checkBody("username", "Special characters are not allowed in Username.").isValid();
                         req.checkBody("emailNew", 'Email already exists. Plese choose another email address.').doesExist(JSON.stringify(result.rows[0]));
                     }
-
                     var errors = req.validationErrors();
                     var mappedErrors = req.validationErrors(true);
 
                     if (errors) {
-
                             var errorMsgs = { "errors": {} };
 
                             errorMsgs.errors.status = "display: block";
-
 
                             if ( mappedErrors.username ) {
                                 errorMsgs.errors.error_username = mappedErrors.username.msg;
@@ -380,18 +381,9 @@ router.post('/signup', function(req, res){
                             if ( mappedErrors.emailNew ) {
                                 errorMsgs.errors.error_emailNew = mappedErrors.emailNew.msg;
                             }
-
-
-
                             res.send("signup failed");
-
-
                         } else {
-
-
                             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-
-
                             client.query('INSERT INTO wanderland.user_account (username, email, password, first_name, last_name, gender, phone_num, city_id, country_id, date_of_birth, date_joined, description) VALUES (' +
                                 "'" + username + "'" +  ", '" + account + "'" + ", '" + password + "'" +', ' + 'NULL' + ', '  + 'NULL, '  + 'NULL, ' + ' NULL, ' +  'NULL'  + ', '  + 'NULL' +  ',NULL, ' +
                                 'NULL, ' + 'NULL' + ');', function(err, result){
@@ -399,20 +391,14 @@ router.post('/signup', function(req, res){
                                 done();
 
                                 if (err) {
-
-
                                     res.send("Error " + err);
                                 }
-
                                 sess.email = account;
                                 res.send('done');
 
 
                             });
                         });
-
-
-
                         }
                 }
         });
@@ -420,31 +406,24 @@ router.post('/signup', function(req, res){
 });
 
 router.post('/file-upload', function(req, res, next){
-
     var userEmail = sess.email;
-
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('select user_id from wanderland.user_account where email = ' + "'" + userEmail + "'", function(err, result){
-                                    
             done();
-
             if (err) {
-                
-
                 res.send("Error " + err);
             }
-           
+
             usrID = JSON.stringify(result.rows[0].user_id);
 
     var fstream;
     req.pipe(req.busboy);
     req.busboy.on('file', function (fieldname, file, filename) {
-        console.log("Uploading: " + filename); 
+        console.log("Uploading: " + filename);
         fstream = fs.createWriteStream(__dirname + '/public/assets/images/profile_images/' + "profile_" + usrID + ".jpg");
         file.pipe(fstream);
         fstream.on('close', function () {
 
-           
             res.redirect('/profile');
             //res.send(__dirname + '/public/assets/images/profile_images/' + "profile_" + usrID + ".jpg");
         });
@@ -475,7 +454,6 @@ router.post('/updatePassword', function(req, res){
                         var mappedErrors = req.validationErrors(true);
 
                         if (errors) {
-
                             var errorMsgs = { "errors": {} };
 
                             if ( mappedErrors.cpassword ) {
@@ -486,30 +464,22 @@ router.post('/updatePassword', function(req, res){
                                         client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +
                                             "'"+ sess.email + "'" , function(err, result) {
                                                 done();
-
                                                 if (err) {
                                                     res.send("Error " + err);
                                                  }
-
                                                 else {
                                                     res.render('profile', {results: result.rows, errors: errorMsgs.errors, type: 'other'});
 
                                                 }
                                             });
                                     });
-
                         } else {
                             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-
-
                             client.query('UPDATE wanderland.user_account SET password = ' + "'" + newPW + "'" + 'WHERE user_account.email = ' +  "'"+ sess.email + "'" , function(err){
                                 done();
-
                                 if (err) {
-
                                     res.send("Error " + err);
                                 } else {
-
                                     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                                         client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +
                                             "'"+ sess.email + "'" , function(err, result) {
@@ -525,20 +495,13 @@ router.post('/updatePassword', function(req, res){
                                                     errors: '',
                                                     type: 'other'
                                                     });
-
                                             }
                                         });
                                     });
                                 }
-
                             });
                         });
-
-
-
                         }
-
-
                     }
                 });
         });
@@ -556,7 +519,6 @@ router.post('/update_email', function(req, res){
                 if (err) {
                     console.error(err);
                     res.send("Error " + err);
-
                 } else {
                         req.checkBody("newEmailValue", 'Email already exists. Plese choose another email address.').doesExist(JSON.stringify(result.rows[0]));
 
@@ -571,23 +533,14 @@ router.post('/update_email', function(req, res){
                                 errorMsgs.errors.error_newEmailValue = mappedErrors.newEmailValue.msg;
                                 update_handler.sendDefault(sess.email, errorMsgs.errors, req, res);
                             }
-
-
                         }  else {
-
                             update_handler.update_email(newEmail, sess, req, res);
 
                         }
-
-
-
-
                 }
-
         });
     });
 });
-
 
 // Post page
 router.get('/post/:postId', function(req, res){
@@ -611,52 +564,39 @@ router.get('/post/:postId', function(req, res){
     });
 
 });
-router.get("/removeFriend/:username", function(req, res){ 
+router.get("/removeFriend/:username", function(req, res){
     var currUsr = sess.email;
     var usr = req.params.username;
     //res.send(currUsr + " " + usr);
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('select user_id from wanderland.user_account where email = ' + "'" + currUsr + "'", function(err, result){
-                                    
             done();
-
             if (err) {
-                
-
                 res.send("Error " + err);
             }
-           
-            usrID = JSON.stringify(result.rows[0].user_id); 
+            usrID = JSON.stringify(result.rows[0].user_id);
 
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-                client.query('delete from wanderland.friendship where first_user_id =' + "'" + usrID + "'" + ' AND second_user_id =' + "'" + usr + "'", function(err, result){ 
-                                done();         
+                client.query('delete from wanderland.friendship where first_user_id =' + "'" + usrID + "'" + ' AND second_user_id =' + "'" + usr + "'", function(err, result){
+                                done();
                         console.log('delete from wanderland.friendship where first_user_id =' + "'" + currUsr + "'" + ' AND second_user_id =' + "'" + usr + "'");
 
                         if (err) {
-                            console.log("err");                        
-
+                            console.log("err");
                             res.send("Error " + err);
                         }
-                
                         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-                            client.query('delete from wanderland.friendship where first_user_id =' + "'" + usr + "'" + 'AND second_user_id =' + "'" + usrID + "'", function(err, result){ 
-                                            
+                            client.query('delete from wanderland.friendship where first_user_id =' + "'" + usr + "'" + 'AND second_user_id =' + "'" + usrID + "'", function(err, result){
                             done();
-
                         if (err) {
-                        
-
                             res.send("Error " + err);
                         }
                     res.send("good");
                 });
-                
+
             });
         });
-
-
     });
         });
     });
@@ -667,27 +607,17 @@ router.get("/getFriends/:username", function(req, res){
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('select user_id from wanderland.user_account where username = ' + "'" + usr + "'", function(err, result){
-                                    
             done();
-
             if (err) {
-                
-
                 res.send("Error " + err);
             }
-           
+
             usrID = JSON.stringify(result.rows[0].user_id);
-            // console.log("hahahah   " + usrID);
-            //res.send(usrID);
 
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 client.query('select username, user_id from wanderland.user_account where user_id in (select second_user_id from wanderland.friendship where first_user_id = ' + "'" + usrID + "'" + ')', function(err, result){
-                                    
                     done();
-
                     if (err) {
-                        
-
                         res.send("Error " + err);
                     }
                     console.log('select username from wanderland.user_account where user_id in (select second_user_id from friendship where first_user_id = ' + "'" + usrID + "'" + ')');
@@ -697,37 +627,18 @@ router.get("/getFriends/:username", function(req, res){
                         if (fs.existsSync(__dirname + '/public/assets/images/profile_images/' + "profile_" + user + ".jpg")) {
                                 path = '/assets/images/profile_images/' + "profile_" + user + ".jpg";
                             } else {
-                                path = '/assets/images/profile_images/default_profile.jpg' 
+                                path = '/assets/images/profile_images/default_profile.jpg'
                             }
-                        
+
                         result.rows[i].pic = path;
                         console.log(result.rows[i].pic);
                     }
-                    //console.log(result.rows);
-                
                     res.send(result.rows);
-            
-
-                });                            
+                });
             });
-
-
-            
-
-        });                            
+        });
     });
-
-
-
-    /**/
-
-
-
-    
-    //res.send(usr);
-
 });
-
 
 router.post('/update_name', function(req, res){
     sess=req.session;

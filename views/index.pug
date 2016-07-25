@@ -10,9 +10,10 @@ html(lang="en")
         script(src="index_script.js")
         script(type='text/javascript', src='assets/js/jquery-ui/jquery-ui.js')
         link(rel='stylesheet', href='assets/js/jquery-ui/jquery-ui.css', type='text/css')
+        script(src='assets/js/typeahead.min.js', type='text/javascript')
         script.
           $( function() {
-          $( ".datepicker" ).datepicker();
+          $( ".datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
           } );
 
     body
@@ -77,7 +78,7 @@ html(lang="en")
                                     h2 Travel Anywhere
                                     h4 with Wanderland                                 
                         section.search-background
-                          form(action='http://wander-land.herokuapp.com/result', method='post')
+                          form(action='https://wander-land.herokuapp.com/result', method='post')
                             div
                               | I am looking for: 
                               select#post-type-bar(name='post_type')
@@ -91,10 +92,11 @@ html(lang="en")
                               input#to-date.datepicker(type='text', name='to_date', value='what day')
                             div
                               | From: 
-                              input#from-city.city-field(type='text', name='from_city', value='what city')
+                              input#from-city.city-field(type='text', name='from_city', value='what city', spellcheck='false', autocomplete='off')
+
                             div
                               | To: 
-                              input#to-city.city-field(type='text', name='to_city', value='what city')
+                              input#to-city.city-field(type='text', name='to_city', value='what city', spellcheck='false', autocomplete='off')
                             |  
                             button.button(value='search')
                               i.w3-large.fa.fa-search(3='')

@@ -32,7 +32,53 @@ module.exports = {
 						console.log('No matching row in database');
 						callback('error');
 					} else {
-						console.log(result.rows[0]);
+						// console.log(result.rows);
+						callback(result.rows);
+					}
+				}
+			});
+
+		});
+	},
+	get_city: function(keyword, callback){
+		var data = [];
+		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
+			console.log("This is get_city keyword: "+keyword);
+			var query_string = "select name||', '||country_name as city from city, country where city.country_id = country.country_id and name ilike \'"+keyword+"%\'";
+			console.log(query_string);
+			client.query(query_string, function(err, result){
+				done();
+				if (err) throw err;
+				else{
+					if (JSON.stringify(result.rows) === "[]") {
+						console.log('No matching row in database');
+						callback('error');
+					} else {
+						console.log(result.rows);
+						for (var i = 0; i < result.rows.length; i++) {
+							data.push(result.rows[i].city);
+						};
+						callback(data);
+					}
+				}
+			});
+
+		});
+	},
+
+	get_city_id: function(city, country, callback){
+		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
+			var query_string = "SELECT city_id FROM city, country WHERE country.country_id = city.country_id AND name = \'"+city+ "\' AND country_name = \'"+country+"\'";
+			console.log(query_string);
+			client.query(query_string, function(err, result){
+				done();
+				if (err) throw err;
+				else{
+					if (JSON.stringify(result.rows) === "[]") {
+						console.log('No matching row in database');
+						callback('error');
+					} else {
+
 						callback(result.rows[0]);
 					}
 				}

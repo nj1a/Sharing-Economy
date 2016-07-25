@@ -1,0 +1,22 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        title=adminManage
+        link(rel="stylesheet", href="admin_style.css", type="text/css")
+        script(src="jquery-3.1.0.js", defer)
+        link(rel="stylesheet", href="style.css", type="text/css")
+        link(rel='stylesheet', href='assets/js/jquery-ui/jquery-ui.css', type='text/css')
+    body
+
+        main(id="adminManage" class="w3-content main")
+            section(class="w3-responsive")
+                div(class="wrap-content")
+                    section(class="h1 text-center m_t_25p")
+                        h1 Wanderland Admin
+                    form(action="enter-data" method="post")
+                        input(id="country" type="country" name="country" placeholder="country")
+                        input(id="country_code" type="country_code" name="country_code" placeholder="country code")
+                        input(id="city" type="city" name="city" placeholder="city")
+                        </br>
+                        button(class="button" value="enter") enter
