@@ -146,30 +146,31 @@ router.post('/result', function(req, res) {
         console.log("Type2: "+ typeof from_city + ' '+typeof to_city_id + ' '+typeof from_country + ' '+ typeof to_country);
         if (typeof from_city === 'undefined' || typeof to_city === 'undefined' || typeof from_country === 'undefined' || typeof to_country === 'undefined') {
             res.send('Please enter both city and country name');
-        };
-        // Get the city ids from city name and country name
-        var from_city_id, to_city_id;
-        tool.get_city_id(from_city, from_country, function(result1){
-            from_city_id = result1.city_id;
+        }
+        else{
+            // Get the city ids from city name and country name
+            var from_city_id, to_city_id;
+            tool.get_city_id(from_city, from_country, function(result1){
+                from_city_id = result1.city_id;
 
-            tool.get_city_id(to_city, to_country, function(result2){
-                to_city_id = result2.city_id;
+                tool.get_city_id(to_city, to_country, function(result2){
+                    to_city_id = result2.city_id;
 
-                tool.get_result(req.body.post_type, from_date, to_date, from_city_id, to_city_id, function(result){
+                    tool.get_result(req.body.post_type, from_date, to_date, from_city_id, to_city_id, function(result){
 
-                    if (result === 'error' || result1 === 'error' || result2 === 'error') {
-                        res.send('No matching result');
+                        if (result === 'error' || result1 === 'error' || result2 === 'error') {
+                            res.send('No matching result');
 
-                    }else{
-                        // res.send(JSON.stringify(result));
-                        res.render(result_page);
-                    }
-                });  
+                        }else{
+                            // res.send(JSON.stringify(result));
+                            res.render(result_page);
+                        }
+                    });  
+
+                });
 
             });
-
-        });
-
+        }
     }
     // res.render('result', { title: 'result', message: 'results'});
 });
