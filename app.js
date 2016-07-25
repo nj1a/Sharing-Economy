@@ -209,48 +209,13 @@ io.sockets.on("connection", function (socket) {
                 fn({people: people});
         });
 
-	socket.on("countryUpdate", function(data) { //we know which country the user is from
-		country = data.country.toLowerCase();
-		people[socket.id].country = country;
-		io.sockets.emit("update-people", {people: people, count: sizePeople});
-	});
-
 	socket.on("typing", function(data) {
 		if (typeof people[socket.id] !== "undefined")
 			io.sockets.in(socket.room).emit("isTyping", {isTyping: data, person: people[socket.id].name});
 	});
 	
 	socket.on("send", function(msTime, msg) {
-		//process.exit(1);
-		var re = /^[w]:.*:/;
-		var whisper = re.test(msg);
-		var whisperStr = msg.split(":");
-		var found = false;
-		if (whisper) {
-			var whisperTo = whisperStr[1];
-			var keys = Object.keys(people);
-			if (keys.length != 0) {
-				for (var i = 0; i<keys.length; i++) {
-					if (people[keys[i]].name === whisperTo) {
-						var whisperId = keys[i];
-						found = true;
-						if (socket.id === whisperId) { //can't whisper to ourselves
-							socket.emit("update", "You can't whisper to yourself.");
-						}
-						break;
-					} 
-				}
-			}
-			if (found && socket.id !== whisperId) {
-				var whisperTo = whisperStr[1];
-				var whisperMsg = whisperStr[2];
-				socket.emit("whisper", {name: "You"}, whisperMsg);
-				io.to(whisperId).emit("whisper", msTime, people[socket.id], whisperMsg);
-			} else {
-				socket.emit("update", "Can't find " + whisperTo);
-			}
-		} else {
-			if (people[socket.id].inroom !== undefined ) {
+		if (people[socket.id].inroom !== undefined ) {
 				io.sockets.in(socket.room).emit("chat", msTime, people[socket.id], msg);
 				socket.emit("isTyping", false);
 				if (_.size(chatHistory[socket.room]) > 10) {
@@ -258,12 +223,12 @@ io.sockets.on("connection", function (socket) {
 				} else {
 					chatHistory[socket.room].push(people[socket.id].name + ": " + msg);
 				}
-			} else {
-			socket.emit("update", "Please connect to a room.");
-			}
+		} else {
+		socket.emit("update", "Please connect to a room.");
 		}
+		
 	});
-
+	
 	socket.on("disconnect", function() {
 		if (typeof people[socket.id] !== "undefined") { //this handles the refresh of the name screen
 			purge(socket, "disconnect");
@@ -346,8 +311,9 @@ io.sockets.on("connection", function (socket) {
 
 	socket.on("leaveRoom", function(id) {
 		var room = rooms[id];
-		if (room)
+		if (room) {
 			purge(socket, "leaveRoom");
+		}
 	});
 });
 
