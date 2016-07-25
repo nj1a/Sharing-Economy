@@ -132,6 +132,7 @@ router.get('/', function(req, res) {
 
 router.post('/result', function(req, res) {
     console.log(req.body);
+    console.log('Type: '+ typeof req.body.from_date + ' '+ typeof req.body.to_date + ' ' + typeof req.body.from_city + ' ' + req.body.to_city);
     if (typeof req.body.from_date === "undefined" || typeof req.body.to_date === "undefined" || typeof req.body.from_city === "undefined" || typeof req.body.to_city === "undefined" || req.body.to_date == 'what day' || req.body.from_date == 'what day') {
         res.send('No req.body');
     }
