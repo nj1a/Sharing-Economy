@@ -147,7 +147,7 @@ router.get('/', csrfProtection, function(req, res) {
 router.post('/result', function(req, res) {
     console.log(req.body);
     console.log('Type: '+ typeof req.body.from_date + ' '+ typeof req.body.to_date + ' ' + typeof req.body.from_city + ' ' + typeof req.body.to_city);
-    if (typeof req.body.from_date === "undefined" || typeof req.body.to_date === "undefined" || typeof req.body.from_city === "undefined" || typeof req.body.to_city === "undefined" || req.body.to_date == 'what day' || req.body.from_date == 'what day' || req.body.from_city == 'what city' || req.body.to_city == 'what city') {
+    if (typeof req.body.from_date === "undefined" || typeof req.body.to_date === "undefined" || typeof req.body.from_city === "undefined" || typeof req.body.to_city === "undefined" || req.body.to_date === 'what day' || req.body.from_date === 'what day' || req.body.from_city === 'what city' || req.body.to_city === 'what city') {
         res.send('No req.body');
     }
     else{
@@ -203,7 +203,7 @@ router.get('/get_city', function(req, res){
         }
     });
 
-})
+});
 
 router.get('/admin-manage', function(req, res) {
     res.render('admin-manage', {
@@ -219,8 +219,8 @@ router.post('/enter-data', function(req, res) {
     var country_code = req.body.country_code;
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        client.query('INSERT INTO wanderland.country VALUES (' + 'default' + ','
-            + "'" + country_code + "'" + ',' + "'" + country + "'" +
+        client.query('INSERT INTO wanderland.country VALUES (' + 'default' + ',' +
+            "'" + country_code + "'" + ',' + "'" + country + "'" +
             ');', function(err, result){
                 done();
                 if (err) {
@@ -582,19 +582,21 @@ router.get('/post/:postId', function(req, res){
           res.send('No such result in database');
         } else{
             glob('public/img/'+req.params.postId+'_*.jpg', function(er, files){
-                if (er) throw er;
+                if (er) {
+                    throw er;
+                }
                 // Format the file path
                 for (var i = 0; i < files.length; i++) {
                     console.log('looped');
                     files[i] = files[i].replace('public', '..');
-                };
+                }
                 console.log('2: '+files);
                 res.render('post2', {
                     result: result,
                     images: files,
                     csrfToken: req.csrfToken()
                 });
-            })
+            });
         }
     });
 
@@ -622,7 +624,7 @@ router.get("/removeFriend/:username", function(req, res){
             if (err) {
                 res.send("Error " + err);
             }
-            usrID = JSON.stringify(result.rows[0].user_id);
+            var usrID = JSON.stringify(result.rows[0].user_id);
 
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 client.query('delete from wanderland.friendship where first_user_id =' + "'" + usrID + "'" + ' AND second_user_id =' + "'" + usr + "'", function(err, result){
