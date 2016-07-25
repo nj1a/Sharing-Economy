@@ -32,7 +32,7 @@ module.exports = {
 						console.log('No matching row in database');
 						callback('error');
 					} else {
-						console.log(result.rows);
+						// console.log(result.rows);
 						callback(result.rows);
 					}
 				}
