@@ -155,7 +155,8 @@ router.post('/result', function(req, res) {
                         res.send('No matching result');
 
                     }else{
-                        res.send(JSON.stringify(result));
+                        // res.send(JSON.stringify(result));
+                        res.render(result_page);
                     }
                 });  
 
