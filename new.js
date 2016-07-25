@@ -581,7 +581,7 @@ router.get('/post/:postId', function(req, res){
         if (result === 'error') {
           res.send('No such result in database');
         } else{
-            glob('public/img/'+req.params.postId+'_*.jpg', function(er, files){
+            glob('public/img/'+req.params.postId+'_*.', function(er, files){
                 if (er) {
                     throw er;
                 }
@@ -601,6 +601,7 @@ router.get('/post/:postId', function(req, res){
     });
 
 });
+// Create post form
 router.get('/create_post', function(req, res){
 
     if (typeof sess.email === 'undefined') {
