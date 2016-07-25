@@ -564,6 +564,18 @@ router.get('/post/:postId', function(req, res){
     });
 
 });
+router.post('/create_post', function(req, res){
+
+    if (typeof sess.email === 'undefined') {
+        res.send('You need to sign in first');
+    }else{
+        // res.render('create_post');
+        res.send(sess.email);
+    }
+
+
+
+});
 router.get("/removeFriend/:username", function(req, res){
     var currUsr = sess.email;
     var usr = req.params.username;
