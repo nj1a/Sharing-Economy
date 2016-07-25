@@ -2,8 +2,8 @@ doctype html
 html(lang="en")
 	head
 		meta(charset="utf-8")
-		title=adminManage
-		link(rel="stylesheet", href="admin_style.css", type="text/css")
+		title Result Page
+		link(rel="stylesheet", href="assets/css/result_style.css", type="text/css")
 		script(src="jquery-3.1.0.js", defer)
 	main
 		each val, index in result
@@ -15,3 +15,9 @@ html(lang="en")
 					tr
 						td Title:
 						td= val.title
+					tr
+						td Transportation:
+						td= val.way_of_travelling
+					tr
+						td Travel type:
+						td= val.travel_type
