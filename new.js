@@ -3,7 +3,7 @@ var express = require('express');
 var session = require('express-session');
 var pg = require('pg');
 var fs = require('fs');
-var update_handler = require("./handle_update.js");
+var update_handler = require("./models/handle_update.js");
 var busboy = require('connect-busboy');
 var expressValidator = require('express-validator');
 var sha256 = require('js-sha256');
@@ -120,7 +120,7 @@ router.post('/login', function(req, res){
         });
 });
 
-var tool = require('./db_function');
+var tool = require('./models/db_function');
 var glob = require('glob');
 
 router.get('/', csrfProtection, function(req, res) {
