@@ -30,11 +30,13 @@
     "undef": true,
     "unused": true,
     "globals": {
-      "jQuery": true
+      "$": false,
+      "jquery": false
     },
-    "esversion": 6,
-    "node": true,
+    "jquery": true,
     "mocha": true,
+    "node": true,
+    "esversion": 6,
     "expr": true
   },
   "repository": {

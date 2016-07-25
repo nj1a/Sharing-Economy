@@ -2,15 +2,17 @@ function toggleNameForm() {
    $("#login-screen").toggle();
 }
 
-function toggleChatWindow() {
-  $("#main-chat-screen").toggle();
+function togglemessageWindow() {
+  $("#main-message-screen").toggle();
 }
 
 // Pad n to specified size by prepending a zeros
 function zeroPad(num, size) {
   var s = num + "";
-  while (s.length < size)
+  while (s.length < size) {
     s = "0" + s;
+  }
+
   return s;
 }
 
@@ -37,7 +39,7 @@ $(document).ready(function() {
       });
   });
 
-  $("#main-chat-screen").hide();
+  $("#main-message-screen").hide();
   $("#errors").hide();
   $("#name").focus();
   $("#join").attr('disabled', 'disabled');
@@ -60,7 +62,7 @@ $(document).ready(function() {
     } else {
       socket.emit("joinserver", name, device);
       toggleNameForm();
-      toggleChatWindow();
+      togglemessageWindow();
       $("#msg").focus();
     }
   });
@@ -76,8 +78,8 @@ $(document).ready(function() {
     }
   });
 
-  //main chat screen
-  $("#chatForm").submit(function() {
+  //main message screen
+  $("#messageForm").submit(function() {
     var msg = $("#msg").val();
     if (msg !== "") {
       socket.emit("send", new Date().getTime(), msg);
@@ -87,7 +89,7 @@ $(document).ready(function() {
 
   //'is typing' message
   var typing = false;
-  var timeout = undefined;
+  var timeout;
 
   function timeoutFunction() {
     typing = false;
@@ -165,7 +167,7 @@ socket.on("exists", function(data) {
   $("#errors").show();
   $("#errors").append(data.msg + " Try <strong>" + data.proposedName + "</strong>");
     toggleNameForm();
-    toggleChatWindow();
+    togglemessageWindow();
 });
 
 socket.on("history", function(data) {
@@ -192,7 +194,7 @@ socket.on("history", function(data) {
 
   });
 
-  socket.on("chat", function(msTime, person, msg) {
+  socket.on("message", function(msTime, person, msg) {
     $("#msgs").append("<li><strong><span class='text-success'>" + timeFormat(msTime) + person.name + "</span></strong>: " + msg + "</li>");
     //clear typing field
      $("#"+person.name+"").remove();
