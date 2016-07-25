@@ -131,27 +131,52 @@ router.get('/', function(req, res) {
 });
 
 router.post('/result', function(req, res) {
-    if (typeof req.body.from_date === "undefined") {
+    console.log(req.body);
+    console.log('Type: '+ typeof req.body.from_date + ' '+ typeof req.body.to_date + ' ' + typeof req.body.from_city + ' ' + typeof req.body.to_city);
+    if (typeof req.body.from_date === "undefined" || typeof req.body.to_date === "undefined" || typeof req.body.from_city === "undefined" || typeof req.body.to_city === "undefined" || req.body.to_date == 'what day' || req.body.from_date == 'what day' || req.body.from_city == 'what city' || req.body.to_city == 'what city') {
         res.send('No req.body');
     }
     else{
-        var from_date = req.body.from_date.replace(/\//g, '-');
-        var to_date = req.body.to_date.replace(/\//g, '-');
-        console.log(req.body);
-        tool.get_result(req.body.post_type, from_date, to_date, req.body.from_city, req.body.to_city, function(result){
-            if (result === 'eror') {
-                res.send('No matching result');
-            }
-            else{
-                res.send(JSON.stringify(result));
-            }
-        })
-    // s
+        var from_date = req.body.from_date;
+        var to_date = req.body.to_date;
+        var from_city = req.body.from_city.split(", ")[0];
+        var from_country = req.body.from_city.split(", ")[1];
+        var to_city = req.body.to_city.split(", ")[0];
+        var to_country = req.body.to_city.split(", ")[1];
+        console.log("Type2: "+ typeof from_city + ' '+typeof to_city_id + ' '+typeof from_country + ' '+ typeof to_country);
+        if (typeof from_city === 'undefined' || typeof to_city === 'undefined' || typeof from_country === 'undefined' || typeof to_country === 'undefined') {
+            res.send('Please enter both city and country name');
+        }
+        else{
+            // Get the city ids from city name and country name
+            var from_city_id, to_city_id;
+            tool.get_city_id(from_city, from_country, function(result1){
+                from_city_id = result1.city_id;
+
+                tool.get_city_id(to_city, to_country, function(result2){
+                    to_city_id = result2.city_id;
+
+                    tool.get_result(req.body.post_type, from_date, to_date, from_city_id, to_city_id, function(result3){
+
+                        if (result3 === 'error' || result1 === 'error' || result2 === 'error') {
+                            res.send('No matching result');
+
+                        }else{
+                            // res.send(JSON.stringify(result));
+                            console.log('This is result object: ', result3);
+                            res.render("result", {result: result3});
+                        }
+                    });  
+
+                });
+
+            });
+        }
     }
     // res.render('result', { title: 'result', message: 'results'});
 });
 
-router.get('/city', function(req, res){
+router.get('/get_city', function(req, res){
     tool.get_city(req.query.key, function(result){
         if (result === 'error') {
             res.send('No matching result');
@@ -537,6 +562,18 @@ router.get('/post/:postId', function(req, res){
             })
         }
     });
+
+});
+router.get('/create_post', function(req, res){
+
+    if (typeof sess.email === 'undefined') {
+        res.send('You need to sign in first');
+    }else{
+        // res.render('create_post');
+        res.send(sess.email);
+    }
+
+
 
 });
 router.get("/removeFriend/:username", function(req, res){

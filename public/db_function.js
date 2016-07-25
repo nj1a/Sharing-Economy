@@ -32,8 +32,8 @@ module.exports = {
 						console.log('No matching row in database');
 						callback('error');
 					} else {
-						console.log(result.rows[0]);
-						callback(result.rows[0]);
+						// console.log(result.rows);
+						callback(result.rows);
 					}
 				}
 			});
@@ -59,6 +59,27 @@ module.exports = {
 							data.push(result.rows[i].city);
 						};
 						callback(data);
+					}
+				}
+			});
+
+		});
+	},
+
+	get_city_id: function(city, country, callback){
+		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
+			var query_string = "SELECT city_id FROM city, country WHERE country.country_id = city.country_id AND name = \'"+city+ "\' AND country_name = \'"+country+"\'";
+			console.log(query_string);
+			client.query(query_string, function(err, result){
+				done();
+				if (err) throw err;
+				else{
+					if (JSON.stringify(result.rows) === "[]") {
+						console.log('No matching row in database');
+						callback('error');
+					} else {
+
+						callback(result.rows[0]);
 					}
 				}
 			});
