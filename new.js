@@ -592,7 +592,7 @@ router.get('/post/:postId', function(req, res){
                 res.render('post2', {
                     result: result,
                     images: files
-                    csrfToken: req.csrfToken()
+                    // csrfToken: req.csrfToken()
                 });
             })
         }
