@@ -178,7 +178,10 @@ router.post('/result', function(req, res) {
                         }else{
                             // res.send(JSON.stringify(result));
                             console.log('This is result object: ', result3);
-                            res.render("result", {result: result3});
+                            res.render("result", {
+                                result: result3,
+                                csrfToken: req.csrfToken()
+                            });
                         }
                     });
 
@@ -203,7 +206,11 @@ router.get('/get_city', function(req, res){
 })
 
 router.get('/admin-manage', function(req, res) {
-    res.render('admin-manage', { title: 'admin_manage', message: 'adminManage'});
+    res.render('admin-manage', {
+        title: 'admin_manage',
+        message: 'adminManage',
+        csrfToken: req.csrfToken()
+    });
 });
 
 router.post('/enter-data', function(req, res) {
@@ -233,9 +240,13 @@ router.get('/admin', function(req, res) {
     } else {
         if (!sess.error_msg) {
             sess.error_msg = '';
-            res.render('admin', {errors: sess.error_msg});
+            res.render('admin', {
+                errors: sess.error_msg,
+                csrfToken: req.csrfToken()});
         } else {
-            res.render('admin', {errors: sess.error_msg.errors});
+            res.render('admin', {
+                errors: sess.error_msg.errors,
+                csrfToken: req.csrfToken()});
         }
     }
 });
@@ -269,12 +280,12 @@ router.get('/profile', function(req, res){
                                 path = '/assets/images/profile_images/default_profile.jpg'
                             }
                             res.render('profile', {
-                        results: result1.rows,
-
-                        errors: ' ',
-                        type: 'own',
-                        pic: path
-                    });
+                                results: result1.rows,
+                                csrfToken: req.csrfToken(),
+                                errors: ' ',
+                                type: 'own',
+                                pic: path
+                            });
                         });
                     });
                 }
@@ -330,12 +341,13 @@ router.get('/showusr', function(req, res){
                                 path = '/assets/images/profile_images/default_profile.jpg'
                             }
                             res.render('viewusr', {
-                        results: result1.rows,
-                        errors: ' ',
-                        type: sess.email,
-                        pic: path
+                                results: result1.rows,
+                                errors: ' ',
+                                type: sess.email,
+                                pic: path,
+                                csrfToken: req.csrfToken()
 
-                    });
+                            });
                         });
                     });
 
@@ -482,7 +494,12 @@ router.post('/updatePassword', function(req, res){
                                                     res.send("Error " + err);
                                                  }
                                                 else {
-                                                    res.render('profile', {results: result.rows, errors: errorMsgs.errors, type: 'other'});
+                                                    res.render('profile', {
+                                                        results: result.rows,
+                                                        errors: errorMsgs.errors,
+                                                        type: 'other',
+                                                        csrfToken: req.csrfToken()
+                                                    });
 
                                                 }
                                             });
@@ -504,10 +521,10 @@ router.post('/updatePassword', function(req, res){
                                             }
                                             else {
                                                 res.render('profile', {
-
                                                     results: result.rows,
                                                     errors: '',
-                                                    type: 'other'
+                                                    type: 'other',
+                                                    csrfToken: req.csrfToken()
                                                     });
                                             }
                                         });
@@ -572,7 +589,11 @@ router.get('/post/:postId', function(req, res){
                     files[i] = files[i].replace('public', '..');
                 };
                 console.log('2: '+files);
-                res.render('post2', {result: result, images: files});
+                res.render('post2', {
+                    result: result,
+                    images: files
+                    csrfToken: req.csrfToken()
+                });
             })
         }
     });
