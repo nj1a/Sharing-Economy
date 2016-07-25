@@ -176,7 +176,7 @@ router.post('/result', function(req, res) {
     // res.render('result', { title: 'result', message: 'results'});
 });
 
-router.get('/city', function(req, res){
+router.get('/get_city', function(req, res){
     tool.get_city(req.query.key, function(result){
         if (result === 'error') {
             res.send('No matching result');
