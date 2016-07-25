@@ -7,12 +7,12 @@ html(lang="en")
         script(src="jquery-3.1.0.js", defer)
     main
     	each val, index in result
-    		a(href= 'https://wander-land.herokuapp.com/post/'+result[index].post_id)
+    		a(href= 'https://wander-land.herokuapp.com/post/'+val.post_id)
 		    	div.result_item
 		    		table
 		    			tr
 		    				td Post_id:
-		    				td= result[index].post_id
+		    				td= val.post_id
 		    			tr
 		    				td Title:
-		    				td= result[index].title
+		    				td= val.title
