@@ -272,12 +272,12 @@ router.get('/profile', function(req, res){
                             if (err) {
                                 res.send("Error " + err);
                             }
-                            usrID = JSON.stringify(result.rows[0].user_id);
+                            var usrID = JSON.stringify(result.rows[0].user_id);
                             var path;
-                            if (fs.existsSync(__dirname + '/public/assets/images/profile_images/' + "profile_" + usrID + ".jpg")) {
-                                path = '/assets/images/profile_images/' + "profile_" + usrID + ".jpg";
+                            if (fs.existsSync(__dirname + '/public/img/' + "profile_" + usrID + ".jpg")) {
+                                path = '/img/' + "profile_" + usrID + ".jpg";
                             } else {
-                                path = '/assets/images/profile_images/default_profile.jpg'
+                                path = '/img/default_profile.jpg';
                             }
                             res.render('profile', {
                                 results: result1.rows,
@@ -300,7 +300,7 @@ router.get('/profile', function(req, res){
 router.get('/viewusr/:username', function(req, res){
 
     sess=req.session;
-    targetUser= req.params.username;
+    var targetUser= req.params.username;
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.username = ' +
@@ -333,12 +333,12 @@ router.get('/showusr', function(req, res){
                             if (err) {
                                 res.send("Error " + err);
                             }
-                            usrID = JSON.stringify(result.rows[0].user_id);
+                            var usrID = JSON.stringify(result.rows[0].user_id);
                             var path;
-                            if (fs.existsSync(__dirname + '/public/assets/images/profile_images/' + "profile_" + usrID + ".jpg")) {
-                                path = '/assets/images/profile_images/' + "profile_" + usrID + ".jpg";
+                            if (fs.existsSync(__dirname + '/public/img/' + "profile_" + usrID + ".jpg")) {
+                                path = '/img/' + "profile_" + usrID + ".jpg";
                             } else {
-                                path = '/assets/images/profile_images/default_profile.jpg'
+                                path = '/img/default_profile.jpg';
                             }
                             res.render('viewusr', {
                                 results: result1.rows,
@@ -440,13 +440,13 @@ router.post('/file-upload', function(req, res, next){
                 res.send("Error " + err);
             }
 
-            usrID = JSON.stringify(result.rows[0].user_id);
+            var usrID = JSON.stringify(result.rows[0].user_id);
 
     var fstream;
     req.pipe(req.busboy);
     req.busboy.on('file', function (fieldname, file, filename) {
         console.log("Uploading: " + filename);
-        fstream = fs.createWriteStream(__dirname + '/public/assets/images/profile_images/' + "profile_" + usrID + ".jpg");
+        fstream = fs.createWriteStream(__dirname + '/public/img/' + "profile_" + usrID + ".jpg");
         file.pipe(fstream);
         fstream.on('close', function () {
 
@@ -581,7 +581,7 @@ router.get('/post/:postId', function(req, res){
         if (result === 'error') {
           res.send('No such result in database');
         } else{
-            glob('public/assets/images/post_images/'+req.params.postId+'_*.jpg', function(er, files){
+            glob('public/img/'+req.params.postId+'_*.jpg', function(er, files){
                 if (er) throw er;
                 // Format the file path
                 for (var i = 0; i < files.length; i++) {
@@ -668,13 +668,13 @@ router.get("/getFriends/:username", function(req, res){
                         res.send("Error " + err);
                     }
                     console.log('select username from wanderland.user_account where user_id in (select second_user_id from friendship where first_user_id = ' + "'" + usrID + "'" + ')');
-                    for (i=0; i < result.rows.length; i++) {
-                        var user = result.rows[i].user_id
+                    for (var i=0; i < result.rows.length; i++) {
+                        var user = result.rows[i].user_id;
                         var path;
-                        if (fs.existsSync(__dirname + '/public/assets/images/profile_images/' + "profile_" + user + ".jpg")) {
-                                path = '/assets/images/profile_images/' + "profile_" + user + ".jpg";
+                        if (fs.existsSync(__dirname + '/public/img/' + "profile_" + user + ".jpg")) {
+                                path = '/img/' + "profile_" + user + ".jpg";
                             } else {
-                                path = '/assets/images/profile_images/default_profile.jpg'
+                                path = '/img/default_profile.jpg';
                             }
 
                         result.rows[i].pic = path;
