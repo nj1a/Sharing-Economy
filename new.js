@@ -591,7 +591,7 @@ router.get('/post/:postId', function(req, res){
                 console.log('2: '+files);
                 res.render('post2', {
                     result: result,
-                    images: files
+                    images: files,
                     csrfToken: req.csrfToken()
                 });
             })
