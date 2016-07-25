@@ -1,0 +1,30 @@
+div.input_element {
+	border: 1px solid black;
+	width: 45%;
+	margin: auto;
+	margin-top: 2%;
+}
+
+div.input_element * {
+	vertical-align: middle;
+}
+div.input_element input {
+	width: 100%;
+}
+div.input_element textarea{
+	width: 100%;
+}
+
+div.input_city {
+	width: 45%;
+	display: inline-block;
+}
+
+div.input_date {
+	width: 45%;
+	display: inline-block;
+}
+
+div#submit_button {
+	margin-top: 10%;
+}

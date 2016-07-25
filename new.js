@@ -604,11 +604,11 @@ router.get('/post/:postId', function(req, res){
 // Create post form
 router.get('/create_post', function(req, res){
 
-    if (typeof sess.email === 'undefined') {
+    if (typeof sess.email === 'undefined' || typeof sess === 'undefined') {
         res.send('You need to sign in first');
     }else{
-        // res.render('create_post');
-        res.send(sess.email);
+        res.render('create_post');
+        // res.send(sess.email);
     }
 
 
