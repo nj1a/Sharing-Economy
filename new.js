@@ -151,7 +151,7 @@ router.post('/result', function(req, res) {
 
                 tool.get_result(req.body.post_type, from_date, to_date, from_city_id, to_city_id, function(result){
 
-                    if (result === 'error' || result1 === 'error' ||| result2 === 'error') {
+                    if (result === 'error' || result1 === 'error' || result2 === 'error') {
                         res.send('No matching result');
 
                     }else{
