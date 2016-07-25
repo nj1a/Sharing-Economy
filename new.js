@@ -157,7 +157,7 @@ router.post('/result', function(req, res) {
                     }else{
                         res.send(JSON.stringify(result));
                     }
-                };  
+                });  
 
             });
 
