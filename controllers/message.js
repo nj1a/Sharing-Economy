@@ -148,8 +148,7 @@ function purge(s, action) {
 }
 
 module.exports = function(io) {
-    io.on("connection", function (socket) {
-
+    io.on("connection", (socket) => {
         socket.on("joinserver", function(name, device) {
             var exists = false;
             var ownerRoomID = null;
