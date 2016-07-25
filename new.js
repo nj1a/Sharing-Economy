@@ -137,8 +137,8 @@ router.post('/result', function(req, res) {
         res.send('No req.body');
     }
     else{
-        var from_date = req.body.from_date.replace(/\//g, '-');
-        var to_date = req.body.to_date.replace(/\//g, '-');
+        var from_date = req.body.from_date;
+        var to_date = req.body.to_date;
         var from_city = req.body.from_city.split(", ")[0];
         var from_country = req.body.from_city.split(", ")[1];
         var to_city = req.body.to_city.split(", ")[0];
