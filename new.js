@@ -143,6 +143,9 @@ router.post('/result', function(req, res) {
         var from_country = req.body.from_city.split(", ")[1];
         var to_city = req.body.to_city.split(", ")[0];
         var to_country = req.body.to_city.split(", ")[1];
+        if (typeof from_city === 'undefined' || typeof to_city === 'undefined' || typeof from_country === 'undefined' || typeof to_country === 'undefined') {
+            res.send('Please enter both city and country name');
+        };
         // Get the city ids from city name and country name
         var from_city_id, to_city_id;
         tool.get_city_id(from_city, from_country, function(result1){
