@@ -3,8 +3,8 @@ html(lang="en")
 	head
 		meta(charset="utf-8")
 		title Result Page
-		link(rel="stylesheet", href="assets/css/result_style.css", type="text/css")
-		script(src="jquery-3.1.0.js", defer)
+		link(rel="stylesheet", href="css/result.css")
+		script(src="js/jquery-3.1.0.js", defer)
 	main
 		each val, index in result
 			a(href= 'https://wander-land.herokuapp.com/post/'+val.post_id)

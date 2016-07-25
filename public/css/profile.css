@@ -15,12 +15,6 @@ a.underlined:hover{
 	text-decoration:underline;
 }
 
-
-
-
-
-
-
 input#logoutButton{
 	position:absolute;
 	bottom: 0;
@@ -31,8 +25,6 @@ input#logoutButton{
 	background-color: #354458;
 	-webkit-appearance:none;
 }
-
-
 
 input#logoutButton:hover{
 	cursor:pointer;

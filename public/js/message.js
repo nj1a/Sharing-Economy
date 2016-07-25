@@ -1,25 +1,18 @@
-/* HTML5 magic
-- GeoLocation
-*/
-
-var last10messages = []; //to be populated later
-
-/*
-Functions
-*/
 function toggleNameForm() {
    $("#login-screen").toggle();
 }
 
-function toggleChatWindow() {
-  $("#main-chat-screen").toggle();
+function togglemessageWindow() {
+  $("#main-message-screen").toggle();
 }
 
 // Pad n to specified size by prepending a zeros
 function zeroPad(num, size) {
   var s = num + "";
-  while (s.length < size)
+  while (s.length < size) {
     s = "0" + s;
+  }
+
   return s;
 }
 
@@ -46,7 +39,7 @@ $(document).ready(function() {
       });
   });
 
-  $("#main-chat-screen").hide();
+  $("#main-message-screen").hide();
   $("#errors").hide();
   $("#name").focus();
   $("#join").attr('disabled', 'disabled');
@@ -64,12 +57,12 @@ $(document).ready(function() {
     }
     if (name === "" || name.length < 2) {
       $("#errors").empty();
-      $("#errors").append("Please enter a name");
+      $("#errors").append("Please enter a name longer than 3 characters");
       $("#errors").show();
     } else {
       socket.emit("joinserver", name, device);
       toggleNameForm();
-      toggleChatWindow();
+      togglemessageWindow();
       $("#msg").focus();
     }
   });
@@ -85,8 +78,8 @@ $(document).ready(function() {
     }
   });
 
-  //main chat screen
-  $("#chatForm").submit(function() {
+  //main message screen
+  $("#messageForm").submit(function() {
     var msg = $("#msg").val();
     if (msg !== "") {
       socket.emit("send", new Date().getTime(), msg);
@@ -96,7 +89,7 @@ $(document).ready(function() {
 
   //'is typing' message
   var typing = false;
-  var timeout = undefined;
+  var timeout;
 
   function timeoutFunction() {
     typing = false;
@@ -168,19 +161,13 @@ $(document).ready(function() {
     $("#createRoom").show();
   });
 
-  $("#people").on('click', '.whisper', function() {
-    var name = $(this).siblings("span").text();
-    $("#msg").val("w:"+name+":");
-    $("#msg").focus();
-  });
-
 //socket-y stuff
 socket.on("exists", function(data) {
   $("#errors").empty();
   $("#errors").show();
   $("#errors").append(data.msg + " Try <strong>" + data.proposedName + "</strong>");
     toggleNameForm();
-    toggleChatWindow();
+    togglemessageWindow();
 });
 
 socket.on("history", function(data) {
@@ -202,31 +189,17 @@ socket.on("history", function(data) {
     $("#people").empty();
     $('#people').append("<li class=\"list-group-item active\">People online <span class=\"badge\">"+data.count+"</span></li>");
     $.each(data.people, function(a, obj) {
-      if (!("country" in obj)) {
-        html = "";
-      } else {
-        html = "<img class=\"flag flag-"+obj.country+"\"/>";
-      }
-      $('#people').append("<li class=\"list-group-item\"><span>" + obj.name + "</span> <i class=\"fa fa-"+obj.device+"\"></i> " + html + " <a href=\"#\" class=\"whisper btn btn-xs\">whisper</a></li>");
+      $('#people').append("<li class=\"list-group-item\"><span>" + obj.name + "</span> <i class=\"fa fa-"+obj.device+"\"></i> ");
     });
 
   });
 
-  socket.on("chat", function(msTime, person, msg) {
+  socket.on("message", function(msTime, person, msg) {
     $("#msgs").append("<li><strong><span class='text-success'>" + timeFormat(msTime) + person.name + "</span></strong>: " + msg + "</li>");
     //clear typing field
      $("#"+person.name+"").remove();
      clearTimeout(timeout);
      timeout = setTimeout(timeoutFunction, 0);
-  });
-
-  socket.on("whisper", function(msTime, person, msg) {
-    if (person.name === "You") {
-      s = "whisper"
-    } else {
-      s = "whispers"
-    }
-    $("#msgs").append("<li><strong><span class='text-muted'>" + timeFormat(msTime) + person.name + "</span></strong> "+s+": " + msg + "</li>");
   });
 
   socket.on("roomList", function(data) {

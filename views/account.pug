@@ -3,9 +3,9 @@ html(lang="en")
     head
         meta(charset="utf-8")
         title= pageTitle
-        link(rel="stylesheet", href="profile_style.css", type="text/css")
-        script(src="jquery-3.1.0.js", defer)
-        script(src="profile_script.js", defer)
+        link(rel="stylesheet", href="css/profile.css")
+        script(src="js/jquery-3.1.0.js", defer)
+        script(src="js/profile.js", defer)
     body
         ul
             if results == '-1'
@@ -14,7 +14,7 @@ html(lang="en")
                 for result in results                
                     main(class="w3-content main")
                         figure(class="text-centre")
-                            img(src="qwmma.png")
+                            img(src="img/qwmma.png")
                         section(class="botmargin20 text-centre")
                             span(class="user")=result.username
                         section(class="profile-section")

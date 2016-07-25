@@ -1,9 +1,5 @@
 var pg = require('pg');
 
-var exports = module.exports = {};
-
-
-
 module.exports = {
 	update_email: function(newEmail, sess, req, res){
 

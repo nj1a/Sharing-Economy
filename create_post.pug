@@ -1,0 +1,47 @@
+html
+  head
+    title Create Post
+    link(rel='stylesheet', href='css/create_post_style.css')
+    script(src='js/jquery-3.1.0.js')
+    script(type='text/javascript', src='js/jquery-ui/jquery-ui.js')
+    script(type='text/javascript', src='js/create_post_script.js')
+    script(type='text/javascript', src='js/typeahead.min.js')
+    script.
+      $( function(){
+      $(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});
+      });
+  body
+    h1 Create Post
+    form(action='', name='create_post_form', method='post')
+      .input_element
+        | Title: 
+        input(type='text', name='title')
+      .input_element
+        | Description:
+        textarea(name='description', cols='30', rows='10')
+      .input_element
+        .input_city
+          | Destination City: 
+          input.city-field(type='text', name='from_city')
+        .input_city
+          | Departure City: 
+          input.city-field(type='text', name='to_city')
+      .input_element
+        | Post Type: 
+        select(name='post_type')
+          option(value='buddy') Looking for travel partner
+          option(value='guide') Looking for tour guide
+          option(value='offer_guide') Offering tour
+      .input_element
+        | Upload Image: 
+        input(type='file', ,='', name='image', accept='image/*', multiple='')
+      .input_element
+        .input_date
+          | Start Date: 
+          input.datepicker(type='text', name='start_date')
+        .input_date
+          | End Date: 
+          input.datepicker(type='text', name='end_date')
+      #submit_button.input_element
+        input(type='submit')
+

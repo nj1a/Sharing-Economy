@@ -1,0 +1,59 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        title= message
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css")
+        link(rel="stylesheet", href="css/message.css")
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js", defer)
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", defer)
+        script(src="https://cdn.socket.io/socket.io-1.4.5.js", defer)
+        script(src="js/message.js", defer)
+
+    body
+        section(class="main col-md-10 col-md-offset-1")
+            section(class="alert alert-danger", id="errors")
+            section(id="login-screen")
+                p Please enter your name below
+                form(class="form-inline", id="nameForm")
+                    section(class="form-group")
+                        input(type="text", class="form-control input-lg", placeholder="username", id="name")
+                    input(type="submit", name="join", id="join", value="Join", class="btn btn-primary btn-lg")
+
+            section(class="row", id="main-message-screen")
+                section(class="col-md-3")
+                    ul(id="rooms", class="list-group")
+                    ul(id="people", class="list-group")
+                section(class="col-md-6")
+                    section(id="convo")
+                        ul(id="msgs", class="list-unstyled")
+                    form(id="messageForm", class="form-inline")
+                        section(class="form-group")
+                            input(type="text", class="form-control input-lg", placeholder="Your message", id="msg")
+                        input(type="submit", name="send", id="send", value="Send", class="btn btn-success btn-lg")
+                        section(class="btn-group")
+                            button(type="button", class="btn btn-lg btn-info dropdown-toggle", data-toggle="dropdown") Actions 
+                                span(class="caret")
+                            ul(class="dropdown-menu", role="menu")
+                                li
+                                    a(href="#", name="createRoom", data-toggle="modal", data-target="#roomModal") Create room
+                                li
+                                    a(href="#", name="leave", id="leave") Leave current room
+                section(class="col-md-2")
+                    ul(class="list-unstyled", id="updates")
+
+        section(class="modal fade", id="roomModal", tabindex="-1", role="dialog")
+            section(class="modal-dialog")
+                section(class="modal-content")
+                    section(class="modal-header")
+                        button(type="button", class="close", data-dismiss="modal") &times;
+                        h4(class="modal-title", id="createRoomLabel") Create room
+                    section(class="modal-body")
+                        form(class="form-inline", id="createRoomForm")
+                            input(type="text", class="form-control input-lg", placeholder="Room name", id="createRoomName")
+                    section(class="modal-footer")
+                        button(type="button", class="btn btn-lg btn-default", data-dismiss="modal") Close
+                        button(data-dismiss="modal", id="createRoomBtn", class="btn btn-success btn-lg") Create room
+
+

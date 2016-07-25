@@ -3,7 +3,7 @@ var express = require('express');
 var session = require('express-session');
 var pg = require('pg');
 var fs = require('fs');
-var update_handler = require("./handle_update.js");
+var update_handler = require("./models/handle_update.js");
 var busboy = require('connect-busboy');
 var expressValidator = require('express-validator');
 var sha256 = require('js-sha256');
@@ -120,7 +120,7 @@ router.post('/login', function(req, res){
         });
 });
 
-var tool = require('./public/db_function');
+var tool = require('./models/db_function');
 var glob = require('glob');
 
 router.get('/', csrfProtection, function(req, res) {
@@ -147,7 +147,7 @@ router.get('/', csrfProtection, function(req, res) {
 router.post('/result', csrfProtection, function(req, res) {
     console.log(req.body);
     console.log('Type: '+ typeof req.body.from_date + ' '+ typeof req.body.to_date + ' ' + typeof req.body.from_city + ' ' + typeof req.body.to_city);
-    if (typeof req.body.from_date === "undefined" || typeof req.body.to_date === "undefined" || typeof req.body.from_city === "undefined" || typeof req.body.to_city === "undefined" || req.body.to_date == 'what day' || req.body.from_date == 'what day' || req.body.from_city == 'what city' || req.body.to_city == 'what city') {
+    if (typeof req.body.from_date === "undefined" || typeof req.body.to_date === "undefined" || typeof req.body.from_city === "undefined" || typeof req.body.to_city === "undefined" || req.body.to_date === 'what day' || req.body.from_date === 'what day' || req.body.from_city === 'what city' || req.body.to_city === 'what city') {
         res.send('No req.body');
     }
     else{
@@ -203,7 +203,7 @@ router.get('/get_city', function(req, res){
         }
     });
 
-})
+});
 
 router.get('/admin-manage', csrfProtection, function(req, res) {
     res.render('admin-manage', {
@@ -219,8 +219,8 @@ router.post('/enter-data', function(req, res) {
     var country_code = req.body.country_code;
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        client.query('INSERT INTO wanderland.country VALUES (' + 'default' + ','
-            + "'" + country_code + "'" + ',' + "'" + country + "'" +
+        client.query('INSERT INTO wanderland.country VALUES (' + 'default' + ',' +
+            "'" + country_code + "'" + ',' + "'" + country + "'" +
             ');', function(err, result){
                 done();
                 if (err) {
@@ -272,12 +272,12 @@ router.get('/profile', csrfProtection, function(req, res){
                             if (err) {
                                 res.send("Error " + err);
                             }
-                            usrID = JSON.stringify(result.rows[0].user_id);
+                            var usrID = JSON.stringify(result.rows[0].user_id);
                             var path;
-                            if (fs.existsSync(__dirname + '/public/assets/images/profile_images/' + "profile_" + usrID + ".jpg")) {
-                                path = '/assets/images/profile_images/' + "profile_" + usrID + ".jpg";
+                            if (fs.existsSync(__dirname + '/public/img/' + "profile_" + usrID + ".jpg")) {
+                                path = '/img/' + "profile_" + usrID + ".jpg";
                             } else {
-                                path = '/assets/images/profile_images/default_profile.jpg'
+                                path = '/img/default_profile.jpg';
                             }
                             res.render('profile', {
                                 results: result1.rows,
@@ -300,7 +300,7 @@ router.get('/profile', csrfProtection, function(req, res){
 router.get('/viewusr/:username', function(req, res){
 
     sess=req.session;
-    targetUser= req.params.username;
+    var targetUser= req.params.username;
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.username = ' +
@@ -333,12 +333,12 @@ router.get('/showusr', csrfProtection, function(req, res){
                             if (err) {
                                 res.send("Error " + err);
                             }
-                            usrID = JSON.stringify(result.rows[0].user_id);
+                            var usrID = JSON.stringify(result.rows[0].user_id);
                             var path;
-                            if (fs.existsSync(__dirname + '/public/assets/images/profile_images/' + "profile_" + usrID + ".jpg")) {
-                                path = '/assets/images/profile_images/' + "profile_" + usrID + ".jpg";
+                            if (fs.existsSync(__dirname + '/public/img/' + "profile_" + usrID + ".jpg")) {
+                                path = '/img/' + "profile_" + usrID + ".jpg";
                             } else {
-                                path = '/assets/images/profile_images/default_profile.jpg'
+                                path = '/img/default_profile.jpg';
                             }
                             res.render('viewusr', {
                                 results: result1.rows,
@@ -440,13 +440,13 @@ router.post('/file-upload', function(req, res, next){
                 res.send("Error " + err);
             }
 
-            usrID = JSON.stringify(result.rows[0].user_id);
+            var usrID = JSON.stringify(result.rows[0].user_id);
 
     var fstream;
     req.pipe(req.busboy);
     req.busboy.on('file', function (fieldname, file, filename) {
         console.log("Uploading: " + filename);
-        fstream = fs.createWriteStream(__dirname + '/public/assets/images/profile_images/' + "profile_" + usrID + ".jpg");
+        fstream = fs.createWriteStream(__dirname + '/public/img/' + "profile_" + usrID + ".jpg");
         file.pipe(fstream);
         fstream.on('close', function () {
 
@@ -581,31 +581,34 @@ router.get('/post/:postId', function(req, res){
         if (result === 'error') {
           res.send('No such result in database');
         } else{
-            glob('public/assets/images/post_images/'+req.params.postId+'_*.jpg', function(er, files){
-                if (er) throw er;
+            glob('public/img/'+req.params.postId+'_*.', function(er, files){
+                if (er) {
+                    throw er;
+                }
                 // Format the file path
                 for (var i = 0; i < files.length; i++) {
                     console.log('looped');
                     files[i] = files[i].replace('public', '..');
-                };
+                }
                 console.log('2: '+files);
                 res.render('post2', {
                     result: result,
                     images: files,
                     csrfToken: req.csrfToken()
                 });
-            })
+            });
         }
     });
 
 });
+// Create post form
 router.get('/create_post', function(req, res){
 
-    if (typeof sess.email === 'undefined') {
+    if (typeof sess.email === 'undefined' || typeof sess === 'undefined') {
         res.send('You need to sign in first');
     }else{
-        // res.render('create_post');
-        res.send(sess.email);
+        res.render('create_post');
+        // res.send(sess.email);
     }
 
 
@@ -622,7 +625,7 @@ router.get("/removeFriend/:username", function(req, res){
             if (err) {
                 res.send("Error " + err);
             }
-            usrID = JSON.stringify(result.rows[0].user_id);
+            var usrID = JSON.stringify(result.rows[0].user_id);
 
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 client.query('delete from wanderland.friendship where first_user_id =' + "'" + usrID + "'" + ' AND second_user_id =' + "'" + usr + "'", function(err, result){
@@ -668,13 +671,13 @@ router.get("/getFriends/:username", function(req, res){
                         res.send("Error " + err);
                     }
                     console.log('select username from wanderland.user_account where user_id in (select second_user_id from friendship where first_user_id = ' + "'" + usrID + "'" + ')');
-                    for (i=0; i < result.rows.length; i++) {
-                        var user = result.rows[i].user_id
+                    for (var i=0; i < result.rows.length; i++) {
+                        var user = result.rows[i].user_id;
                         var path;
-                        if (fs.existsSync(__dirname + '/public/assets/images/profile_images/' + "profile_" + user + ".jpg")) {
-                                path = '/assets/images/profile_images/' + "profile_" + user + ".jpg";
+                        if (fs.existsSync(__dirname + '/public/img/' + "profile_" + user + ".jpg")) {
+                                path = '/img/' + "profile_" + user + ".jpg";
                             } else {
-                                path = '/assets/images/profile_images/default_profile.jpg'
+                                path = '/img/default_profile.jpg';
                             }
 
                         result.rows[i].pic = path;

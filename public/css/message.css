@@ -1,0 +1,16 @@
+#login-screen, #main-chat-screen {
+    padding-top: 10px;
+}
+
+.main {
+    padding-top: 10px;
+    text-align: center;
+}
+
+#convo {
+    font-size: 18px;
+    margin: 0px;
+    height: 300px;
+    overflow: scroll;
+}
+

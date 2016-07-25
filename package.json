@@ -9,7 +9,6 @@
     "cookie-parser": "^1.4.3",
     "crypto": "0.0.3",
     "csurf": "^1.9.0",
-    "ejs": "~1.0.0",
     "express": "^4.14.0",
     "js-sha256": "^0.3.0",
     "node-uuid": "^1.4.7",
@@ -31,21 +30,18 @@
     "undef": true,
     "unused": true,
     "globals": {
-      "jQuery": true
+      "$": false,
+      "jquery": false
     },
-    "esversion": 6,
-    "node": true,
+    "jquery": true,
     "mocha": true,
+    "node": true,
+    "esversion": 6,
     "expr": true
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/njia95/Sharing-Economy.git"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/njia95/Sharing-Economy/issues"
-  },
-  "homepage": "https://github.com/njia95/Sharing-Economy#readme"
+  "license": "ISC"
 }
