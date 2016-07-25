@@ -173,7 +173,7 @@ function purge(s, action) {
 	}
 }
 
-io.sockets.on("connection", function (socket) {
+io.on("connection", function (socket) {
 
 	socket.on("joinserver", function(name, device) {
 		var exists = false;
@@ -186,7 +186,7 @@ io.sockets.on("connection", function (socket) {
 		if (exists) {//provide unique username:
 			var randomNumber=Math.floor(Math.random()*1001)
 			do {
-				proposedName = name+randomNumber;
+				var proposedName = name+randomNumber;
 				_.find(people, function(key,value) {
 					if (key.name.toLowerCase() === proposedName.toLowerCase())
 						return exists = true;
@@ -243,7 +243,7 @@ io.sockets.on("connection", function (socket) {
 			var id = uuid.v4();
 			var room = new Room(name, id, socket.id);
 			rooms[id] = room;
-			sizeRooms = _.size(rooms);
+			var sizeRooms = _.size(rooms);
 			io.sockets.emit("roomList", {rooms: rooms, count: sizeRooms});
 			//add room to socket, and auto join the creator of the room
 			socket.room = name;
@@ -262,8 +262,9 @@ io.sockets.on("connection", function (socket) {
 	socket.on("check", function(name, fn) {
 		var match = false;
 		_.find(rooms, function(key,value) {
-			if (key.name === name)
+			if (key.name === name) {
 				return match = true;
+			}	
 		});
 		fn({result: match});
 	});
@@ -293,7 +294,7 @@ io.sockets.on("connection", function (socket) {
 						people[socket.id].inroom = id;
 						socket.room = room.name;
 						socket.join(socket.room);
-						user = people[socket.id];
+						var user = people[socket.id];
 						io.sockets.in(socket.room).emit("update", user.name + " has connected to " + room.name + " room.");
 						socket.emit("update", "Welcome to " + room.name + ".");
 						socket.emit("sendRoomID", {id: id});

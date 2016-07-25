@@ -168,12 +168,6 @@ $(document).ready(function() {
     $("#createRoom").show();
   });
 
-  $("#people").on('click', '.whisper', function() {
-    var name = $(this).siblings("span").text();
-    $("#msg").val("w:"+name+":");
-    $("#msg").focus();
-  });
-
 //socket-y stuff
 socket.on("exists", function(data) {
   $("#errors").empty();
@@ -202,12 +196,7 @@ socket.on("history", function(data) {
     $("#people").empty();
     $('#people').append("<li class=\"list-group-item active\">People online <span class=\"badge\">"+data.count+"</span></li>");
     $.each(data.people, function(a, obj) {
-      if (!("country" in obj)) {
-        html = "";
-      } else {
-        html = "<img class=\"flag flag-"+obj.country+"\"/>";
-      }
-      $('#people').append("<li class=\"list-group-item\"><span>" + obj.name + "</span> <i class=\"fa fa-"+obj.device+"\"></i> " + html + " <a href=\"#\" class=\"whisper btn btn-xs\">whisper</a></li>");
+      $('#people').append("<li class=\"list-group-item\"><span>" + obj.name + "</span> <i class=\"fa fa-"+obj.device+"\"></i> ");
     });
 
   });
@@ -218,15 +207,6 @@ socket.on("history", function(data) {
      $("#"+person.name+"").remove();
      clearTimeout(timeout);
      timeout = setTimeout(timeoutFunction, 0);
-  });
-
-  socket.on("whisper", function(msTime, person, msg) {
-    if (person.name === "You") {
-      s = "whisper"
-    } else {
-      s = "whispers"
-    }
-    $("#msgs").append("<li><strong><span class='text-muted'>" + timeFormat(msTime) + person.name + "</span></strong> "+s+": " + msg + "</li>");
   });
 
   socket.on("roomList", function(data) {
