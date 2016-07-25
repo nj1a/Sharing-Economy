@@ -64,7 +64,7 @@ $(document).ready(function() {
     }
     if (name === "" || name.length < 2) {
       $("#errors").empty();
-      $("#errors").append("Please enter a name");
+      $("#errors").append("Please enter a name longer than 3 characters");
       $("#errors").show();
     } else {
       socket.emit("joinserver", name, device);

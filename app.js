@@ -23,8 +23,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // chat
-app.get('/chat', function(req, res){
-  res.sendFile(path.join(__dirname, 'public/chat.html'));
+app.get('/chat', function(req, res) {
+  	res.render('chat');
 });
 
 
