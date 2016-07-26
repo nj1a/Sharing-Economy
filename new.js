@@ -164,7 +164,7 @@ router.get('/', csrfProtection, function(req, res) {
 });
 // Create post form
 router.get('/create_post', csrfProtection, function(req, res){
-
+    console.log('hi');
     if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
         res.send('You need to sign in first');
     }else{
