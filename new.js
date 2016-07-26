@@ -211,7 +211,7 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
 });
 router.get('/country/:countryID', csrfProtection, function(req, res){
     
-    res.render('city');
+    res.render('country');
 
 
 });
