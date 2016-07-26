@@ -3,7 +3,7 @@ var pg = require('pg');
 module.exports = {
 	get_info_by_post_id: function(post_id, callback){
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-			client.query('SELECT product_post.*, user_account.username, user_account.email, user_account.gender, user_account.date_joined, ci1.name AS departure_city, co1.country_name AS departure_country, ci2.name AS destination_city, co2.country_name AS destination_country FROM product_post, user_account, city AS ci1, city AS ci2, country AS co1, country AS co2 WHERE post_id ='+post_id+' AND product_post.user_id = user_account.user_id AND from_city = ci1.city_id AND to_city = ci2.city_id AND ci1.country_id = co1.country_id AND ci2.country_id = co2.country_id', function(err, result){
+			client.query('SELECT product_post.*, user_account.username, user_account.email, user_account.gender, user_account.date_joined, ci1.name AS departure_city, co1.country_name AS departure_country, ci2.name AS destination_city, co2.country_name AS destination_country FROM wanderland.product_post, wanderland.user_account, wanderland.city AS ci1, wanderland.city AS ci2, wanderland.country AS co1, wanderland.country AS co2 WHERE post_id ='+post_id+' AND product_post.user_id = user_account.user_id AND from_city = ci1.city_id AND to_city = ci2.city_id AND ci1.country_id = co1.country_id AND ci2.country_id = co2.country_id', function(err, result){
 				done();
 				if (err) throw err;
 				else{
@@ -22,7 +22,7 @@ module.exports = {
 	get_result: function(type, start_date, end_date, start_city, end_city, callback){
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 			console.log('This is get_result: \''+type+ '\'' +start_date+ ' '+end_date+ ' '+start_city);
-			var query_string = 'SELECT * FROM product_post WHERE post_type = \''+type+'\' AND travel_start_date = \''+start_date+ '\' AND travel_end_date = \''+end_date+ '\' AND from_city = '+start_city+ ' AND to_city = '+end_city;
+			var query_string = 'SELECT * FROM wanderland.product_post WHERE post_type = \''+type+'\' AND travel_start_date = \''+start_date+ '\' AND travel_end_date = \''+end_date+ '\' AND from_city = '+start_city+ ' AND to_city = '+end_city;
 			console.log(query_string);
 			client.query(query_string, function(err, result){
 				done();
@@ -44,7 +44,7 @@ module.exports = {
 		var data = [];
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
 			console.log("This is get_city keyword: "+keyword);
-			var query_string = "select name||', '||country_name as city from city, country where city.country_id = country.country_id and name ilike \'"+keyword+"%\'";
+			var query_string = "select name||', '||country_name as city from wanderland.city, wanderland.country where city.country_id = country.country_id and name ilike \'"+keyword+"%\'";
 			console.log(query_string);
 			client.query(query_string, function(err, result){
 				done();
@@ -68,7 +68,7 @@ module.exports = {
 
 	get_city_id: function(city, country, callback){
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
-			var query_string = "SELECT city_id FROM city, country WHERE country.country_id = city.country_id AND name = \'"+city+ "\' AND country_name = \'"+country+"\'";
+			var query_string = "SELECT city_id FROM wanderland.city, wanderland.country WHERE country.country_id = city.country_id AND name = \'"+city+ "\' AND country_name = \'"+country+"\'";
 			console.log(query_string);
 			client.query(query_string, function(err, result){
 				done();

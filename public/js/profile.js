@@ -24,14 +24,18 @@ $(document).ready(function(){
 			var curr = this.id.substring(3);
 			
 			processMenu(curr, navs);
-			if (navs.length === 4 && curr === '3') {
+			//alert(navs[curr-1].id);
+			if ( navs[curr-1].id === 'manageUser') {
+				listInfo(3, info);
+			} else if (navs[curr-1].id === 'manageData'){
 				listInfo(4, info);
-			} else if (navs.length === 4 && curr === '4'){
-				listInfo(5, info);
-			} else if (navs.length === 3 && curr == '3'){
+			} else if (navs[curr-1].id == 'friends-list'){
 				listInfo(curr, info);
 				listFriends();
-			}  else {
+			}  else if (navs[curr-1].id == 'view-request'){
+				listInfo(curr, info);
+				listRequests();
+			}else {
 				listInfo(curr, info);
 			}
 		});
@@ -385,4 +389,116 @@ function listFriends(){
 		
 		}
 	});
+}
+
+function listRequests(){
+	$("#resultField2").remove();
+	$('<div>', {
+		"id":"resultField2"
+		
+	}).appendTo("#resultWrap2");
+
+	var usr = $(".username-field").html();
+
+	$('<ul>', {
+		"class":"flt_l w50p",
+		"id":"left_column2"
+	}).appendTo("#resultField2");
+
+	//alert(usr);
+
+	//$("#resultField2").html(usr);
+	
+	$.get("/getRequests/" + usr,  function(result){
+
+
+		
+		for(i=0; i < result.length ; i++) {
+			//alert(result[i].username);
+
+			$('<li>', {
+				"class": "req-wrap b_p_50",
+				"id": "req_" + i,
+				html: "request from " + result[i].username
+			}).appendTo("#left_column2");
+
+			$('<div>', {
+				"id": "identifier-wrap_" + i,
+				"class": "hidden ", 
+				html: result[i].user_id
+			}).appendTo("#req_" + i);
+
+
+
+			$('<div>', {
+				"id": "decision-wrap_" + i
+			}).appendTo("#req_" + i);
+
+			$('<input>', {
+				"class": "decisionButton w50p",
+				"id": "acceptButton_" + i,
+				"value": "accept" //result[i].username
+			}).appendTo("#decision-wrap_" + i);
+
+			$('<input>', {
+				"class": "decisionButton w50p",
+				"id": "declineButton_" + i,
+				"value": "decline" //result[i].username
+			}).appendTo("#decision-wrap_" + i);
+
+		}
+		var decisionButtons = document.getElementsByClassName("decisionButton");
+
+		//var removeButtons = document.getElementsByClassName("removeButton");
+		
+
+		for (i=0; i < decisionButtons.length; i++){
+			$("#acceptButton_" + i).click(function(event){
+				var curr = this.id.substring(13);
+				//alert($("#identifier-wrap_" + curr).html());
+				$.get("/makeFriends/" + $("#identifier-wrap_" + curr).html(), function(data){
+					alert(data);
+				});
+
+			});
+
+			$("#declineButton_" + i).click(function(event){
+				var curr = this.id.substring(14);
+				alert(curr);
+				alert($("#identifier-wrap_" + curr).html());
+				$.get("/declineRequests/" + $("#identifier-wrap_" + curr).html(), function(data){
+					alert(data);
+				});
+				
+			});
+
+			/*$("#submitButton_" + i).click(function(event){
+
+				$.get("/viewusr/" + event.target.value, function(data){
+					if (data==="good"){
+						window.location.href="/showusr";
+					}
+				});
+			});*/
+		
+		}
+
+		/*for (i=0; i < removeButtons.length; i++){
+
+			$("#removeButton_" + i).click(function(event){
+				var username= this.className.substring(13);
+				//alert(username);
+				$.get("/removeFriend/" + username, function(data){
+					
+					//alert(data);	
+					if (data==="good"){
+						window.location.href="/profile";
+					}
+				});
+			});
+		
+		}*/
+	});
+
+
 }

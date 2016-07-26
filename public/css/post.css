@@ -2,6 +2,22 @@ body {
 	background-color: #F6F6F6;
 }
 
+input.submitButton{
+	font-size:20px;
+	border:none;
+    -webkit-appearance:none;
+
+}
+
+input.submitButton:hover{
+	cursor:pointer;
+	text-decoration: underline;
+}
+
+input.submitButton:focus{
+	outline: none;
+}
+
 #product_title {
 	margin-top: 8%;
 	width: 100%;

@@ -285,6 +285,40 @@ module.exports = {
 
 	},
 
+	update_account: function(user_id, username, email, password, first_name, 
+                                  last_name, gender, phone_num, city_id, 
+                                  country_id, date_of_birth, description, req, res){
+
+		pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+	        client.query('UPDATE wanderland.user_account ' + 
+	        			 'SET email = ' + "'" + email + "'" + ', ' + 
+	        			 'username = ' + "'" + username + "'" + ', ' + 
+	        			 'password = ' + "'" + password + "'" + ', ' + 
+	        			 'first_name = ' + "'" + first_name + "'" + ', ' + 
+	        			 'last_name = ' + "'" + last_name + "'" + ', ' + 
+	        			 'gender = ' + "'" + gender + "'" + ', ' + 
+	        			 'phone_num = ' + "'" + phone_num + "'" + ', ' + 
+	        			 'city_id = ' + "'" + city_id + "'" + ', ' + 
+	        			 'country_id = ' + "'" + country_id + "'" + ', ' + 
+	        			 'date_of_birth = ' + "'" + date_of_birth + "'" + ', ' + 
+	        			 'description = ' + "'" + description + "'" + 
+	        			 ' WHERE user_account.user_id = ' +  "'"+ user_id + "'", function(err, result) {
+	                done();
+	                
+	                if (err) {
+	                    console.error(err); 
+	                    res.send("Error " + err); 
+	                 }
+	                else {                                                     
+	                    //res.render('profile', {results: result.rows, errors: error_msg});
+	                    res.send("Update was successful");
+	                }
+	            }); 
+	    });
+
+
+	},
+
 
 	sendDefault: function(sess_email, error_msg, req, res){
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {

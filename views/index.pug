@@ -3,6 +3,7 @@ html(lang="en")
     head
         meta(charset="utf-8")
         meta(name="google-signin-client_id" content="541812798719-dg2tn8dqj5skgu9kqg5jpb3g7hdu9ip0.apps.googleusercontent.com")
+
         title= Index
         link(rel='stylesheet', href='js/jquery-ui/jquery-ui.css')
         link(rel="stylesheet", href="css/index.css")
@@ -27,7 +28,7 @@ html(lang="en")
                         section(class="login-box span12")
                             button(class="close_pop" onclick="close_login_pop()") [close]
                             section(id="inputField" class="old span3")
-                                form(class="existing" action="/account" method="post")
+                                form(class="existing" method="post")
                                     section(class="span12 text-center")
                                         h3(id="inputField") Login
                                     section(id="inputField" class="span12")
@@ -38,7 +39,7 @@ html(lang="en")
                                         label(id="inputField" for="password" class="m_b_10x") Password
                                         input(id="passwordEx" class="inputField m_b_10x" type="password" name="password")
                                     section(class="span12 text-center")
-                                       div(class="g-signin2" data-onsuccess="onSignIn")
+                                       div(class="g-signin2" data-onsuccess="onSignIn" data-theme="dark")
 
                                     section(class="span12 text-center")
                                         input(id="existingClient" class="button" type="button" value="Login")
@@ -78,7 +79,9 @@ html(lang="en")
                                     h2 Travel Anywhere
                                     h4 with Wanderland
                         section.search-background
+
                             form(action='https://wander-land.herokuapp.com/result', method='post')
+                            //form(action='http://127.0.0.1:1337/result', method='post')
                                 input(type="hidden" name="_csrf" value="{{csrfToken}}")
                                 div
                                   | I am looking for:
@@ -94,7 +97,6 @@ html(lang="en")
                                 div
                                   | From:
                                   input#from-city.city-field(type='text', name='from_city', value='what city', spellcheck='false', autocomplete='off')
-
                                 div
                                   | To:
                                   input#to-city.city-field(type='text', name='to_city', value='what city', spellcheck='false', autocomplete='off')

@@ -42,7 +42,7 @@ function purge(io, s, action) {
 		var room = rooms[people[s.id].inroom]; //check which room user is in.
 		if (s.id === room.owner) { //user in room and owns room
 			if (action === 'disconnect') {
-				io.sockets.in(s.room).emit('update', 'The owner (' +people[s.id].name + ') has left the server. The room is removed and you have been disconnected from it as well.');
+				io.sockets.to(s.room).emit('update', 'The owner (' +people[s.id].name + ') has left the server. The room is removed and you have been disconnected from it as well.');
 				var socketids = [];
 				for (var i=0; i<sockets.length; i++) {
 					socketids.push(sockets[i].id);
@@ -67,7 +67,7 @@ function purge(io, s, action) {
 				var o = _.findWhere(sockets, {'id': s.id});
 				sockets = _.without(sockets, o);
 			} else if (action === 'removeRoom') { //room owner removes room
-				io.sockets.in(s.room).emit('update', 'The owner (' +people[s.id].name + ') has removed the room. The room is removed and you have been disconnected from it as well.');
+				io.sockets.to(s.room).emit('update', 'The owner (' +people[s.id].name + ') has removed the room. The room is removed and you have been disconnected from it as well.');
 				var socketids = [];
 				for (var i=0; i<sockets.length; i++) {
 					socketids.push(sockets[i].id);
@@ -88,7 +88,7 @@ function purge(io, s, action) {
 				roomCount = _.size(rooms);
 				io.emit('updateRoomCount', {rooms: rooms, count: roomCount});
 			} else if (action === 'leaveRoom') { //room owner leaves room
-				io.sockets.in(s.room).emit('update', 'The owner (' +people[s.id].name + ') has left the room. The room is removed and you have been disconnected from it as well.');
+				io.sockets.to(s.room).emit('update', 'The owner (' +people[s.id].name + ') has left the room. The room is removed and you have been disconnected from it as well.');
 				var socketids = [];
 				for (var i=0; i<sockets.length; i++) {
 					socketids.push(sockets[i].id);
@@ -174,28 +174,36 @@ module.exports = (io) => {
                 // update people and rooms
                 peopleCount = _.size(people);
                 roomCount = _.size(rooms);
-                socket.emit('updateRoomCount', {rooms: rooms, count: roomCount});
-                io.emit('updatePeopleCount', {people: people, count: peopleCount});
+                socket.emit('updateRoomCount', {
+					rooms: rooms, 
+					count: roomCount
+				});
+                io.emit('updatePeopleCount', {
+					people: people, 
+					count: peopleCount
+				});
                 
                 // record socket
                 sockets.push(socket);
             }
         });
 
-        socket.on('getOnlinePeople', function(fn) {
-                    fn({people: people});
-            });
+        // socket.on('getOnlinePeople', function(fn) {
+        //             fn({people: people});
+        //     });
 
-        socket.on('typing', function(data) {
+        socket.on('typing', (bool) => {
             if (typeof people[socket.id] !== 'undefined') {
-                io.sockets.in(socket.room).emit('isTyping', {isTyping: data, person: people[socket.id].name});
+                io.sockets.to(socket.room).emit('isTyping', {
+					isTyping: bool, 
+					name: people[socket.id].name
+				});
             }
-                
         });
         
-        socket.on('send', function(msTime, msg) {
+        socket.on('send', (msTime, msg) => {
             if (people[socket.id].inroom !== undefined ) {
-                    io.sockets.in(socket.room).emit('message', msTime, people[socket.id], msg);
+                    io.sockets.to(socket.room).emit('message', msTime, people[socket.id], msg);
                     socket.emit('isTyping', false);
                     if (_.size(messageHistory[socket.room]) > 10) {
                         messageHistory[socket.room].splice(0,1);
@@ -274,7 +282,7 @@ module.exports = (io) => {
                             socket.room = room.name;
                             socket.join(socket.room);
                             var user = people[socket.id];
-                            io.sockets.in(socket.room).emit('update', user.name + ' has connected to ' + room.name + ' room.');
+                            io.sockets.to(socket.room).emit('update', user.name + ' has connected to ' + room.name + ' room.');
                             socket.emit('update', 'Welcome to ' + room.name + '.');
                             socket.emit('sendRoomID', {id: id});
                             var keys = _.keys(messageHistory);

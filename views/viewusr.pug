@@ -8,11 +8,6 @@ html(lang="en")
         script(src="js/profile.js", defer)
         script(src="js/viewusr.js", defer)
     body
-        //ul
-            //if results == '-1'
-              //  li user not available
-            //else 
-              //  for result in results
         main(id=type)
             section(class="top-nav bdb-lg")
                 div
@@ -45,11 +40,15 @@ html(lang="en")
                             div(id="friends-list" class="main-nav-button")
                                 a(id="nav3" href="#")
                                     span(class="nav-title")="Friends of " + results[0].username
+                                    
                 ul(id="account-settings" class="profile-info selected")
                     li(id="profile-manage" class="bdb-lg profile-contents")
                         section(class="container-content")
                             section(class="content-key")
                                 span(class="sub-title") Account
+                                br
+                                span(class="friendship" id="haha")=friendship
+                                div(class="reqLink")
                                 //="Account Information for " + results[0].username 
                                 
                             

@@ -38,19 +38,19 @@ input#logoutButton:focus{
 }
 
 
-input.submitButton{
+input.submitButton, input.decisionButton{
 	font-size:20px;
 	border:none;
     -webkit-appearance:none;
 
 }
 
-input.submitButton:hover{
+input.submitButton:hover, input.decisionButton:hover{
 	cursor:pointer;
 	text-decoration: underline;
 }
 
-input.submitButton:focus{
+input.submitButton:focus, input.decisionButton:focus{
 	outline: none;
 }
 
@@ -158,6 +158,10 @@ textarea{
 #account, #personal, #manageUser{
 	margin-right: 15px;
 }
+
+.m_b_10{
+	margin-bottom: 10px
+}
 .m_b_15 {
 	margin-bottom:45px;
 }
@@ -167,6 +171,10 @@ textarea{
 }
 .m_r_5{
 	margin-right:5px;
+}
+
+.m_r_t{
+	margin-right:10px;
 }
 
 .m_t_10{
@@ -187,7 +195,7 @@ li.fr-pro-wrap{
 	height:70px;
 }
 
-#account-settings, #personal-info, #friends, .main-nav-button-wrap, .main-nav, .top-nav{
+#account-settings, #personal-info, #friends, .main-nav-button-wrap, #manusr, #mandata, .main-nav, .top-nav{
 	min-width:1000px;
 	max-width: 1200px;
 	width:100%;
