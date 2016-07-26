@@ -23,6 +23,21 @@ router.use(cookieParser());
 
 var sess;
 
+function validateEmail(email) {
+    var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return emailRegex.test(email);
+}
+
+function validatePassword(password) {
+    var blackListedChar = "<>,./:;'|{}[]-_+=!@#$%^&*()`~?";
+    for (var i = 0; i < blackListedChar.length; i++) {
+        if (password.includes(blackListedChar[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
 router.use(session({secret: 'shhhhh',
                     resave: true,
                     saveUninitialized: false,
@@ -85,41 +100,43 @@ router.post('/login', function(req, res){
     var email = req.body.email;
     var password = req.body.pass;
 
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +
-            "'"+ email + "'" +  ' AND wanderland.user_account.password =' + "'" +
-            password + "'" , function(err, result) {
-                console.log(JSON.stringify(result.rows[0]));
-                done();
-                if (err) {
-                    res.send("Error " + err);
-                 }
-                else {
-                    req.checkBody("email", 'Wrong email and password combination').doesNotExist(JSON.stringify(result.rows[0]));
+    if (validateEmail(email) && validatePassword(password)) {
+        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+            client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +
+                "'"+ email + "'" +  ' AND wanderland.user_account.password =' + "'" +
+                password + "'" , function(err, result) {
+                    console.log(JSON.stringify(result.rows[0]));
+                    done();
+                    if (err) {
+                        res.send("Error " + err);
+                     }
+                    else {
+                        req.checkBody("email", 'Wrong email and password combination').doesNotExist(JSON.stringify(result.rows[0]));
 
-                    var errors = req.validationErrors();
-                    var mappedErrors = req.validationErrors(true);
+                        var errors = req.validationErrors();
+                        var mappedErrors = req.validationErrors(true);
 
-                    if (errors) {
+                        if (errors) {
 
-                        var errorMsgs = { "errors": {} };
+                            var errorMsgs = { "errors": {} };
 
-                        errorMsgs.errors.status = "display: block";
+                            errorMsgs.errors.status = "display: block";
 
-                        if ( mappedErrors.email ) {
-                            errorMsgs.errors.error_email = mappedErrors.email.msg;
+                            if ( mappedErrors.email ) {
+                                errorMsgs.errors.error_email = mappedErrors.email.msg;
+                            }
+                            res.end('loginFail');
+                        } else {
+                            sess.email = email;
+                            sess.pass = password;
+                            sess.currId = result.rows[0].user_id;
+                            console.log(sess.currId);
+                            res.end('done');
                         }
-                        res.end('loginFail');
-                    } else {
-                        sess.email = email;
-                        sess.pass = password;
-                        sess.currId = result.rows[0].user_id;
-                        console.log(sess.currId);
-                        res.end('done');
                     }
-                }
+                });
             });
-        });
+    }
 });
 
 var tool = require('./models/db_function');
@@ -209,7 +226,7 @@ router.get('/get_city', function(req, res){
 
 });
 router.get('/city/:cityID', csrfProtection, function(req, res){
-    
+
     tool.get_info_by_city_id(req.params.cityID, function(city_info){
         if (city_info == 'error') {
             res.send('City not found');
@@ -237,9 +254,9 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                         attraction_name = attraction_name.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 
                         attraction_images[files[i]] = attraction_name;
-                    };  
+                    };
                     res.render('city', {
-                        city_info: city_info, 
+                        city_info: city_info,
                         csrfToken: req.csrfToken(),
                         main_images: main_images,
                         attraction_images: attraction_images
@@ -248,15 +265,15 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
 
 
             })
-            
+
         }
     })
-    
+
 
 
 });
 router.get('/country/:countryID', csrfProtection, function(req, res){
-    
+
     res.render('country');
 });
 
@@ -427,13 +444,13 @@ router.get('/showusr', function(req, res){
                                 //csrfToken: req.csrfToken()
 
                                     });
-                                                    
+
                                 });
                             });
 
 
 
-                            
+
                         });
                     });
 
@@ -485,8 +502,8 @@ router.post("/adminUpdate", function(req, res){
     var description = req.body.description;
 
 
-    update_handler.update_account(user_id, username, email, password, first_name, 
-                                  last_name, gender, phone_num, city_id, 
+    update_handler.update_account(user_id, username, email, password, first_name,
+                                  last_name, gender, phone_num, city_id,
                                   country_id, date_of_birth, description, req, res);
 
 
@@ -534,7 +551,7 @@ router.post('/createUser', function(req, res){
             if (err) {
                 res.send("Error " + err);
             }
-            
+
             res.send("good");
 
 
@@ -551,61 +568,64 @@ router.post('/signup', function(req, res){
 
     sess = req.session;
 
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        client.query('SELECT * FROM wanderland.user_account WHERE user_account.email = ' +
-            "'" + account + "'" +  ' OR user_account.username =' + "'" + username + "'" ,
-            function(err, result) {
-                done();
-                if (err) {
-                    console.error(err);
-                    res.send("Error " + err);
-                 } else {
-                    if (result.rows.length === 2) {
-                        req.checkBody("username", "Username already exists. Please choose another username.").usernameAvailable(JSON.stringify(result.rows[1]));
-                        req.checkBody("username", "Special characters are not allowed in Username.").isValid();
-                        req.checkBody("emailNew", 'Email already exists. Plese choose another email address.').doesExist(JSON.stringify(result.rows[0]));
-                    } else {
-                        req.checkBody("username", "Username already exists. Please choose another username.").usernameAvailable(JSON.stringify(result.rows[0]));
-                        req.checkBody("username", "Special characters are not allowed in Username.").isValid();
-                        req.checkBody("emailNew", 'Email already exists. Plese choose another email address.').doesExist(JSON.stringify(result.rows[0]));
-                    }
-                    var errors = req.validationErrors();
-                    var mappedErrors = req.validationErrors(true);
-
-                    if (errors) {
-                            var errorMsgs = { "errors": {} };
-
-                            errorMsgs.errors.status = "display: block";
-
-                            if ( mappedErrors.username ) {
-                                errorMsgs.errors.error_username = mappedErrors.username.msg;
-                            }
-
-                            if ( mappedErrors.emailNew ) {
-                                errorMsgs.errors.error_emailNew = mappedErrors.emailNew.msg;
-                            }
-                            res.send("signup failed");
+    if (validateEmail(email) && validatePassword(password)) {
+        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+            client.query('SELECT * FROM wanderland.user_account WHERE user_account.email = ' +
+                "'" + account + "'" +  ' OR user_account.username =' + "'" + username + "'" ,
+                function(err, result) {
+                    done();
+                    if (err) {
+                        console.error(err);
+                        res.send("Error " + err);
+                     } else {
+                        if (result.rows.length === 2) {
+                            req.checkBody("username", "Username already exists. Please choose another username.").usernameAvailable(JSON.stringify(result.rows[1]));
+                            req.checkBody("username", "Special characters are not allowed in Username.").isValid();
+                            req.checkBody("emailNew", 'Email already exists. Plese choose another email address.').doesExist(JSON.stringify(result.rows[0]));
                         } else {
-                            pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-                            client.query('INSERT INTO wanderland.user_account (username, email, password, first_name, last_name, gender, phone_num, city_id, country_id, date_of_birth, date_joined, description) VALUES (' +
-                                "'" + username + "'" +  ", '" + account + "'" + ", '" + password + "'" +', ' + 'NULL' + ', '  + 'NULL, '  + 'NULL, ' + ' NULL, ' +  'NULL'  + ', '  + 'NULL' +  ',NULL, ' +
-                                'NULL, ' + 'NULL' + ');', function(err, result){
-
-                                done();
-
-                                if (err) {
-                                    res.send("Error " + err);
-                                }
-                                sess.email = account;
-                                res.send('done');
-
-
-                            });
-                        });
+                            req.checkBody("username", "Username already exists. Please choose another username.").usernameAvailable(JSON.stringify(result.rows[0]));
+                            req.checkBody("username", "Special characters are not allowed in Username.").isValid();
+                            req.checkBody("emailNew", 'Email already exists. Plese choose another email address.').doesExist(JSON.stringify(result.rows[0]));
                         }
-                }
+                        var errors = req.validationErrors();
+                        var mappedErrors = req.validationErrors(true);
+
+                        if (errors) {
+                                var errorMsgs = { "errors": {} };
+
+                                errorMsgs.errors.status = "display: block";
+
+                                if ( mappedErrors.username ) {
+                                    errorMsgs.errors.error_username = mappedErrors.username.msg;
+                                }
+
+                                if ( mappedErrors.emailNew ) {
+                                    errorMsgs.errors.error_emailNew = mappedErrors.emailNew.msg;
+                                }
+                                res.send("signup failed");
+                            } else {
+                                pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+                                client.query('INSERT INTO wanderland.user_account (username, email, password, first_name, last_name, gender, phone_num, city_id, country_id, date_of_birth, date_joined, description) VALUES (' +
+                                    "'" + username + "'" +  ", '" + account + "'" + ", '" + password + "'" +', ' + 'NULL' + ', '  + 'NULL, '  + 'NULL, ' + ' NULL, ' +  'NULL'  + ', '  + 'NULL' +  ',NULL, ' +
+                                    'NULL, ' + 'NULL' + ');', function(err, result){
+
+                                    done();
+
+                                    if (err) {
+                                        res.send("Error " + err);
+                                    }
+                                    sess.email = account;
+                                    res.send('done');
+
+
+                                });
+                            });
+                            }
+                    }
+            });
         });
-    });
+    }
+
 });
 
 router.post('/file-upload', function(req, res, next){
@@ -628,7 +648,7 @@ router.post('/file-upload', function(req, res, next){
         fstream.on('close', function () {
 
             res.redirect('/profile');
-            
+
         });
     });
 
@@ -952,7 +972,7 @@ router.get("/getRequests/:username", function(req, res){
                     if (err) {
                         res.send("Error " + err);
                     }
-                    
+
                     res.send(result.rows);
                 });
             });
@@ -988,14 +1008,14 @@ router.get("/makeFriends/:userId", function(req, res){
 
 
 
-            
+
 
         });
     });
 
 
 
-            
+
 
         });
     });
