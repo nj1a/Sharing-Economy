@@ -60,7 +60,7 @@ $(document).ready(function() {
       $("#errors").append("Please enter a name longer than 3 characters");
       $("#errors").show();
     } else {
-      socket.emit("joinserver", name, device);
+      socket.emit("start", name, device);
       toggleNameForm();
       togglemessageWindow();
       $("#msg").focus();
@@ -160,12 +160,13 @@ $(document).ready(function() {
     socket.emit("leaveRoom", roomID);
     $("#createRoom").show();
   });
+  // htmkl css xml json js jquery (understand the syntax) untill week 10 (including security)
 
 //socket-y stuff
 socket.on("exists", function(data) {
   $("#errors").empty();
   $("#errors").show();
-  $("#errors").append(data.msg + " Try <strong>" + data.proposedName + "</strong>");
+  $("#errors").append(data.msg);
     toggleNameForm();
     togglemessageWindow();
 });

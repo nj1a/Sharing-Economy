@@ -139,7 +139,7 @@ function purge(s, action) {
 		if (action === "disconnect") {
 			io.sockets.emit("update", people[s.id].name + " has disconnected from the server.");
 			delete people[s.id];
-			sizePeople = _.size(people);
+			var sizePeople = _.size(people);
 			io.sockets.emit("update-people", {people: people, count: sizePeople});
 			var o = _.findWhere(sockets, {'id': s.id});
 			sockets = _.without(sockets, o);
@@ -147,32 +147,21 @@ function purge(s, action) {
 	}
 }
 
-module.exports = function(io) {
+module.exports = (io) => {
     io.on("connection", (socket) => {
-        socket.on("joinserver", function(name, device) {
+        socket.on("start", (name, device) => {
             var exists = false;
             var ownerRoomID = null;
             var inRoomID = null;
 
-            _.find(people, function(key,value) {
+            _.find(people, (key, value) => {
                 if (key.name.toLowerCase() === name.toLowerCase()) {
                     return exists = true;
-                }
-                    
+                }  
             });
-            if (exists) {//provide unique username:
-                var randomNumber=Math.floor(Math.random()*1001);
-                var proposedName;
-                do {
-                    proposedName= name+randomNumber;
-                    _.find(people, function(key,value) {
-                        if (key.name.toLowerCase() === proposedName.toLowerCase()) {
-                            return exists = true;
-                        }
-                            
-                    });
-                } while (!exists);
-                socket.emit("exists", {msg: "The username already exists, please pick another one.", proposedName: proposedName});
+            if (exists) {
+
+                socket.emit("exists", {msg: "The username already exists, please pick another one."});
             } else {
                 people[socket.id] = {"name" : name, "owns" : ownerRoomID, "inroom": inRoomID, "device": device};
                 socket.emit("update", "You have connected to the server.");
