@@ -613,8 +613,70 @@ router.get('/create_post', csrfProtection, function(req, res){
 
 // Process create_post request
 router.post('/create_post', parseForm, csrfProtection, function(req, res){
+    if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
+        res.send('You need to sign in first');
+        return;
+    }
+    // Image not required
+    if (req.body.title && req.body.description && req.body.from_city && req.body.to_city && req.body.post_type && req.body.from_date && req.body.to_date && req.body.way_of_travelling && req.body.travel_type) {
+        function formatDate(date){
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
 
-    res.send(req.body.title);
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+        var way_of_travelling = req.body.way_of_travelling;
+        var post_type = req.body.post_type;
+        var post_date = new Date();
+        post_date = formatDate(post_date);
+        var from_date = req.body.from_date;
+        var to_date = req.body.to_date;
+        var from_city = req.body.from_city.split(", ")[0];
+        var from_country = req.body.from_city.split(", ")[1];
+        var to_city = req.body.to_city.split(", ")[0];
+        var to_country = req.body.to_city.split(", ")[1];
+        if (typeof from_city === 'undefined' || typeof to_city === 'undefined' || typeof from_country === 'undefined' || typeof to_country === 'undefined') {
+            res.send('Please enter city correctly');
+        }
+        else{
+            // Find user id by email
+            tool.get_user_id(sess.email, function(result0){
+                var user_id = result0.user_id;
+                // Get the city ids from city name and country name
+                var from_city_id, to_city_id;
+                tool.get_city_id(from_city, from_country, function(result1){
+                    from_city_id = result1.city_id;
+
+                    tool.get_city_id(to_city, to_country, function(result2){
+                        to_city_id = result2.city_id;
+
+                        tool.create_post(user_id, post_type, post_date, way_of_travelling, travel_start_date, travel_end_date, from_city_id, to_city_id, description, title, travel_type function(result3){
+
+                            if (result3 === 'error' || result1 === 'error' || result2 === 'error') {
+                                res.send('Error on creating post');
+
+                            }else{
+                                // res.send(JSON.stringify(result));
+                                console.log('This is result object: ', result3);
+                                res.send('Your post_id is: '+result3.post_id);
+                            }
+                        });
+
+                    });
+
+                });
+            })
+        }
+
+    }
+    else{
+        res.send（'Please fill out the whole form');
+    }
 
 
 });
