@@ -28,7 +28,7 @@ function validateEmail(email) {
     return emailRegex.test(email);
 }
 
-function validatePassword(password) {
+function validateBlackList(password) {
     var blackListedChar = "<>,./:;'|{}[]-_+=!@#$%^&*()`~?";
     for (var i = 0; i < blackListedChar.length; i++) {
         if (password.includes(blackListedChar[i])) {
@@ -100,7 +100,7 @@ router.post('/login', function(req, res){
     var email = req.body.email;
     var password = req.body.pass;
 
-    if (validateEmail(email) && validatePassword(password)) {
+    if (validateEmail(email) && validateBlackList(password)) {
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +
                 "'"+ email + "'" +  ' AND wanderland.user_account.password =' + "'" +
@@ -176,42 +176,48 @@ router.post('/result', function(req, res) {
         var from_country = req.body.from_city.split(", ")[1];
         var to_city = req.body.to_city.split(", ")[0];
         var to_country = req.body.to_city.split(", ")[1];
-        console.log("Type2: "+ typeof from_city + ' '+typeof to_city_id + ' '+typeof from_country + ' '+ typeof to_country);
-        if (typeof from_city === 'undefined' || typeof to_city === 'undefined' || typeof from_country === 'undefined' || typeof to_country === 'undefined') {
-            res.send('Please enter both city and country name');
-        }
-        else{
-            // Get the city ids from city name and country name
-            var from_city_id, to_city_id;
-            tool.get_city_id(from_city, from_country, function(result1){
-                from_city_id = result1.city_id;
 
-                tool.get_city_id(to_city, to_country, function(result2){
-                    to_city_id = result2.city_id;
+        var validatation = validateBlackList(from_city) && validateBlackList(from_country)
+                            && validateBlackList(to_city) && validateBlackList(to_country);
 
-                    tool.get_result(req.body.post_type, from_date, to_date, from_city_id, to_city_id, function(result3){
+        if (validatation) {
+            console.log("Type2: "+ typeof from_city + ' '+typeof to_city_id + ' '+typeof from_country + ' '+ typeof to_country);
+            if (typeof from_city === 'undefined' || typeof to_city === 'undefined' || typeof from_country === 'undefined' || typeof to_country === 'undefined') {
+                res.send('Please enter both city and country name');
+            }
+            else{
+                // Get the city ids from city name and country name
+                var from_city_id, to_city_id;
+                tool.get_city_id(from_city, from_country, function(result1){
+                    from_city_id = result1.city_id;
 
-                        if (result3 === 'error' || result1 === 'error' || result2 === 'error') {
-                            res.send('No matching result');
+                    tool.get_city_id(to_city, to_country, function(result2){
+                        to_city_id = result2.city_id;
 
-                        }else{
-                            // res.send(JSON.stringify(result));
-                            console.log('This is result object: ', result3);
-                            res.render("result", {
+                        tool.get_result(req.body.post_type, from_date, to_date, from_city_id, to_city_id, function(result3){
 
-                                result: result3//,
-                                //csrfToken: req.csrfToken()
+                            if (result3 === 'error' || result1 === 'error' || result2 === 'error') {
+                                res.send('No matching result');
 
-                            });
-                        }
+                            }else{
+                                // res.send(JSON.stringify(result));
+                                console.log('This is result object: ', result3);
+                                res.render("result", {
+
+                                    result: result3//,
+                                    //csrfToken: req.csrfToken()
+
+                                });
+                            }
+                        });
+
                     });
 
                 });
-
-            });
+            }
         }
+        // res.render('result', { title: 'result', message: 'results'});
     }
-    // res.render('result', { title: 'result', message: 'results'});
 });
 
 router.get('/get_city', function(req, res){
@@ -568,7 +574,7 @@ router.post('/signup', function(req, res){
 
     sess = req.session;
 
-    if (validateEmail(email) && validatePassword(password)) {
+    if (validateEmail(email) && validateBlackList(password)) {
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query('SELECT * FROM wanderland.user_account WHERE user_account.email = ' +
                 "'" + account + "'" +  ' OR user_account.username =' + "'" + username + "'" ,
