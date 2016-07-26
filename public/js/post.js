@@ -1,7 +1,7 @@
 var slideIndex = 1;
 var attractionIndex = 1;
-//showSlides(slideIndex);
-//showAttractions(attractionIndex);
+showSlides(slideIndex);
+showAttractions(attractionIndex);
 
 $(document).ready(function(){
 	$(".submitButton").click(function(event){
