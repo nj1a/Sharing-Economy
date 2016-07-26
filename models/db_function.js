@@ -86,9 +86,50 @@ module.exports = {
 
 		});
 	},
-	create_post: function(user_id, post_type, post_date, way_of_travelling, travel_start_date, travel_end_date, from_city, to_city, description, title, trave_type){
+	create_post: function(user_id, post_type, post_date, way_of_travelling, travel_start_date, travel_end_date, from_city, to_city, description, title, travel_type, callback){
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
-			var query_string = "INSERT INTO product_post VALUE (default, "+user_id+", "+post_type+", "+way_of_travelling+", "+travel_start_date+", "+travel_end_date+", "+from_city+", "+to_city+", "+description+", "+title+", "+travel_start_date+", null RETURNING post_id";
+			var query_string = "INSERT INTO product_post VALUES (default, "+user_id+", \'"+post_type+"\', \'"+ post_date + "\', \'"+way_of_travelling+"\', \'"+travel_start_date+"\', \'"+travel_end_date+"\', "+from_city+", "+to_city+", \'"+description+"\', \'"+title+"\', \'"+travel_type+"\', null) RETURNING post_id";
+			console.log(query_string);
+			client.query(query_string, function(err, result){
+				done();
+				if (err) throw err;
+				else{
+					if (JSON.stringify(result.rows) === "[]") {
+						console.log('No matching row in database');
+						callback('error');
+					} else {
+						console.log(result.rows);
+						callback(result.rows[0]);
+					}
+				}
+			});
+
+		});
+	},
+	// Get user id by email
+	get_user_id: function(email, callback){
+		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
+			var query_string = "SELECT user_id FROM user_account WHERE email = \'"+email+"\'";
+			console.log(query_string);
+			client.query(query_string, function(err, result){
+				done();
+				if (err) throw err;
+				else{
+					if (JSON.stringify(result.rows) === "[]") {
+						console.log('No matching row in database');
+						callback('error');
+					} else {
+						console.log(result.rows);
+						callback(result.rows[0]);
+					}
+				}
+			});
+
+		});
+	},
+	get_info_by_city_id: function(city_id, callback){
+		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
+			var query_string = "SELECT * FROM city, country where city.country_id = country.country_id AND city_id = "+city_id;
 			console.log(query_string);
 			client.query(query_string, function(err, result){
 				done();

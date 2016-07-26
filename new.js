@@ -144,7 +144,7 @@ router.get('/', csrfProtection, function(req, res) {
     }
 });
 
-router.post('/result', csrfProtection, function(req, res) {
+router.post('/result', function(req, res) {
     console.log(req.body);
     console.log('Type: '+ typeof req.body.from_date + ' '+ typeof req.body.to_date + ' ' + typeof req.body.from_city + ' ' + typeof req.body.to_city);
     if (typeof req.body.from_date === "undefined" || typeof req.body.to_date === "undefined" || typeof req.body.from_city === "undefined" || typeof req.body.to_city === "undefined" || req.body.to_date === 'what day' || req.body.from_date === 'what day' || req.body.from_city === 'what city' || req.body.to_city === 'what city') {
@@ -179,8 +179,7 @@ router.post('/result', csrfProtection, function(req, res) {
                             // res.send(JSON.stringify(result));
                             console.log('This is result object: ', result3);
                             res.render("result", {
-                                result: result3,
-                                csrfToken: req.csrfToken()
+                                result: result3
                             });
                         }
                     });
@@ -204,7 +203,25 @@ router.get('/get_city', function(req, res){
     });
 
 });
+router.get('/city/:cityID', csrfProtection, function(req, res){
+    
+    tool.get_info_by_city_id(cityID, function(city_info){
+        if (city_info == 'error') {
+            res.send('City not found');
+        }else{
+            res.render('city', {city_info: city_info, csrfToken: req.csrfToken()});        
+        }
+    })
+    
 
+
+});
+router.get('/country/:countryID', csrfProtection, function(req, res){
+    
+    res.render('country');
+
+
+});
 router.get('/admin-manage', csrfProtection, function(req, res) {
     res.render('admin-manage', {
         title: 'admin_manage',
@@ -281,7 +298,7 @@ router.get('/profile', csrfProtection, function(req, res){
                             }
                             res.render('profile', {
                                 results: result1.rows,
-                                csrfToken: req.csrfToken(),
+                                //csrfToken: req.csrfToken(),
                                 errors: ' ',
                                 type: 'own',
                                 pic: path
@@ -459,7 +476,7 @@ router.post('/file-upload', function(req, res, next){
     });
 });
 
-router.post('/updatePassword', csrfProtection, function(req, res){
+router.post('/updatePassword', parseForm, csrfProtection, function(req, res){
     sess=req.session;
     var currPW = req.body.cpassword;
     var newPW = req.body.npassword;
@@ -576,12 +593,12 @@ router.post('/update_email', function(req, res){
 // Post page
 router.get('/post/:postId', csrfProtection, function(req, res){
     var username, type, post_date, way_of_travelling, travel_start_date, travel_end_date;
-
     tool.get_info_by_post_id(req.params.postId, function(result){
         if (result === 'error') {
           res.send('No such result in database');
         } else{
-            glob('public/img/'+req.params.postId+'_*.', function(er, files){
+            glob('public/img/post_images/'+req.params.postId+'_*.*', function(er, files){
+                console.log('This is glob: '+files);
                 if (er) {
                     throw er;
                 }
@@ -602,9 +619,9 @@ router.get('/post/:postId', csrfProtection, function(req, res){
 
 });
 // Create post form
-router.get('/create_post', csrfProtection, function(req, res){
+router.get('/create_post', function(req, res){
 
-    if (typeof sess.email === 'undefined' || typeof sess === 'undefined') {
+    if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
         res.send('You need to sign in first');
     }else{
         res.render('create_post');
@@ -613,7 +630,74 @@ router.get('/create_post', csrfProtection, function(req, res){
 
 // Process create_post request
 router.post('/create_post', function(req, res){
+    if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
+        res.send('You need to sign in first');
+        return;
+    }
+    // Image not required
+    if (req.body.title && req.body.description && req.body.from_city && req.body.to_city && req.body.post_type && req.body.from_date && req.body.to_date && req.body.way_of_travelling && req.body.travel_type) {
+        function formatDate(date){
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
 
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+        var way_of_travelling = req.body.way_of_travelling;
+        var description = req.body.description;
+        var travel_type = req.body.travel_type;
+        var title = req.body.title;
+        var post_type = req.body.post_type;
+        var post_date = new Date();
+        post_date = formatDate(post_date);
+        var from_date = req.body.from_date;
+        var to_date = req.body.to_date;
+        var from_city = req.body.from_city.split(", ")[0];
+        var from_country = req.body.from_city.split(", ")[1];
+        var to_city = req.body.to_city.split(", ")[0];
+        var to_country = req.body.to_city.split(", ")[1];
+        if (typeof from_city === 'undefined' || typeof to_city === 'undefined' || typeof from_country === 'undefined' || typeof to_country === 'undefined') {
+            res.send('Please enter city correctly');
+        }
+        else{
+            // Find user id by email
+            tool.get_user_id(sess.email, function(result0){
+                var user_id = result0.user_id;
+                // Get the city ids from city name and country name
+                var from_city_id, to_city_id;
+                tool.get_city_id(from_city, from_country, function(result1){
+                    from_city_id = result1.city_id;
+
+                    tool.get_city_id(to_city, to_country, function(result2){
+                        to_city_id = result2.city_id;
+
+                        tool.create_post(user_id, post_type, post_date, way_of_travelling, from_date, to_date, from_city_id, to_city_id, description, title, travel_type, function(result3){
+
+                            if (result3 === 'error' || result1 === 'error' || result2 === 'error' || result0 === 'error') {
+                                res.send('Error on creating post');
+
+                            }else{
+                                // res.send(JSON.stringify(result));
+                                console.log('This is result object: ', result3);
+                                // res.send('Your post_id is: '+result3.post_id);
+                                res.redirect('/post/'+result3.post_id);
+                            }
+                        });
+
+                    });
+
+                });
+            })
+        }
+
+    }
+    else{
+        res.send('Please fill out the whole form');
+    }
 
 
 });

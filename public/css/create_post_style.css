@@ -13,6 +13,7 @@ div.input_element input {
 }
 div.input_element textarea{
 	width: 100%;
+	resize: none;
 }
 
 div.input_city {
