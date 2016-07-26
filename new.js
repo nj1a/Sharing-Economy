@@ -631,6 +631,8 @@ router.post('/create_post', function(req, res){
         }
         var way_of_travelling = req.body.way_of_travelling;
         var description = req.body.description;
+        var travel_type = req.body.travel_type;
+        var title = req.body.title;
         var post_type = req.body.post_type;
         var post_date = new Date();
         post_date = formatDate(post_date);
