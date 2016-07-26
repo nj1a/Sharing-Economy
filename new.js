@@ -281,7 +281,7 @@ router.get('/profile', csrfProtection, function(req, res){
                             }
                             res.render('profile', {
                                 results: result1.rows,
-                                csrfToken: req.csrfToken(),
+                                //csrfToken: req.csrfToken(),
                                 errors: ' ',
                                 type: 'own',
                                 pic: path
