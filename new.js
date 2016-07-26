@@ -580,7 +580,7 @@ router.get('/post/:postId', csrfProtection, function(req, res){
         if (result === 'error') {
           res.send('No such result in database');
         } else{
-            glob('public/img/post_images'+req.params.postId+'_*.jpg', function(er, files){
+            glob('public/img/post_images/'+req.params.postId+'_*.jpg', function(er, files){
                 console.log('This is glob: '+files);
                 if (er) {
                     throw er;
