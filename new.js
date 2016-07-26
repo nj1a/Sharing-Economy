@@ -170,7 +170,7 @@ router.get('/create_post', csrfProtection, function(req, res){
     }else{
         res.render('create_post');
     }
-);
+});
 router.post('/result', function(req, res) {
     console.log(req.body);
     console.log('Type: '+ typeof req.body.from_date + ' '+ typeof req.body.to_date + ' ' + typeof req.body.from_city + ' ' + typeof req.body.to_city);
