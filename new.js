@@ -80,7 +80,7 @@ router.use(expressValidator({
     }
 }));
 
-router.post('/login', function(req, res){
+router.post('/login', parseForm, csrfProtection, function(req, res){
     sess = req.session;
     var email = req.body.email;
     var password = req.body.pass;
@@ -144,7 +144,7 @@ router.get('/', csrfProtection, function(req, res) {
     }
 });
 
-router.post('/result', csrfProtection, function(req, res) {
+router.post('/result', parseForm, csrfProtection, function(req, res) {
     console.log(req.body);
     console.log('Type: '+ typeof req.body.from_date + ' '+ typeof req.body.to_date + ' ' + typeof req.body.from_city + ' ' + typeof req.body.to_city);
     if (typeof req.body.from_date === "undefined" || typeof req.body.to_date === "undefined" || typeof req.body.from_city === "undefined" || typeof req.body.to_city === "undefined" || req.body.to_date === 'what day' || req.body.from_date === 'what day' || req.body.from_city === 'what city' || req.body.to_city === 'what city') {
@@ -213,7 +213,7 @@ router.get('/admin-manage', csrfProtection, function(req, res) {
     });
 });
 
-router.post('/enter-data', function(req, res) {
+router.post('/enter-data', parseForm, csrfProtection, function(req, res) {
     var country = req.body.country;
     var city = req.body.city;
     var country_code = req.body.country_code;
@@ -366,7 +366,7 @@ router.get('/logout',function(req,res){
     });
 });
 
-router.post('/signup', function(req, res){
+router.post('/signup', parseForm, csrfProtection, function(req, res){
 
     var account = req.body.emailNew;
     var password = sha256(req.body.password);
@@ -431,7 +431,7 @@ router.post('/signup', function(req, res){
     });
 });
 
-router.post('/file-upload', function(req, res, next){
+router.post('/file-upload', parseForm, csrfProtection, function(req, res, next){
     var userEmail = sess.email;
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('select user_id from wanderland.user_account where email = ' + "'" + userEmail + "'", function(err, result){
@@ -459,7 +459,7 @@ router.post('/file-upload', function(req, res, next){
     });
 });
 
-router.post('/updatePassword', csrfProtection, function(req, res){
+router.post('/updatePassword', parseForm, csrfProtection, function(req, res){
     sess=req.session;
     var currPW = req.body.cpassword;
     var newPW = req.body.npassword;
@@ -539,7 +539,7 @@ router.post('/updatePassword', csrfProtection, function(req, res){
     }
 });
 
-router.post('/update_email', function(req, res){
+router.post('/update_email', parseForm, csrfProtection, function(req, res){
     sess=req.session;
     var newEmail = req.body.newEmailValue;
 
@@ -612,6 +612,7 @@ router.get('/create_post', csrfProtection, function(req, res){
     }
 
 // Process create_post request
+<<<<<<< HEAD
 router.post('/create_post', function(req, res){
     if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
         res.send('You need to sign in first');
@@ -666,6 +667,9 @@ router.post('/create_post', function(req, res){
                                 res.send('Your post_id is: '+result3.post_id);
                             }
                         });
+=======
+router.post('/create_post', parseForm, csrfProtection, function(req, res){
+>>>>>>> 294e3d5e2b58a6b668da584005ca5870f010084a
 
                     });
 
@@ -682,7 +686,7 @@ router.post('/create_post', function(req, res){
 });
 
 });
-router.get("/removeFriend/:username", function(req, res){
+router.get("/removeFriend/:username", csrfProtection, function(req, res){
     var currUsr = sess.email;
     var usr = req.params.username;
     //res.send(currUsr + " " + usr);
@@ -719,7 +723,7 @@ router.get("/removeFriend/:username", function(req, res){
         });
     });
 });
-router.get("/getFriends/:username", function(req, res){
+router.get("/getFriends/:username", csrfProtection, function(req, res){
     var usr = req.params.username;
     var usrID;
 
@@ -758,42 +762,42 @@ router.get("/getFriends/:username", function(req, res){
     });
 });
 
-router.post('/update_name', function(req, res){
+router.post('/update_name', parseForm, csrfProtection, function(req, res){
     sess=req.session;
     var first_name = req.body.newNameFirst;
     var last_name = req.body.newNameLast;
     update_handler.update_name(first_name, last_name, sess.email, req, res);
 });
 
-router.post('/update_address', function(req, res){
+router.post('/update_address', parseForm, csrfProtection, function(req, res){
     sess=req.session;
     var city = req.body.newCity;
     var country = req.body.newCountry;
     update_handler.update_address(city, country, sess.email, req, res);
 });
 
-router.post('/update_phone', function(req, res){
+router.post('/update_phone', parseForm, csrfProtection, function(req, res){
     sess=req.session;
     var phone_num = req.body.newPhone;
 
     update_handler.update_phone(phone_num, sess.email, req, res);
 });
 
-router.post('/update_dob', function(req, res){
+router.post('/update_dob', parseForm, csrfProtection, function(req, res){
     sess=req.session;
     var dob = req.body.newDOB;
 
     update_handler.update_dob(dob, sess.email, req, res);
 });
 
-router.post('/update_gender', function(req, res){
+router.post('/update_gender', parseForm, csrfProtection, function(req, res){
     sess=req.session;
     var gender = req.body.newGender;
 
     update_handler.update_gender(gender, sess.email, req, res);
 });
 
-router.post('/update_desc', function(req, res){
+router.post('/update_desc', parseForm, csrfProtection, function(req, res){
     sess=req.session;
     var desc = req.body.newDesc;
 

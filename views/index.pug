@@ -76,28 +76,27 @@ html(lang="en")
                             section(class="v-center")
                                 section(class="main-text")
                                     h2 Travel Anywhere
-                                    h4 with Wanderland                                 
+                                    h4 with Wanderland
                         section.search-background
-                          form(action='https://wander-land.herokuapp.com/result', method='post')
-                            div
-                              | I am looking for: 
-                              select#post-type-bar(name='post_type')
-                                option(value='buddy') Looking for someone to travel with
-                                option(value='guide') Looking for a tour guide
-                            div
-                              | From: 
-                              input#from-date.datepicker(type='text', name='from_date', value='what day')
-                            div
-                              | To: 
-                              input#to-date.datepicker(type='text', name='to_date', value='what day')
-                            div
-                              | From: 
-                              input#from-city.city-field(type='text', name='from_city', value='what city', spellcheck='false', autocomplete='off')
+                            form(action='https://wander-land.herokuapp.com/result', method='post')
+                                div
+                                  | I am looking for:
+                                  select#post-type-bar(name='post_type')
+                                    option(value='buddy') Looking for someone to travel with
+                                    option(value='guide') Looking for a tour guide
+                                div
+                                  | From:
+                                  input#from-date.datepicker(type='text', name='from_date', value='what day')
+                                div
+                                  | To:
+                                  input#to-date.datepicker(type='text', name='to_date', value='what day')
+                                div
+                                  | From:
+                                  input#from-city.city-field(type='text', name='from_city', value='what city', spellcheck='false', autocomplete='off')
 
-                            div
-                              | To: 
-                              input#to-city.city-field(type='text', name='to_city', value='what city', spellcheck='false', autocomplete='off')
-                            |  
-                            button.button(value='search')
-                              i.w3-large.fa.fa-search(3='')
-
+                                div
+                                  | To:
+                                  input#to-city.city-field(type='text', name='to_city', value='what city', spellcheck='false', autocomplete='off')
+                                input(type="hidden" name="_csrf" value="<%- csrfToken %>")
+                                button.button(value='search')
+                                  i.w3-large.fa.fa-search(3='')
