@@ -203,7 +203,12 @@ router.get('/get_city', function(req, res){
     });
 
 });
+router.get('/city/:cityID', csrfProtection, function(req, res){
+    
+    req.render('city');
 
+
+});
 router.get('/admin-manage', csrfProtection, function(req, res) {
     res.render('admin-manage', {
         title: 'admin_manage',
