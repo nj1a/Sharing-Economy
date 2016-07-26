@@ -255,12 +255,16 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
 
                         attraction_images[files[i]] = attraction_name;
                     };
-                    res.render('city', {
-                        city_info: city_info,
-                        csrfToken: req.csrfToken(),
-                        main_images: main_images,
-                        attraction_images: attraction_images
-                    });
+                    // Get ratings and comments
+                    tool.get_ratings_by_city_id(req.params.cityID, function(ratings){
+                        res.render('city', {
+                            city_info: city_info,
+                            csrfToken: req.csrfToken(),
+                            main_images: main_images,
+                            attraction_images: attraction_images
+                            ratings: ratings
+                        });
+                    })
                 });
 
 

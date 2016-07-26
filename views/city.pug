@@ -96,50 +96,15 @@ html
             #customer_rating
               h2 Other ratings
               #customer_rating_text
-                .customer_rating
+                each val, index in ratings
+                  .customer_rating
                   span.comment_username
-                    a(href='') User1
-                  |  
-                  span.comment_rating &starf;&starf;&starf;&starf;&starf;
-                  |  
-                  span.comment_date July 6, 2016
-                  .comment  Very traditional. The whole city is like a live museum.
-                .customer_rating
-                  span.comment_username
-                    a(href='') User2
-                  |  
-                  span.comment_rating &starf;&starf;&starf;&star;&star;
-                  |  
-                  span.comment_date July 5, 2016
-                  br
-                  .comment  Not too shabby.
-                .customer_rating
-                  span.comment_username
-                    a(href='') User2
-                  |  
-                  span.comment_rating &starf;&starf;&starf;&star;&star;
-                  |  
-                  span.comment_date July 5, 2016
-                  br
-                  .comment  Food is expensive there.
-                .customer_rating
-                  span.comment_username
-                    a(href='') User2
-                  |  
-                  span.comment_rating &starf;&starf;&starf;&star;&star;
-                  |  
-                  span.comment_date July 5, 2016
-                  br
-                  .comment  Love the accent
-                .customer_rating
-                  span.comment_username
-                    a(href='') User3
-                  |  
-                  span.comment_rating &starf;&star;&star;&star;&star;
-                  |  
-                  span.comment_date July 5, 2016
-                  br
-                  .comment  People aren&apos;t friendly there.
+                    a(href='')= val.username
+                  |
+                  span.comment_rating= 'Rating: '+val.rating
+                  |
+                  span.comment_date= val.date_rated
+                  .comment= val.comments
         #recommendation
           h1 Related Post
           #related_product_list

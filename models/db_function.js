@@ -149,7 +149,7 @@ module.exports = {
 	},
 	get_ratings_by_city_id: function(city_id, callback){
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
-			var query_string = "SELECT * FROM city_rating where city.country_id = "+city_id+" ORDER BY date_rated DESC ";
+			var query_string = "SELECT * FROM city_rating, user_account where city_rating.user_id = user_account.user_id AND city.country_id = "+city_id+" ORDER BY date_rated DESC ";
 			console.log(query_string);
 			client.query(query_string, function(err, result){
 				done();
