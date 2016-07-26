@@ -110,6 +110,7 @@ module.exports = {
 	get_user_id: function(email, callback){
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
 			var query_string = "SELECT user_id FROM user_account WHERE email = "+email;
+			console.log(query_string);
 			client.query(query_string, function(err, result){
 				done();
 				if (err) throw err;
