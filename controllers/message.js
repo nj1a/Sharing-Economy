@@ -5,7 +5,7 @@ var _ = require('underscore')._;
 var people = {}, rooms= {};
 var peopleCount = 0, roomCount = 0;
 var sockets = [];
-var messageHistory = {};
+var msgHistory = {};
 
 function purge(io, s, action) {
 	/*
@@ -59,7 +59,7 @@ function purge(io, s, action) {
 				room.people = _.without(room.people, s.id); //remove people from the room:people{}collection
 				delete rooms[people[s.id].owns]; //delete the room
 				delete people[s.id]; //delete user from people collection
-				delete messageHistory[room.name]; //delete the message history
+				delete msgHistory[room.name]; //delete the message history
 				peopleCount = _.size(people);
 				var roomCount = _.size(rooms);
 				io.emit('updatePeopleCount', {people: people, count: peopleCount});
@@ -84,7 +84,7 @@ function purge(io, s, action) {
 				delete rooms[people[s.id].owns];
 				people[s.id].owns = null;
 				room.people = _.without(room.people, s.id); //remove people from the room:people{}collection
-				delete messageHistory[room.name]; //delete the message history
+				delete msgHistory[room.name]; //delete the message history
 				roomCount = _.size(rooms);
 				io.emit('updateRoomCount', {rooms: rooms, count: roomCount});
 			} else if (action === 'leaveRoom') { //room owner leaves room
@@ -105,7 +105,7 @@ function purge(io, s, action) {
 				delete rooms[people[s.id].owns];
 				people[s.id].owns = null;
 				room.people = _.without(room.people, s.id); //remove people from the room:people{}collection
-				delete messageHistory[room.name]; //delete the message history
+				delete msgHistory[room.name]; //delete the message history
 				roomCount = _.size(rooms);
 				io.emit('updateRoomCount', {rooms: rooms, count: roomCount});
 			}
@@ -188,12 +188,8 @@ module.exports = (io) => {
             }
         });
 
-        // socket.on('getOnlinePeople', function(fn) {
-        //             fn({people: people});
-        //     });
-
         socket.on('typing', (bool) => {
-            if (typeof people[socket.id] !== 'undefined') {
+            if (typeof people[socket.id] !== undefined) {
                 io.sockets.to(socket.room).emit('isTyping', {
 					isTyping: bool, 
 					name: people[socket.id].name
@@ -201,19 +197,18 @@ module.exports = (io) => {
             }
         });
         
-        socket.on('send', (msTime, msg) => {
-            if (people[socket.id].inroom !== undefined ) {
-                    io.sockets.to(socket.room).emit('message', msTime, people[socket.id], msg);
-                    socket.emit('isTyping', false);
-                    if (_.size(messageHistory[socket.room]) > 10) {
-                        messageHistory[socket.room].splice(0,1);
-                    } else {
-                        messageHistory[socket.room].push(people[socket.id].name + ': ' + msg);
-                    }
+        socket.on('send', (msgTime, msg) => {
+            if (typeof people[socket.id].inroom !== undefined) {
+				io.sockets.to(socket.room).emit('message', msgTime, people[socket.id], msg);
+				socket.emit('isTyping', false);
+				if (_.size(msgHistory[socket.room]) > 50) {
+					msgHistory[socket.room].splice(0,1); // remove 1 ele from idx 0
+				} else {
+					msgHistory[socket.room].push(people[socket.id].name + ': ' + msg);
+				}
             } else {
-            socket.emit('update', 'Please connect to a room.');
+            	socket.emit('update', 'Please connect to a room.');
             }
-            
         });
         
         socket.on('disconnect', function() {
@@ -228,6 +223,7 @@ module.exports = (io) => {
                 socket.emit('update', 'You are in a room. Please leave it first to create your own.');
             } else if (!people[socket.id].owns) {
                 var id = uuid.v4();
+				console.log(id);
                 var room = new Room(name, id, socket.id);
                 rooms[id] = room;
                 var roomCount = _.size(rooms);
@@ -240,7 +236,7 @@ module.exports = (io) => {
                 room.addPerson(socket.id);
                 socket.emit('update', 'Welcome to ' + room.name + '.');
                 socket.emit('sendRoomID', {id: id});
-                messageHistory[socket.room] = [];
+                msgHistory[socket.room] = [];
             } else {
                 socket.emit('update', 'You have already created a room.');
             }
@@ -268,6 +264,7 @@ module.exports = (io) => {
         socket.on('joinRoom', function(id) {
             if (typeof people[socket.id] !== 'undefined') {
                 var room = rooms[id];
+				console.log(id, room);
                 if (socket.id === room.owner) {
                     socket.emit('update', 'You are the owner of this room and you have already been joined.');
                 } else {
@@ -285,9 +282,9 @@ module.exports = (io) => {
                             io.sockets.to(socket.room).emit('update', user.name + ' has connected to ' + room.name + ' room.');
                             socket.emit('update', 'Welcome to ' + room.name + '.');
                             socket.emit('sendRoomID', {id: id});
-                            var keys = _.keys(messageHistory);
+                            var keys = _.keys(msgHistory);
                             if (_.contains(keys, socket.room)) {
-                                socket.emit('history', messageHistory[socket.room]);
+                                socket.emit('history', msgHistory[socket.room]);
                             }
                         }
                     }
