@@ -86,13 +86,13 @@ $(document).ready(function() {
   });
 
   //main message screen
-  $('#messageForm').submit(function() {
-    var msg = $('#msg').val();
-    if (msg !== '') {
-      socket.emit('send', new Date().getTime(), msg);
-      $('#msg').val('');
-    }
-  });
+    $('#messageForm').submit(() => {
+        var $msg = $('#msg').val();
+        if ($msg !== '') {
+            socket.emit('send', new Date().getTime(), $msg);
+            $('#msg').val('');
+        }
+    });
 
 
 
@@ -133,18 +133,18 @@ $(document).ready(function() {
     });
   });
 
-  $('#rooms').on("click", ".joinRoomBtn", function() {
-    var roomName = $(this).siblings('span').text();
-    var roomID = $(this).attr('id');
-    socket.emit('joinRoom', roomID);
-  });
+    // don't use arrow functions for the following two functions, as this 
+    // keyword points to the code surrounding this function, which is not desired.
+    $('#rooms').on("click", ".joinRoomBtn", function() {
+        var roomID = $(this).parent().attr('id');
+        socket.emit('joinRoom', roomID);
+    });
 
-  $('#rooms').on("click", ".removeRoomBtn", function() {
-    var roomName = $(this).siblings('span').text();
-    var roomID = $(this).attr('id');
-    socket.emit('removeRoom', roomID);
-    $('#createRoom').show();
-  });
+    $('#rooms').on("click", ".removeRoomBtn", function() {
+        var roomID = $(this).parent().attr('id');
+        socket.emit('removeRoom', roomID);
+        $('#createRoom').show();
+    });
 
   $('#leave').click(function() {
     var roomID = myRoomID;
@@ -174,11 +174,11 @@ $(document).ready(function() {
         $list.appendTo('#rooms');
 
         if (data.count) { // at least one room
-            $.each(data.rooms, (idx, room) => {
+            $.each(data.rooms, (id, room) => {
                 var $join = $('<button/>').addClass('joinRoomBtn btn btn-default btn-xs').text('Join');
                 var $remove = $('<button/>').addClass('joinRoomBtn btn btn-default btn-xs').text('Remove');
                 var $name = $('<span/>').text(room.name + ' ');
-                $('<li/>').attr('id', idx).addClass('list-group-item')
+                $('<li/>').attr('id', id).addClass('list-group-item')
                 .append($name).append($join).append($remove).appendTo('#rooms');
             });
         } else {
