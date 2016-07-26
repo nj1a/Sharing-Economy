@@ -228,7 +228,7 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                         var current_image = files[i];
                         var attraction_name = current_image.slice(current_image.lastIndexOf('/')+1, current_image.lastIndexOf('.'));
                         attraction_name = attraction_name.slice(attraction_name.lastIndexOf('_')+1);
-                        attraction_name = attraction_name.replace('-', ' ');
+                        attraction_name = attraction_name.replace(/-/g, ' ');
                         attraction_name = attraction_name.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 
                         attraction_images[files[i]] = attraction_name;
