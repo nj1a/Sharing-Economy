@@ -144,7 +144,7 @@ router.get('/', csrfProtection, function(req, res) {
     }
 });
 
-router.post('/result', function(req, res) {
+router.post('/result', csrfProtection, function(req, res) {
     console.log(req.body);
     console.log('Type: '+ typeof req.body.from_date + ' '+ typeof req.body.to_date + ' ' + typeof req.body.from_city + ' ' + typeof req.body.to_city);
     if (typeof req.body.from_date === "undefined" || typeof req.body.to_date === "undefined" || typeof req.body.from_city === "undefined" || typeof req.body.to_city === "undefined" || req.body.to_date === 'what day' || req.body.from_date === 'what day' || req.body.from_city === 'what city' || req.body.to_city === 'what city') {
@@ -205,7 +205,7 @@ router.get('/get_city', function(req, res){
 
 });
 
-router.get('/admin-manage', function(req, res) {
+router.get('/admin-manage', csrfProtection, function(req, res) {
     res.render('admin-manage', {
         title: 'admin_manage',
         message: 'adminManage',
@@ -232,7 +232,7 @@ router.post('/enter-data', function(req, res) {
     });
 });
 
-router.get('/admin', function(req, res) {
+router.get('/admin', csrfProtection, function(req, res) {
     sess = req.session;
 
     if (sess.email) {
@@ -251,7 +251,7 @@ router.get('/admin', function(req, res) {
     }
 });
 
-router.get('/profile', function(req, res){
+router.get('/profile', csrfProtection, function(req, res){
     sess=req.session;
     var userEmail;
 
@@ -318,7 +318,7 @@ router.get('/viewusr/:username', function(req, res){
 
 });
 
-router.get('/showusr', function(req, res){
+router.get('/showusr', csrfProtection, function(req, res){
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.email = ' +
                 "'"+ sess.targetUser + "'" , function(err, result1) {
@@ -459,7 +459,7 @@ router.post('/file-upload', function(req, res, next){
     });
 });
 
-router.post('/updatePassword', function(req, res){
+router.post('/updatePassword', csrfProtection, function(req, res){
     sess=req.session;
     var currPW = req.body.cpassword;
     var newPW = req.body.npassword;
@@ -574,14 +574,14 @@ router.post('/update_email', function(req, res){
 });
 
 // Post page
-router.get('/post/:postId', function(req, res){
+router.get('/post/:postId', csrfProtection, function(req, res){
     var username, type, post_date, way_of_travelling, travel_start_date, travel_end_date;
 
     tool.get_info_by_post_id(req.params.postId, function(result){
         if (result === 'error') {
           res.send('No such result in database');
         } else{
-            glob('public/img/'+req.params.postId+'_*.jpg', function(er, files){
+            glob('public/img/post_images'+req.params.postId+'_*.jpg', function(er, files){
                 if (er) {
                     throw er;
                 }
@@ -601,16 +601,22 @@ router.get('/post/:postId', function(req, res){
     });
 
 });
-router.get('/create_post', function(req, res){
+// Create post form
+router.get('/create_post', csrfProtection, function(req, res){
 
-    if (typeof sess.email === 'undefined') {
+    if (typeof sess.email === 'undefined' || typeof sess === 'undefined') {
         res.send('You need to sign in first');
     }else{
-        // res.render('create_post');
-        res.send(sess.email);
+        res.render('create_post');
+        // res.send(sess.email);
     }
 
+// Process create_post request
+router.post('/create_post', function(req, res){
 
+
+
+});
 
 });
 router.get("/removeFriend/:username", function(req, res){
