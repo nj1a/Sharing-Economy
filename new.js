@@ -802,7 +802,7 @@ router.get('/post/:postId', function(req, res){
         if (result === 'error') {
           res.send('No such result in database');
         } else{
-            glob('public/img/'+req.params.postId+'_*.jpg', function(er, files){
+            glob('public/img/post_images/'+req.params.postId+'_*.*', function(er, files){
                 if (er) {
                     throw er;
                 }
