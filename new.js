@@ -574,7 +574,7 @@ router.post('/signup', function(req, res){
 
     sess = req.session;
 
-    if (validateEmail(email) && validateBlackList(password)) {
+    if (validateEmail(email) && validateBlackList(password) && validateBlackList(username)) {
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query('SELECT * FROM wanderland.user_account WHERE user_account.email = ' +
                 "'" + account + "'" +  ' OR user_account.username =' + "'" + username + "'" ,
