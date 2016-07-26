@@ -1,16 +1,16 @@
 function toggleNameForm() {
-   $("#login-screen").toggle();
+   $('#login-screen').toggle();
 }
 
 function togglemessageWindow() {
-  $("#main-message-screen").toggle();
+  $('#main-message-screen').toggle();
 }
 
 // Pad n to specified size by prepending a zeros
 function zeroPad(num, size) {
-  var s = num + "";
+  var s = num + '';
   while (s.length < size) {
-    s = "0" + s;
+    s = '0' + s;
   }
 
   return s;
@@ -19,88 +19,88 @@ function zeroPad(num, size) {
 // Format the time specified in ms from 1970 into local HH:MM:SS
 function timeFormat(msTime) {
   var d = new Date(msTime);
-  return zeroPad(d.getHours(), 2) + ":" +
-    zeroPad(d.getMinutes(), 2) + ":" +
-    zeroPad(d.getSeconds(), 2) + " ";
+  return zeroPad(d.getHours(), 2) + ':' +
+    zeroPad(d.getMinutes(), 2) + ':' +
+    zeroPad(d.getSeconds(), 2) + ' ';
 }
 
 $(document).ready(function() {
-  //setup "global" variables first
+  //setup 'global' variables first
   var socket = io.connect();
   var myRoomID = null;
 
-  $("form").submit(function(event) {
+  $('form').submit(function(event) {
     event.preventDefault();
   });
 
-  $("#conversation").bind("DOMSubtreeModified",function() {
-    $("#conversation").animate({
-        scrollTop: $("#conversation")[0].scrollHeight
+  $('#conversation').bind('DOMSubtreeModified',function() {
+    $('#conversation').animate({
+        scrollTop: $('#conversation')[0].scrollHeight
       });
   });
 
-  $("#main-message-screen").hide();
-  $("#errors").hide();
-  $("#name").focus();
-  $("#join").attr('disabled', 'disabled');
+  $('#main-message-screen').hide();
+  $('#errors').hide();
+  $('#name').focus();
+  $('#join').attr("disabled", "disabled");
 
-  if ($("#name").val() === "") {
-    $("#join").attr('disabled', 'disabled');
+  if ($('#name').val() === '') {
+    $('#join').attr("disabled", "disabled");
   }
 
   //enter screen
-  $("#nameForm").submit(function() {
-    var name = $("#name").val();
-    var device = "desktop";
+  $('#nameForm').submit(function() {
+    var name = $('#name').val();
+    var device = 'desktop';
     if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
-      device = "mobile";
+      device = 'mobile';
     }
-    if (name === "" || name.length < 2) {
-      $("#errors").empty();
-      $("#errors").append("Please enter a name longer than 3 characters");
-      $("#errors").show();
+    if (name === '' || name.length < 2) {
+      $('#errors').empty();
+      $('#errors').append('Please enter a name longer than 3 characters');
+      $('#errors').show();
     } else {
-      socket.emit("joinserver", name, device);
+      socket.emit('start', name, device);
       toggleNameForm();
       togglemessageWindow();
-      $("#msg").focus();
+      $('#msg').focus();
     }
   });
 
-  $("#name").keypress(function(e){
-    var name = $("#name").val();
+  $('#name').keypress(function(e){
+    var name = $('#name').val();
     if(name.length < 2) {
-      $("#join").attr('disabled', 'disabled');
+      $('#join').attr("disabled", "disabled");
     } else {
-      $("#errors").empty();
-      $("#errors").hide();
-      $("#join").removeAttr('disabled');
+      $('#errors').empty();
+      $('#errors').hide();
+      $('#join').removeAttr("disabled");
     }
   });
 
   //main message screen
-  $("#messageForm").submit(function() {
-    var msg = $("#msg").val();
-    if (msg !== "") {
-      socket.emit("send", new Date().getTime(), msg);
-      $("#msg").val("");
+  $('#messageForm').submit(function() {
+    var msg = $('#msg').val();
+    if (msg !== '') {
+      socket.emit('send', new Date().getTime(), msg);
+      $('#msg').val('');
     }
   });
 
-  //'is typing' message
+  //"is typing" message
   var typing = false;
   var timeout;
 
   function timeoutFunction() {
     typing = false;
-    socket.emit("typing", false);
+    socket.emit('typing', false);
   }
 
-  $("#msg").keypress(function(e){
+  $('#msg').keypress(function(e){
     if (e.which !== 13) {
-      if (typing === false && myRoomID !== null && $("#msg").is(":focus")) {
+      if (typing === false && myRoomID !== null && $('#msg').is(':focus')) {
         typing = true;
-        socket.emit("typing", true);
+        socket.emit('typing', true);
       } else {
         clearTimeout(timeout);
         timeout = setTimeout(timeoutFunction, 5000);
@@ -108,121 +108,140 @@ $(document).ready(function() {
     }
   });
 
-  socket.on("isTyping", function(data) {
+  socket.on('isTyping', function(data) {
     if (data.isTyping) {
-      if ($("#"+data.person+"").length === 0) {
-        $("#updates").append("<li id='"+ data.person +"'><span class='text-muted'><small><i class='fa fa-keyboard-o'></i> " + data.person + " is typing.</small></li>");
+      if ($('#'+data.person+'').length === 0) {
+        $('#updates').append('<li id="'+ data.person +'"><span class="text-muted"><small><i class="fa fa-keyboard-o"></i> ' + data.person + ' is typing.</small></li>');
         timeout = setTimeout(timeoutFunction, 5000);
       }
     } else {
-      $("#"+data.person+"").remove();
+      $('#'+data.person+'').remove();
     }
   });
 
-  $("#showCreateRoom").click(function() {
-    $("#createRoomForm").toggle();
+  $('#showCreateRoom').click(function() {
+    $('#createRoomForm').toggle();
   });
 
-  $("#createRoomBtn").click(function() {
+  $('#createRoomBtn').click(function() {
     var roomExists = false;
-    var roomName = $("#createRoomName").val();
-    socket.emit("check", roomName, function(data) {
+    var roomName = $('#createRoomName').val();
+    socket.emit('check', roomName, function(data) {
       roomExists = data.result;
        if (roomExists) {
-          $("#errors").empty();
-          $("#errors").show();
-          $("#errors").append("Room <i>" + roomName + "</i> already exists");
+          $('#errors').empty();
+          $('#errors').show();
+          $('#errors').append('Room <i>' + roomName + '</i> already exists');
         } else {
         if (roomName.length > 0) { //also check for roomname
-          socket.emit("createRoom", roomName);
-          $("#errors").empty();
-          $("#errors").hide();
+          socket.emit('createRoom', roomName);
+          $('#errors').empty();
+          $('#errors').hide();
           }
         }
     });
   });
 
-  $("#rooms").on('click', '.joinRoomBtn', function() {
-    var roomName = $(this).siblings("span").text();
-    var roomID = $(this).attr("id");
-    socket.emit("joinRoom", roomID);
+  $('#rooms').on("click", ".joinRoomBtn", function() {
+    var roomName = $(this).siblings('span').text();
+    var roomID = $(this).attr('id');
+    socket.emit('joinRoom', roomID);
   });
 
-  $("#rooms").on('click', '.removeRoomBtn', function() {
-    var roomName = $(this).siblings("span").text();
-    var roomID = $(this).attr("id");
-    socket.emit("removeRoom", roomID);
-    $("#createRoom").show();
+  $('#rooms').on("click", ".removeRoomBtn", function() {
+    var roomName = $(this).siblings('span').text();
+    var roomID = $(this).attr('id');
+    socket.emit('removeRoom', roomID);
+    $('#createRoom').show();
   });
 
-  $("#leave").click(function() {
+  $('#leave').click(function() {
     var roomID = myRoomID;
-    socket.emit("leaveRoom", roomID);
-    $("#createRoom").show();
+    socket.emit('leaveRoom', roomID);
+    $('#createRoom').show();
   });
+  // htmkl css xml json js jquery (understand the syntax) untill week 10 (including security)
 
-//socket-y stuff
-socket.on("exists", function(data) {
-  $("#errors").empty();
-  $("#errors").show();
-  $("#errors").append(data.msg + " Try <strong>" + data.proposedName + "</strong>");
-    toggleNameForm();
-    togglemessageWindow();
-});
 
-socket.on("history", function(data) {
+    socket.on('nameExists', (msg) => {
+        $('#errors').empty();
+        $('#errors').show();
+        $('#errors').append(msg);
+        toggleNameForm();
+        togglemessageWindow();
+    });
+
+    socket.on('update', (msg) => {
+        $('<li/>').text(msg).appendTo('#msgs');
+    });
+
+    socket.on('updateRoomCount', (data) => {
+        $('#rooms').empty();
+        var $count = $('<span/>').addClass('badge').text(data.count);
+        var $list = $('<li/>').addClass('list-group-item active').text('Rooms');
+        $count.appendTo($list);
+        $list.appendTo('#rooms');
+
+        if (data.count) { // at least one room
+            $.each(data.rooms, (idx, room) => {
+                var $join = $('<button/>').addClass('joinRoomBtn btn btn-default btn-xs').text('Join');
+                var $remove = $('<button/>').addClass('joinRoomBtn btn btn-default btn-xs').text('Remove');
+                var $name = $('<span/>').text(room.name + ' ');
+                $('<li/>').attr('id', idx).addClass('list-group-item')
+                .append($name).append($join).append($remove).appendTo('#rooms');
+            });
+        } else {
+            $('<li/>').addClass('list-group-item').text('Wait for you to create a room').appendTo('#rooms');
+        }
+    });
+
+    socket.on('updatePeopleCount', (data) => {
+        $('#people').empty();
+        var $count = $('<span/>').addClass('badge').text(data.count);
+        var $list = $('<li/>').addClass('list-group-item active').text('People');
+        $count.appendTo($list);
+        $list.appendTo('#people');
+        
+        $.each(data.people, (idx, user) => {
+            var $name = $('<span/>').text(user.name + ' ');
+            var $device = $('<i/>').addClass('fa fa-' + user.device);
+            $('<li/>').addClass('list-group-item').append($name).append($device).appendTo('#people');
+        });
+    });
+
+socket.on('history', function(data) {
   if (data.length !== 0) {
-    $("#msgs").append("<li><strong><span class='text-warning'>Last 10 messages:</li>");
+    $('#msgs').append('<li><strong><span class="text-warning">Last 10 messages:</li>');
     $.each(data, function(data, msg) {
-      $("#msgs").append("<li><span class='text-warning'>" + msg + "</span></li>");
+      $('#msgs').append('<li><span class="text-warning">' + msg + '</span></li>');
     });
   } else {
-    $("#msgs").append("<li><strong><span class='text-warning'>No past messages in this room.</li>");
+    $('#msgs').append('<li><strong><span class="text-warning">No past messages in this room.</li>');
   }
 });
 
-  socket.on("update", function(msg) {
-    $("#msgs").append("<li>" + msg + "</li>");
-  });
 
-  socket.on("update-people", function(data){
-    $("#people").empty();
-    $('#people').append("<li class=\"list-group-item active\">People online <span class=\"badge\">"+data.count+"</span></li>");
-    $.each(data.people, function(a, obj) {
-      $('#people').append("<li class=\"list-group-item\"><span>" + obj.name + "</span> <i class=\"fa fa-"+obj.device+"\"></i> ");
-    });
 
-  });
 
-  socket.on("message", function(msTime, person, msg) {
-    $("#msgs").append("<li><strong><span class='text-success'>" + timeFormat(msTime) + person.name + "</span></strong>: " + msg + "</li>");
+
+  socket.on('message', function(msTime, person, msg) {
+    $('#msgs').append('<li><strong><span class="text-success">' + timeFormat(msTime) + person.name + '</span></strong>: ' + msg + '</li>');
     //clear typing field
-     $("#"+person.name+"").remove();
+     $('#'+person.name+'').remove();
      clearTimeout(timeout);
      timeout = setTimeout(timeoutFunction, 0);
   });
 
-  socket.on("roomList", function(data) {
-    $("#rooms").text("");
-    $("#rooms").append("<li class=\"list-group-item active\">List of rooms <span class=\"badge\">"+data.count+"</span></li>");
-     if (!jQuery.isEmptyObject(data.rooms)) {
-      $.each(data.rooms, function(id, room) {
-        var html = "<button id="+id+" class='joinRoomBtn btn btn-default btn-xs' >Join</button>" + " " + "<button id="+id+" class='removeRoomBtn btn btn-default btn-xs'>Remove</button>";
-        $('#rooms').append("<li id="+id+" class=\"list-group-item\"><span>" + room.name + "</span> " + html + "</li>");
-      });
-    } else {
-      $("#rooms").append("<li class=\"list-group-item\">There are no rooms yet.</li>");
-    }
-  });
 
-  socket.on("sendRoomID", function(data) {
+
+  socket.on('sendRoomID', function(data) {
     myRoomID = data.id;
   });
 
-  socket.on("disconnect", function(){
-    $("#msgs").append("<li><strong><span class='text-warning'>The server is not available</span></strong></li>");
-    $("#msg").attr("disabled", "disabled");
-    $("#send").attr("disabled", "disabled");
+  socket.on('disconnect', function(){
+    $('#msgs').append('<li><strong><span class="text-warning">The server is not available</span></strong></li>');
+    $('#msg').attr('disabled', 'disabled');
+    $('#send').attr('disabled', 'disabled');
   });
 
 });

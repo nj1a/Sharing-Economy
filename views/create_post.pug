@@ -33,15 +33,21 @@ html
           option(value='guide') Looking for tour guide
           option(value='offer_guide') Offering tour
       .input_element
+        | Ways to get there:
+        input(type='text', name='way_of_travelling')
+      .input_element
+        | Attribute of the tour:
+        input(type='text', name='travel_type')
+      .input_element
         | Upload Image: 
         input(type='file', ,='', name='image', accept='image/*', multiple='')
       .input_element
         .input_date
           | Start Date: 
-          input.datepicker(type='text', name='start_date')
+          input.datepicker(type='text', name='from_date')
         .input_date
           | End Date: 
-          input.datepicker(type='text', name='end_date')
+          input.datepicker(type='text', name='to_date')
       #submit_button.input_element
         input(type='submit')
 
