@@ -576,12 +576,12 @@ router.post('/update_email', function(req, res){
 // Post page
 router.get('/post/:postId', csrfProtection, function(req, res){
     var username, type, post_date, way_of_travelling, travel_start_date, travel_end_date;
-
     tool.get_info_by_post_id(req.params.postId, function(result){
         if (result === 'error') {
           res.send('No such result in database');
         } else{
-            glob('img/post_images'+req.params.postId+'_*.jpg', function(er, files){
+            glob('public/img/post_images'+req.params.postId+'_*.jpg', function(er, files){
+                console.log('This is glob: '+files);
                 if (er) {
                     throw er;
                 }
