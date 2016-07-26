@@ -7,18 +7,38 @@ html(lang="en")
         script(src="js/jquery-3.1.0.js", defer)
         script(src="js/profile.js", defer)
         script(src="js/viewusr.js", defer)
+        link(rel='stylesheet', href='../css/w3.css')
+        link(rel='stylesheet', href='../css/w3-theme-teal.css')
+        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans')
+        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css')
     body
         main(id=type)
             section(class="top-nav bdb-lg")
                 div
+                    section(class="top-nav bdb-lg")
+                        div
+                            nav.w3-top.top-nav
+                                ul.w3-navbar.w3-theme-d2.w3-left-align.w3-large
+                                  li
+                                    a.w3-padding-large.w3-hover-white(href='#')
+                                      i.fa.fa-home
+                                  li
+                                    a.w3-padding-large.w3-hover-white(href='/profile', title='Account Settings')
+                                        i.fa.fa-user
+                                  li.w3-hide-small
+                                    a.w3-padding-large.w3-hover-white(href='#', title='Inbox')
+                                      i.fa.fa-envelope
+                                  li.w3-hide-small.w3-right
+                                    form(class="anchor-wrap" action="/logout" method="get")
+                                        input(type="submit" class="flt_r m_l_5" id="logoutButton" value="SIGN OUT")
                     
-                    form(class="anchor-wrap flt_r w30p" action="/logout" method="get")
+                    //form(class="anchor-wrap flt_r w30p" action="/logout" method="get")
                         //button(type="submit" value="logout" class="flt_r logoButton")= "(" + logout ")"
                         //div(class="anchor-wrap")
-                        input(type="submit" class="flt_r m_l_5" id="logoutButton" value="logout")
-                    form(action="/profile" method="get")
-                        div(class="back")
-                            input(type="submit" class="main-title" value="signed as " + type)
+                        //input(type="submit" class="flt_r m_l_5" id="logoutButton" value="logout")
+                    //form(action="/profile" method="get")
+                        //div(class="back")
+                            //input(type="submit" class="main-title" value="signed as " + type)
 
             section(class="main-wrap")
                 section(class="main-nav bdb-lg h100") 

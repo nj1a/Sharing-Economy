@@ -24,7 +24,6 @@ $(document).ready(function(){
 			var curr = this.id.substring(3);
 			
 			processMenu(curr, navs);
-			//alert(navs[curr-1].id);
 			if ( navs[curr-1].id === 'manageUser') {
 				listInfo(3, info);
 			} else if (navs[curr-1].id === 'manageData'){

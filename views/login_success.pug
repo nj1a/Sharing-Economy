@@ -1,0 +1,66 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        meta(name="google-signin-client_id" content="541812798719-dg2tn8dqj5skgu9kqg5jpb3g7hdu9ip0.apps.googleusercontent.com")
+
+        title= Index
+        link(rel='stylesheet', href='js/jquery-ui/jquery-ui.css')
+        link(rel="stylesheet", href="css/index.css")
+        script(src="https://apis.google.com/js/platform.js" async defer)
+        script(src="js/jquery-3.1.0.js")
+        script(src="js/index.js")
+        script(src='js/jquery-ui/jquery-ui.js')
+        script(src='js/typeahead.min.js')
+        script.
+          $( function() {
+          $( ".datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
+          } );
+    body
+        section(class="body-wrap")
+            header
+
+                li.w3-hide-small.w3-right
+                    form(class="anchor-wrap" action="/logout" method="get")
+                        
+                        input(type="submit" class="flt_r m_t_10" id="logoutButton" value="SIGN OUT")
+
+                        a(href="/profile") My Account
+                        
+                
+                  
+            main(id="root-content")
+                section(id="main-contents" class="main-wrap")
+                    section(class="main-background")
+                        image(src="img/london_eye.jpg", class="background-image", alt="london picture")
+                        image(src="img/paris.jpg" class="background-image" alt="paris picture")
+                        image(src="img/beijing1.jpg", class="background-image", alt="beijing picture")
+                    section(class="main-content text-center")
+                        section(class="v-wrap")
+                            section(class="v-center")
+                                section(class="main-text")
+                                    h2 Travel Anywhere
+                                    h4 with Wanderland
+                        section.search-background
+                            //form(action='https://wander-land.herokuapp.com/result', method='post')
+                            form(action='http://127.0.0.1:1337/result', method='post')
+                                input(type="hidden" name="_csrf" value="{{csrfToken}}")
+                                div
+                                  | I am looking for:
+                                  select#post-type-bar(name='post_type')
+                                    option(value='buddy') Looking for someone to travel with
+                                    option(value='guide') Looking for a tour guide
+                                div
+                                  | From:
+                                  input#from-date.datepicker(type='text', name='from_date', value='what day')
+                                div
+                                  | To:
+                                  input#to-date.datepicker(type='text', name='to_date', value='what day')
+                                div
+                                  | From:
+                                  input#from-city.city-field(type='text', name='from_city', value='what city', spellcheck='false', autocomplete='off')
+                                div
+                                  | To:
+                                  input#to-city.city-field(type='text', name='to_city', value='what city', spellcheck='false', autocomplete='off')
+                                button.button(value='search')
+                                  i.w3-large.fa.fa-search(3='')

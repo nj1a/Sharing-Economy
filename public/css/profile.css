@@ -22,7 +22,7 @@ input#logoutButton{
 	font-size:13px;
 	color:white;
 	border:none;
-	background-color: #354458;
+	background-color: #00766a;
 	-webkit-appearance:none;
 }
 
@@ -107,7 +107,7 @@ textarea{
 	margin-top:25px;
 }
 
-#nav1, #nav2, #nav3, #nav4 {
+#nav1, #nav2, #nav3, #nav4, #nav5 {
 	color:#596981;
 }
 
@@ -155,7 +155,7 @@ textarea{
 
 
 
-#account, #personal, #manageUser{
+#account, #personal, #manageUser, #friends-list, #view-request{
 	margin-right: 15px;
 }
 

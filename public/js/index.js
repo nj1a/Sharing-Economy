@@ -135,7 +135,7 @@ $(document).ready(function() {
 	            if(data==='done')           
 	            {	
 	            	//alert(1);
-	                window.location.href="/profile";
+	                window.location.href="/login_success";
 	            } else {
 	            	//alert(2);
 	            	if (x===null){

@@ -124,7 +124,7 @@ header {
     z-index:1;
 
 }
-header a{
+header a, input#logoutButton{
     padding: 3px 5px 3px 5px;
 
     float:right;
@@ -142,10 +142,34 @@ header a:visited {
 header a:link {
     text-decoration: none;
 }
-header a:hover {
+header a:hover, input#logoutButton:hover {
     color: #009688;
     border-color: #009688;
 }
+
+input#logoutButton{
+    
+    border:none;
+    
+    -webkit-appearance:none;
+    background-color: transparent;
+}
+
+input#logoutButton:hover{
+    cursor:pointer;
+    
+}
+
+input#logoutButton:focus{
+    outline: none;
+
+}
+
+.m_t_10{
+    position: relative;
+    top: 15;
+}
+
 #pop-wrap/*, #pop-wrap2*/ {
     display:none;
     width:100%;
@@ -367,3 +391,5 @@ footer a:link {
 footer a:hover{
     text-decoration: underline;
 }
+
+

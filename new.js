@@ -131,7 +131,7 @@ router.post('/login', function(req, res){
                             sess.email = email;
                             sess.pass = password;
                             sess.currId = result.rows[0].user_id;
-                            console.log(sess.currId);
+                            console.log("current session ID:  " + sess.currId);
                             res.end('done');
                         }
                     }
@@ -147,7 +147,7 @@ router.get('/', csrfProtection, function(req, res) {
     sess = req.session;
 
     if (sess.email) {
-        res.redirect('/profile');
+        res.redirect('/login_success');
     } else {
         if (!sess.error_msg) {
             sess.error_msg = '';
@@ -161,6 +161,15 @@ router.get('/', csrfProtection, function(req, res) {
                 //csrfToken: req.csrfToken()
             });
         }
+    }
+});
+
+router.get("/login_success", function(req, res) {
+    sess = req.session;
+    if (sess.email){
+        res.render("login_success");
+    } else{
+        res.redirect('/');
     }
 });
 // Create post form
