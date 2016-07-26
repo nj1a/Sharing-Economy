@@ -213,6 +213,21 @@ $(document).ready(function() {
         }
     });
 
+    socket.on('message', function(msgTime, person, msg) {
+        $('#msgs').append('<li><strong><span class="text-success">' + timeFormat(msgTime) + person.name + '</span></strong>: ' + msg + '</li>');
+
+        //clear typing field
+        $('#' + person.name + '_t').remove();
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(timeUp, 0);
+    });
+
+    socket.on('disconnect', () => {
+        $('#msgs').append('<li><strong><span class="text-warning">You are disconnected.</span></strong></li>');
+        $('#msg').attr('disabled', 'disabled');
+        $('#send').attr('disabled', 'disabled');
+    });
+
 socket.on('history', function(data) {
   if (data.length !== 0) {
     $('#msgs').append('<li><strong><span class="text-warning">Last 10 messages:</li>');
@@ -228,13 +243,7 @@ socket.on('history', function(data) {
 
 
 
-  socket.on('message', function(msTime, person, msg) {
-    $('#msgs').append('<li><strong><span class="text-success">' + timeFormat(msTime) + person.name + '</span></strong>: ' + msg + '</li>');
-    //clear typing field
-     $('#'+person.name+'').remove();
-     clearTimeout(timeoutId);
-     timeoutId = setTimeout(timeUp, 0);
-  });
+
 
 
 
@@ -242,10 +251,6 @@ socket.on('history', function(data) {
     myRoomID = data.id;
   });
 
-  socket.on('disconnect', function(){
-    $('#msgs').append('<li><strong><span class="text-warning">The server is not available</span></strong></li>');
-    $('#msg').attr('disabled', 'disabled');
-    $('#send').attr('disabled', 'disabled');
-  });
+
 
 });
