@@ -630,6 +630,7 @@ router.post('/create_post', function(req, res){
             return [year, month, day].join('-');
         }
         var way_of_travelling = req.body.way_of_travelling;
+        var description = req.body.description;
         var post_type = req.body.post_type;
         var post_date = new Date();
         post_date = formatDate(post_date);
