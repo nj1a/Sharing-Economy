@@ -9,6 +9,7 @@ var expressValidator = require('express-validator');
 var sha256 = require('js-sha256');
 
 var router = express.Router();
+router.use(busboy());
 
 // Security
 var csrf = require('csurf');
