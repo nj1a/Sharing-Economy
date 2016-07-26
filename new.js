@@ -205,7 +205,7 @@ router.get('/get_city', function(req, res){
 });
 router.get('/city/:cityID', csrfProtection, function(req, res){
     
-    tool.get_info_by_city_id(cityID, function(city_info){
+    tool.get_info_by_city_id(req.params.cityID, function(city_info){
         if (city_info == 'error') {
             res.send('City not found');
         }else{
