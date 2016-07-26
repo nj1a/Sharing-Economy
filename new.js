@@ -80,7 +80,7 @@ router.use(expressValidator({
     }
 }));
 
-router.post('/login', parseForm, csrfProtection, function(req, res){
+router.post('/login', function(req, res){
     sess = req.session;
     var email = req.body.email;
     var password = req.body.pass;
