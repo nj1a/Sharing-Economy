@@ -205,7 +205,7 @@ router.get('/get_city', function(req, res){
 });
 router.get('/city/:cityID', csrfProtection, function(req, res){
     
-    req.render('city');
+    res.render('city');
 
 
 });
