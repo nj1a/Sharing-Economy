@@ -79,7 +79,7 @@ html(lang="en")
                                     h4 with Wanderland
                         section.search-background
                             form(action='https://wander-land.herokuapp.com/result', method='post')
-                                input(type="hidden" name="_csrf" value="<%- csrfToken %>")
+                                input(type="hidden" name="_csrf" value="#{csrf}")
                                 div
                                   | I am looking for:
                                   select#post-type-bar(name='post_type')
