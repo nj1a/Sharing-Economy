@@ -235,6 +235,7 @@ router.get('/get_city', function(req, res){
         else{
             res.send(JSON.stringify(result));
         }
+        console.log('test');
     });
 
 });
