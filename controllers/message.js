@@ -174,8 +174,14 @@ module.exports = (io) => {
                 // update people and rooms
                 peopleCount = _.size(people);
                 roomCount = _.size(rooms);
-                socket.emit('updateRoomCount', {rooms: rooms, count: roomCount});
-                io.emit('updatePeopleCount', {people: people, count: peopleCount});
+                socket.emit('updateRoomCount', {
+					rooms: rooms, 
+					count: roomCount
+				});
+                io.emit('updatePeopleCount', {
+					people: people, 
+					count: peopleCount
+				});
                 
                 // record socket
                 sockets.push(socket);

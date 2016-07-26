@@ -177,15 +177,30 @@ $(document).ready(function() {
 
     socket.on('updateRoomCount', (data) => {
         $('#rooms').text('');
-        $('#rooms').append('<li class=\'list-group-item active\'>List of rooms <span class=\'badge\'>'+data.count+'</span></li>');
-        if (!jQuery.isEmptyObject(data.rooms)) {
-        $.each(data.rooms, function(id, room) {
-            var html = '<button id='+id+' class="joinRoomBtn btn btn-default btn-xs" >Join</button>' + ' ' + '<button id='+id+' class="removeRoomBtn btn btn-default btn-xs">Remove</button>';
-            $("#rooms").append('<li id='+id+' class=\'list-group-item\'><span>' + room.name + '</span> ' + html + '</li>');
-        });
+        var $count = $('<span/>').addClass('badge').text(data.count);
+        var $list = $('<li/>').addClass('list-group-item active').text('Rooms');
+        $count.appendTo($list);
+        $list.appendTo('#rooms');
+
+        if (!jQuery.isEmptyObject(data.rooms)) { // at least one room
+            $.each(data.rooms, (idx, room) => {
+                var $join = $('<button/>').addClass('joinRoomBtn btn btn-default btn-xs').text('Join');
+                var $remove = $('<button/>').addClass('joinRoomBtn btn btn-default btn-xs').text('Remove');
+                var $name = $('<span/>').text(room.name + ' ');
+                $('<li/>').attr('id', idx).addClass('list-group-item')
+                .append($name).append($join).append($remove).appendTo('#rooms');
+            });
         } else {
-        $('#rooms').append('<li class=\'list-group-item\'>There are no rooms yet.</li>');
+            $('<li/>').addClass('list-group-item').text('Wait for you to create a room').appendTo('#rooms');
         }
+    });
+
+    socket.on('updatePeopleCount', (data) => {
+        $('#people').empty();
+        $("#people").append('<li class=\'list-group-item active\'>People online <span class=\'badge\'>'+data.count+'</span></li>');
+        $.each(data.people, function(a, obj) {
+        $("#people").append('<li class=\'list-group-item\'><span>' + obj.name + '</span> <i class=\'fa fa-'+obj.device+'\'></i> ');
+        });
     });
 
 socket.on('history', function(data) {
@@ -201,14 +216,7 @@ socket.on('history', function(data) {
 
 
 
-  socket.on('updatePeopleCount', function(data){
-    $('#people').empty();
-    $("#people").append('<li class=\'list-group-item active\'>People online <span class=\'badge\'>'+data.count+'</span></li>');
-    $.each(data.people, function(a, obj) {
-      $("#people").append('<li class=\'list-group-item\'><span>' + obj.name + '</span> <i class=\'fa fa-'+obj.device+'\'></i> ');
-    });
 
-  });
 
   socket.on('message', function(msTime, person, msg) {
     $('#msgs').append('<li><strong><span class="text-success">' + timeFormat(msTime) + person.name + '</span></strong>: ' + msg + '</li>');
