@@ -25,9 +25,16 @@ function timeFormat(msTime) {
 }
 
 $(document).ready(function() {
-  //setup 'global' variables first
-  var socket = io.connect();
-  var myRoomID = null;
+
+    var socket = io.connect();
+    var myRoomID = null;
+    var typing = false;
+    var timeoutId;
+
+    function timeUp() {
+        typing = false;
+        socket.emit('typing', false);
+    }
 
   $('form').submit(function(event) {
     event.preventDefault();
@@ -87,37 +94,21 @@ $(document).ready(function() {
     }
   });
 
-  //"is typing" message
-  var typing = false;
-  var timeout;
 
-  function timeoutFunction() {
-    typing = false;
-    socket.emit('typing', false);
-  }
 
-  $('#msg').keypress(function(e){
-    if (e.which !== 13) {
-      if (typing === false && myRoomID !== null && $('#msg').is(':focus')) {
-        typing = true;
-        socket.emit('typing', true);
-      } else {
-        clearTimeout(timeout);
-        timeout = setTimeout(timeoutFunction, 5000);
-      }
-    }
-  });
+    $('#msg').keypress((e) => {
+        if (e.which !== 13) { // not return
+            if (!typing && myRoomID && $('#msg').is(':focus')) {
+                typing = true;
+                socket.emit('typing', true);
+            } else {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(timeUp, 3000);
+            }
+        }
+    });
 
-  socket.on('isTyping', function(data) {
-    if (data.isTyping) {
-      if ($('#'+data.person+'').length === 0) {
-        $('#updates').append('<li id="'+ data.person +'"><span class="text-muted"><small><i class="fa fa-keyboard-o"></i> ' + data.person + ' is typing.</small></li>');
-        timeout = setTimeout(timeoutFunction, 5000);
-      }
-    } else {
-      $('#'+data.person+'').remove();
-    }
-  });
+
 
   $('#showCreateRoom').click(function() {
     $('#createRoomForm').toggle();
@@ -205,8 +196,21 @@ $(document).ready(function() {
         $.each(data.people, (idx, user) => {
             var $name = $('<span/>').text(user.name + ' ');
             var $device = $('<i/>').addClass('fa fa-' + user.device);
-            $('<li/>').addClass('list-group-item').append($name).append($device).appendTo('#people');
+            $('<li/>').attr('id', user.name).addClass('list-group-item').append($name).append($device).appendTo('#people');
         });
+    });
+
+    socket.on('isTyping', (data) => {
+        if (data.isTyping) {
+            if (!$('#'+ data.name + '_t').length) {
+                $('<span/>').attr('id', data.name + '_t').addClass('text-muted').text(' is typing')
+                .appendTo('#' + data.name);
+
+                timeoutId = setTimeout(timeUp, 3000);
+            }
+        } else {
+            $('#' + data.name + '_t').remove();
+        }
     });
 
 socket.on('history', function(data) {
@@ -228,8 +232,8 @@ socket.on('history', function(data) {
     $('#msgs').append('<li><strong><span class="text-success">' + timeFormat(msTime) + person.name + '</span></strong>: ' + msg + '</li>');
     //clear typing field
      $('#'+person.name+'').remove();
-     clearTimeout(timeout);
-     timeout = setTimeout(timeoutFunction, 0);
+     clearTimeout(timeoutId);
+     timeoutId = setTimeout(timeUp, 0);
   });
 
 
