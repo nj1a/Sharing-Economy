@@ -276,6 +276,7 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                             res.send('City not found');
                             return;
                         };
+                        console.log('hi');
                         res.render('city', {
                             city_info: city_info,
                             csrfToken: req.csrfToken(),
