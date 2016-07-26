@@ -258,7 +258,7 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
 router.get('/country/:countryID', csrfProtection, function(req, res){
     
     res.render('country');
-
+});
 
 
 router.get('/admin-manage', csrfProtection, function(req, res) {
