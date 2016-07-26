@@ -144,7 +144,7 @@ router.get('/', csrfProtection, function(req, res) {
     }
 });
 
-router.post('/result',function(req, res) {
+router.post('/result', parseForm, csrfProtection, function(req, res) {
     console.log(req.body);
     console.log('Type: '+ typeof req.body.from_date + ' '+ typeof req.body.to_date + ' ' + typeof req.body.from_city + ' ' + typeof req.body.to_city);
     if (typeof req.body.from_date === "undefined" || typeof req.body.to_date === "undefined" || typeof req.body.from_city === "undefined" || typeof req.body.to_city === "undefined" || req.body.to_date === 'what day' || req.body.from_date === 'what day' || req.body.from_city === 'what city' || req.body.to_city === 'what city') {
@@ -179,7 +179,8 @@ router.post('/result',function(req, res) {
                             // res.send(JSON.stringify(result));
                             console.log('This is result object: ', result3);
                             res.render("result", {
-                                result: result3
+                                result: result3,
+                                csrfToken: req.csrfToken()
                             });
                         }
                     });
