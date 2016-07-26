@@ -675,7 +675,7 @@ router.post('/create_post', parseForm, csrfProtection, function(req, res){
 
     }
     else{
-        res.send（'Please fill out the whole form');
+        res.send('Please fill out the whole form');
     }
 
 
