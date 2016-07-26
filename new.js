@@ -263,7 +263,7 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                     };
                     // Get ratings and comments
                     tool.get_ratings_by_city_id(req.params.cityID, function(ratings){
-                        if (city_info == 'error') {
+                        if (ratings == 'error') {
                             res.send('City not found');
                             return;
                         };
@@ -274,7 +274,7 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                             attraction_images: attraction_images,
                             ratings: ratings
                         });
-                    })
+                    });
                 });
 
 
