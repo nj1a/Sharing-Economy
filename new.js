@@ -162,7 +162,14 @@ router.get('/', csrfProtection, function(req, res) {
         }
     }
 });
-
+// Create post form
+router.get('/create_post', csrfProtection, function(req, res){
+    if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
+        res.send('You need to sign in first');
+    }else{
+        res.render('create_post');
+    }
+});
 router.post('/result', function(req, res) {
     console.log(req.body);
     console.log('Type: '+ typeof req.body.from_date + ' '+ typeof req.body.to_date + ' ' + typeof req.body.from_city + ' ' + typeof req.body.to_city);
@@ -795,7 +802,7 @@ router.get('/post/:postId', function(req, res){
         if (result === 'error') {
           res.send('No such result in database');
         } else{
-            glob('public/img/'+req.params.postId+'_*.jpg', function(er, files){
+            glob('public/img/post_images/'+req.params.postId+'_*.*', function(er, files){
                 if (er) {
                     throw er;
                 }
