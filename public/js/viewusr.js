@@ -1,37 +1,38 @@
-
+//"Send request for friends"
 
 $(document).ready(function() {
-//{username: event.target.value}
- 	//$("#friends-list").on("click", function(){
- 		
+	if ($(".friendship").html() === "already friends") {
 
- 	//});
-	
+		$('<form>', {
+				"action": "/profile",
+				"id": "friendReq"
+			}).appendTo(".reqLink");
 
 
-	/*$("#submitButton").on("click", function(event){
-		alert(event.target.value);
-		$.get("/viewusr/" + event.target.value, function(data){
-			if (data==="good"){
+			$('<div>', {
+				"class": "link-container" ,
+				"id": "link-wrap"
+			}).appendTo("#friendReq");
+
+			$('<input>', {
+				"class": "submitButton",
+				"id": "reqButton",
+				"value": "send friend request!"
+			}).appendTo("#link-wrap");
+
+			
+	}
+
+
+
+	$("#reqButton").click(function(){
+
+		//alert($('.username-field').html());
+		$.get("/requestFriend/" + $('.username-field').html(), function(data){
+			if (data===$('.username-field').html()){
+				alert("request sent!");
 				window.location.href="/showusr";
 			}
 		});
-
-		//alert(result);
-	});*/
-
-	//var renderType = document.getElementById("own");
-	//var editButtons = document.getElementsByClass("edit-icon");
-	//alert(renderType);
-	/*if (renderType === null) {
-
-		for(i=0; i<editButtons.length; i++) {
-			editButtons[i].className += " hidden";
-		}
-	} else {
-
-		for(i=0; i<editButtons.length; i++) {
-			editButtons[i].className = "edit-icon";
-		}
-	}*/
+	});
 });

@@ -123,6 +123,15 @@ country_name varchar(100) NOT NULL default '',
 PRIMARY KEY (id)
 );
 
+DROP TABLE IF EXISTS request CASCADE;
+create table request ( 
+    to_user_id int,
+    from_user_id int,
+    primary key (to_user_id, from_user_id),
+    foreign key (to_user_id) references user_account(user_id),
+    foreign key (from_user_id) references user_account(user_id)
+);
+
 
 
 
@@ -448,7 +457,7 @@ INSERT INTO product_post VALUES(default, 4, 'buddy', '2014-06-04', 'by plane', '
 INSERT INTO product_post VALUES(default, 5, 'guide', '2014-07-05', 'by foot', '2015-02-23', '2015-04-05', 24, 1, 'Description', 'This is Title', 'Test', NULL);
 INSERT INTO product_post VALUES(default, 6, 'buddy', '2014-08-06', 'by ferry', '2015-05-01', '2015-06-21', 2, 3, 'Description', 'This is Title', 'Test', NULL);
 INSERT INTO product_post VALUES(default, 7, 'offer_guide', '2014-09-07', 'by ferry', '2015-06-03', '2015-08-17', 1, 1, 'Description', 'This is Title', 'Test', NULL);
-INSERT INTO product_post VALUES(default, 8, 'buddy', '2015-04-08', 'by plane', '2015-08-30', '2015-09-01', 27, 29, 'Description', 'This is Title', 'Test', NULL);
+INSERT INTO product_post VALUES(default, 8, 'buddy', '2015-04-08', 'by plane', '2016-07-25', '2016-07-26', 27, 29, 'Description', 'This is Title', 'Test', NULL);
 INSERT INTO product_post VALUES(default, 9, 'guide', '2015-05-09', 'by train', '2015-09-01', '2015-09-18', 20, 19, 'Description', 'This is Title', 'Test', NULL);
 INSERT INTO product_post VALUES(default, 10, 'guide', '2015-11-10', 'by plane', '2015-12-25', '2016-01-13', 15, 39, 'Description', 'This is Title', 'Test', NULL);
 
@@ -470,4 +479,8 @@ INSERT INTO friendship VALUES(2, 5);
 INSERT INTO friendship VALUES(3, 1);
 INSERT INTO friendship VALUES(4, 6);
 INSERT INTO friendship VALUES(6, 5);
+
+INSERT INTO request VALUES(1, 10);
+
+
 

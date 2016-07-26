@@ -6,7 +6,8 @@ html(lang="en")
         link(rel="stylesheet", href="css/profile.css")
         script(src="js/jquery-3.1.0.js", defer)
         script(src="js/profile.js", defer)
-        script(src="js/viewusr.js", defer)
+        script(src="js/admin.js", defer)
+        //script(src="js/viewusr.js", defer)
     body
         //ul
             //if results == '-1'
@@ -49,6 +50,10 @@ html(lang="en")
                             div(id="friends-list" class="main-nav-button")
                                 a(id="nav3" href="#")
                                     span(class="nav-title") My Friends
+                            div(id="view-request" class="main-nav-button")
+                                a(id="nav4" href="#")
+                                    span(class="nav-title")="View friends request"
+
                 ul(id="account-settings" class="profile-info selected")
                     li(id="profile-manage" class="bdb-lg profile-contents")
                         section(class="container-content")
@@ -222,37 +227,116 @@ html(lang="en")
                                                                         img(src="img/edit_icon.png" class="edit-img" id="edit-button7")
 
                                                     span(class="error" id="newDescError")=errors.error_newDescValue
+                                                    
+                if results[0].is_admin
+                    ul(id="manusr" class="profile-info")
+                        li(class="profile-contents")
+                            section(class="container-content bdb-lg")
+                                section(class="content-key")
+                                    span(class="sub-title") Update an account
+                                    span(class="sub-description") Update information of an exisiting user
 
-                                                    //span(class="edit-icon")
-                                                      //  button(class="edit-img button") Edit 
-                                                        //button(class="update-personal-info hidden") Update
-                                                        //button(class="cancel-edit hidden") Cancel
+                                section(class="content-value")
+                                    div(class="acc-info")
+                                        div(id="resultArea")
+                                            div(class="perma" id="resultBox")
+                                                label(class="profile-label") Email address
+                                                div(class="username-container")
+                                                    input(type="text" placeholder="Enter email address of an existing user" name="findEmail" id="inputEmail")
+                                                    //span(class="username-field")
+                                                    input(type="button" value="find user!" id="findUsr")
 
-                ul(id="friends" class="profile-info")
-                    li(class="profile-contents")
-                        section(class="container-content bdb-lg")
-                            section(class="content-key")
-                                span(class="sub-title") Friends 
-                                span(class="sub-description") Visit your friends profile!
 
-                            section(class="content-value")                       
-                                div(class="info-content")
-                                    div(id="resultWrap")
-                                        div(id="resultField")
+
+
+                        li(class="profile-contents")
+                            section(class="container-content bdb-lg")
+                                section(class="content-key")
+                                    span(class="sub-title") Create an account 
+                                    span(class="sub-description") Add a new user to the database
+
+
+                                section(class="content-value")
+                                    form
+                                        div(class="acc-info") 
+                                            
+                                                label(class="profile-label") Username
+                                                div(class="username-container")
+                                                    input(type="text" placeholder="username"  name="newACCusername")
+                                        
+                                            
+                                                label(class="profile-label") Email address
+                                                div(class="username-container")
+                                                    input(type="text" placeholder="email"  name="newACCemail")
+                                        
+                                            
+                                                label(class="profile-label") Password
+                                                div(class="username-container")
+                                                    input(type="text" placeholder="password"  name="newACCpass")
+                                        
+                                           
+                                                label(class="profile-label") First name
+                                                div(class="username-container")
+                                                    input(type="text" placeholder="first name" name="newACCfname")
+                                        
+                                           
+                                                label(class="profile-label") Last name
+                                                div(class="username-container")
+                                                    input(type="text" placeholder="last name" name="newACClname")
+                                        
+                                            
+                                                input(type="submit" value="create!" id="createUsr")
+
+
+                                               
+
+                        li(class="profile-contents")
+                            section(class="container-content bdb-lg")
+                                section(class="content-key")
+                                    span(class="sub-title") Remove an account
+                                    span(class="sub-description") Delete a new user from the database
+
+                                section(class="content-value")                       
+                                    div(class="acc-info") 
+                                        div(class="perma")
+                                            label(class="profile-label") Email address
+                                            div(class="username-container")
+                                                input(type="text" placeholder="Enter email address of an existing user" name="deleteEmail")
+                                                input(type="button" value="Delete User" id="deleteUsr")
+
+                    ul(id="mandata" class="profile-info")
+                        li(class="profile-contents")
+                            section(class="container-content bdb-lg")
+                                section(class="content-key") 
+                                    span(class="sub-title") data mgmt
+                                    span(class="sub-description") Visit your friends profile!
+                else
+                    ul(id="friends" class="profile-info")
+                        li(class="profile-contents")
+                            section(class="container-content bdb-lg")
+                                section(class="content-key")
+                                    span(class="sub-title") Friends 
+                                    span(class="sub-description") Visit your friends profile!
+
+                                section(class="content-value")                       
+                                    div(class="info-content")
+                                        div(id="resultWrap")
+                                            div(id="resultField")
+
+                    ul(id="viewReq" class="profile-info")
+                        li(class="profile-contents")
+                            section(class="container-content bdb-lg")
+                                section(class="content-key")
+                                    span(class="sub-title") Friends Request
+                                    span(class="sub-description") view friends requests from other users!
+
+                                section(class="content-value")                       
+                                    div(class="info-content")
+                                        div(id="resultWrap2")
+                                            div(id="resultField2")
+
                                             
 
-                ul(id="manusr" class="profile-info")
-                    li(class="profile-contents")
-                        section(class="container-content bdb-lg")
-                            section(class="content-key")
-                                span(class="sub-title") usr mgmt 
-                                span(class="sub-description") Visit your friends profile!
-
-                ul(id="mandata" class="profile-info")
-                    li(class="profile-contents")
-                        section(class="container-content bdb-lg")
-                            section(class="content-key") 
-                                span(class="sub-title") data mgmt
-                                span(class="sub-description") Visit your friends profile!
+                
 
 
