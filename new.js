@@ -665,7 +665,8 @@ router.post('/create_post', function(req, res){
                             }else{
                                 // res.send(JSON.stringify(result));
                                 console.log('This is result object: ', result3);
-                                res.send('Your post_id is: '+result3.post_id);
+                                // res.send('Your post_id is: '+result3.post_id);
+                                res.direct('/post/'+result3.post_id);
                             }
                         });
 
