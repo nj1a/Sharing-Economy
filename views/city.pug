@@ -81,16 +81,11 @@ html
             span Overall Rating: &starf;&starf;&starf;&starf;&star;
             br
             |  
-            textarea#review_box(name='comment', cols='30', rows='10', form='review_submission') Type your travellng experience with this poster here
+            textarea#review_box(name='comment', cols='30', rows='10', form='review_submission') Type your travellng experience in this city here
             |  
-            span Rate this poster:
+            span Rate this city:
             |  
-            span#star
-              span#star1 &star;
-              span#star2 &star;
-              span#star3 &star;
-              span#star4 &star;
-              span#star5 &star;
+            input(type='number', name='rating', min='1', max='5')
             form#review_submission(action='')
               input(type='submit', value='Submit')
             #customer_rating
