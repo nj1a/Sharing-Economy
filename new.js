@@ -499,7 +499,7 @@ router.post("/adminUpdate", function(req, res){
 router.get('/deleteUser/:email', function(req, res){
     var userEmail = req.params.email;
 
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('delete * from wanderland.user_account where email = ' + "'" + userEmail + "'", function(err, result){
             done();
             if (err) {
@@ -512,16 +512,35 @@ router.get('/deleteUser/:email', function(req, res){
 
         });
     });
+    //console.log(userEmail);
 
     res.send(userEmail);
 });
 
-router.get('/createUser/:email', function(req, res){
-    var userEmail = req.params.email;
+router.post('/createUser', function(req, res){
+    var email = req.body.email;
+    var password = req.body.password;
+    var username = req.body.username;
+    var first_name = req.body.first_name;
+    var last_name = req.body.last_name;
 
-    console.log(userEmail);
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+        client.query('INSERT INTO wanderland.user_account (username, email, password, first_name, last_name, gender, phone_num, city_id, country_id, date_of_birth, date_joined, description) VALUES (' +
+            "'" + username + "'" +  ", '" + email + "'" + ", '" + password + "'" +', ' + "'" + first_name + "'" + ', '  + "'" + last_name + "'" +', '  + 'NULL, ' + ' NULL, ' +  'NULL'  + ', '  + 'NULL' +  ',NULL, ' +
+            'NULL, ' + 'NULL' + ');', function(err, result){
 
-    res.send(userEmail);
+            done();
+
+            if (err) {
+                res.send("Error " + err);
+            }
+            
+            res.send("good");
+
+
+        });
+    });
+
 });
 
 router.post('/signup', function(req, res){

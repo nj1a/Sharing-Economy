@@ -244,11 +244,29 @@ $(document).ready(function(){
 		
 
 	$("#deleteUsr").click(function(event) {
-		//alert($("#inputEmail").val());
+		//alert($("#deleteEmail").val());
+		$.get("/deleteUser/" + $("#deleteEmail").val(), function(result){
+			alert(result);
+		});
+		
 	});
 
 	$("#createUsr").click(function(event) {
-		//alert($("#inputEmail").val());
+		/*alert($("#newACCemail").val());
+		alert($("#newACCpass").val());
+		alert($("#newACCusername").val());
+		alert($("#newACCfname").val());
+		alert($("#newACClname").val());*/
+
+		$.post("/createUser", {email: $("#newACCemail").val(),
+							   password: $("#newACCpass").val(),
+							   username: $("#newACCusername").val(),
+							   first_name: $("#newACCfname").val(),
+							   last_name: $("#newACClname").val()}, 
+							   function(data){
+							       alert(data);
+							   });
+
 	});
 
 });
