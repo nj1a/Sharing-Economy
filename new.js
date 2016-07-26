@@ -614,7 +614,7 @@ router.get('/create_post', csrfProtection, function(req, res){
 // Process create_post request
 router.post('/create_post', function(req, res){
 
-    res.send("This is create post we get your thingy: "+JSON.stringify(req));
+    res.send(req.body.title);
 
 
 });
