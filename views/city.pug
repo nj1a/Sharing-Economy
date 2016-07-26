@@ -32,12 +32,9 @@ html
       #product_page
         #product_title= city_info.name+', '+city_info.country_name
         #product_image
-          img.slide_image(src='https://pixabay.com/static/uploads/photo/2014/11/13/23/34/london-530055_960_720.jpg', alt='')
-          |  
-          img.slide_image(src='https://pixabay.com/static/uploads/photo/2016/02/19/10/54/tower-bridge-1209483_960_720.jpg', alt='')
-          |  
-          img.slide_image(src='https://pixabay.com/static/uploads/photo/2010/12/13/10/33/architecture-2892_960_720.jpg', alt='')
-          |  
+          each val, index in main_images
+            img.slide_image(src= val, alt='')
+          
           a#left_slide_button(onclick='plusDivs(-1)') &lt;
           |  
           a#right_slide_button.slide_button(onclick='plusDivs(1)') &gt;
@@ -70,15 +67,11 @@ html
                 td GMT
         #attractions
           h1 Attractions
-          .attraction_image
-            img(src='https://pixabay.com/static/uploads/photo/2013/05/29/05/35/british-museum-114400_960_720.jpg', alt='')
-            |  British Museum
-          .attraction_image
-            img(src='https://pixabay.com/static/uploads/photo/2015/11/20/18/50/london-1053695_960_720.jpg', alt='')
-            |  Big Ben
-          .attraction_image
-            img(src='https://pixabay.com/static/uploads/photo/2016/02/19/10/54/tower-bridge-1209483_960_720.jpg', alt='')
-            |  Tower Bridge
+            each val, index in attraction_images
+              .attraction_image
+                img(src= index, alt='')
+              |
+              span= val
           |  
           a#left_attraction_button(onclick='plusDivsAtrraction(-1)') &lt;
           |  
