@@ -210,7 +210,7 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
             res.send('City not found');
         }else{
             // Look for main images
-            glob('public/img/post_images/'+req.params.cityID+'_*.*', function(er, main_images){
+            glob('public/img/city_images/'+req.params.cityID+'_*.*', function(er, main_images){
                 if (er) {
                     throw er;
                 };
@@ -218,7 +218,7 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                     main_images[i] = main_images[i].replace('public', '..');
                 };
                 // Look for attraction images
-                glob('public/img/post_images/attraction_'+req.params.cityID+'_*.*', function(er, files){
+                glob('public/img/city_images/attraction_'+req.params.cityID+'_*.*', function(er, files){
                     if (er) {
                         throw er;
                     };
