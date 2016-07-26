@@ -655,7 +655,7 @@ router.post('/create_post', parseForm, csrfProtection, function(req, res){
                     tool.get_city_id(to_city, to_country, function(result2){
                         to_city_id = result2.city_id;
 
-                        tool.create_post(user_id, post_type, post_date, way_of_travelling, travel_start_date, travel_end_date, from_city_id, to_city_id, description, title, travel_type function(result3){
+                        tool.create_post(user_id, post_type, post_date, way_of_travelling, travel_start_date, travel_end_date, from_city_id, to_city_id, description, title, travel_type, function(result3){
 
                             if (result3 === 'error' || result1 === 'error' || result2 === 'error') {
                                 res.send('Error on creating post');
