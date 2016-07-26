@@ -211,8 +211,8 @@ module.exports = (io) => {
             }
         });
         
-        socket.on('disconnect', function() {
-            if (typeof people[socket.id] !== 'undefined') { //this handles the refresh of the name screen
+        socket.on('disconnect', () => {
+            if (typeof people[socket.id] !== undefined) { // handles the refresh of the name screen
                 purge(io, socket, 'disconnect');
             }
         });
