@@ -162,7 +162,16 @@ router.get('/', csrfProtection, function(req, res) {
         }
     }
 });
+// Create post form
+router.get('/create_post', function(req, res){
 
+    if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
+        res.send('You need to sign in first');
+    }else{
+        res.render('create_post');
+        // res.send(sess.email);
+    }
+);
 router.post('/result', function(req, res) {
     console.log(req.body);
     console.log('Type: '+ typeof req.body.from_date + ' '+ typeof req.body.to_date + ' ' + typeof req.body.from_city + ' ' + typeof req.body.to_city);
