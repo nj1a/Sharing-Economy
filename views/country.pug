@@ -1,0 +1,68 @@
+doctype html
+html
+  head
+    title Country
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans')
+    link(rel='stylesheet', href='../css/country_style.css')
+    script(src='../js/jquery-3.1.0.js', defer='')
+    script(src='../js/post.js', defer='')
+  #wrap
+    body#entity
+      nav.w3-top
+        ul.w3-navbar.w3-theme-d2.w3-left-align.w3-large
+          li
+            a.w3-padding-large.w3-hover-white(href='#')
+              i.fa.fa-home
+          li
+            a.w3-padding-large.w3-hover-white(href='#', title='Account Settings')
+              i.fa.fa-user
+          li.w3-hide-small
+            a.w3-padding-large.w3-hover-white(href='#', title='Inbox')
+              i.fa.fa-envelope
+          li.w3-hide-small
+            a.w3-padding-large.w3-hover-white(href='#', title='Notifications')
+              i.fa.fa-bell
+          li.w3-hide-small
+            a.w3-padding-large.w3-hover-white(href='#', title='Admin Panel')
+              i.fa.fa-eye
+          li.w3-hide-small.w3-right
+            a.w3-padding-large.w3-hover-white(href='#', title='My Account')
+              img.w3-circle.avatar(src='../assets/images/avatar.jpg', alt='Avatar')
+      #product_page
+        #product_title  England
+        #product_image
+          img.slide_image(src='https://pixabay.com/static/uploads/photo/2014/11/13/23/34/london-530055_960_720.jpg', alt='')
+          |  
+          img.slide_image(src='https://pixabay.com/static/uploads/photo/2016/02/19/10/54/tower-bridge-1209483_960_720.jpg', alt='')
+          |  
+          img.slide_image(src='https://pixabay.com/static/uploads/photo/2010/12/13/10/33/architecture-2892_960_720.jpg', alt='')
+          |  
+          a#left_slide_button(onclick='plusDivs(-1)') &lt;
+          |  
+          a#right_slide_button.slide_button(onclick='plusDivs(1)') &gt;
+      #major_city
+        h2
+          | Major Cities
+          #city_list
+            a(href='')
+              .city_item
+                img(src='../assets/images/Paris.jpg', alt='')
+                |  
+                span.city_title Londan
+            a(href='')
+              .city_item
+                img(src='../assets/images/Greece.jpg', alt='')
+                |  
+                span.city_title Liverpool
+            a(href='')
+              .city_item
+                img(src='../assets/images/Beijing.jpg', alt='')
+                |  
+                span.city_title Birmingham
+            a(href='')
+              .city_item
+                img(src='../assets/images/London_eye.jpg', alt='')
+                |  
+                span.city_title Londan
+
