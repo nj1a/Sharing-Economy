@@ -202,34 +202,33 @@ module.exports = (io) => {
 				io.sockets.to(socket.room).emit('message', msgTime, people[socket.id], msg);
 				socket.emit('isTyping', false);
 				if (_.size(msgHistory[socket.room]) > 50) {
-					msgHistory[socket.room].splice(0,1); // remove 1 ele from idx 0
+					msgHistory[socket.room].splice(0,1); // remove one ele from idx 0
 				} else {
-					msgHistory[socket.room].push(people[socket.id].name + ': ' + msg);
+					msgHistory[socket.room].push(people[socket.id].name + ': ' + msg); // cache this msg
 				}
             } else {
-            	socket.emit('update', 'Please connect to a room.');
+            	socket.emit('update', 'Please join a room.');
             }
         });
         
         socket.on('disconnect', () => {
-            if (typeof people[socket.id] !== undefined) { // handles the refresh of the name screen
+            if (typeof people[socket.id] !== 'undefined') { // handles the refresh of the name screen
                 purge(io, socket, 'disconnect');
             }
         });
 
         //Room functions
-        socket.on('createRoom', function(name) {
+        socket.on('createRoom', (roomName) => {
             if (people[socket.id].inroom) {
                 socket.emit('update', 'You are in a room. Please leave it first to create your own.');
             } else if (!people[socket.id].owns) {
                 var id = uuid.v4();
-				console.log(id);
-                var room = new Room(name, id, socket.id);
+                var room = new Room(roomName, id, socket.id);
                 rooms[id] = room;
                 var roomCount = _.size(rooms);
                 io.emit('updateRoomCount', {rooms: rooms, count: roomCount});
                 //add room to socket, and auto join the creator of the room
-                socket.room = name;
+                socket.room = roomName;
                 socket.join(socket.room);
                 people[socket.id].owns = id;
                 people[socket.id].inroom = id;
@@ -242,12 +241,9 @@ module.exports = (io) => {
             }
         });
 
-        socket.on('check', function(name, fn) {
-            var match = false;
-            _.find(rooms, function(key,value) {
-                if (key.name === name) {
-                    return match = true;
-                }	
+        socket.on('checkRoomName', (name, fn) => {
+            var match = _.find(rooms, (room) => {
+                return room.name === name;
             });
             fn({result: match});
         });
@@ -264,7 +260,6 @@ module.exports = (io) => {
         socket.on('joinRoom', function(id) {
             if (typeof people[socket.id] !== 'undefined') {
                 var room = rooms[id];
-				console.log(id, room);
                 if (socket.id === room.owner) {
                     socket.emit('update', 'You are the owner of this room and you have already been joined.');
                 } else {

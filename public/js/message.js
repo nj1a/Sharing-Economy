@@ -114,24 +114,24 @@ $(document).ready(function() {
     $('#createRoomForm').toggle();
   });
 
-  $('#createRoomBtn').click(function() {
-    var roomExists = false;
-    var roomName = $('#createRoomName').val();
-    socket.emit('check', roomName, function(data) {
-      roomExists = data.result;
-       if (roomExists) {
-          $('#errors').empty();
-          $('#errors').show();
-          $('#errors').append('Room <i>' + roomName + '</i> already exists');
-        } else {
-        if (roomName.length > 0) { //also check for roomname
-          socket.emit('createRoom', roomName);
-          $('#errors').empty();
-          $('#errors').hide();
-          }
-        }
+    $('#createRoomBtn').click(() => {
+        var roomExists = false;
+        var roomName = $('#createRoomName').val();
+        socket.emit('checkRoomName', roomName, function(data) {
+        roomExists = data.result;
+        if (roomExists) {
+            $('#errors').empty();
+            $('#errors').show();
+            $('#errors').append('Room <i>' + roomName + '</i> already exists');
+            } else {
+            if (roomName.length > 0) { //also check for roomname
+            socket.emit('createRoom', roomName);
+            $('#errors').empty();
+            $('#errors').hide();
+            }
+            }
+        });
     });
-  });
 
     // don't use arrow functions for the following two functions, as this 
     // keyword points to the code surrounding this function, which is not desired.
@@ -213,7 +213,7 @@ $(document).ready(function() {
         }
     });
 
-    socket.on('message', function(msgTime, person, msg) {
+    socket.on('message', (msgTime, person, msg) => {
         $('#msgs').append('<li><strong><span class="text-success">' + timeFormat(msgTime) + person.name + '</span></strong>: ' + msg + '</li>');
 
         //clear typing field
