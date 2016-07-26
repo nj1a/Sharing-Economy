@@ -176,13 +176,13 @@ $(document).ready(function() {
     });
 
     socket.on('updateRoomCount', (data) => {
-        $('#rooms').text('');
+        $('#rooms').empty();
         var $count = $('<span/>').addClass('badge').text(data.count);
         var $list = $('<li/>').addClass('list-group-item active').text('Rooms');
         $count.appendTo($list);
         $list.appendTo('#rooms');
 
-        if (!jQuery.isEmptyObject(data.rooms)) { // at least one room
+        if (data.count) { // at least one room
             $.each(data.rooms, (idx, room) => {
                 var $join = $('<button/>').addClass('joinRoomBtn btn btn-default btn-xs').text('Join');
                 var $remove = $('<button/>').addClass('joinRoomBtn btn btn-default btn-xs').text('Remove');
@@ -197,9 +197,15 @@ $(document).ready(function() {
 
     socket.on('updatePeopleCount', (data) => {
         $('#people').empty();
-        $("#people").append('<li class=\'list-group-item active\'>People online <span class=\'badge\'>'+data.count+'</span></li>');
-        $.each(data.people, function(a, obj) {
-        $("#people").append('<li class=\'list-group-item\'><span>' + obj.name + '</span> <i class=\'fa fa-'+obj.device+'\'></i> ');
+        var $count = $('<span/>').addClass('badge').text(data.count);
+        var $list = $('<li/>').addClass('list-group-item active').text('People');
+        $count.appendTo($list);
+        $list.appendTo('#people');
+        
+        $.each(data.people, (idx, user) => {
+            var $name = $('<span/>').text(user.name + ' ');
+            var $device = $('<i/>').addClass('fa fa-' + user.device);
+            $('<li/>').addClass('list-group-item').append($name).append($device).appendTo('#people');
         });
     });
 
