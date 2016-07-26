@@ -267,7 +267,7 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                             city_info: city_info,
                             csrfToken: req.csrfToken(),
                             main_images: main_images,
-                            attraction_images: attraction_images
+                            attraction_images: attraction_images,
                             ratings: ratings
                         });
                     })
