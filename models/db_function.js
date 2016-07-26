@@ -86,7 +86,7 @@ module.exports = {
 
 		});
 	},
-	create_post: function(user_id, post_type, post_date, way_of_travelling, travel_start_date, travel_end_date, from_city, to_city, description, title, travel_type){
+	create_post: function(user_id, post_type, post_date, way_of_travelling, travel_start_date, travel_end_date, from_city, to_city, description, title, travel_type, callback){
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
 			var query_string = "INSERT INTO product_post VALUES (default, "+user_id+", \'"+post_type+"\', \'"+ post_date + "\', \'"+way_of_travelling+"\', \'"+travel_start_date+"\', \'"+travel_end_date+"\', "+from_city+", "+to_city+", \'"+description+"\', \'"+title+"\', \'"+travel_type+"\', null) RETURNING post_id";
 			console.log(query_string);
