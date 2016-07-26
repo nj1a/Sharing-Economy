@@ -612,8 +612,7 @@ router.get('/create_post', csrfProtection, function(req, res){
     }
 
 // Process create_post request
-<<<<<<< HEAD
-router.post('/create_post', function(req, res){
+router.post('/create_post', parseForm, csrfProtection, function(req, res){
     if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
         res.send('You need to sign in first');
         return;
@@ -667,9 +666,6 @@ router.post('/create_post', function(req, res){
                                 res.send('Your post_id is: '+result3.post_id);
                             }
                         });
-=======
-router.post('/create_post', parseForm, csrfProtection, function(req, res){
->>>>>>> 294e3d5e2b58a6b668da584005ca5870f010084a
 
                     });
 
