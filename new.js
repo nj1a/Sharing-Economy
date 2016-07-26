@@ -209,7 +209,41 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
         if (city_info == 'error') {
             res.send('City not found');
         }else{
-            res.render('city', {city_info: city_info, csrfToken: req.csrfToken()});        
+            // Look for main images
+            glob('public/img/city_images/'+req.params.cityID+'_*.*', function(er, main_images){
+                if (er) {
+                    throw er;
+                };
+                for (var i = 0; i < main_images.length; i++) {
+                    main_images[i] = main_images[i].replace('public', '..');
+                };
+                // Look for attraction images
+                glob('public/img/city_images/attraction_'+req.params.cityID+'_*.*', function(er, files){
+                    if (er) {
+                        throw er;
+                    };
+                    var attraction_images = {};
+                    for (var i = 0; i < files.length; i++) {
+                        files[i] = files[i].replace('public', '..');
+                        var current_image = files[i];
+                        var attraction_name = current_image.slice(current_image.lastIndexOf('/')+1, current_image.lastIndexOf('.'));
+                        attraction_name = attraction_name.slice(attraction_name.lastIndexOf('_')+1);
+                        attraction_name = attraction_name.replace(/-/g, ' ');
+                        attraction_name = attraction_name.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+
+                        attraction_images[files[i]] = attraction_name;
+                    };  
+                    res.render('city', {
+                        city_info: city_info, 
+                        csrfToken: req.csrfToken(),
+                        main_images: main_images,
+                        attraction_images: attraction_images
+                    });
+                });
+
+
+            })
+            
         }
     })
     
