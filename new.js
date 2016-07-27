@@ -30,7 +30,7 @@ function validateEmail(email) {
 }
 
 function validateBlackList(password) {
-    var blackListedChar = "<>,./:;'|{}[]-_+=!@#$%^&*()`~?";
+    var blackListedChar = "<>./:;'|{}[]-_+=!@#$%^&*()`~?";
     for (var i = 0; i < blackListedChar.length; i++) {
         if (password.includes(blackListedChar[i])) {
             return false;
