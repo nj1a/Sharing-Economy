@@ -27,7 +27,7 @@ function timeFormat(msTime) {
 $(document).ready(function() {
 
     var socket = io.connect();
-    var myRoomID = null;
+    var currRoom = null;
     var typing = false;
     var timeoutId;
 
@@ -98,7 +98,7 @@ $(document).ready(function() {
 
     $('#msg').keypress((e) => {
         if (e.which !== 13) { // not return
-            if (!typing && myRoomID && $('#msg').is(':focus')) {
+            if (!typing && currRoom && $('#msg').is(':focus')) {
                 typing = true;
                 socket.emit('typing', true);
             } else {
@@ -146,11 +146,11 @@ $(document).ready(function() {
         $('#createRoom').show();
     });
 
-  $('#leave').click(function() {
-    var roomID = myRoomID;
-    socket.emit('leaveRoom', roomID);
-    $('#createRoom').show();
-  });
+    $('#leave').click(() => {
+        var roomID = currRoom;
+        socket.emit('leaveRoom', roomID);
+        $('#createRoom').show();
+    });
   // htmkl css xml json js jquery (understand the syntax) untill week 10 (including security)
 
 
@@ -176,7 +176,7 @@ $(document).ready(function() {
         if (data.count) { // at least one room
             $.each(data.rooms, (id, room) => {
                 var $join = $('<button/>').addClass('joinRoomBtn btn btn-default btn-xs').text('Join');
-                var $remove = $('<button/>').addClass('joinRoomBtn btn btn-default btn-xs').text('Remove');
+                var $remove = $('<button/>').addClass('removeRoomBtn btn btn-default btn-xs').text('Remove');
                 var $name = $('<span/>').text(room.name + ' ');
                 $('<li/>').attr('id', id).addClass('list-group-item')
                 .append($name).append($join).append($remove).appendTo('#rooms');
@@ -248,7 +248,7 @@ socket.on('history', function(data) {
 
 
   socket.on('sendRoomID', function(data) {
-    myRoomID = data.id;
+    currRoom = data.id;
   });
 
 
