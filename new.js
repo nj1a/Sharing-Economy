@@ -598,6 +598,8 @@ router.post('/google_sign_up', function(req, res){
     email = req.body.email;
     first_name = req.body.first_name;
     last_name = req.body.last_name;
+    console.log(req.body);
+    console.log("now rendering google_sign_up");
 
     res.render("google_sign_up", {
         email: email,
