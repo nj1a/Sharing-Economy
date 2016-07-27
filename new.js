@@ -339,6 +339,7 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                             user_id = sess.currId;
                         }
                         tool.get_suggestion_by_city_id(user_id, req.params.cityID, function(suggestions){
+                            
                             res.render('city', {
                                 city_info: city_info,
                                 csrfToken: req.csrfToken(),
@@ -347,7 +348,7 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                                 ratings: ratings,
                                 suggestions: suggestions
                             });
-                        })
+                        });
 
                     });
                 });
