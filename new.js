@@ -216,7 +216,7 @@ router.get('/world_map', csrfProtection, function(req, res){
 });
 // Convert ISO country code to country id
 router.get('/get_country/:countryCode', csrfProtection, function(req, res){
-    res.render('THis is country code: 'countryCode);
+    res.render('THis is country code: '+countryCode);
 
 });
 router.post('/result', function(req, res) {
