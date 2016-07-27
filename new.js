@@ -684,7 +684,7 @@ router.get("/google_sign_up", function(req, res){
     
 });
 router.post('/signup', function(req, res){
-    var google, account, password, username, first_name, last_name;
+    var google, email, password, username, first_name, last_name;
 
     google = req.body.google;
 
@@ -696,7 +696,7 @@ router.post('/signup', function(req, res){
         last_name = "";
     }
 
-    account = req.body.emailNew;
+    email = req.body.emailNew;
     password = sha256(req.body.password);
     username = req.body.username;
 
