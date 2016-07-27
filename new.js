@@ -356,7 +356,7 @@ router.post('/city/:cityID', function(req, res){
     if (req.body.comment && req.body.rating) {
         if (typeof req.body.rating === 'string' && req.body.rating >= 1 && req.body.rating <= 5 && req.body.comment !== 'Type your travellng experience in this city here') {
             var date_rated = new Date();
-            date_rated = formatDate(date_rated);
+            date_rated = tool.formatDate(date_rated);
 
             tool.insert_comment(req.params.cityID, sess.currId, req.body.rating, req.body.comment, date_rated, function(result){
                 res.redirect('/city/'+req.params.cityID);
@@ -1019,8 +1019,8 @@ router.get('/post/:postId', function(req, res){
                     console.log('looped');
                     files[i] = files[i].replace('public', '..');
                 }
-                result.travel_start_date = formatDate(result.travel_start_date);
-                result.travel_end_date = formatDate(result.travel_end_date);
+                result.travel_start_date = tool.formatDate(result.travel_start_date);
+                result.travel_end_date = tool.formatDate(result.travel_end_date);
 
                 tool.get_result_suggestion(result.from_city, result.departure_country_id, result.to_city, result.destination_country_id, result.post_type, result.travel_start_date, result.travel_end_date, function(related_posts){
                     console.log('!F');
@@ -1055,7 +1055,7 @@ router.post('/create_post', function(req, res){
         var title = req.body.title;
         var post_type = req.body.post_type;
         var post_date = new Date();
-        post_date = formatDate(post_date);
+        post_date = tool.formatDate(post_date);
         var from_date = req.body.from_date;
         var to_date = req.body.to_date;
         var from_city = req.body.from_city.split(", ")[0];
