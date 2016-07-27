@@ -5,17 +5,9 @@ html(lang="en")
         title= pageTitle
         link(rel="stylesheet", href="css/profile.css")
         link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans') 
-        script(src="js/jquery-3.1.0.js")
+        script(src="js/jquery-3.1.0.js", defer)
         script(src="js/profile.js", defer)
         script(src="js/admin.js", defer)
-
-        // This is for create_post
-        link(rel='stylesheet', href='css/create_post_style.css')
-        script(type='text/javascript', src='js/jquery-ui/jquery-ui.js')
-        script(type='text/javascript', src='js/create_post_script.js')
-        script(type='text/javascript', src='js/typeahead.min.js')
-        link(rel='stylesheet', href='../css/datepickerFormat.js')
-
         link(rel='stylesheet', href='../css/w3.css')
         link(rel='stylesheet', href='../css/w3-theme-teal.css')
         link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans')
@@ -373,46 +365,7 @@ html(lang="en")
                                     div(class="info-content")
                                         div(id="resultWrap2")
                                             div(id="resultField2")
-                                                form(action='https://wander-land.herokuapp.com/create_post', name='create_post_form', method='post')
-                                                  .input_element
-                                                    | Title: 
-                                                    input(type='text', name='title')
-                                                  .input_element
-                                                    | Description:
-                                                    textarea(name='description', cols='30', rows='10')
-                                                  .input_element
-                                                    .input_city
-                                                      | Destination City: 
-                                                      input.city-field(type='text', name='from_city')
-                                                    .input_city
-                                                      | Departure City: 
-                                                      input.city-field(type='text', name='to_city')
-                                                  .input_element
-                                                    | Post Type: 
-                                                    select(name='post_type')
-                                                      option(value='buddy') Looking for travel partner
-                                                      option(value='guide') Looking for tour guide
-                                                      option(value='offer_guide') Offering tour
-                                                  .input_element
-                                                    | Ways to get there:
-                                                    input(type='text', name='way_of_travelling')
-                                                  .input_element
-                                                    | Attribute of the tour:
-                                                    input(type='text', name='travel_type')
-                                                  .input_element
-                                                    | Upload Image: 
-                                                    input(type='file', ,='', name='image', accept='image/*', multiple='')
-                                                  .input_element
-                                                    .input_date
-                                                      | Start Date: 
-                                                      input.datepicker(type='text', name='from_date')
-                                                    .input_date
-                                                      | End Date: 
-                                                      input.datepicker(type='text', name='to_date')
-                                                  #submit_button.input_element
-                                                    input(type='submit')
-
-
+                                                
                                             
 
                 
