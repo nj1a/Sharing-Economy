@@ -1,24 +1,23 @@
-
 var express = require('express');
 var session = require('express-session');
 var pg = require('pg');
 var fs = require('fs');
-var update_handler = require("./models/handle_update.js");
 var busboy = require('connect-busboy');
 var expressValidator = require('express-validator');
 var sha256 = require('js-sha256');
-
+var glob = require('glob');
 var router = express.Router();
-router.use(busboy());
-
-// Securityf
 var csrf = require('csurf');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var update_handler = require("../models/handle_update.js");
+var tool = require('../models/db_function');
+
 var csrfProtection = csrf({ cookie: true });
 var parseForm = bodyParser.urlencoded({ extended: false });
 
+router.use(busboy());
 router.use(cookieParser());
 
 // performance
@@ -168,8 +167,7 @@ router.post('/login', function(req, res){
     }
 });
 
-var tool = require('./models/db_function');
-var glob = require('glob');
+
 
 router.get('/', csrfProtection, function(req, res) {
     sess = req.session;
