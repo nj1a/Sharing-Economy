@@ -115,20 +115,20 @@ $(document).ready(function() {
   });
 
     $('#createRoomBtn').click(() => {
-        var roomExists = false;
+        var nameExists = false;
         var roomName = $('#createRoomName').val();
-        socket.emit('checkRoomName', roomName, function(data) {
-        roomExists = data.result;
-        if (roomExists) {
-            $('#errors').empty();
-            $('#errors').show();
-            $('#errors').append('Room <i>' + roomName + '</i> already exists');
+        socket.emit('checkRoomName', roomName, (data) => {
+            nameExists = data.result;
+            if (nameExists) {
+                $('#errors').empty();
+                $('#errors').show();
+                $('#errors').append('Room <i>' + roomName + '</i> already exists');
             } else {
-            if (roomName.length > 0) { //also check for roomname
-            socket.emit('createRoom', roomName);
-            $('#errors').empty();
-            $('#errors').hide();
-            }
+                if (roomName.length > 0) { //also check for roomname
+                    socket.emit('createRoom', roomName);
+                    $('#errors').empty();
+                    $('#errors').hide();
+                }
             }
         });
     });

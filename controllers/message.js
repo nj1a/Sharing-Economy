@@ -189,7 +189,7 @@ module.exports = (io) => {
         });
 
         socket.on('typing', (bool) => {
-            if (typeof people[socket.id] !== undefined) {
+            if (typeof people[socket.id] !== 'undefined') {
                 io.sockets.to(socket.room).emit('isTyping', {
 					isTyping: bool, 
 					name: people[socket.id].name
@@ -198,7 +198,7 @@ module.exports = (io) => {
         });
         
         socket.on('send', (msgTime, msg) => {
-            if (typeof people[socket.id].inroom !== undefined) {
+            if (typeof people[socket.id].inroom !== 'undefined') {
 				io.sockets.to(socket.room).emit('message', msgTime, people[socket.id], msg);
 				socket.emit('isTyping', false);
 				if (_.size(msgHistory[socket.room]) > 50) {
@@ -218,16 +218,28 @@ module.exports = (io) => {
         });
 
         //Room functions
-        socket.on('createRoom', (roomName) => {
+        socket.on('checkRoomName', (name, func) => {
+            var exists = _.find(rooms, (room) => {
+                return room.name === name;
+            });
+			// send back the result
+            func({result: exists});
+        });
+
+		socket.on('createRoom', (roomName) => {
             if (people[socket.id].inroom) {
-                socket.emit('update', 'You are in a room. Please leave it first to create your own.');
+                socket.emit('update', 'Please leave your current room first.');
             } else if (!people[socket.id].owns) {
+				// create a room
                 var id = uuid.v4();
                 var room = new Room(roomName, id, socket.id);
                 rooms[id] = room;
+
+				// update room count 
                 var roomCount = _.size(rooms);
                 io.emit('updateRoomCount', {rooms: rooms, count: roomCount});
-                //add room to socket, and auto join the creator of the room
+
+                // add room to socket, and auto join the creator of the room
                 socket.room = roomName;
                 socket.join(socket.room);
                 people[socket.id].owns = id;
@@ -237,15 +249,8 @@ module.exports = (io) => {
                 socket.emit('sendRoomID', {id: id});
                 msgHistory[socket.room] = [];
             } else {
-                socket.emit('update', 'You have already created a room.');
+                socket.emit('update', 'You cannot have more than one room.');
             }
-        });
-
-        socket.on('checkRoomName', (name, fn) => {
-            var match = _.find(rooms, (room) => {
-                return room.name === name;
-            });
-            fn({result: match});
         });
 
         socket.on('removeRoom', function(id) {
