@@ -218,7 +218,7 @@ router.post('/result', function(req, res) {
                             tool.get_result_suggestion(from_city_id, from_country_id, to_city_id, to_country_id, req.body.post_type, from_date, to_date, function(suggestions){
 
 
-                                if (result3 === 'error' || result1 === 'error' || result2 === 'error' || suggestions === 'error') {
+                                if (result1 === 'error' || result2 === 'error') {
                                     res.send('No matching result');
 
                                 }else{
