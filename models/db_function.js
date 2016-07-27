@@ -269,6 +269,27 @@ module.exports = {
 		});
 
 
+	},
+	get_country: function(region_code, callback){
+		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
+			var query_string = "SELECT * FROM country WHERE country_code = \'"+ region_code + "\'";
+			console.log(query_string);
+
+			client.query(query_string, function(err, result){
+				done();
+				if (err) throw err;
+				else{
+					if (JSON.stringify(result.rows) === "[]") {
+						callback('error');
+					}
+					else {
+						callback(result.rows);
+					}
+				}
+			});
+
+		});
+
 	}
 
 

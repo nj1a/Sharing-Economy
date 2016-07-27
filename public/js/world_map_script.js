@@ -11,11 +11,12 @@ jQuery(document).ready(function () {
 		values: sample_data,
 		normalizeFunction: 'polynomial',
 		onRegionClick: function(element, code, region) {
-			var message = 'You clicked "'
-			+ region
-			+ '" which has the code: '
-			+ code.toUpperCase();
-			alert(message);
+			window.location.href = "https://wander-land.herokuapp.com/get_country?key="+code.toUpperCase();
+			// var message = 'You clicked "'
+			// + region
+			// + '" which has the code: '
+			// + code.toUpperCase();
+			// alert(message);
 		}
 	});
 });

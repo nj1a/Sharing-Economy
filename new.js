@@ -215,8 +215,22 @@ router.get('/world_map', csrfProtection, function(req, res){
 
 });
 // Convert ISO country code to country id
-router.get('/get_country/:countryCode', csrfProtection, function(req, res){
-    res.render('THis is country code: '+countryCode);
+router.get('/get_country', function(req, res){
+    if (req.query.key === 'undefined') {
+        res.send('Error, please enter your key');
+        return;
+    };
+    tool.get_country(req.query.key, function(result){
+        if (result === 'error') {
+            res.send('No matching result');
+        }
+        else{
+            // res.redirect('/country/'+result.country_id);
+            res.send(JSON.stringify(result));
+            // res.send('Country ID is : '+result.country_id);
+        }
+
+    });
 
 });
 router.post('/result', function(req, res) {
