@@ -611,21 +611,33 @@ router.post('/createUser', function(req, res){
 
 });
 
-router.post('/google_sign_up', function(req, res){
-    var email, first_name, last_name;
-    email = req.body.email;
-    first_name = req.body.first_name;
-    last_name = req.body.last_name;
-    console.log(req.body);
-    console.log("now rendering google_sign_up");
+router.post('/set_google', function(req, res){
+    sess.google = true;
+    //var email, first_name, last_name;
+    sess.gemail = req.body.email;
+    sess.gfirst_name = req.body.first_name;
+    sess.glast_name = req.body.last_name;
 
+    res.send("done");
+
+
+    //console.log(req.body);
+   // console.log("now rendering google_sign_up");
+
+   /* res.render("google_sign_up", {
+        email: email,
+        first_name: first_name,
+        last_name: last_name
+    });*/
+});
+
+router.get("/google_sign_up", function(req, res){
     res.render("google_sign_up", {
         email: email,
         first_name: first_name,
         last_name: last_name
     });
-});
-
+})
 router.post('/signup', function(req, res){
     var google, account, password, username, first_name, last_name;
 
