@@ -34,7 +34,7 @@ html
             a.w3-padding-large.w3-hover-white(href='#', title='My Account')
               img.w3-circle.avatar(src='../assets/images/avatar.jpg', alt='Avatar')
       #product_page
-        #product_title  England
+        #product_title= country_info.country_name
         #product_image
           each val, index in main_images
             img.slide_image(src= val, alt='')

@@ -340,10 +340,18 @@ router.get('/country/:countryID', csrfProtection, function(req, res){
             console.log('looped');
             main_images[i] = main_images[i].replace('public', '..');
         }
-        res.render('country', {
-            main_images: main_images
-            //csrfToken: req.csrfToken()
-        });
+        tool.get_info_by_country_id(req.params.countryID, function(country_info){
+            if (country_info === 'error') {
+                res.send('No such country');
+            }
+            else{
+                res.render('country', {
+                    main_images: main_images,
+                    country_info: country_info
+                    //csrfToken: req.csrfToken()
+                });
+            }
+        })
     });
 
 });

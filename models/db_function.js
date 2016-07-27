@@ -216,6 +216,26 @@ module.exports = {
 		var today = new Date();
 		today = formatDate(today);
 		return today;
+	},
+	get_info_by_country_id: function(country_id, callback){
+		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
+			var query_string = "SELECT * FROM country WHERE country_id = "+country_id;
+			console.log(query_string);
+			client.query(query_string, function(err, result){
+				done();
+				if (err) throw err;
+				else{
+					if (JSON.stringify(result.rows) === "[]") {
+						console.log('No matching row in database');
+						callback('error');
+					} else {
+						console.log(result.rows);
+						callback(result.rows[0]);
+					}
+				}
+			});
+
+		});
 	}
 
 };
