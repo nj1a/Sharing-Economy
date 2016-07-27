@@ -244,7 +244,7 @@ module.exports = (io) => {
                 socket.join(socket.room);
                 people[socket.id].owns = id;
                 people[socket.id].inroom = id;
-                room.addPerson(socket.id);
+                room.add(socket.id);
                 socket.emit('update', 'Welcome to ' + room.name + '.');
                 socket.emit('sendRoomID', {id: id});
                 msgHistory[socket.room] = [];
@@ -274,7 +274,7 @@ module.exports = (io) => {
                         if (people[socket.id].inroom !== null) {
                                 socket.emit('update', 'You are already in a room ('+rooms[people[socket.id].inroom].name+'), please leave it first to join another room.');
                             } else {
-                            room.addPerson(socket.id);
+                            room.add(socket.id);
                             people[socket.id].inroom = id;
                             socket.room = room.name;
                             socket.join(socket.room);
