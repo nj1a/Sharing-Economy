@@ -227,7 +227,7 @@ router.get('/get_country', function(req, res){
         else{
             res.redirect('/country/'+result.country_id);
         }
-        console.log('test');
+
     });
 
 });
