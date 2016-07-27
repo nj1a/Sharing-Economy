@@ -151,8 +151,6 @@ $(document).ready(function() {
         socket.emit('leaveRoom', roomID);
         $('#createRoom').show();
     });
-  // htmkl css xml json js jquery (understand the syntax) untill week 10 (including security)
-
 
     socket.on('nameExists', (msg) => {
         $('#errors').empty();
@@ -228,29 +226,19 @@ $(document).ready(function() {
         $('#send').attr('disabled', 'disabled');
     });
 
-socket.on('history', function(data) {
-  if (data.length !== 0) {
-    $('#msgs').append('<li><strong><span class="text-warning">Last 10 messages:</li>');
-    $.each(data, function(data, msg) {
-      $('#msgs').append('<li><span class="text-warning">' + msg + '</span></li>');
+    // handle history display
+    socket.on('history', (data) => {
+        if (data.length) {
+            $('#msgs').append('<li><strong><span class="text-warning">Last 50 messages:</li>');
+            $.each(data, (data, msg) => {
+                $('#msgs').append('<li><span class="text-warning">' + msg + '</span></li>');
+            });
+        } else {
+            $('#msgs').append('<li><strong><span class="text-warning">No past messages in this room.</li>');
+        }
     });
-  } else {
-    $('#msgs').append('<li><strong><span class="text-warning">No past messages in this room.</li>');
-  }
-});
 
-
-
-
-
-
-
-
-
-  socket.on('sendRoomID', function(data) {
-    currRoom = data.id;
-  });
-
-
-
+    socket.on('sendRoomID', (data) => {
+        currRoom = data.id;
+    });
 });
