@@ -252,7 +252,7 @@ router.get('/get_city', function(req, res){
 router.get('/city/:cityID', csrfProtection, function(req, res){
 
     tool.get_info_by_city_id(req.params.cityID, function(city_info){
-        if (city_info == 'error') {
+        if (city_info === 'error') {
             res.send('City not found');
         }else{
             // Look for main images
@@ -281,7 +281,7 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                     };
                     // Get ratings and comments
                     tool.get_ratings_by_city_id(req.params.cityID, function(ratings){
-                        if (ratings == 'error') {
+                        if (ratings === 'error') {
                             res.send('City not found');
                             return;
                         };
