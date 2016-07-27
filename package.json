@@ -32,7 +32,10 @@
     "unused": true,
     "globals": {
       "$": false,
-      "jquery": false
+      "jquery": false,
+      "navigator": false,
+      "document": false,
+      "io": false
     },
     "jquery": true,
     "mocha": true,
