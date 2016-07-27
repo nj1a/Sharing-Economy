@@ -1367,12 +1367,12 @@ router.post('/update_desc', function(req, res){
 router.get('/message', function(req, res) {
 	sess = req.session;
     console.log(sess);
-    console.log(sess.username);
-	if (typeof sess === 'undefined' || typeof sess.username === 'undefined') {
+    console.log(sess.email);
+	if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
         res.send('You need to sign in first');
     } else {
   	    res.render('message', {
-            username: sess.username
+            email: sess.email
         });
 	}
 });
