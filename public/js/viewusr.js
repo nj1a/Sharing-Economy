@@ -1,7 +1,7 @@
 //"Send request for friends"
 
 $(document).ready(function() {
-	if ($(".friendship").html() === "already friends") {
+	if ($(".friendship").html() == "Send request for friends") {
 
 		$('<form>', {
 				"action": "/profile",
@@ -21,6 +21,18 @@ $(document).ready(function() {
 			}).appendTo("#link-wrap");
 
 			
+	} else if ($(".friendship").html() == "request has been sent") {
+		$('<div>', {
+				"class": "link-container" ,
+				"id": "link-wrap"
+			}).appendTo(".reqLink");
+
+			$('<span>', {
+				"class": "submitButton",
+				html: "request sent!"
+			}).appendTo("#link-wrap");
+
+		
 	}
 
 
@@ -31,7 +43,9 @@ $(document).ready(function() {
 		$.get("/requestFriend/" + $('.username-field').html(), function(data){
 			if (data===$('.username-field').html()){
 				alert("request sent!");
+
 				window.location.href="/showusr";
+
 			}
 		});
 	});

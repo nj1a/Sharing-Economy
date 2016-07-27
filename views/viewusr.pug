@@ -20,7 +20,7 @@ html(lang="en")
                             nav.w3-top.top-nav
                                 ul.w3-navbar.w3-theme-d2.w3-left-align.w3-large
                                   li
-                                    a.w3-padding-large.w3-hover-white(href='#')
+                                    a.w3-padding-large.w3-hover-white(href='/')
                                       i.fa.fa-home
                                   li
                                     a.w3-padding-large.w3-hover-white(href='/profile', title='Account Settings')
@@ -67,7 +67,8 @@ html(lang="en")
                             section(class="content-key")
                                 span(class="sub-title") Account
                                 br
-                                span(class="friendship" id="haha")=friendship
+                                span(class="friendship hidden" id="haha")=friendship
+
                                 div(class="reqLink")
                                 //="Account Information for " + results[0].username 
                                 

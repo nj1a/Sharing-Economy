@@ -12,20 +12,19 @@ html(lang="en")
 				section(class="h1 text-center m_t_25p")
 					h1 Wanderland Admin
 				section(class="login-box")
-					form(action="/profile" method="get")
+					form(action="/admin_sign" method="post")
 						div(class="email-section")
 							div(class="m_t_20x m_b_20x text-center")
 								label(class="h3") 
 									h3 email
 								input(type="email" placeholder="Enter your email" name="email" id="adminEmail")
 							div(class="error-wrap")
-								span(class="error")=errors.error_email
 						div(class="pw-section")
 							div(class="m_t_20x m_b_20x text-center")
 								label(class="h3") 
 									h3 password
 								input(type="password" placeholder="password" name="password" id="adminPass")
-							div(class="error-wrap")
-								span(class="error")=errors.error_email
+							div(class="error-wrap text-center")
+								p(class="error")=errors
 							div(class="m_t_20x text-center")
-								input(id="adminLogin" type="button" value="Login")
+								input(id="adminLogin" type="submit" value="Login")
