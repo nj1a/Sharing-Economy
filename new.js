@@ -340,7 +340,7 @@ router.get('/country/:countryID', csrfProtection, function(req, res){
             console.log('looped');
             main_images[i] = main_images[i].replace('public', '..');
         }
-        tool.get_info_by_country_id(countryID, function(country_info){
+        tool.get_info_by_country_id(req.params.countryID, function(country_info){
             if (country_info === 'error') {
                 res.send('No such country');
             }
