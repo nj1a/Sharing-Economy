@@ -109,21 +109,15 @@ html
         #recommendation
           h1 Related Post
           #related_product_list
-            a(href='')
-              .related_product
-                img(src='../assets/images/related_product_1.jpg', alt='')
-                |  
-                span.related_product_title Looking for a tour guide in London, UK
-            a(href='')
-              .related_product
-                img(src='../assets/images/related_product_2.jpg', alt='')
-                |  
-                span.related_product_title Offering tour in England
-            a(href='')
-              .related_product
-                img(src='../assets/images/related_product_3.png', alt='')
-                |  
-                span.related_product_title Partner to travel with
+            if !suggestions
+              span 'You need to log in first to see the suggestions'
+            else
+              each val, index in suggestions
+                a(href='https://wander-land.herokuapp.com/post/'+ val.post_id)
+                  .related_product
+                    img(src='../img/post_images/'+val.post_id + '_1.jpg', alt='')
+                    span.related_product_title= val.title    
+
         footer
           section.w3-container.w3-theme-d3.w3-padding-16
             section.w3-content

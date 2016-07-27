@@ -322,6 +322,7 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                     };
                     // Get ratings and comments
                     tool.get_ratings_by_city_id(req.params.cityID, function(ratings){
+                        var user_id;
                         console.log('hi');
                         if (ratings === 'error') {
                             res.send('City not found');
@@ -331,13 +332,23 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                         for (var i = 0; i < ratings.length; i++) {
                             ratings[i].date_rated = tool.formatDate(ratings[i].date_rated);
                         };
-                        res.render('city', {
-                            city_info: city_info,
-                            csrfToken: req.csrfToken(),
-                            main_images: main_images,
-                            attraction_images: attraction_images,
-                            ratings: ratings
-                        });
+                        if (typeof sess === 'undefined' || typeof sess.currId === 'undefined' ) {
+                            user_id = -1;                            
+                        }
+                        else {
+                            user_id = sess.currId;
+                        }
+                        tool.get_suggestion_by_city_id(user_id, req.params.cityID, function(suggestions){
+                            res.render('city', {
+                                city_info: city_info,
+                                csrfToken: req.csrfToken(),
+                                main_images: main_images,
+                                attraction_images: attraction_images,
+                                ratings: ratings,
+                                suggestions: suggestions
+                            });
+                        })
+
                     });
                 });
 

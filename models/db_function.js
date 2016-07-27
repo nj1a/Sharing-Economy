@@ -247,6 +247,25 @@ module.exports = {
 			});
 
 		});
+	},
+	get_suggestion_by_city_id: function(user_id, to_city, callback){
+		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
+			var current_date = new Date();
+			current_date = formatDate(current_date);
+			var query_string = "SELECT * FROM product_post, user_account WHERE from_city = user_account.city_id AND user_id = "+ user_id + " AND to_city = "+ to_city + "travel_start_date - integer '7' <= \'"+ current_date + "\' LIMIT 10";
+			console.log(query_string);
+			client.query(query_string, function(err, result){
+				done();
+				if (err) throw err;
+				else{
+					callback(result.rows);
+
+				}
+			});
+
+		});
+
+
 	}
 
 
