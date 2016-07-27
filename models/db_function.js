@@ -255,7 +255,7 @@ module.exports = {
 			var current_date = '2015-01-01';
 			// current_date = formatDate(current_date);
 			console.log('!H');
-			var query_string = "SELECT * FROM product_post, user_account WHERE from_city = user_account.city_id AND user_id = "+ user_id + " AND to_city = "+ to_city + "travel_start_date - integer '7' <= \'"+ current_date + "\' LIMIT 10";
+			var query_string = "SELECT * FROM product_post, user_account WHERE from_city = user_account.city_id AND user_id = "+ user_id + " AND to_city = "+ to_city + " AND travel_start_date - integer '7' <= \'"+ current_date + "\' LIMIT 10";
 			console.log('!I');
 			console.log(query_string);
 
