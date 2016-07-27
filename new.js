@@ -600,6 +600,7 @@ router.post('/google_sign_up', function(req, res){
     last_name = req.body.last_name;
 
     res.render("google_sign_up", {
+        errors:' ',
         email: email,
         first_name: first_name,
         last_name: last_name
