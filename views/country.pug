@@ -48,7 +48,7 @@ html
           #city_list
             each val, index in related_cities
               a(href='http://wander-land.herokuapp.com/city/'+val.city_id)
-              .city_item
-                img(src='../img/city_images/'+val.city_id+'_1.jpg')
-                span.city_title= val.name
+                .city_item
+                  img(src='../img/city_images/'+val.city_id+'_1.jpg')
+                  span.city_title= val.name
 
