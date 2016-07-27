@@ -36,12 +36,9 @@ html
       #product_page
         #product_title  England
         #product_image
-          img.slide_image(src='https://pixabay.com/static/uploads/photo/2014/11/13/23/34/london-530055_960_720.jpg', alt='')
-          |  
-          img.slide_image(src='https://pixabay.com/static/uploads/photo/2016/02/19/10/54/tower-bridge-1209483_960_720.jpg', alt='')
-          |  
-          img.slide_image(src='https://pixabay.com/static/uploads/photo/2010/12/13/10/33/architecture-2892_960_720.jpg', alt='')
-          |  
+          each val, index in main_images
+            img.slide_image(src= val, alt='')
+
           a#left_slide_button(onclick='plusDivs(-1)') &lt;
           |  
           a#right_slide_button.slide_button(onclick='plusDivs(1)') &gt;
