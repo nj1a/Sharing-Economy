@@ -749,7 +749,7 @@ router.post('/signup', function(req, res){
                                     if (err) {
                                         res.send("Error " + err);
                                     }
-                                    sess.email = account;
+                                    sess.email = email;
                                     if (!google) {
                                         res.send('done');
                                     } else{
