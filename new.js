@@ -653,6 +653,7 @@ router.post('/set_google', function(req, res){
     sess = req.session;
     sess.google = true;
     email = req.body.email;
+    console.log("got this from browser:   " + email);
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('select count(*) as count from wanderland.user_account where email = ' + "'" + email + "'", function(err, result){
@@ -660,13 +661,16 @@ router.post('/set_google', function(req, res){
             if (err) {
                 res.send("Error " + err);
             }
+            console.log("number of emails with this value:  " + result.rows[0].count);
 
             if (result.rows[0].count) {
+                console.log("redirected..");
                 res.redirect("/");
             } else {
                 sess.gemail = req.body.email;
                 sess.gfirst_name = req.body.first_name;
                 sess.glast_name = req.body.last_name;
+                console.log("back to browser");
                 res.send("goSign");
             }
 
