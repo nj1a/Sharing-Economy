@@ -1,66 +1,60 @@
 doctype html
 html(lang="en")
-    head
-        meta(charset="utf-8")
-        title= pageTitle
-        link(rel="stylesheet", href="css/profile.css")
-        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans') 
-        script(src="js/jquery-3.1.0.js", defer)
-        script(src="js/profile.js", defer)
-        script(src="js/admin.js", defer)
-        link(rel='stylesheet', href='../css/w3.css')
-        link(rel='stylesheet', href='../css/w3-theme-teal.css')
-        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans')
-        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css')
+	head
+		meta(charset="utf-8")
+		title= pageTitle
+		link(rel="stylesheet", href="css/profile.css")
+		link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans') 
+		script(src="js/jquery-3.1.0.js", defer)
+		script(src="js/profile.js", defer)
+		script(src="js/admin.js", defer)
+		link(rel='stylesheet', href='../css/w3.css')
+		link(rel='stylesheet', href='../css/w3-theme-teal.css')
+		link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans')
+		link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css')
 
-    body
-        main(id=type)
-        	section(class="main-wrap")
-            	ul(id="account-settings" class="profile-info selected")
-				    li(id="profile-manage" class="bdb-lg profile-contents")
-				        section(class="container-content")
-				            section(class="content-key")
-				                span(class="sub-title") Please fill out the following information to complete sign up
-				                span(class="sub-description") some description.... 
-				            
-				            section(class="content-value")
-                                div(class="edit-password")
-                                    form(action="/signup")
-                                        section(class="m_b_15")
-                                        	input(name="google" value=true)
-                                            label(class="profile-label") Username
-                                            div(class="edit-box")
-                                                input(type="text" name="username" id="usrg")
+	body
+		main(id=type)
+			section(class="main-wrap")
+				ul(id="account-settings" class="profile-info selected")
+					li(id="profile-manage" class="bdb-lg profile-contents")
+						section(class="container-content")
+							section(class="content-key")
+								span(class="sub-title") Please fill out the following information to complete sign up
+								span(class="sub-description") some description.... 
 
-                                        section(class="m_b_15")
-                                            label(class="profile-label") Password
-                                            div(class="edit-box")
-                                                input(type="password" name="password" id="npw")
-
-                                        section(class="confirm-pw m_b_15")
-                                            label(class="profile-label") Confirm Password
-                                            div(class="edit-box")
-                                                input(type="password" name="cpassword" id="cpw")
-                                        span(class="error pw")
-                                        span(class="error")=errors.error_npw
-
-                                        section(class="m_b_15")
-                                            label(class="profile-label") Email address
-                                            div(class="edit-box")
-                                                input(type="text" name="emailNew" id="usrg" value=email)
-
-                                        section(class="m_b_15")
-		                                    label(class="profile-label") First name
-		                                    div(class="edit-box")
-		                                        input(type="text" name="first_name" id="usrg" value=first_name)
-
-		                                section(class="m_b_15")
-		                                    label(class="profile-label") Last name
-		                                    div(class="edit-box")
-		                                        input(type="text" name="last_name" id="usrg" value=last_name)
-
-                                        div(class="mt10")
-                                            a(id="createACC" href="" type="submit" disabled = "true") CREATE
+							section(class="content-value")
+								div(class="edit-password")
+									form(action="/signup")
+										section(class="m_b_15")
+											input(name="google" class="hidden" value=true)
+											label(class="profile-label") Username
+											div(class="edit-box")
+												input(type="text" name="username" id="usrg")
+										section(class="m_b_15")
+											label(class="profile-label") Password
+											div(class="edit-box")
+												input(type="password" name="password" id="npw")
+										section(class="confirm-pw m_b_15")
+											label(class="profile-label") Confirm Password
+											div(class="edit-box")
+												input(type="password" name="cpassword" id="cpw")
+											span(class="error pw")
+											span(class="error")=errors.error_npw
+										section(class="m_b_15")
+											label(class="profile-label") Email address
+											div(class="edit-box")
+												input(type="text" name="emailNew" id="usrg" value=email)
+										section(class="m_b_15")
+											label(class="profile-label") First name
+											div(class="edit-box")
+												input(type="text" name="first_name" id="usrg" value=first_name)
+										section(class="m_b_15")
+											label(class="profile-label") Last name
+											div(class="edit-box")
+												input(type="text" name="last_name" id="usrg" value=last_name)
+										div(class="mt10")
+											a(id="createACC" href="" type="submit" disabled = "true") CREATE
 
 
 
