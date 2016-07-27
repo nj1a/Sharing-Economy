@@ -639,12 +639,17 @@ router.post('/set_google', function(req, res){
 });
 
 router.get("/google_sign_up", function(req, res){
-    res.render("google_sign_up", {
-        email: sess.gemail,
-        first_name: sess.gfirst_name,
-        last_name: sess.glast_name
-    });
-})
+    if (sess.google) {
+        res.render("google_sign_up", {
+            email: sess.gemail,
+            first_name: sess.gfirst_name,
+            last_name: sess.glast_name
+        });
+    } else {
+        res.redirect("/");
+    }
+    
+});
 router.post('/signup', function(req, res){
     var google, account, password, username, first_name, last_name;
 
