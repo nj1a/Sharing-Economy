@@ -22,4 +22,10 @@
 
 .m_b_20x {
 	margin-bottom:20px;
+
+}
+
+input::after{
+	content:" ";
+	visibility: hidden;
 }

@@ -8,6 +8,22 @@ $(document).ready(function() {
 	if (x===null){
 		startSlide();
 	} 
+	$("#usernameNew").on("input", function(event){
+			$("#error_user").html("");
+			var usrRegex = new RegExp("^[a-zA-Z0-9äöüÄÖÜ]*$");
+
+        if (!usrRegex.test(event.target.value)){
+			$("#error_user").html("special characters are not allowed");
+			$("#newClient").attr("disabled", true);        
+        } else if (event.target.value.length == 0) {
+        	$("#error_user").html("cannot be empty");
+			$("#newClient").attr("disabled", true);   
+        }else {
+        	$("#error_user").html("");
+			$("#newClient").attr("disabled", false);  
+        }
+            
+	});
 
 	$("input[type='button']#existingClient").click(function(e){
 		reqType = 1;
@@ -119,6 +135,7 @@ $(document).ready(function() {
             } else {
             	//alert(2);
             	if (x===null){
+            		$("#error_user").html("either username or email address already exists");
             		show_login_pop();
 					
 				} 
@@ -138,9 +155,13 @@ $(document).ready(function() {
 	            	//alert(1);
 	                window.location.href="/login_success";
 	            } else {
+
+	            	$("#comboErr").html("wrong email or password");
 	            	//alert(2);
 	            	if (x===null){
+	            		
 	            		show_login_pop();
+
 						
 					} 
 	            	

@@ -10,6 +10,8 @@ $(document).ready(function(){
 		$.get("/viewusr/" + event.target.value, function(data){
 					if (data==="good"){
 						window.location.href="/showusr";
+					} else {
+						alert("please log in first");
 					}
 				});
 	});

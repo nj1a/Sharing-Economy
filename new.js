@@ -11,7 +11,7 @@ var sha256 = require('js-sha256');
 var router = express.Router();
 router.use(busboy());
 
-// Security
+// Securityf
 var csrf = require('csurf');
 var cookieParser = require('cookie-parser');
 var sanitizer = require('sanitizer');
@@ -21,6 +21,10 @@ var csrfProtection = csrf({ cookie: true });
 var parseForm = bodyParser.urlencoded({ extended: false });
 
 router.use(cookieParser());
+
+// performance
+var compression = require('compression');
+router.use(compression());
 
 var sess;
 
@@ -96,6 +100,28 @@ router.use(expressValidator({
         }
     }
 }));
+
+router.post('/admin_sign', function(req, res){
+    sess = req.session;
+
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+            client.query('SELECT count(*) FROM wanderland.user_account WHERE wanderland.user_account.email = ' +
+                "'"+ req.body.email + "'" +  ' AND wanderland.user_account.password =' + "'" + req.body.password + "'" + ' AND wanderland.user_account.is_admin = ' + "'" +'t' + "'", function(err, result) {
+                    console.log('SELECT count(*) FROM wanderland.user_account WHERE wanderland.user_account.email = ' +
+                "'"+ req.body.email + "'" +  ' AND wanderland.user_account.password =' + "'" + req.body.password + "'" + ' AND wanderland.user_account.is_admin = ' + "'" +'t' + "'");
+                    console.log(JSON.stringify(result.rows[0].count));
+                    done();
+                    if (err) {
+                        res.send("Error " + err);
+                    }
+                    if (result.rows[0].count == '0'){
+                        res.render("admin", {errors: "invalid login information"});
+                    } else{
+                        sess.email = req.body.email;
+                        res.redirect("/login_success");
+                    }
+
+});});});
 
 router.post('/login', function(req, res){
     sess = req.session;
@@ -341,7 +367,7 @@ router.post('/city/:cityID', function(req, res){
         else{
             res.send('Please enter valid rating (ie. 1 to 5) and valid comment');
         }
-        
+
     } else{
         res.send('Please enter valid rating (ie. 1 to 5) and valid comment');
     }
@@ -488,7 +514,10 @@ router.get('/viewusr/:username', function(req, res){
     sess=req.session;
     var targetUser= req.params.username;
 
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    if (!sess.email){
+        res.send("not logged in");
+    } else {
+        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('SELECT * FROM wanderland.user_account WHERE wanderland.user_account.username = ' +
             "'"+ targetUser + "'" , function(err, result) {
             done();
@@ -502,6 +531,10 @@ router.get('/viewusr/:username', function(req, res){
             }
         });
     });
+
+    }
+
+
 
 });
 
@@ -528,7 +561,7 @@ router.get('/showusr', function(req, res){
                                 path = '/img/default_profile.jpg';
                             }
 
-
+                            var friendshipExists;
                              pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                                 client.query('select count(*) as count from wanderland.friendship where first_user_id = ' + "'" + sess.currId + "'" +  ' and second_user_id = ' + "'" + usrID + "'", function(err, result2){
                                     done();
@@ -536,21 +569,38 @@ router.get('/showusr', function(req, res){
                                         res.send("Error " + err);
                                     }
 
-                                    var friendshipExists;
-                                    if (result2.rows[0].count) {
-                                        friendshipExists = 'already friends';
-                                    } else {
+
+
+                                    if (result2.rows[0].count === '0') {
+                                        //console.log("hohohahahahohao" + result2.rows[0].count);
                                         friendshipExists = "Send request for friends";
+                                    } else {
+                                        friendshipExists = 'already friends';
                                     }
+
+                                    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+                                        client.query('select count(*) as count from wanderland.request where from_user_id = ' + "'" + sess.currId + "'" +  ' and to_user_id = ' + "'" + usrID + "'", function(err, result3){
+                                            done();
+                                            if (err) {
+                                                res.send("Error " + err);
+                                            }
+
+                                            if (result3.rows[0].count === '1') {
+                                                friendshipExists = "request has been sent";
+                                            }
+
+                                            res.render('viewusr', {
+                                            results: result1.rows,
+                                            errors: ' ',
+                                            type: sess.email,
+                                            pic: path,
+                                            friendship: friendshipExists
+                                        });
+                                    });
 
                                     //console.log(result2.rows[0].count);
 
-                                    res.render('viewusr', {
-                                        results: result1.rows,
-                                        errors: ' ',
-                                        type: sess.email,
-                                        pic: path,
-                                        friendship: friendshipExists
+
                                 //csrfToken: req.csrfToken()
 
                                     });
@@ -711,9 +761,10 @@ router.get("/google_sign_up", function(req, res){
     } else {
         res.redirect("/");
     }
-    
+
 });
 router.post('/signup', function(req, res){
+    sess = req.session;
     if(sess.email){
         res.redirect("/");
     }
@@ -789,7 +840,7 @@ router.post('/signup', function(req, res){
                                         console.log("google value is :   " + google);
                                         res.redirect("/")
                                     }
-                                    
+
 
 
                                 });
@@ -955,7 +1006,7 @@ router.get('/post/:postId', function(req, res){
         console.log('!B');
         if (result === 'error') {
           res.send('No such result in database');
-        } 
+        }
         else{
             console.log('!C');
             glob('public/img/post_images/'+req.params.postId+'_*.*', function(er, files){

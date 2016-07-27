@@ -186,20 +186,29 @@ input#logoutButton:focus{
 }
 
 #login-pop/*, #sign-pop*/{
-    position:fixed;
+    position:absolute;
     width:60%;
+    min-width: 200px;
     margin-left:20%;
     background-color: #fff;
-    top:17%;
-    height:45%;
-    min-height:45vh;
+    margin-top:15%;
+    height:65%;
+    min-height:65vh;
 
     font-size: 13px;
     border-radius:20px;
     background-color:#fff;
-    overflow: visible;
+    
 
 
+
+}
+#googleSign{
+    margin-top:20px;
+}
+#googleLink{
+    margin-left: 55px;
+    margin-top: 20px;
 
 }
 #login-pop::after{
