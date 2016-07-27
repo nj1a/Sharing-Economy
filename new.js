@@ -1022,6 +1022,7 @@ router.get('/post/:postId', function(req, res){
                 result.travel_start_date = tool.formatDate(result.travel_start_date);
                 result.travel_end_date = tool.formatDate(result.travel_end_date);
                 result.post_date = tool.formatDate(post_date);
+                console.log('This is post_date: '+result.post_date);
 
                 tool.get_result_suggestion(result.from_city, result.departure_country_id, result.to_city, result.destination_country_id, result.post_type, result.travel_start_date, result.travel_end_date, function(related_posts){
                     console.log('!F');

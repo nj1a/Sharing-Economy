@@ -204,7 +204,7 @@ module.exports = {
 
 		if (month.length < 2) month = '0' + month;
 		if (day.length < 2) day = '0' + day;
-
+		console.log('year: '+year + ' month: '+month + ' day: '+day);
 		return [year, month, day].join('-');
 	},
 	get_info_by_country_id: function(country_id, callback){
