@@ -1023,9 +1023,9 @@ router.get('/post/:postId', function(req, res){
                 console.log("Post date: "+ typeof result.post_date);
                 result.travel_start_date = tool.formatDate(result.travel_start_date);
                 result.travel_end_date = tool.formatDate(result.travel_end_date);
-                console.log('This is post_date1: '+result.post_date);
+                console.log('This is post_date1: '+result.post_date.getFullYear() +', '+result.post_date.getMonth() + ', '+result.post_date.getDate());
                 result.post_date = tool.formatDate(post_date);
-                console.log('This is post_date2: '+result.post_date);
+
 
                 tool.get_result_suggestion(result.from_city, result.departure_country_id, result.to_city, result.destination_country_id, result.post_type, result.travel_start_date, result.travel_end_date, function(related_posts){
                     console.log('!F');
