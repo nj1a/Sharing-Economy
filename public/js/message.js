@@ -1,31 +1,12 @@
-function toggleNameForm() {
-   $('#login-screen').toggle();
+function prependZero(num) {
+    var s = num + '';
+    while (s.length < 2) {
+        s = '0' + s;
+    }
+    return s;
 }
 
-function togglemessageWindow() {
-  $('#main-message-screen').toggle();
-}
-
-// Pad n to specified size by prepending a zeros
-function zeroPad(num, size) {
-  var s = num + '';
-  while (s.length < size) {
-    s = '0' + s;
-  }
-
-  return s;
-}
-
-// Format the time specified in ms from 1970 into local HH:MM:SS
-function timeFormat(msTime) {
-  var d = new Date(msTime);
-  return zeroPad(d.getHours(), 2) + ':' +
-    zeroPad(d.getMinutes(), 2) + ':' +
-    zeroPad(d.getSeconds(), 2) + ' ';
-}
-
-$(document).ready(function() {
-
+$(document).ready(() => {
     var socket = io.connect();
     var currRoom = null;
     var typing = false;
@@ -36,56 +17,57 @@ $(document).ready(function() {
         socket.emit('typing', false);
     }
 
-  $('form').submit(function(event) {
-    event.preventDefault();
-  });
+    $('form').submit((event) => {
+        event.preventDefault();
+    });
 
-  $('#conversation').bind('DOMSubtreeModified',function() {
-    $('#conversation').animate({
-        scrollTop: $('#conversation')[0].scrollHeight
-      });
-  });
+    $('#convo').bind('DOMSubtreeModified', () => {
+        $('#convo').animate({
+            scrollTop: $('#convo')[0].scrollHeight
+        });
+    });
 
-  $('#main-message-screen').hide();
-  $('#errors').hide();
-  $('#name').focus();
-  $('#join').attr("disabled", "disabled");
-
-  if ($('#name').val() === '') {
+    $('#main-message-screen').hide();
+    $('#errors').hide();
+    $('#name').focus();
     $('#join').attr("disabled", "disabled");
-  }
 
-  //enter screen
-  $('#nameForm').submit(function() {
-    var name = $('#name').val();
-    var device = 'desktop';
-    if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
-      device = 'mobile';
+    // limit the length of name
+    if ($('#name').val() === '') {
+        $('#join').attr("disabled", "disabled");
     }
-    if (name === '' || name.length < 2) {
-      $('#errors').empty();
-      $('#errors').append('Please enter a name longer than 3 characters');
-      $('#errors').show();
-    } else {
-      socket.emit('start', name, device);
-      toggleNameForm();
-      togglemessageWindow();
-      $('#msg').focus();
-    }
-  });
 
-  $('#name').keypress(function(e){
-    var name = $('#name').val();
-    if(name.length < 2) {
-      $('#join').attr("disabled", "disabled");
-    } else {
-      $('#errors').empty();
-      $('#errors').hide();
-      $('#join').removeAttr("disabled");
-    }
-  });
+    $('#name').keypress(() => {
+        var name = $('#name').val();
+        if(name.length < 3) {
+            $('#join').attr("disabled", "disabled");
+        } else {
+            $('#errors').empty();
+            $('#errors').hide();
+            $('#join').removeAttr("disabled");
+        }
+    });
 
-  //main message screen
+
+    $('#nameForm').submit(() => {
+        var name = $('#name').val();
+        var device = navigator.userAgent
+            .match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i) ?
+            'mobile' : 'desktop';
+
+        if (name === '' || name.length < 3) {
+            $('#errors').empty();
+            $('#errors').append('Please enter a name longer than 3 characters');
+            $('#errors').show();
+        } else {
+            socket.emit('start', name, device);
+            $('#login-screen').toggle();
+            $('#main-message-screen').toggle();
+            $('#msg').focus();
+        }
+    });
+
+
     $('#messageForm').submit(() => {
         var $msg = $('#msg').val();
         if ($msg !== '') {
@@ -93,8 +75,6 @@ $(document).ready(function() {
             $('#msg').val('');
         }
     });
-
-
 
     $('#msg').keypress((e) => {
         if (e.which !== 13) { // not return
@@ -108,11 +88,9 @@ $(document).ready(function() {
         }
     });
 
-
-
-  $('#showCreateRoom').click(function() {
-    $('#createRoomForm').toggle();
-  });
+    $('#showCreateRoom').click(() => {
+        $('#createRoomForm').toggle();
+    });
 
     $('#createRoomBtn').click(() => {
         var nameExists = false;
@@ -156,8 +134,8 @@ $(document).ready(function() {
         $('#errors').empty();
         $('#errors').show();
         $('#errors').append(msg);
-        toggleNameForm();
-        togglemessageWindow();
+        $('#login-screen').toggle();
+        $('#main-message-screen').toggle();
     });
 
     socket.on('update', (msg) => {
@@ -212,7 +190,13 @@ $(document).ready(function() {
     });
 
     socket.on('message', (msgTime, person, msg) => {
-        $('#msgs').append('<li><strong><span class="text-success">' + timeFormat(msgTime) + person.name + '</span></strong>: ' + msg + '</li>');
+        // format time
+        var d = new Date(msgTime);
+        var formattedTime =  prependZero(d.getHours()) + ':' +
+            prependZero(d.getMinutes()) + ':' +
+            prependZero(d.getSeconds()) + ' ';
+
+        $('#msgs').append('<li><strong><span class="text-success">' + formattedTime + person.name + '</span></strong>: ' + msg + '</li>');
 
         //clear typing field
         $('#' + person.name + '_t').remove();
@@ -241,4 +225,22 @@ $(document).ready(function() {
     socket.on('sendRoomID', (data) => {
         currRoom = data.id;
     });
+
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+var constraints = {video: true};
+
+function successCallback(localMediaStream) {  
+  window.stream = localMediaStream;
+  var video = document.querySelector("video");
+  video.src = window.URL.createObjectURL(localMediaStream);
+  video.play();
+}
+
+function errorCallback(error){  
+  console.log("navigator.getUserMedia error: ", error);
+}
+
+navigator.getUserMedia(constraints, successCallback, errorCallback);  
+
 });

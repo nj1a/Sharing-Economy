@@ -8,7 +8,6 @@ var peopleCount = 0, roomCount = 0;
 var sockets = [];
 var msgHistory = {};
 
-
 function roomRemoved(io, s, room) {
 	io.sockets.to(s.room).emit('update', 'The room is removed.');
 	var socketids = [];
@@ -55,72 +54,6 @@ function userLeft(io, s, room) {
 		people[s.id].inroom = null;
 		io.emit('update', people[s.id].name + ' has left the room.');
 		s.leave(room.name);
-	}
-}
-
-
-function purge(io, s, action) {
-	/*
-	The action will determine how we deal with the room/user removal.
-	These are the following scenarios:
-	if the user is the owner and (s)he:
-		1) disconnects (i.e. leaves the whole server)
-			- advise users
-		 	- delete user from people object
-			- delete room from rooms object
-			- delete message history
-			- remove all users from room that is owned by disconnecting user
-		2) removes the room
-			- same as above except except not removing user from the people object
-		3) leaves the room
-			- same as above
-	if the user is not an owner and (s)he's in a room:
-		1) disconnects
-			- delete user from people object
-			- remove user from room.people object
-		2) removes the room
-			- produce error message (only owners can remove rooms)
-		3) leaves the room
-			- same as point 1 except not removing user from the people object
-	if the user is not an owner and not in a room:
-		1) disconnects
-			- same as above except not removing user from room.people object
-		2) removes the room
-			- produce error message (only owners can remove rooms)
-		3) leaves the room
-			- n/a
-	*/
-	if (people[s.id].inroom) { // user is in a room
-		var room = rooms[people[s.id].inroom]; // find which room user is in.
-		if (s.id === room.owner) { //user is the owner
-			if (action === 'disconnect') {
-				roomRemoved(io, s, room);
-				userDisconnected(io, s);
-
-			} else if (action === 'removeRoom') { //room owner removes room
-				roomRemoved(io, s, room);
-				people[s.id].owns = null;
-
-			} else if (action === 'leaveRoom') { //room owner leaves room
-				roomRemoved(io, s, room);
-				people[s.id].owns = null;
-			}
-		} else {//user in room but does not own room
-			if (action === 'disconnect') {
-				userLeft(io, s, room);
-				userDisconnected(io, s);
-			} else if (action === 'removeRoom') {
-				s.emit('update', 'Only the owner can remove a room.');
-			} else if (action === 'leaveRoom') {
-				userLeft(io, s, room);
-			}
-		}	
-	} else {
-		//The user isn't in a room, but maybe he just disconnected, handle the scenario:
-		if (action === 'disconnect') {
-			io.emit('update', people[s.id].name + ' has disconnected from the server.');
-			userDisconnected(io, s);
-		}		
 	}
 }
 
@@ -190,8 +123,23 @@ module.exports = (io) => {
         
         socket.on('disconnect', () => {
             if (typeof people[socket.id] !== 'undefined') { // handles the refresh of the name screen
-                purge(io, socket, 'disconnect');
-            }
+
+				if (people[socket.id].inroom) { // user is in a room
+					var room = rooms[people[socket.id].inroom];
+
+					if (socket.id === room.owner) { //user is the owner
+						roomRemoved(io, socket, room);
+						userDisconnected(io, socket);
+					}  else { // user is not the owner
+						userLeft(io, socket, room);
+						userDisconnected(io, socket);
+					}
+				} else {
+					// not in a room
+					io.emit('update', people[socket.id].name + ' has disconnected from the server.');
+					userDisconnected(io, socket);	
+				}
+			}
         });
 
         //Room functions
@@ -235,7 +183,8 @@ module.exports = (io) => {
         socket.on('removeRoom', (roomId) => {
             var room = rooms[roomId];
             if (socket.id === room.owner) {
-                purge(io, socket, 'removeRoom');
+                roomRemoved(io, socket, room);
+				people[socket.id].owns = null;
             } else {
 				socket.emit('update', 'You are not the owner.');
             }
@@ -246,33 +195,29 @@ module.exports = (io) => {
                 var room = rooms[roomId];
                 if (socket.id === room.owner) {
                     socket.emit('update', 'You are already in the room.');
-                } else {
-                    if (_.contains((room.people), socket.id)) {
-                        socket.emit('update', 'You are already in this room.');
-                    } else {
-                        if (people[socket.id].inroom !== null) {
-                                socket.emit('update', 'You are already in the room (' + rooms[people[socket.id].inroom].name + ').');
-						} else {
-							// add this user to the room
-							var user = people[socket.id];
-							user.inroom = roomId;
-							room.add(socket.id);
-							socket.room = room.name;
-							socket.join(socket.room);
+                } else if (_.contains((room.people), socket.id)) {
+					socket.emit('update', 'You are already in this room.');
+				} else if (people[socket.id].inroom !== null) {
+					socket.emit('update', 'You are already in the room (' + rooms[people[socket.id].inroom].name + ').');
+				} else {
+					// add this user to the room
+					var user = people[socket.id];
+					user.inroom = roomId;
+					room.add(socket.id);
+					socket.room = room.name;
+					socket.join(socket.room);
 
-							// broadcast
-							io.sockets.to(socket.room).emit('update', user.name + ' has joined room ' + room.name + '.');
-							socket.emit('update', 'Welcome to ' + room.name + '.');
-							socket.emit('sendRoomID', {id: roomId});
+					// broadcast
+					io.sockets.to(socket.room).emit('update', user.name + ' has joined room ' + room.name + '.');
+					socket.emit('update', 'Welcome to ' + room.name + '.');
+					socket.emit('sendRoomID', {id: roomId});
 
-							// show past msgs
-							var keys = _.keys(msgHistory);
-							if (_.contains(keys, socket.room)) {
-								socket.emit('history', msgHistory[socket.room]);
-							}
-                        }
-                    }
-                }
+					// show past msgs
+					var keys = _.keys(msgHistory);
+					if (_.contains(keys, socket.room)) {
+						socket.emit('history', msgHistory[socket.room]);
+					}
+				}
             } else {
                 socket.emit('update', 'Please enter a valid name first.');
             }
@@ -281,8 +226,13 @@ module.exports = (io) => {
         socket.on('leaveRoom', (roomId) => {
             var room = rooms[roomId];
             if (room) {
-                purge(io, socket, 'leaveRoom');
-            }
+                if (socket.id === room.owner) { //user is the owner
+					roomRemoved(io, socket, room);
+					people[socket.id].owns = null;
+            	} else {
+					userLeft(io, socket, room);
+				}
+			}
         });
     });
 };

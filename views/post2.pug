@@ -8,6 +8,10 @@ html(lang="en")
     script(src="../js/jquery-3.1.0.js", defer)
     script(src="../js/post-c.js", defer)
     script(src="../js/post.js", defer)
+    link(rel='stylesheet', href='../css/w3.css')
+    link(rel='stylesheet', href='../css/w3-theme-teal.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css')
   body#entity.w3-theme-l5
       nav.w3-top
         ul.w3-navbar.w3-theme-d2.w3-left-align.w3-large
@@ -113,21 +117,11 @@ html(lang="en")
         section#recommendation
           h1 Related Post
           article#related_product_list
-            a(href='')
-              section.related_product
-                img(src='../assets/images/product_1.jpg', alt='')
-                |  
-                span.related_product_title Looking for a tour guide
-            a(href='')
-              section.related_product
-                img(src='../assets/images/product_2.jpg', alt='')
-                |  
-                span.related_product_title Offering tour in Vancouver BC
-            a(href='')
-              section.related_product
-                img(src='../assets/images/product_3.jpg', alt='')
-                |  
-                span.related_product_title England!
+            each val, index in related_posts
+              a(href='https://wander-land.herokuapp.com/post/'+val.post_id)
+                section.related_product
+                  img(src='../img/post_images/'+val.post_id+'_1.jpg')
+                  span.related_product_title= val.title
       br
       footer
         section.w3-container.w3-theme-d3.w3-padding-16

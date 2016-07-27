@@ -3,7 +3,7 @@ var pg = require('pg');
 module.exports = {
 	get_info_by_post_id: function(post_id, callback){
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-			client.query('SELECT product_post.*, user_account.username, user_account.email, user_account.gender, user_account.date_joined, ci1.name AS departure_city, co1.country_name AS departure_country, ci2.name AS destination_city, co2.country_name AS destination_country FROM wanderland.product_post, wanderland.user_account, wanderland.city AS ci1, wanderland.city AS ci2, wanderland.country AS co1, wanderland.country AS co2 WHERE post_id ='+post_id+' AND product_post.user_id = user_account.user_id AND from_city = ci1.city_id AND to_city = ci2.city_id AND ci1.country_id = co1.country_id AND ci2.country_id = co2.country_id', function(err, result){
+			client.query('SELECT product_post.*, user_account.username, user_account.email, user_account.gender, user_account.date_joined, ci1.name AS departure_city, co1.country_name AS departure_country, co1.country_id AS depature_country_id, ci2.name AS destination_city, co2.country_name AS destination_country, co2.country_id AS destination_country_id FROM wanderland.product_post, wanderland.user_account, wanderland.city AS ci1, wanderland.city AS ci2, wanderland.country AS co1, wanderland.country AS co2 WHERE post_id ='+post_id+' AND product_post.user_id = user_account.user_id AND from_city = ci1.city_id AND to_city = ci2.city_id AND ci1.country_id = co1.country_id AND ci2.country_id = co2.country_id', function(err, result){
 				done();
 				if (err) throw err;
 				else{
@@ -28,13 +28,8 @@ module.exports = {
 				done();
 				if (err) throw err;
 				else{
-					if (JSON.stringify(result.rows) === "[]") {
-						console.log('No matching row in database');
-						callback('error');
-					} else {
-						// console.log(result.rows);
-						callback(result.rows);
-					}
+					callback(result.rows);
+
 				}
 			});
 
@@ -232,6 +227,27 @@ module.exports = {
 						console.log(result.rows);
 						callback(result.rows[0]);
 					}
+				}
+			});
+
+		});
+	},
+	get_result_suggestion: function(from_city, from_country, to_city, to_country, type, start_date, end_date, callback){
+		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
+			var query_string;
+			if (type === 'buddy') {
+				query_string = 'SELECT * FROM product_post, city AS from_city, city AS to_city WHERE product_post.from_city = from_city.city_id AND product_post.to_city = to_city.city_id AND post_type = \''+type + "\' AND from_city.country_id = "+from_country + " AND to_city.country_id = "+to_country + " AND travel_start_date + integer \'7\'>= \'" + start_date + "\' AND travel_end_date - integer \'7\' <= \'"+end_date + "\' LIMIT 5";
+			}
+			else if (type === 'offer_guide' || type === 'guide'){
+				query_string = "SELECT * FROM product_post , city AS to_city WHERE product_post.to_city = to_city.city_id AND post_type = \'" + type + "\' AND to_city.country_id = "+to_country + " AND from_city = "+from_city + " AND travel_start_date + integer \'7\'>= \'" + start_date + "\' AND travel_end_date - integer \'7\'<= \'" + end_date + "\' LIMIT 5";
+			}
+			console.log(query_string);
+			client.query(query_string, function(err, result){
+				done();
+				if (err) throw err;
+				else{
+					callback(result.rows);
+
 				}
 			});
 

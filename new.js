@@ -11,7 +11,7 @@ var sha256 = require('js-sha256');
 var router = express.Router();
 router.use(busboy());
 
-// Security
+// Securityf
 var csrf = require('csurf');
 var cookieParser = require('cookie-parser');
 var sanitizer = require('sanitizer');
@@ -30,7 +30,8 @@ function validateEmail(email) {
 }
 
 function validateBlackList(password) {
-    var blackListedChar = "<>,./:;'|{}[]-_+=!@#$%^&*()`~?";
+    // I pulled out the , and - because the city and date use them
+    var blackListedChar = "<>./:;'|{}[]_+=!@#$%^&*()`~?";
     for (var i = 0; i < blackListedChar.length; i++) {
         if (password.includes(blackListedChar[i])) {
             return false;
@@ -230,30 +231,44 @@ router.post('/result', function(req, res) {
                 var from_city_id, to_city_id, to_country_id;
                 tool.get_city_id(from_city, from_country, function(result1){
                     from_city_id = result1.city_id;
+                    from_country_id = result1.country_id;
                     tool.get_city_id(to_city, to_country, function(result2){
                         to_city_id = result2.city_id;
                         to_country_id = result2.country_id;
                         tool.get_result(req.body.post_type, from_date, to_date, from_city_id, to_city_id, function(result3){
-                            
-                            if (result3 === 'error' || result1 === 'error' || result2 === 'error') {
-                                res.send('No matching result');
 
-                            }else{
-                                // res.send(JSON.stringify(result));
-                                console.log('This is result object: ', result3);
-                                res.render("result", {
+                            tool.get_result_suggestion(from_city_id, from_country_id, to_city_id, to_country_id, req.body.post_type, from_date, to_date, function(suggestions){
 
-                                    result: result3//,
-                                    //csrfToken: req.csrfToken()
 
-                                });
-                            }
+                                if (result1 === 'error' || result2 === 'error') {
+                                    res.send('No matching result');
+
+                                }else{
+                                    // res.send(JSON.stringify(result));
+                                    console.log('This is result object: ', result3);
+                                    res.render("result", {
+
+                                        result: result3,
+                                        suggestions: suggestions
+                                        //,
+                                        //csrfToken: req.csrfToken()
+
+                                    });
+                                }
+
+
+                            })
+
+
                         });
 
                     });
 
                 });
             }
+        }
+        else {
+            res.send('Error on validation');
         }
         // res.render('result', { title: 'result', message: 'results'});
     }
@@ -980,12 +995,16 @@ router.post('/update_email', function(req, res){
 // Post page
 router.get('/post/:postId', function(req, res){
     var username, type, post_date, way_of_travelling, travel_start_date, travel_end_date;
-
+    console.log('!A');
     tool.get_info_by_post_id(req.params.postId, function(result){
+        console.log('!B');
         if (result === 'error') {
           res.send('No such result in database');
-        } else{
+        } 
+        else{
+            console.log('!C');
             glob('public/img/post_images/'+req.params.postId+'_*.*', function(er, files){
+                console.log('!D');
                 if (er) {
                     throw er;
                 }
@@ -994,11 +1013,18 @@ router.get('/post/:postId', function(req, res){
                     console.log('looped');
                     files[i] = files[i].replace('public', '..');
                 }
-                console.log('2: '+files);
-                res.render('post2', {
-                    result: result,
-                    images: files,
-                    //csrfToken: req.csrfToken()
+                console.log('!E');
+                tool.get_result_suggestion(result.from_city, result.departure_country_id, result.to_city, result.destination_country_id, result.post_type, result.travel_start_date, result.travel_end_date, function(related_posts){
+                    console.log('!F');
+
+                    console.log('2: '+files);
+                    res.render('post2', {
+                        result: result,
+                        images: files,
+                        related_posts: related_posts
+                        //csrfToken: req.csrfToken()
+                    });
+
                 });
             });
         }
