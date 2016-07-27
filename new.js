@@ -652,31 +652,26 @@ router.post('/createUser', function(req, res){
 router.post('/set_google', function(req, res){
     sess = req.session;
     sess.google = true;
-    sess.verified = false;
+    email = req.body.email;
 
-    //var email, first_name, last_name;
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+        client.query('select count(*) as count from wanderland.user_account where email = ' + "'" + email + "'", function(err, result){
+            done();
+            if (err) {
+                res.send("Error " + err);
+            }
 
-    if (sess.google && !sess.verified) {
-        sess.gemail = req.body.email;
-        sess.gfirst_name = req.body.first_name;
-        sess.glast_name = req.body.last_name;
-       // sess.verified = true;
-        res.send("verified");
-    } else {
-        res.send("already verified");
-    }
+            if (result.rows[0].count) {
+                res.redirect("/");
+            } else {
+                sess.gemail = req.body.email;
+                sess.gfirst_name = req.body.first_name;
+                sess.glast_name = req.body.last_name;
+                res.send("goSign");
+            }
 
-    
-
-
-    //console.log(req.body);
-   // console.log("now rendering google_sign_up");
-
-   /* res.render("google_sign_up", {
-        email: email,
-        first_name: first_name,
-        last_name: last_name
-    });*/
+        });
+    });
 });
 
 router.get("/google_sign_up", function(req, res){

@@ -237,10 +237,8 @@ function onSignIn(googleUser) {
 
 
         $.post("/set_google", {first_name: first_name, last_name:last_name, email:email}, function(result){
-        	if (result ==="verified") {
+        	if (result ==="goSign") {
         		window.location.href="/google_sign_up";
-        	} else {
-        		window.location.href="/signup";
         	}
         });
         
