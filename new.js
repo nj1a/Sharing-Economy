@@ -22,6 +22,10 @@ var parseForm = bodyParser.urlencoded({ extended: false });
 
 router.use(cookieParser());
 
+// performance
+var compression = require('compression');
+router.use(compression());
+
 var sess;
 
 function validateEmail(email) {
@@ -361,7 +365,7 @@ router.post('/city/:cityID', function(req, res){
         else{
             res.send('Please enter valid rating (ie. 1 to 5) and valid comment');
         }
-        
+
     } else{
         res.send('Please enter valid rating (ie. 1 to 5) and valid comment');
     }
@@ -528,7 +532,7 @@ router.get('/viewusr/:username', function(req, res){
 
     }
 
-    
+
 
 });
 
@@ -563,7 +567,7 @@ router.get('/showusr', function(req, res){
                                         res.send("Error " + err);
                                     }
 
-                                    
+
 
                                     if (result2.rows[0].count === '0') {
                                         //console.log("hohohahahahohao" + result2.rows[0].count);
@@ -594,7 +598,7 @@ router.get('/showusr', function(req, res){
 
                                     //console.log(result2.rows[0].count);
 
-                                    
+
                                 //csrfToken: req.csrfToken()
 
                                     });
@@ -755,7 +759,7 @@ router.get("/google_sign_up", function(req, res){
     } else {
         res.redirect("/");
     }
-    
+
 });
 router.post('/signup', function(req, res){
     sess = req.session;
@@ -834,7 +838,7 @@ router.post('/signup', function(req, res){
                                         console.log("google value is :   " + google);
                                         res.redirect("/")
                                     }
-                                    
+
 
 
                                 });
@@ -1000,7 +1004,7 @@ router.get('/post/:postId', function(req, res){
         console.log('!B');
         if (result === 'error') {
           res.send('No such result in database');
-        } 
+        }
         else{
             console.log('!C');
             glob('public/img/post_images/'+req.params.postId+'_*.*', function(er, files){
