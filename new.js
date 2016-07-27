@@ -323,8 +323,9 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                     // Get ratings and comments
                     tool.get_ratings_by_city_id(req.params.cityID, function(ratings){
                         var user_id;
-                        console.log('hi');
+                        console.log('!A');
                         if (ratings === 'error') {
+                            console.log('!B');
                             res.send('City not found');
                             ratings = {};
                         };
@@ -332,14 +333,18 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                         for (var i = 0; i < ratings.length; i++) {
                             ratings[i].date_rated = tool.formatDate(ratings[i].date_rated);
                         };
+                        console.log('!C');
                         if (typeof sess === 'undefined' || typeof sess.currId === 'undefined' ) {
-                            user_id = -1;                            
+                            user_id = -1;
+                            console.log('!D');
                         }
                         else {
                             user_id = sess.currId;
+                            console.log('!E');
                         }
+                        console.log('!F');
                         tool.get_suggestion_by_city_id(user_id, req.params.cityID, function(suggestions){
-                            
+
                             res.render('city', {
                                 city_info: city_info,
                                 csrfToken: req.csrfToken(),
