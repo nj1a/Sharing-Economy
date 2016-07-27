@@ -663,7 +663,7 @@ router.post('/set_google', function(req, res){
             }
             console.log("number of emails with this value:  " + result.rows[0].count);
 
-            if (result.rows[0].count) {
+            if (result.rows[0].count == 1) {
                 console.log("redirected..");
                 res.redirect("/");
             } else {
