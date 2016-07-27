@@ -701,12 +701,12 @@ router.post('/signup', function(req, res){
     username = req.body.username;
 
     sess = req.session;
-    console.log(account, password, username, first_name, last_name);
+    console.log(email, password, username, first_name, last_name);
 
     if (validateEmail(email) && validateBlackList(password) && validateBlackList(username)) {
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query('SELECT * FROM wanderland.user_account WHERE user_account.email = ' +
-                "'" + account + "'" +  ' OR user_account.username =' + "'" + username + "'" ,
+                "'" + email + "'" +  ' OR user_account.username =' + "'" + username + "'" ,
                 function(err, result) {
                     done();
                     if (err) {
@@ -741,7 +741,7 @@ router.post('/signup', function(req, res){
                             } else {
                                 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                                 client.query('INSERT INTO wanderland.user_account (username, email, password, first_name, last_name, gender, phone_num, city_id, country_id, date_of_birth, date_joined, description) VALUES (' +
-                                    "'" + username + "'" +  ", '" + account + "'" + ", '" + password + "'" +', ' + "'" + first_name + "'" + ', '  + "'" +  last_name  + "'" + 'NULL, ' + ' NULL, ' +  'NULL'  + ', '  + 'NULL' +  ',NULL, ' +
+                                    "'" + username + "'" +  ", '" + email + "'" + ", '" + password + "'" +', ' + "'" + first_name + "'" + ', '  + "'" +  last_name  + "'" + 'NULL, ' + ' NULL, ' +  'NULL'  + ', '  + 'NULL' +  ',NULL, ' +
                                     'NULL, ' + 'NULL' + ');', function(err, result){
 
                                     done();
@@ -749,7 +749,7 @@ router.post('/signup', function(req, res){
                                     if (err) {
                                         res.send("Error " + err);
                                     }
-                                    sess.email = account;
+                                    sess.email = email;
                                     if (!google) {
                                         res.send('done');
                                     } else{
