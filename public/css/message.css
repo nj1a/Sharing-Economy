@@ -12,6 +12,10 @@
     margin: 0px;
     height: 600px;
     overflow: scroll;
+    border-color: seagreen;
+    border-style: solid;
+    border-width: 1px;
+    border-left-width: 10px;
 }
 
 .overlay {   

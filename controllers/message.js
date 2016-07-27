@@ -1,5 +1,5 @@
-'use strict'; 
-var Room = require('./room');  
+'use strict';
+
 var uuid = require('node-uuid');
 var _ = require('underscore')._;
 
@@ -7,6 +7,33 @@ var people = {}, rooms= {};
 var peopleCount = 0, roomCount = 0;
 var sockets = [];
 var msgHistory = {};
+
+class Room {
+    constructor(name, id, owner) {
+        this.name = name;
+        this.id = id;
+        this.owner = owner;
+        this.people = [];
+    }
+
+    add(userId) {
+	    this.people.push(userId);
+    }
+
+    get(userId) {
+        var idx = this.people.indexOf(userId);
+        if (idx !== -1) {
+            return this.people[idx];
+        }
+    }
+
+    remove(userId) {
+        var idx = this.people.indexOf(userId);
+        if (idx !== -1) {
+            this.people.splice(idx, 1);
+        }
+    }
+}
 
 function roomRemoved(io, s, room) {
 	io.sockets.to(s.room).emit('update', 'The room is removed.');
