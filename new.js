@@ -632,6 +632,7 @@ router.post('/createUser', function(req, res){
 });
 
 router.post('/set_google', function(req, res){
+    sess = req.session;
     sess.google = true;
     //var email, first_name, last_name;
     sess.gemail = req.body.email;
@@ -652,6 +653,7 @@ router.post('/set_google', function(req, res){
 });
 
 router.get("/google_sign_up", function(req, res){
+    sess = req.session;
     if (sess.google) {
         res.render("google_sign_up", {
             email: sess.gemail,
