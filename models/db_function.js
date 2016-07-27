@@ -68,7 +68,7 @@ module.exports = {
 
 	get_city_id: function(city, country, callback){
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
-			var query_string = "SELECT city_id FROM wanderland.city, wanderland.country WHERE country.country_id = city.country_id AND name = \'"+city+ "\' AND country_name = \'"+country+"\'";
+			var query_string = "SELECT city_id, city.country_id FROM wanderland.city, wanderland.country WHERE country.country_id = city.country_id AND name = \'"+city+ "\' AND country_name = \'"+country+"\'";
 			console.log(query_string);
 			client.query(query_string, function(err, result){
 				done();
@@ -237,5 +237,6 @@ module.exports = {
 
 		});
 	}
+
 
 };
