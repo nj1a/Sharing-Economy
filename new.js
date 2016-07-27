@@ -1019,7 +1019,6 @@ router.get('/post/:postId', function(req, res){
                     console.log('looped');
                     files[i] = files[i].replace('public', '..');
                 }
-                console.log('!E');
                 result.travel_start_date = formatDate(result.travel_start_date);
                 result.travel_end_date = formatDate(result.travel_end_date);
 
