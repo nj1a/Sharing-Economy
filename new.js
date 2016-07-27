@@ -973,7 +973,7 @@ router.get('/post/:postId', function(req, res){
                         //csrfToken: req.csrfToken()
                     });
 
-                })
+                });
             });
         }
     });
