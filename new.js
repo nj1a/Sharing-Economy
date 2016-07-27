@@ -312,7 +312,7 @@ router.post('/city/:cityID', function(req, res){
         return;
     };
     if (req.body.comment && req.body.rating) {
-        if (typeof req.body.rating === 'string' && req.body.rating >= 1 && req.body.rating <= 5) {
+        if (typeof req.body.rating === 'string' && req.body.rating >= 1 && req.body.rating <= 5 && req.body.comment !== 'Type your travellng experience in this city here') {
             var date_rated = tool.get_today();
             tool.insert_comment(req.params.cityID, sess.currId, req.body.rating, req.body.comment, date_rated, function(result){
                 res.redirect('/city/'+req.params.cityID);
@@ -321,7 +321,7 @@ router.post('/city/:cityID', function(req, res){
 
         }
         else{
-            res.send('Please enter valid rating ie. 1 to 5');
+            res.send('Please enter valid rating (ie. 1 to 5) and valid comment');
         }
         
     };
