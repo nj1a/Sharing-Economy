@@ -237,7 +237,7 @@ function onSignIn(googleUser) {
 
 
         $.post("/set_google", {first_name: first_name, last_name:last_name, email:email}, function(result){
-        	if (result ==="done") {
+        	if (result ==="verified") {
         		window.location.href="/google_sign_up";
         	} 
         });
