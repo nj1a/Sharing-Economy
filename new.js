@@ -307,19 +307,26 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
 });
 
 router.post('/city/:cityID', function(req, res){
-    if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
+    if (typeof sess === 'undefined' || typeof sess.currId === 'undefined') {
         res.send('You need to sign in first');
         return;
     };
     if (req.body.comment && req.body.rating) {
-        if (typeof req.body.rating === 'string' && req.body.rating >= 1 && req.body.rating <= 5) {
-            res.send('Comment: '+ req.body.comment+ ' Rating '+req.body.rating);    
+        if (typeof req.body.rating === 'string' && req.body.rating >= 1 && req.body.rating <= 5 && req.body.comment !== 'Type your travellng experience in this city here') {
+            var date_rated = tool.get_today();
+            tool.insert_comment(req.params.cityID, sess.currId, req.body.rating, req.body.comment, date_rated, function(result){
+                res.redirect('/city/'+req.params.cityID);
+
+            })
+
         }
         else{
-            res.send('Please enter valid rating ie. 1 to 5');
+            res.send('Please enter valid rating (ie. 1 to 5) and valid comment');
         }
         
-    };
+    } else{
+        res.send('Please enter valid rating (ie. 1 to 5) and valid comment');
+    }
 
 
 });
@@ -900,24 +907,12 @@ router.post('/create_post', function(req, res){
     }
     // Image not required
     if (req.body.title && req.body.description && req.body.from_city && req.body.to_city && req.body.post_type && req.body.from_date && req.body.to_date && req.body.way_of_travelling && req.body.travel_type) {
-        function formatDate(date){
-            var d = new Date(date),
-                month = '' + (d.getMonth() + 1),
-                day = '' + d.getDate(),
-                year = d.getFullYear();
-
-            if (month.length < 2) month = '0' + month;
-            if (day.length < 2) day = '0' + day;
-
-            return [year, month, day].join('-');
-        }
         var way_of_travelling = req.body.way_of_travelling;
         var description = req.body.description;
         var travel_type = req.body.travel_type;
         var title = req.body.title;
         var post_type = req.body.post_type;
-        var post_date = new Date();
-        post_date = formatDate(post_date);
+        var post_date = tool.get_today();
         var from_date = req.body.from_date;
         var to_date = req.body.to_date;
         var from_city = req.body.from_city.split(", ")[0];
