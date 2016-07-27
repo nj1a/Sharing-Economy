@@ -1366,6 +1366,8 @@ router.post('/update_desc', function(req, res){
 
 router.get('/message', function(req, res) {
 	sess = req.session;
+    console.log(sess);
+    console.log(sess.username);
 	if (typeof sess === 'undefined' || typeof sess.username === 'undefined') {
         res.send('You need to sign in first');
     } else {
