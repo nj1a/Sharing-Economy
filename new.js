@@ -127,6 +127,7 @@ router.post('/login', function(req, res){
     sess = req.session;
     var email = req.body.email;
     var password = req.body.pass;
+    var username = req.body.username;
 
     if (validateEmail(email) && validateBlackList(password)) {
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
@@ -157,6 +158,7 @@ router.post('/login', function(req, res){
                         } else {
                             sess.email = email;
                             sess.pass = password;
+                            sess.username = username;
                             sess.currId = result.rows[0].user_id;
                             console.log("current session ID:  " + sess.currId);
                             res.end('done');
