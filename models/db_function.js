@@ -195,13 +195,7 @@ module.exports = {
 				done();
 				if (err) throw err;
 				else{
-					if (JSON.stringify(result.rows) === "[]") {
-						console.log('No matching row in database');
-						callback('error');
-					} else {
-						console.log(result.rows);
-						callback();
-					}
+					callback();
 				}
 			});
 

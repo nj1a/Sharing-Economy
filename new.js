@@ -315,12 +315,8 @@ router.post('/city/:cityID', function(req, res){
         if (typeof req.body.rating === 'string' && req.body.rating >= 1 && req.body.rating <= 5) {
             var date_rated = tool.get_today();
             tool.insert_comment(req.params.cityID, sess.currId, req.body.rating, req.body.comment, date_rated, function(result){
-                if (result === 'error') {
-                    res.send('Please enter rating and comment correctly');
-                }
-                else{
-                  res.redirect('/city/'+req.params.cityID);                      
-                }
+                res.redirect('/city/'+req.params.cityID);
+
             })
 
         }
