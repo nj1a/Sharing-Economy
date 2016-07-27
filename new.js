@@ -1019,6 +1019,8 @@ router.get('/post/:postId', function(req, res){
                     console.log('looped');
                     files[i] = files[i].replace('public', '..');
                 }
+                console.log("Start date: "+ typeof result.travel_start_date);
+                console.log("Post date: "+ typeof result.post_date);
                 result.travel_start_date = tool.formatDate(result.travel_start_date);
                 result.travel_end_date = tool.formatDate(result.travel_end_date);
                 console.log('This is post_date1: '+result.post_date);
