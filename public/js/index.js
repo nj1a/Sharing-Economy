@@ -234,10 +234,7 @@ function onSignIn(googleUser) {
         console.log("Email: " + profile.getEmail());
 
 
-        $.post("/google_sign_up", {first_name: first_name, last_name:last_name, email:email}, 
-        	function(result){
-        		
-        	});
+        $.post("/google_sign_up", {first_name: first_name, last_name:last_name, email:email});
         
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
