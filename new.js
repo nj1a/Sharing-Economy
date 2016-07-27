@@ -226,8 +226,8 @@ router.get('/get_country', function(req, res){
         }
         else{
             // res.redirect('/country/'+result.country_id);
-            res.send(JSON.stringify(result));
-            // res.send('Country ID is : '+result.country_id);
+            // res.send(JSON.stringify(result));
+            res.send('Country ID is : '+result.country_id);
         }
 
     });
