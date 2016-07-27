@@ -39,3 +39,16 @@
 #join {
     margin-left: 10px;
 }
+
+#send, button, #leave {
+    margin: 10px;
+}
+
+.joinRoomBtn, .removeRoomBtn {
+    margin: 5px;
+}
+
+.label {
+    margin: 5px;
+}
+

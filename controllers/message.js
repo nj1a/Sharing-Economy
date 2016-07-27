@@ -78,7 +78,6 @@ module.exports = (io) => {
                 };
 
                 // connection msg
-                socket.emit('update', 'You have connected to the server.');
                 io.emit('update', people[socket.id].name + ' is online.');
 
                 // update people and rooms

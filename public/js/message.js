@@ -82,7 +82,7 @@ $(document).ready(() => {
                 socket.emit('typing', true);
             } else {
                 clearTimeout(timeoutId);
-                timeoutId = setTimeout(timeUp, 3000);
+                timeoutId = setTimeout(timeUp, 1500);
             }
         }
     });
@@ -138,20 +138,20 @@ $(document).ready(() => {
     });
 
     socket.on('update', (msg) => {
-        $('<li/>').text(msg).appendTo('#msgs');
+        $('#msgs').append('<li><span class="text-info">' + msg + '</span></li>');
     });
 
     socket.on('updateRoomCount', (data) => {
         $('#rooms').empty();
-        var $count = $('<span/>').addClass('badge').text(data.count);
-        var $list = $('<li/>').addClass('list-group-item active').text('Rooms');
+        var $count = $('<span/>').addClass('label label-success').text(data.count);
+        var $list = $('<li/>').addClass('list-group-item list-group-item-success').text('Rooms');
         $count.appendTo($list);
         $list.appendTo('#rooms');
 
         if (data.count) { // at least one room
             $.each(data.rooms, (id, room) => {
-                var $join = $('<button/>').addClass('joinRoomBtn btn btn-default btn-xs').text('Join');
-                var $remove = $('<button/>').addClass('removeRoomBtn btn btn-default btn-xs').text('Remove');
+                var $join = $('<button/>').addClass('joinRoomBtn btn btn-info btn-xs').text('Join');
+                var $remove = $('<button/>').addClass('removeRoomBtn btn btn-danger btn-xs').text('Remove');
                 var $name = $('<span/>').text(room.name + ' ');
                 $('<li/>').attr('id', id).addClass('list-group-item')
                 .append($name).append($join).append($remove).appendTo('#rooms');
@@ -163,8 +163,8 @@ $(document).ready(() => {
 
     socket.on('updatePeopleCount', (data) => {
         $('#people').empty();
-        var $count = $('<span/>').addClass('badge').text(data.count);
-        var $list = $('<li/>').addClass('list-group-item active').text('People');
+        var $count = $('<span/>').addClass('label label-success').text(data.count);
+        var $list = $('<li/>').addClass('list-group-item list-group-item-success').text('People');
         $count.appendTo($list);
         $list.appendTo('#people');
         
@@ -181,7 +181,7 @@ $(document).ready(() => {
                 $('<span/>').attr('id', data.name + '_t').addClass('text-muted').text(' is typing')
                 .appendTo('#' + data.name);
 
-                timeoutId = setTimeout(timeUp, 3000);
+                timeoutId = setTimeout(timeUp, 1500);
             }
         } else {
             $('#' + data.name + '_t').remove();
@@ -195,7 +195,7 @@ $(document).ready(() => {
             prependZero(d.getMinutes()) + ':' +
             prependZero(d.getSeconds()) + ' ';
 
-        $('#msgs').append('<li><strong><span class="text-success">' + formattedTime + person.name + '</span></strong>: ' + msg + '</li>');
+        $('#msgs').append('<li><span class="text-success">' + formattedTime + person.name + '</span>: ' + msg + '</li>');
 
         //clear typing field
         $('#' + person.name + '_t').remove();
@@ -204,7 +204,7 @@ $(document).ready(() => {
     });
 
     socket.on('disconnect', () => {
-        $('#msgs').append('<li><strong><span class="text-warning">You are disconnected.</span></strong></li>');
+        $('#msgs').append('<li><span class="text-danger">You are disconnected.</span></li>');
         $('#msg').attr('disabled', 'disabled');
         $('#send').attr('disabled', 'disabled');
     });
@@ -212,12 +212,12 @@ $(document).ready(() => {
     // handle history display
     socket.on('history', (data) => {
         if (data.length) {
-            $('#msgs').append('<li><strong><span class="text-warning">Last 50 messages:</li>');
+            $('#msgs').append('<li><span class="text-info">Last 50 messages:</li>');
             $.each(data, (data, msg) => {
                 $('#msgs').append('<li><span class="text-warning">' + msg + '</span></li>');
             });
         } else {
-            $('#msgs').append('<li><strong><span class="text-warning">No past messages in this room.</li>');
+            $('#msgs').append('<li><span class="text-info">No past messages in this room.</li>');
         }
     });
 
