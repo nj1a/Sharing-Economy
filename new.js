@@ -331,8 +331,21 @@ router.post('/city/:cityID', function(req, res){
 
 });
 router.get('/country/:countryID', csrfProtection, function(req, res){
+    glob('public/img/country_images/'+req.params.countryID+'_*.*', function(er, main_images){
+        if (er) {
+            throw er;
+        }
+        // Format the file path
+        for (var i = 0; i < main_images.length; i++) {
+            console.log('looped');
+            main_images[i] = main_images[i].replace('public', '..');
+        }
+        res.render('country', {
+            main_images: main_images
+            //csrfToken: req.csrfToken()
+        });
+    });
 
-    res.render('country');
 });
 
 
