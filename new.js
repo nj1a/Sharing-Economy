@@ -225,11 +225,11 @@ router.get('/get_country', function(req, res){
             res.send('No matching result');
         }
         else{
-            // res.redirect('/country/'+result.country_id);
-            // res.send(JSON.stringify(result));
-            console.log('This is getcountry: '+ result[0].country_id + result[0].country_code + result[0].country_name);
-            console.log('hi');
-            res.send('Country ID is : '+result.country_id);
+            res.redirect('/country/'+result[0].country_id);
+            res.send(JSON.stringify(result));
+            // console.log('This is getcountry: '+ result[0].country_id + result[0].country_code + result[0].country_name);
+            // console.log('hi');
+            // res.send('Country ID is : '+result.country_id);
         }
 
     });
