@@ -61,7 +61,7 @@ $(document).ready(() => {
             $('#errors').show();
         } else {
             socket.emit('start', name, device);
-            $('#login-screen').toggle();
+            $('#first').toggle();
             $('#main-message-screen').toggle();
             $('#msg').focus();
         }
@@ -134,7 +134,7 @@ $(document).ready(() => {
         $('#errors').empty();
         $('#errors').show();
         $('#errors').append(msg);
-        $('#login-screen').toggle();
+        $('#first').toggle();
         $('#main-message-screen').toggle();
     });
 
