@@ -4,7 +4,7 @@ var pg = require('pg');
 var fs = require('fs');
 var busboy = require('connect-busboy');
 var multer = require('multer');
-var upload = multer({ dest: 'uploads/' })
+var upload = multer({ dest: '../public/img/post_images' })
 var expressValidator = require('express-validator');
 var sha256 = require('js-sha256');
 var glob = require('glob');
@@ -1085,12 +1085,14 @@ router.get('/post/:postId', function(req, res){
 
 
 // Process create_post request
-router.post('/create_post', function(req, res){
+router.post('/create_post', upload.array('photos', 6), function(req, res){
     if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
         res.send('You need to sign in first');
         return;
     }
     // Image not required
+    console.log(req.files);
+    
     if (req.body.title && req.body.description && req.body.from_city && req.body.to_city && req.body.post_type && req.body.from_date && req.body.to_date && req.body.way_of_travelling && req.body.travel_type) {
         var way_of_travelling = req.body.way_of_travelling;
         var description = req.body.description;
