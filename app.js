@@ -20,11 +20,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 
-
 // message
-app.get('/message', function(req, res) {
-  	res.render('message');
-});
+
 
 // define routes
 
