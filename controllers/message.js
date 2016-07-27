@@ -239,12 +239,14 @@ module.exports = (io) => {
                 var roomCount = _.size(rooms);
                 io.emit('updateRoomCount', {rooms: rooms, count: roomCount});
 
-                // add room to socket, and auto join the creator of the room
+                // initialize the room and add the owner
                 socket.room = roomName;
                 socket.join(socket.room);
                 people[socket.id].owns = id;
                 people[socket.id].inroom = id;
                 room.add(socket.id);
+
+				// broadcase the room
                 socket.emit('update', 'Welcome to ' + room.name + '.');
                 socket.emit('sendRoomID', {id: id});
                 msgHistory[socket.room] = [];
@@ -253,12 +255,12 @@ module.exports = (io) => {
             }
         });
 
-        socket.on('removeRoom', function(id) {
-            var room = rooms[id];
+        socket.on('removeRoom', (roomId) => {
+            var room = rooms[roomId];
             if (socket.id === room.owner) {
                 purge(io, socket, 'removeRoom');
             } else {
-                        socket.emit('update', 'Only the owner can remove a room.');
+				socket.emit('update', 'You are not the owner.');
             }
         });
 
@@ -294,12 +296,11 @@ module.exports = (io) => {
             }
         });
 
-        socket.on('leaveRoom', function(id) {
-            var room = rooms[id];
+        socket.on('leaveRoom', (roomId) => {
+            var room = rooms[roomId];
             if (room) {
                 purge(io, socket, 'leaveRoom');
             }
         });
     });
-    
 };
