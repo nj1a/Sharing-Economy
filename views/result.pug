@@ -5,48 +5,74 @@ html(lang="en")
 		title Result Page
 		link(rel="stylesheet", href="css/result.css")
 		script(src="js/jquery-3.1.0.js", defer)
-	main
-		h1 Suggestion
-		each val, index in suggestions
-			a(href= 'https://wander-land.herokuapp.com/post/'+val.post_id)
-				div.result_item
-					table
-						tr
-							td Post ID:
-							td= val.post_id
-						tr
-							td Title:
-							td= val.title
-						tr
-							td Transportation:
-							td= val.way_of_travelling
-						tr
-							td Travel type:
-							td= val.travel_type
-						tr
-							td Image Preview:
-							td
-								img.result_image(src= 'assets/images/post_images/'+val.post_id+'_1.jpg')
+		link(rel='stylesheet', href='../css/w3.css')
+		link(rel='stylesheet', href='../css/w3-theme-teal.css')
+		link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans')
+		link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css')
 
-		h1 Result
-		each val, index in result
-			a(href= 'https://wander-land.herokuapp.com/post/'+val.post_id)
-				div.result_item
-					table
-						tr
-							td Post ID:
-							td= val.post_id
-						tr
-							td Title:
-							td= val.title
-						tr
-							td Transportation:
-							td= val.way_of_travelling
-						tr
-							td Travel type:
-							td= val.travel_type
-						tr
-							td Image Preview:
-							td
-								img.result_image(src= 'assets/images/post_images/'+val.post_id+'_1.jpg')
+	body#entity.w3-theme-l5
+	    nav.w3-top
+	      ul.w3-navbar.w3-theme-d2.w3-left-align.w3-large
+	        li
+	          a.w3-padding-large.w3-hover-white(href='#')
+	            i.fa.fa-home
+	        li
+	          a.w3-padding-large.w3-hover-white(href='#', title='Account Settings')
+	            i.fa.fa-user
+	        li.w3-hide-small
+	          a.w3-padding-large.w3-hover-white(href='#', title='Inbox')
+	            i.fa.fa-envelope
+	        li.w3-hide-small
+	          a.w3-padding-large.w3-hover-white(href='#', title='Notifications')
+	            i.fa.fa-bell
+	        li.w3-hide-small
+	          a.w3-padding-large.w3-hover-white(href='#', title='Admin Panel')
+	            i.fa.fa-eye
+	        li.w3-hide-small.w3-right
+	          a.w3-padding-large.w3-hover-white(href='#', title='My Account')
+	            img.w3-circle.avatar(src='../assets/images/avatar.jpg', alt='Avatar')
+		main
+			h1 Suggestion
+			each val, index in suggestions
+				a(href= 'https://wander-land.herokuapp.com/post/'+val.post_id)
+					div.result_item
+						table
+							tr
+								td Post ID:
+								td= val.post_id
+							tr
+								td Title:
+								td= val.title
+							tr
+								td Transportation:
+								td= val.way_of_travelling
+							tr
+								td Travel type:
+								td= val.travel_type
+							tr
+								td Image Preview:
+								td
+									img.result_image(src= 'assets/images/post_images/'+val.post_id+'_1.jpg')
+
+			h1 Result
+			each val, index in result
+				a(href= 'https://wander-land.herokuapp.com/post/'+val.post_id)
+					div.result_item
+						table
+							tr
+								td Post ID:
+								td= val.post_id
+							tr
+								td Title:
+								td= val.title
+							tr
+								td Transportation:
+								td= val.way_of_travelling
+							tr
+								td Travel type:
+								td= val.travel_type
+							tr
+								td Image Preview:
+								td
+									img.result_image(src= 'assets/images/post_images/'+val.post_id+'_1.jpg')
 
