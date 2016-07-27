@@ -345,11 +345,20 @@ router.get('/country/:countryID', csrfProtection, function(req, res){
                 res.send('No such country');
             }
             else{
-                res.render('country', {
-                    main_images: main_images,
-                    country_info: country_info
-                    //csrfToken: req.csrfToken()
-                });
+                tool.get_city_by_country_id(req.params.countryID, function(related_cities){
+                    if (related_cities === 'error') {
+                        res.send('No such country');
+                    }
+                    else{
+
+                        res.render('country', {
+                            main_images: main_images,
+                            country_info: country_info,
+                            related_cities: related_cities
+                            //csrfToken: req.csrfToken()
+                        });
+                    }
+                })
             }
         })
     });
