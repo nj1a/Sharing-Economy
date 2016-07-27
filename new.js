@@ -652,12 +652,21 @@ router.post('/createUser', function(req, res){
 router.post('/set_google', function(req, res){
     sess = req.session;
     sess.google = true;
-    //var email, first_name, last_name;
-    sess.gemail = req.body.email;
-    sess.gfirst_name = req.body.first_name;
-    sess.glast_name = req.body.last_name;
+    sess.verified = false;
 
-    res.send("done");
+    //var email, first_name, last_name;
+
+    if (sess.google && !verified) {
+        sess.gemail = req.body.email;
+        sess.gfirst_name = req.body.first_name;
+        sess.glast_name = req.body.last_name;
+        res.verified = true;
+        res.send("registered");
+    } else {
+        res.send("already registered");
+    }
+
+    
 
 
     //console.log(req.body);
