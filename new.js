@@ -640,9 +640,9 @@ router.post('/set_google', function(req, res){
 
 router.get("/google_sign_up", function(req, res){
     res.render("google_sign_up", {
-        email: email,
-        first_name: first_name,
-        last_name: last_name
+        email: sess.gemail,
+        first_name: sess.gfirst_name,
+        last_name: sess.glast_name
     });
 })
 router.post('/signup', function(req, res){
