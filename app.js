@@ -4,7 +4,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
-require('./controllers/message')(io);
+
 
 
 // configure environemnt
@@ -36,6 +36,8 @@ server.listen(port, function () {
 
 var router = require('./new');
 app.use(router);
+
+require('./controllers/message')(io);
 
 
 
