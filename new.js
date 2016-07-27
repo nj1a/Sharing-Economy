@@ -1001,14 +1001,12 @@ router.post('/update_email', function(req, res){
 // Post page
 router.get('/post/:postId', function(req, res){
     var username, type, post_date, way_of_travelling, travel_start_date, travel_end_date;
-    console.log('!A');
     tool.get_info_by_post_id(req.params.postId, function(result){
         console.log('!B');
         if (result === 'error') {
           res.send('No such result in database');
         }
         else{
-            console.log('!C');
             glob('public/img/post_images/'+req.params.postId+'_*.*', function(er, files){
                 console.log('!D');
                 if (er) {
@@ -1016,18 +1014,15 @@ router.get('/post/:postId', function(req, res){
                 }
                 // Format the file path
                 for (var i = 0; i < files.length; i++) {
-                    console.log('looped');
                     files[i] = files[i].replace('public', '..');
                 }
-                console.log("Start date: "+ typeof result.travel_start_date);
-                console.log("Post date: "+ typeof result.post_date);
+
                 result.travel_start_date = tool.formatDate(result.travel_start_date);
                 result.travel_end_date = tool.formatDate(result.travel_end_date);
                 result.post_date = tool.formatDate(result.post_date);
 
 
                 tool.get_result_suggestion(result.from_city, result.departure_country_id, result.to_city, result.destination_country_id, result.post_type, result.travel_start_date, result.travel_end_date, function(related_posts){
-                    console.log('!F');
 
                     console.log('2: '+files);
                     res.render('post2', {
