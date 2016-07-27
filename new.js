@@ -307,14 +307,22 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
 });
 
 router.post('/city/:cityID', function(req, res){
-    if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
+    if (typeof sess === 'undefined' || typeof sess.currId === 'undefined') {
         res.send('You need to sign in first');
         return;
     };
     if (req.body.comment && req.body.rating) {
         if (typeof req.body.rating === 'string' && req.body.rating >= 1 && req.body.rating <= 5) {
-            
-            res.send('Comment: '+ req.body.comment+ ' Rating '+req.body.rating);    
+            var date_rated = tool.get_today();
+            tool.insert_comment(req.params.cityID, sess.currId, req.body.rating, req.body.comment, date_rated, function(result){
+                if (result === 'error') {
+                    res.send('Please enter rating and comment correctly');
+                }
+                else{
+                  res.redirect('/city/'+req.params.cityID);                      
+                }
+            })
+
         }
         else{
             res.send('Please enter valid rating ie. 1 to 5');
