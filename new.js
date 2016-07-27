@@ -438,11 +438,15 @@ router.get('/profile', function(req, res){
                                 res.send("Error " + err);
                             }
                             var usrID = JSON.stringify(result.rows[0].user_id);
-                            var path;
+                            var path, google;
                             if (fs.existsSync(__dirname + '/public/img/' + "profile_" + usrID + ".jpg")) {
                                 path = '/img/' + "profile_" + usrID + ".jpg";
                             } else {
                                 path = '/img/default_profile.jpg';
+                            }
+
+                            if(sess.google){
+
                             }
                             res.render('profile', {
                                 results: result1.rows,
@@ -684,7 +688,7 @@ router.get("/google_sign_up", function(req, res){
         res.render("google_sign_up", {
             email: sess.gemail,
             first_name: sess.gfirst_name,
-            google: 'true',
+            google: true,
             last_name: sess.glast_name
         });
     } else {
