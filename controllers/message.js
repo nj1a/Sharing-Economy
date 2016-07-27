@@ -1,3 +1,4 @@
+'use strict'; 
 var Room = require('./room');  
 var uuid = require('node-uuid');
 var _ = require('underscore')._;
