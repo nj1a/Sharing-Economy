@@ -233,7 +233,7 @@ function onSignIn(googleUser) {
         console.log("Image URL: " + profile.getImageUrl());
         console.log("Email: " + profile.getEmail());
 
-       
+
 
 
         $.post("/set_google", {first_name: first_name, last_name:last_name, email:email}, function(result){
