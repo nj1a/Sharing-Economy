@@ -13,13 +13,15 @@ html(lang="en")
 
     body
         section(class="main col-md-10 col-md-offset-1")
-            section(class="alert alert-danger", id="errors")
-            section(id="login-screen")
-                p Please pick a username
-                form(class="form-inline", id="nameForm")
-                    section(class="form-group")
-                        input(type="text", class="form-control input-lg", placeholder= email, id="name")
-                    input(type="submit", name="join", id="join", value="Join", class="btn btn-primary btn-lg")
+            section(class="overlay" id="first")
+                section(class="overlay-content")
+                    section(class="alert alert-danger", id="errors")
+                    section(id="login-screen")
+                        p Please pick a username
+                        form(class="form-inline", id="nameForm")
+                            section(class="form-group")
+                                input(type="text", class="form-control input-lg", value= email, id="name")
+                            input(type="submit", name="join", id="join", value="Join", class="btn btn-primary btn-lg")
 
             section(class="row", id="main-message-screen")
                 section(class="col-md-3")

@@ -1370,15 +1370,14 @@ router.post('/update_desc', function(req, res){
 
 router.get('/message', function(req, res) {
 	sess = req.session;
-    console.log(sess);
-    console.log(sess.email);
-	if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
-        res.send('You need to sign in first');
-    } else {
+
+	// if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
+    //     res.send('You need to sign in first');
+    // } else {
   	    res.render('message', {
             email: sess.email
         });
-	}
+	// }
 });
 
 module.exports = router;
