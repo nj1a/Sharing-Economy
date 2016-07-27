@@ -339,7 +339,7 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                             user_id = sess.currId;
                         }
                         var current_date = new Date();
-                        current_date = formatDate(current_date);
+                        current_date = tool.formatDate(current_date);
 
                         tool.get_suggestion_by_city_id(user_id, req.params.cityID, current_date, function(suggestions){
                             if (suggestions === 'error') {
