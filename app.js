@@ -20,17 +20,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 
-var sess;
 // message
-app.get('/message', function(req, res) {
-	sess = req.session;
-	console.log(sess);
-	if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
-        res.send('You need to sign in first');
-    }else{
-  	res.render('message');
-	}
-});
+
 
 // define routes
 

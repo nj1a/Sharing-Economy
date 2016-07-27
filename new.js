@@ -1356,4 +1356,14 @@ router.post('/update_desc', function(req, res){
     update_handler.update_description(desc, sess.email, req, res);
 });
 
+router.get('/message', function(req, res) {
+	sess = req.session;
+	console.log(sess);
+	if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
+        res.send('You need to sign in first');
+    }else{
+  	res.render('message');
+	}
+});
+
 module.exports = router;
