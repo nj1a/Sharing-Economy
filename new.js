@@ -656,7 +656,7 @@ router.post('/set_google', function(req, res){
 
     //var email, first_name, last_name;
 
-    if (sess.google && !verified) {
+    if (sess.google && !sess.verified) {
         sess.gemail = req.body.email;
         sess.gfirst_name = req.body.first_name;
         sess.glast_name = req.body.last_name;
