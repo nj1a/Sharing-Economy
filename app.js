@@ -19,8 +19,11 @@ app.use(bodyParser.json());
 
 
 // define routes
-var router = require('./new');
-app.use(router);
+var routers = require('./controllers/routers');
+app.use(routers);
+
+// message
+require('./controllers/message')(io);
 
 // start the server
 var port = process.env.PORT || 1337;
@@ -28,8 +31,7 @@ server.listen(port, function () {
 	console.log('listen on port ' + port);
 });
 
-// message
-require('./controllers/message')(io);
+
 
 
 

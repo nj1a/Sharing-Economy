@@ -14,7 +14,6 @@ router.use(busboy());
 // Securityf
 var csrf = require('csurf');
 var cookieParser = require('cookie-parser');
-var sanitizer = require('sanitizer');
 var bodyParser = require('body-parser');
 
 var csrfProtection = csrf({ cookie: true });
@@ -114,7 +113,7 @@ router.post('/admin_sign', function(req, res){
                     if (err) {
                         res.send("Error " + err);
                     }
-                    if (result.rows[0].count == '0'){
+                    if (result.rows[0].count === '0'){
                         res.render("admin", {errors: "invalid login information"});
                     } else{
                         sess.email = req.body.email;
@@ -219,7 +218,7 @@ router.get('/get_country', function(req, res){
     if (req.query.key === 'undefined') {
         res.send('Error, please enter your key');
         return;
-    };
+    }
     tool.get_country(req.query.key, function(result){
         if (result === 'error') {
             res.send('No matching result');
@@ -250,8 +249,8 @@ router.post('/result', function(req, res) {
         var to_city = req.body.to_city.split(", ")[0];
         var to_country = req.body.to_city.split(", ")[1];
 
-        var validatation = validateBlackList(from_city) && validateBlackList(from_country)
-                            && validateBlackList(to_city) && validateBlackList(to_country);
+        var validatation = validateBlackList(from_city) && validateBlackList(from_country) &&
+                             validateBlackList(to_city) && validateBlackList(to_country);
 
         if (validatation) {
             console.log("Type2: "+ typeof from_city + ' '+typeof to_city_id + ' '+typeof from_country + ' '+ typeof to_country);
@@ -263,7 +262,7 @@ router.post('/result', function(req, res) {
                 var from_city_id, to_city_id, to_country_id;
                 tool.get_city_id(from_city, from_country, function(result1){
                     from_city_id = result1.city_id;
-                    from_country_id = result1.country_id;
+                    var from_country_id = result1.country_id;
                     tool.get_city_id(to_city, to_country, function(result2){
                         to_city_id = result2.city_id;
                         to_country_id = result2.country_id;
@@ -289,7 +288,7 @@ router.post('/result', function(req, res) {
                                 }
 
 
-                            })
+                            });
 
 
                         });
@@ -328,15 +327,15 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
             glob('public/img/city_images/'+req.params.cityID+'_*.*', function(er, main_images){
                 if (er) {
                     throw er;
-                };
+                }
                 for (var i = 0; i < main_images.length; i++) {
                     main_images[i] = main_images[i].replace('public', '..');
-                };
+                }
                 // Look for attraction images
                 glob('public/img/city_images/attraction_'+req.params.cityID+'_*.*', function(er, files){
                     if (er) {
                         throw er;
-                    };
+                    }
                     var attraction_images = {};
                     for (var i = 0; i < files.length; i++) {
                         files[i] = files[i].replace('public', '..');
@@ -347,7 +346,7 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                         attraction_name = attraction_name.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 
                         attraction_images[files[i]] = attraction_name;
-                    };
+                    }
                     // Get ratings and comments
                     tool.get_ratings_by_city_id(req.params.cityID, function(ratings){
                         var user_id;
@@ -355,11 +354,11 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                             console.log('!B');
                             res.send('City not found');
                             ratings = {};
-                        };
+                        }
 
                         for (var i = 0; i < ratings.length; i++) {
                             ratings[i].date_rated = tool.formatDate(ratings[i].date_rated);
-                        };
+                        }
                         if (typeof sess === 'undefined' || typeof sess.currId === 'undefined' ) {
                             user_id = -1;
                         }
@@ -372,7 +371,7 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                         tool.get_suggestion_by_city_id(user_id, req.params.cityID, current_date, function(suggestions){
                             if (suggestions === 'error') {
                                 suggestions = false;
-                            };
+                            }
                             res.render('city', {
                                 city_info: city_info,
                                 csrfToken: req.csrfToken(),
@@ -387,10 +386,10 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                 });
 
 
-            })
+            });
 
         }
-    })
+    });
 
 
 
@@ -400,16 +399,16 @@ router.post('/city/:cityID', function(req, res){
     if (typeof sess === 'undefined' || typeof sess.currId === 'undefined') {
         res.send('You need to sign in first');
         return;
-    };
+    }
     if (req.body.comment && req.body.rating) {
         if (typeof req.body.rating === 'string' && req.body.rating >= 1 && req.body.rating <= 5 && req.body.comment !== 'Type your travellng experience in this city here') {
             var date_rated = new Date();
             date_rated = tool.formatDate(date_rated);
 
-            tool.insert_comment(req.params.cityID, sess.currId, req.body.rating, req.body.comment, date_rated, function(result){
+            tool.insert_comment(req.params.cityID, sess.currId, req.body.rating, req.body.comment, date_rated, function(){
                 res.redirect('/city/'+req.params.cityID);
 
-            })
+            });
 
         }
         else{
@@ -450,9 +449,9 @@ router.get('/country/:countryID', csrfProtection, function(req, res){
                         related_cities: related_cities
                         //csrfToken: req.csrfToken()
                     });
-                })
+                });
             }
-        })
+        });
     });
 
 });
@@ -469,13 +468,12 @@ router.get('/admin-manage', csrfProtection, function(req, res) {
 
 router.post('/enter-data', function(req, res) {
     var country = req.body.country;
-    var city = req.body.city;
     var country_code = req.body.country_code;
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('INSERT INTO wanderland.country VALUES (' + 'default' + ',' +
             "'" + country_code + "'" + ',' + "'" + country + "'" +
-            ');', function(err, result){
+            ');', function(err){
                 done();
                 if (err) {
                     res.send("Error " + err);
@@ -509,7 +507,6 @@ router.get('/admin', function(req, res) {
 
 router.get('/profile', function(req, res){
     sess=req.session;
-    var userEmail;
 
     if (sess.email){
 
@@ -529,7 +526,7 @@ router.get('/profile', function(req, res){
                                 res.send("Error " + err);
                             }
                             var usrID = JSON.stringify(result.rows[0].user_id);
-                            var path, google;
+                            var path;
                             if (fs.existsSync(__dirname + '/public/img/' + "profile_" + usrID + ".jpg")) {
                                 path = '/img/' + "profile_" + usrID + ".jpg";
                             } else {
@@ -696,7 +693,7 @@ router.get('/findUser/:email', function(req, res){
 });
 
 router.post("/adminUpdate", function(req, res){
-    var user_id = req.body.user_id
+    var user_id = req.body.user_id;
     var email = req.body.email;
     var password = req.body.password;
     var username = req.body.username;
@@ -752,7 +749,7 @@ router.post('/createUser', function(req, res){
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('INSERT INTO wanderland.user_account (username, email, password, first_name, last_name, gender, phone_num, city_id, country_id, date_of_birth, date_joined, description) VALUES (' +
             "'" + username + "'" +  ", '" + email + "'" + ", '" + password + "'" +', ' + "'" + first_name + "'" + ', '  + "'" + last_name + "'" +', '  + 'NULL, ' + ' NULL, ' +  'NULL'  + ', '  + 'NULL' +  ',NULL, ' +
-            'NULL, ' + 'NULL' + ');', function(err, result){
+            'NULL, ' + 'NULL' + ');', function(err){
 
             done();
 
@@ -771,7 +768,7 @@ router.post('/createUser', function(req, res){
 router.post('/set_google', function(req, res){
     sess = req.session;
     sess.google = true;
-    email = req.body.email;
+    var email = req.body.email;
     console.log("got this from browser:   " + email);
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
@@ -782,7 +779,7 @@ router.post('/set_google', function(req, res){
             }
             console.log("number of emails with this value:  " + result.rows[0].count);
 
-            if (result.rows[0].count == 1) {
+            if (result.rows[0].count === 1) {
                 console.log("redirected..");
                 res.redirect("/");
             } else {
@@ -874,7 +871,7 @@ router.post('/signup', function(req, res){
                                 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                                 client.query('INSERT INTO wanderland.user_account (username, email, password, first_name, last_name, gender, phone_num, city_id, country_id, date_of_birth, date_joined, description) VALUES (' +
                                     "'" + username + "'" +  ", '" + email + "'" + ", '" + password + "'" +', ' + "'" + first_name + "'" + ', '  + "'" +  last_name  + "'"+ ', ' + 'NULL, ' + ' NULL, ' +  'NULL'  + ', '  + 'NULL' +  ',NULL, ' +
-                                    'NULL, ' + 'NULL' + ');', function(err, result){
+                                    'NULL, ' + 'NULL' + ');', function(err){
 
                                     done();
 
@@ -886,7 +883,7 @@ router.post('/signup', function(req, res){
                                         res.send('done');
                                     } else{
                                         console.log("google value is :   " + google);
-                                        res.redirect("/")
+                                        res.redirect("/");
                                     }
 
 
@@ -901,7 +898,7 @@ router.post('/signup', function(req, res){
 
 });
 
-router.post('/file-upload', function(req, res, next){
+router.post('/file-upload', function(req, res){
     var userEmail = sess.email;
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('select user_id from wanderland.user_account where email = ' + "'" + userEmail + "'", function(err, result){
@@ -1048,7 +1045,6 @@ router.post('/update_email', function(req, res){
 
 // Post page
 router.get('/post/:postId', function(req, res){
-    var username, type, post_date, way_of_travelling, travel_start_date, travel_end_date;
     tool.get_info_by_post_id(req.params.postId, function(result){
         console.log('!B');
         if (result === 'error') {
@@ -1140,7 +1136,7 @@ router.post('/create_post', function(req, res){
                     });
 
                 });
-            })
+            });
         }
 
     }
@@ -1164,7 +1160,7 @@ router.get("/removeFriend/:username", function(req, res){
             var usrID = JSON.stringify(result.rows[0].user_id);
 
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-                client.query('delete from wanderland.friendship where first_user_id =' + "'" + usrID + "'" + ' AND second_user_id =' + "'" + usr + "'", function(err, result){
+                client.query('delete from wanderland.friendship where first_user_id =' + "'" + usrID + "'" + ' AND second_user_id =' + "'" + usr + "'", function(err){
                                 done();
                         console.log('delete from wanderland.friendship where first_user_id =' + "'" + currUsr + "'" + ' AND second_user_id =' + "'" + usr + "'");
 
@@ -1173,7 +1169,7 @@ router.get("/removeFriend/:username", function(req, res){
                             res.send("Error " + err);
                         }
                         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-                            client.query('delete from wanderland.friendship where first_user_id =' + "'" + usr + "'" + 'AND second_user_id =' + "'" + usrID + "'", function(err, result){
+                            client.query('delete from wanderland.friendship where first_user_id =' + "'" + usr + "'" + 'AND second_user_id =' + "'" + usrID + "'", function(err){
                             done();
                         if (err) {
                             res.send("Error " + err);
@@ -1200,7 +1196,7 @@ router.get("/requestFriend/:username", function(req, res){
             var usrID = JSON.stringify(result.rows[0].user_id);
 
             pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-                client.query('INSERT into wanderland.request values (' + "'" + usrID + "'" + ', ' + "'" + sess.currId + "'" + ')', function(err, result){
+                client.query('INSERT into wanderland.request values (' + "'" + usrID + "'" + ', ' + "'" + sess.currId + "'" + ')', function(err){
                                 done();
                         console.log('INSERT into wanderland.request values (' + "'" + usrID + "'" + ', ' + "'" + sess.currId + "'" + ')');
 
@@ -1223,7 +1219,7 @@ router.get("/declineRequests/:userID", function(req, res){
     console.log(targetUser);
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-            client.query('delete from wanderland.request where to_user_id = ' + "'" + sess.currId + "'" + ' AND from_user_id =  ' + "'" + targetUser+ "'"  , function(err, result){
+            client.query('delete from wanderland.request where to_user_id = ' + "'" + sess.currId + "'" + ' AND from_user_id =  ' + "'" + targetUser+ "'"  , function(err){
                 done();
                 console.log('delete from wanderland.request where to_user_id = ' + "'" + sess.currId + "'" + ' AND from_user_id =  ' + "'" + targetUser+ "'");
                 if (err) {
@@ -1237,8 +1233,6 @@ router.get("/declineRequests/:userID", function(req, res){
 
 
 router.get("/getRequests/:username", function(req, res){
-    var targetUser = req.params.username;
-    //console.log(targetUser);
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                 client.query('select username, user_id from wanderland.user_account where user_id in (select from_user_id from wanderland.request where to_user_id = ' + "'" + sess.currId + "'" + ')', function(err, result){
@@ -1258,7 +1252,7 @@ router.get("/makeFriends/:userId", function(req, res){
     var currUser = sess.currId;
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        client.query('INSERT into wanderland.friendship values (' + "'" + targetUser+ "'" + ', ' + "'" + currUser+ "'" + ')', function(err, result){
+        client.query('INSERT into wanderland.friendship values (' + "'" + targetUser+ "'" + ', ' + "'" + currUser+ "'" + ')', function(err){
 
             done();
             if (err) {
@@ -1266,14 +1260,14 @@ router.get("/makeFriends/:userId", function(req, res){
             }
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-            client.query('INSERT into wanderland.friendship values (' + "'" + currUser + "'" + ', ' + "'" + targetUser+ "'" + ')' , function(err, result){
+            client.query('INSERT into wanderland.friendship values (' + "'" + currUser + "'" + ', ' + "'" + targetUser+ "'" + ')' , function(err){
                 done();
                 if (err) {
                     res.send("Error " + err);
                 }
 
                 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-            client.query('delete from wanderland.request where to_user_id = ' + "'" + currUser + "'" + ' AND from_user_id =  ' + "'" + targetUser+ "'"  , function(err, result){
+            client.query('delete from wanderland.request where to_user_id = ' + "'" + currUser + "'" + ' AND from_user_id =  ' + "'" + targetUser+ "'"  , function(err){
                 done();
                 console.log('delete from wanderland.request where to_user_id = ' + "'" + currUser + "'" + ' AND from_user_id =  ' + "'" + targetUser+ "'");
                 if (err) {
@@ -1387,13 +1381,13 @@ router.post('/update_desc', function(req, res){
 router.get('/message', function(req, res) {
 	sess = req.session;
 
-	// if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
-    //     res.send('You need to sign in first');
-    // } else {
+	if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
+        res.send('You need to sign in first');
+    } else {
   	    res.render('message', {
             email: sess.email
         });
-	// }
+	}
 });
 
 module.exports = router;
