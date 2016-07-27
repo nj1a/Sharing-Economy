@@ -110,7 +110,7 @@ html
           h1 Related Post
           #related_product_list
             if !suggestions
-              span 'You need to log in first to see the suggestions'
+              span You need to log in first to see the suggestions or you are logged in but no suggestion available
             else
               each val, index in suggestions
                 a(href='https://wander-land.herokuapp.com/post/'+ val.post_id)
