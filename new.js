@@ -244,6 +244,9 @@ router.post('/result', function(req, res) {
                 });
             }
         }
+        else {
+            res.send('Error on validation');
+        }
         // res.render('result', { title: 'result', message: 'results'});
     }
 });
