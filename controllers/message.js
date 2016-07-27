@@ -264,30 +264,35 @@ module.exports = (io) => {
             }
         });
 
-        socket.on('joinRoom', function(id) {
+        socket.on('joinRoom', (roomId) => {
             if (typeof people[socket.id] !== 'undefined') {
-                var room = rooms[id];
+                var room = rooms[roomId];
                 if (socket.id === room.owner) {
-                    socket.emit('update', 'You are the owner of this room and you have already been joined.');
+                    socket.emit('update', 'You are already in the room.');
                 } else {
                     if (_.contains((room.people), socket.id)) {
-                        socket.emit('update', 'You have already joined this room.');
+                        socket.emit('update', 'You are already in this room.');
                     } else {
                         if (people[socket.id].inroom !== null) {
-                                socket.emit('update', 'You are already in a room ('+rooms[people[socket.id].inroom].name+'), please leave it first to join another room.');
-                            } else {
-                            room.add(socket.id);
-                            people[socket.id].inroom = id;
-                            socket.room = room.name;
-                            socket.join(socket.room);
-                            var user = people[socket.id];
-                            io.sockets.to(socket.room).emit('update', user.name + ' has connected to ' + room.name + ' room.');
-                            socket.emit('update', 'Welcome to ' + room.name + '.');
-                            socket.emit('sendRoomID', {id: id});
-                            var keys = _.keys(msgHistory);
-                            if (_.contains(keys, socket.room)) {
-                                socket.emit('history', msgHistory[socket.room]);
-                            }
+                                socket.emit('update', 'You are already in the room (' + rooms[people[socket.id].inroom].name + ').');
+						} else {
+							// add this user to the room
+							var user = people[socket.id];
+							user.inroom = roomId;
+							room.add(socket.id);
+							socket.room = room.name;
+							socket.join(socket.room);
+
+							// broadcast
+							io.sockets.to(socket.room).emit('update', user.name + ' has joined room ' + room.name + '.');
+							socket.emit('update', 'Welcome to ' + room.name + '.');
+							socket.emit('sendRoomID', {id: roomId});
+
+							// show past msgs
+							var keys = _.keys(msgHistory);
+							if (_.contains(keys, socket.room)) {
+								socket.emit('history', msgHistory[socket.room]);
+							}
                         }
                     }
                 }

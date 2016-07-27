@@ -1,3 +1,5 @@
+'use strict';
+
 class Room {
     constructor(name, id, owner) {
         this.name = name;
