@@ -243,7 +243,7 @@ module.exports = {
 			if (type === 'buddy') {
 				query_string = 'SELECT * FROM product_post, city AS from_city, city AS to_city WHERE product_post.from_city = from_city.city_id AND product_post.to_city = to_city.city_id AND post_type = \''+type + "\' AND from_city.country_id = "+from_country + " AND to_city.country_id = "+to_country + " AND travel_start_date + integer \'7\'>= \'" + start_date + "\' AND travel_end_date - integer \'7\' <= \'"+end_date + "\' LIMIT 5";
 			}
-			else if (type === 'tour'){
+			else if (type === 'offer_guide'){
 				query_string = "SELECT * FROM product_post , city AS to_city WHERE product_post.to_city = to_city.city_id AND post_type = \'" + type + "\' AND to_city.country_id = "+to_country + " AND from_city.city_id = "+from_city + " AND travel_start_date + integer \'7\'>= \'" + start_date + "\' AND travel_start_date + integer \'7\'>= \'" + end_date + "\' LIMIT 5";
 			}
 			console.log(query_string);
