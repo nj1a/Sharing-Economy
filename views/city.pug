@@ -90,8 +90,9 @@ html
             |  
             span Rate this city:
             |  
-            input(type='number', name='rating', min='1', max='5')
             form#review_submission(action='')
+              input(type='number', name='rating', min='1', max='5')
+              br
               input(type='submit', value='Submit')
             #customer_rating
               h2 Other ratings
