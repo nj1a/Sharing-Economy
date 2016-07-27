@@ -283,6 +283,7 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                     tool.get_ratings_by_city_id(req.params.cityID, function(ratings){
                         if (ratings === 'error') {
                             // res.send('City not found');
+                            console.log('no rating');
                             ratings = {};
                         };
                         console.log('hi');
