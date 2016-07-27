@@ -196,21 +196,16 @@ module.exports = {
 
 		});	
 	},
-	get_today: function(){
-		function formatDate(date){
-		    var d = new Date(date),
-		        month = '' + (d.getMonth() + 1),
-		        day = '' + d.getDate(),
-		        year = d.getFullYear();
+	formatDate: function(date){
+		var d = new Date(date),
+		    month = '' + (d.getMonth() + 1),
+		    day = '' + d.getDate(),
+		    year = d.getFullYear();
 
-		    if (month.length < 2) month = '0' + month;
-		    if (day.length < 2) day = '0' + day;
+		if (month.length < 2) month = '0' + month;
+		if (day.length < 2) day = '0' + day;
 
-		    return [year, month, day].join('-');
-		};
-		var today = new Date();
-		today = formatDate(today);
-		return today;
+		return [year, month, day].join('-');
 	},
 	get_info_by_country_id: function(country_id, callback){
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
