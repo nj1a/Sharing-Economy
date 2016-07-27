@@ -248,9 +248,7 @@ module.exports = {
 
 		});
 	},
-	get_suggestion_by_city_id: function(user_id, to_city, callback){
-		var current_date = new Date();
-		current_date = formatDate(current_date);
+	get_suggestion_by_city_id: function(user_id, to_city, current_date, callback){
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
 			var query_string = "SELECT * FROM product_post, user_account WHERE from_city = user_account.city_id AND user_account.user_id = "+ user_id + " AND to_city = "+ to_city + " AND travel_start_date - integer '7' <= \'"+ current_date + "\' LIMIT 10";
 			console.log(query_string);
