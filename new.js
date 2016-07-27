@@ -228,6 +228,7 @@ router.get('/get_country', function(req, res){
             // res.redirect('/country/'+result.country_id);
             // res.send(JSON.stringify(result));
             console.log('This is getcountry: '+ result.country_id + result.country_code + result.country_name);
+            console.log('hi');
             res.send('Country ID is : '+result.country_id);
         }
 
