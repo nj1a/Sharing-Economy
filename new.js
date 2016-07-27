@@ -327,7 +327,10 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                             console.log('no rating');
                             ratings = {};
                         };
-                        console.log('hi');
+
+                        for (var i = 0; i < ratings.length; i++) {
+                            ratings[i].date_rated = formatDate(ratings[i].date_rated);
+                        };
                         res.render('city', {
                             city_info: city_info,
                             csrfToken: req.csrfToken(),
