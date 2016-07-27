@@ -1,7 +1,7 @@
 window.slideNum = 1;
 
 $(document).ready(function() {
-	var reqType, x, email, pass;
+	var reqType, x, email, pass, google;
 	
 	
 	x = document.getElementById("adminMain");
@@ -102,6 +102,7 @@ $(document).ready(function() {
 			email=$("#emailNew").val();
 			pass=$("#passwordNew").val();
 			username=$("#usernameNew").val();
+			google = false;
 		}else{
 			email=$("#adminEmail").val();
 			pass=$("#adminPass").val();
@@ -110,7 +111,7 @@ $(document).ready(function() {
 		//alert("email: " + email + " pass: " + pass + " username: " + username);
 
 		if (reqType===2) {
-			$.post("/signup", {emailNew:email, password:pass, username:username}, function(data){
+			$.post("/signup", {google: google, emailNew:email, password:pass, username:username}, function(data){
 				if(data==='done')           
             {	
             	//alert(1);
@@ -220,13 +221,24 @@ function startSlide(){
 function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
         var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        var first_name = profile.getGivenName();
+        var last_name = profile.getFamilyName();
+        var email = profile.getEmail();
+
+
+       	console.log("ID: " + profile.getId()); 
         console.log('Full Name: ' + profile.getName());
         console.log('Given Name: ' + profile.getGivenName());
         console.log('Family Name: ' + profile.getFamilyName());
         console.log("Image URL: " + profile.getImageUrl());
         console.log("Email: " + profile.getEmail());
 
+
+        $.post("/google_sign_up", {first_name: first_name, last_name:last_name, email:email}, 
+        	function(result){
+        		
+        	});
+        
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);

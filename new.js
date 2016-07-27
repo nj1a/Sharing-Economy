@@ -593,11 +593,35 @@ router.post('/createUser', function(req, res){
 
 });
 
-router.post('/signup', function(req, res){
+router.post('/google_sign_up', function(req, res){
+    var email, first_name, last_name;
+    email = req.body.email;
+    first_name = req.body.first_name;
+    last_name = req.body.last_name;
 
-    var account = req.body.emailNew;
-    var password = sha256(req.body.password);
-    var username = req.body.username;
+    res.render("google_sign_up", {
+        email: email,
+        first_name: first_name,
+        last_name: last_name
+    });
+});
+
+router.post('/signup', function(req, res){
+    var google, account, password, username, first_name, last_name;
+
+    google = req.body.google;
+
+    if (google) {
+        first_name = req.body.first_name;
+        last_name = req.body.last_name;
+    } else {
+        first_name = "";
+        last_name = "";
+    }
+
+    account = req.body.emailNew;
+    password = sha256(req.body.password);
+    username = req.body.username;
 
     sess = req.session;
 
@@ -639,7 +663,7 @@ router.post('/signup', function(req, res){
                             } else {
                                 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
                                 client.query('INSERT INTO wanderland.user_account (username, email, password, first_name, last_name, gender, phone_num, city_id, country_id, date_of_birth, date_joined, description) VALUES (' +
-                                    "'" + username + "'" +  ", '" + account + "'" + ", '" + password + "'" +', ' + 'NULL' + ', '  + 'NULL, '  + 'NULL, ' + ' NULL, ' +  'NULL'  + ', '  + 'NULL' +  ',NULL, ' +
+                                    "'" + username + "'" +  ", '" + account + "'" + ", '" + password + "'" +', ' + "'" + first_name + "'" + ', '  + "'" +  last_name  + "'" + 'NULL, ' + ' NULL, ' +  'NULL'  + ', '  + 'NULL' +  ',NULL, ' +
                                     'NULL, ' + 'NULL' + ');', function(err, result){
 
                                     done();
