@@ -340,13 +340,12 @@ router.get('/country/:countryID', csrfProtection, function(req, res){
             console.log('looped');
             files[i] = files[i].replace('public', '..');
         }
-        console.log('2: '+files);
-        res.render('post2', {
+        res.render('country', {
             main_images: main_images
             //csrfToken: req.csrfToken()
         });
-    };
-    res.render('country');
+    });
+
 });
 
 
