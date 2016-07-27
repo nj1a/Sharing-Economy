@@ -30,6 +30,7 @@ function validateEmail(email) {
 }
 
 function validateBlackList(password) {
+    // I pulled out the , and - because the city and date use them
     var blackListedChar = "<>./:;'|{}[]_+=!@#$%^&*()`~?";
     for (var i = 0; i < blackListedChar.length; i++) {
         if (password.includes(blackListedChar[i])) {
