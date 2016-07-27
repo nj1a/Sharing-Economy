@@ -676,7 +676,7 @@ router.get("/google_sign_up", function(req, res){
         res.render("google_sign_up", {
             email: sess.gemail,
             first_name: sess.gfirst_name,
-            google: true,
+            google: 'true',
             last_name: sess.glast_name
         });
     } else {
