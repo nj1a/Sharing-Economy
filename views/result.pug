@@ -6,8 +6,8 @@ html(lang="en")
 		link(rel="stylesheet", href="css/result.css")
 		script(src="js/jquery-3.1.0.js", defer)
 	main
-		each val, index in result
-		//a(href= 'http://127.0.0.1:1337/post/'+val.post_id)
+		h1 Suggestion
+		each val, index in suggestions
 			a(href= 'https://wander-land.herokuapp.com/post/'+val.post_id)
 				div.result_item
 					table
@@ -27,3 +27,26 @@ html(lang="en")
 							td Image Preview:
 							td
 								img.result_image(src= 'assets/images/post_images/'+val.post_id+'_1.jpg')
+
+		h1 Result
+		each val, index in result
+			a(href= 'https://wander-land.herokuapp.com/post/'+val.post_id)
+				div.result_item
+					table
+						tr
+							td Post ID:
+							td= val.post_id
+						tr
+							td Title:
+							td= val.title
+						tr
+							td Transportation:
+							td= val.way_of_travelling
+						tr
+							td Travel type:
+							td= val.travel_type
+						tr
+							td Image Preview:
+							td
+								img.result_image(src= 'assets/images/post_images/'+val.post_id+'_1.jpg')
+

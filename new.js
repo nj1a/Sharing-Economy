@@ -208,24 +208,35 @@ router.post('/result', function(req, res) {
                 var from_city_id, to_city_id, to_country_id;
                 tool.get_city_id(from_city, from_country, function(result1){
                     from_city_id = result1.city_id;
+                    from_country_id = result1.country_id;
                     tool.get_city_id(to_city, to_country, function(result2){
                         to_city_id = result2.city_id;
                         to_country_id = result2.country_id;
                         tool.get_result(req.body.post_type, from_date, to_date, from_city_id, to_city_id, function(result3){
-                            
-                            if (result3 === 'error' || result1 === 'error' || result2 === 'error') {
-                                res.send('No matching result');
 
-                            }else{
-                                // res.send(JSON.stringify(result));
-                                console.log('This is result object: ', result3);
-                                res.render("result", {
+                            tool.get_result_suggestion(from_city_id, from_country_id, to_city_id, to_country_id, req.body.post_type, from_date, to_date, function(suggestions){
 
-                                    result: result3//,
-                                    //csrfToken: req.csrfToken()
 
-                                });
-                            }
+                                if (result3 === 'error' || result1 === 'error' || result2 === 'error' || suggestions === 'error') {
+                                    res.send('No matching result');
+
+                                }else{
+                                    // res.send(JSON.stringify(result));
+                                    console.log('This is result object: ', result3);
+                                    res.render("result", {
+
+                                        result: result3,
+                                        suggestions: suggestions
+                                        //,
+                                        //csrfToken: req.csrfToken()
+
+                                    });
+                                }
+
+
+                            })
+
+
                         });
 
                     });
