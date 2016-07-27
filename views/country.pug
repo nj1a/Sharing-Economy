@@ -46,24 +46,10 @@ html
         h2
           | Major Cities
           #city_list
-            a(href='')
+            each val, index in related_cities
+              a(href='http://wander-land.herokuapp.com/city/'+val.city_id)
               .city_item
-                img(src='../img/paris.jpg', alt='')
-                |  
-                span.city_title Londan
-            a(href='')
-              .city_item
-                img(src='../img/paris.jpg', alt='')
-                |  
-                span.city_title Liverpool
-            a(href='')
-              .city_item
-                img(src='../img/beijing1.jpg', alt='')
-                |  
-                span.city_title Birmingham
-            a(href='')
-              .city_item
-                img(src='../img/london_eye.jpg', alt='')
-                |  
-                span.city_title Londan
+                img(src='../img/city_images/'+val.city_id+'_1.jpg')
+                |
+                span.city_title= val.name
 
