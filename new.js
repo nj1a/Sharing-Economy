@@ -962,6 +962,7 @@ router.get('/post/:postId', function(req, res){
                     console.log('looped');
                     files[i] = files[i].replace('public', '..');
                 }
+            // tool.get_result_suggestion(result.from_city, result.departure_)
                 console.log('2: '+files);
                 res.render('post2', {
                     result: result,
