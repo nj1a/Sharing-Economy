@@ -324,7 +324,9 @@ router.post('/city/:cityID', function(req, res){
             res.send('Please enter valid rating (ie. 1 to 5) and valid comment');
         }
         
-    };
+    } else{
+        res.send('Please enter valid rating (ie. 1 to 5) and valid comment');
+    }
 
 
 });
