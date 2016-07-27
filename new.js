@@ -312,7 +312,13 @@ router.post('/city/:cityID', function(req, res){
         return;
     };
     if (req.body.comment && req.body.rating) {
-        res.send('Comment: '+ req.body.comment+ ' Rating '+req.body.rating);
+        if (typeof req.body.rating === 'string' && req.body.rating >= 1 && req.body.rating <= 5) {
+            res.send('Comment: '+ req.body.comment+ ' Rating '+req.body.rating);    
+        }
+        else{
+            res.send('Please enter valid rating ie. 1 to 5');
+        }
+        
     };
 
 
