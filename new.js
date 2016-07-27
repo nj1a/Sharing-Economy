@@ -42,7 +42,7 @@ function validateBlackList(password) {
 router.use(session({secret: 'shhhhh',
                     resave: true,
                     saveUninitialized: false,
-                    cookie: {maxAge: 50000}
+                    cookie: {maxAge: 500000}
                 }));
 
 router.use(expressValidator({
