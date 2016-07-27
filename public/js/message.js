@@ -30,7 +30,6 @@ $(document).ready(() => {
     $('#main-message-screen').hide();
     $('#errors').hide();
     $('#name').focus();
-    $('#join').attr("disabled", "disabled");
 
     // limit the length of name
     if ($('#name').val() === '') {

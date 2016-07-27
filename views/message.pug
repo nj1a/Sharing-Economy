@@ -6,12 +6,27 @@ html(lang="en")
         link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
         link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css")
         link(rel="stylesheet", href="css/message.css")
+        link(rel='stylesheet', href='css/w3.css')
+        link(rel='stylesheet', href='css/w3-theme-teal.css')
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js", defer)
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", defer)
         script(src="https://cdn.socket.io/socket.io-1.4.5.js", defer)
         script(src="js/message.js", defer)
 
     body
+        section(class="top-nav bdb-lg")
+            nav.w3-top.top-nav
+                ul.w3-navbar.w3-theme-d2.w3-left-align.w3-large
+                    li
+                    a.w3-padding-large.w3-hover-white(href='/')
+                        i.fa.fa-home
+                    li
+                    a.w3-padding-large.w3-hover-white(href='/profile', title='Account Settings')
+                        i.fa.fa-user
+                    li.w3-hide-small
+                    a.w3-padding-large.w3-hover-white(href='/message', title='Messages')
+                        i.fa.fa-envelope
+                    li.w3-hide-small.w3-right
         section(class="main col-md-10 col-md-offset-1")
             section(class="overlay" id="first")
                 section(class="overlay-content")
@@ -34,14 +49,8 @@ html(lang="en")
                         section(class="form-group")
                             input(type="text", class="form-control input-lg", placeholder="Your message", id="msg")
                         input(type="submit", name="send", id="send", value="Send", class="btn btn-success btn-lg")
-                        section(class="btn-group")
-                            button(type="button", class="btn btn-lg btn-info dropdown-toggle", data-toggle="dropdown") Actions 
-                                span(class="caret")
-                            ul(class="dropdown-menu", role="menu")
-                                li
-                                    a(href="#", name="createRoom", data-toggle="modal", data-target="#roomModal") Create room
-                                li
-                                    a(href="#", name="leave", id="leave") Leave current room
+                        button(class="btn btn-lg btn-warning", name="createRoom", data-toggle="modal", data-target="#roomModal") Create
+                        button(class="btn btn-lg btn-danger", name="leave", id="leave") Leave
 
         section(class="modal fade", id="roomModal", tabindex="-1", role="dialog")
             section(class="modal-dialog")
