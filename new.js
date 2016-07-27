@@ -207,6 +207,12 @@ router.get('/create_post', csrfProtection, function(req, res){
         res.render('create_post');
     }
 });
+// World map search
+router.get('/word_map', csrfProtection, function(req, res){
+    res.render('word_map');
+
+});
+
 router.post('/result', function(req, res) {
     console.log(req.body);
     console.log('hi');
