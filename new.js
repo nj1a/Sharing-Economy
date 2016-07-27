@@ -336,9 +336,9 @@ router.get('/country/:countryID', csrfProtection, function(req, res){
             throw er;
         }
         // Format the file path
-        for (var i = 0; i < files.length; i++) {
+        for (var i = 0; i < main_images.length; i++) {
             console.log('looped');
-            files[i] = files[i].replace('public', '..');
+            main_images[i] = main_images[i].replace('public', '..');
         }
         res.render('country', {
             main_images: main_images
