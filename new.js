@@ -313,6 +313,7 @@ router.post('/city/:cityID', function(req, res){
     };
     if (req.body.comment && req.body.rating) {
         if (typeof req.body.rating === 'string' && req.body.rating >= 1 && req.body.rating <= 5) {
+            
             res.send('Comment: '+ req.body.comment+ ' Rating '+req.body.rating);    
         }
         else{
@@ -888,24 +889,12 @@ router.post('/create_post', function(req, res){
     }
     // Image not required
     if (req.body.title && req.body.description && req.body.from_city && req.body.to_city && req.body.post_type && req.body.from_date && req.body.to_date && req.body.way_of_travelling && req.body.travel_type) {
-        function formatDate(date){
-            var d = new Date(date),
-                month = '' + (d.getMonth() + 1),
-                day = '' + d.getDate(),
-                year = d.getFullYear();
-
-            if (month.length < 2) month = '0' + month;
-            if (day.length < 2) day = '0' + day;
-
-            return [year, month, day].join('-');
-        }
         var way_of_travelling = req.body.way_of_travelling;
         var description = req.body.description;
         var travel_type = req.body.travel_type;
         var title = req.body.title;
         var post_type = req.body.post_type;
-        var post_date = new Date();
-        post_date = formatDate(post_date);
+        var post_date = tool.get_today();
         var from_date = req.body.from_date;
         var to_date = req.body.to_date;
         var from_city = req.body.from_city.split(", ")[0];

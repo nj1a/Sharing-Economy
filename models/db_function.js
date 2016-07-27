@@ -186,6 +186,42 @@ module.exports = {
 			});
 
 		});	
+	},
+	insert_comment: function(city_id, user_id, rating, comment, date_rated, callback){
+		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
+			var query_string = "INSERT INTO city_rating VALUES ("+ city_id+", "+user_id + ", "+rating + ", \'"+comment+"\' , \'"+ date_rated +"\')";
+			console.log(query_string);
+			client.query(query_string, function(err, result){
+				done();
+				if (err) throw err;
+				else{
+					if (JSON.stringify(result.rows) === "[]") {
+						console.log('No matching row in database');
+						callback('error');
+					} else {
+						console.log(result.rows);
+						callback();
+					}
+				}
+			});
+
+		});	
+	},
+	get_today: function(){
+		function formatDate(date){
+		    var d = new Date(date),
+		        month = '' + (d.getMonth() + 1),
+		        day = '' + d.getDate(),
+		        year = d.getFullYear();
+
+		    if (month.length < 2) month = '0' + month;
+		    if (day.length < 2) day = '0' + day;
+
+		    return [year, month, day].join('-');
+		};
+		var today = new Date();
+		today = formatDate(today);
+		return today;
 	}
 
 };
