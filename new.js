@@ -689,6 +689,7 @@ router.post('/signup', function(req, res){
     username = req.body.username;
 
     sess = req.session;
+    console.log(account, password, username, first_name, last_name);
 
     if (validateEmail(email) && validateBlackList(password) && validateBlackList(username)) {
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
@@ -737,7 +738,13 @@ router.post('/signup', function(req, res){
                                         res.send("Error " + err);
                                     }
                                     sess.email = account;
-                                    res.send('done');
+                                    if (!google) {
+                                        res.send('done');
+                                    } else{
+                                        console.log("google value is :   " + google);
+                                        res.redirect("/")
+                                    }
+                                    
 
 
                                 });
