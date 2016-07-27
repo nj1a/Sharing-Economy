@@ -210,8 +210,8 @@ router.get('/create_post', csrfProtection, function(req, res){
     }
 });
 // World map search
-router.get('/word_map', csrfProtection, function(req, res){
-    res.render('word_map');
+router.get('/world_map', csrfProtection, function(req, res){
+    res.render('world_map');
 
 });
 
