@@ -88,9 +88,9 @@ html
             |  
             textarea#review_box(name='comment', cols='30', rows='10', form='review_submission') Type your travellng experience in this city here
             |  
-            span Rate this city:
+            span Rate this city (1-5):
             |  
-            form#review_submission(action='')
+            form#review_submission(action='', method='post')
               input(type='number', name='rating', min='1', max='5')
               br
               input(type='submit', value='Submit')

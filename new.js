@@ -305,6 +305,18 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
 
 
 });
+
+router.post('/city/:cityID', function(req, res){
+    if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
+        res.send('You need to sign in first');
+        return;
+    };
+    if (req.body.comment && req.body.rating) {
+        res.send('Comment: '+ req.body.comment+ ' Rating '+req.body.rating);
+    };
+
+
+});
 router.get('/country/:countryID', csrfProtection, function(req, res){
 
     res.render('country');
