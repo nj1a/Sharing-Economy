@@ -110,7 +110,7 @@ $(document).ready(() => {
         });
     });
 
-    // don't use arrow functions for the following two functions, as this 
+    // don't use arrow functions for the following two functions, as "this" 
     // keyword points to the code surrounding this function, which is not desired.
     $('#rooms').on("click", ".joinRoomBtn", function() {
         var roomID = $(this).parent().attr('id');
