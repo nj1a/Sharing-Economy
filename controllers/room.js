@@ -6,8 +6,6 @@ class Room {
         this.id = id;
         this.owner = owner;
         this.people = [];
-        // this.peopleLimit = 4;
-        // this.private = false;
     }
 
     add(userId) {
@@ -28,9 +26,5 @@ class Room {
         }
     }
 }
-
-// Room.prototype.isPrivate = function() {
-//   return this.private;
-// };
 
 module.exports = Room;

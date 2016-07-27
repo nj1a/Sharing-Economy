@@ -5,8 +5,6 @@ var bodyParser = require('body-parser');
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 
-
-
 // configure environemnt
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -20,12 +18,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 
-// message
-
-
 // define routes
-
-
+var router = require('./new');
+app.use(router);
 
 // start the server
 var port = process.env.PORT || 1337;
@@ -33,10 +28,7 @@ server.listen(port, function () {
 	console.log('listen on port ' + port);
 });
 
-
-var router = require('./new');
-app.use(router);
-
+// message
 require('./controllers/message')(io);
 
 

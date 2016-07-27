@@ -3,6 +3,7 @@ html(lang="en")
     head
         meta(charset="utf-8")
         title= message
+        meta(name='viewport', content='width=device-width, initial-scale=1')
         link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
         link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css")
         link(rel="stylesheet", href="css/message.css")
@@ -36,7 +37,7 @@ html(lang="en")
                         form(class="form-inline", id="nameForm")
                             section(class="form-group")
                                 input(type="text", class="form-control input-lg", value= email, id="name")
-                            input(type="submit", name="join", id="join", value="Join", class="btn btn-primary btn-lg")
+                            input(type="submit", name="join", id="join", value="Join", class="btn btn-success btn-lg")
 
             section(class="row", id="main-message-screen")
                 section(class="col-md-3")
@@ -62,7 +63,7 @@ html(lang="en")
                         form(class="form-inline", id="createRoomForm")
                             input(type="text", class="form-control input-lg", placeholder="Room name", id="createRoomName")
                     section(class="modal-footer")
-                        button(type="button", class="btn btn-lg btn-default", data-dismiss="modal") Close
-                        button(data-dismiss="modal", id="createRoomBtn", class="btn btn-success btn-lg") Create room
+                        button(type="button", class="btn btn-lg btn-warning", data-dismiss="modal") Close
+                        button(data-dismiss="modal", id="createRoomBtn", class="btn btn-info btn-lg") Create room
 
 
