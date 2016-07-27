@@ -117,21 +117,11 @@ html(lang="en")
         section#recommendation
           h1 Related Post
           article#related_product_list
-            a(href='')
-              section.related_product
-                img(src='../assets/images/product_1.jpg', alt='')
-                |  
-                span.related_product_title Looking for a tour guide
-            a(href='')
-              section.related_product
-                img(src='../assets/images/product_2.jpg', alt='')
-                |  
-                span.related_product_title Offering tour in Vancouver BC
-            a(href='')
-              section.related_product
-                img(src='../assets/images/product_3.jpg', alt='')
-                |  
-                span.related_product_title England!
+            each val, index in related_posts
+              a(href='https://wander-land.herokuapp.com/post/'+val.post_id)
+                section.related_product
+                  img(src='../img/post_images/'+val.post_id+'_1.jpg')
+                  span.related_product_title= val.title
       br
       footer
         section.w3-container.w3-theme-d3.w3-padding-16

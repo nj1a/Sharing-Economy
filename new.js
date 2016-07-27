@@ -952,7 +952,8 @@ router.get('/post/:postId', function(req, res){
     tool.get_info_by_post_id(req.params.postId, function(result){
         if (result === 'error') {
           res.send('No such result in database');
-        } else{
+        } 
+        else{
             glob('public/img/post_images/'+req.params.postId+'_*.*', function(er, files){
                 if (er) {
                     throw er;
@@ -962,13 +963,17 @@ router.get('/post/:postId', function(req, res){
                     console.log('looped');
                     files[i] = files[i].replace('public', '..');
                 }
-            // tool.get_result_suggestion(result.from_city, result.departure_)
-                console.log('2: '+files);
-                res.render('post2', {
-                    result: result,
-                    images: files,
-                    //csrfToken: req.csrfToken()
-                });
+                tool.get_result_suggestion(result.from_city, result.departure_country_id, result.to_city, result.destination_country_id, result.post_type, result.travel_start_date, result.travel_end_date, function(related_posts){
+
+                    console.log('2: '+files);
+                    res.render('post2', {
+                        result: result,
+                        images: files,
+                        related_posts: related_posts
+                        //csrfToken: req.csrfToken()
+                    });
+
+                })
             });
         }
     });
