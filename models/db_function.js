@@ -251,20 +251,21 @@ module.exports = {
 	get_suggestion_by_city_id: function(user_id, to_city, callback){
 		
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
-			console.log('!G');
-			var current_date = '2015-01-01';
-			// current_date = formatDate(current_date);
-			console.log('!H');
+			var current_date = new Date();
+			current_date = formatDate(current_date);
 			var query_string = "SELECT * FROM product_post, user_account WHERE from_city = user_account.city_id AND user_account.user_id = "+ user_id + " AND to_city = "+ to_city + " AND travel_start_date - integer '7' <= \'"+ current_date + "\' LIMIT 10";
-			console.log('!I');
 			console.log(query_string);
 
 			client.query(query_string, function(err, result){
 				done();
 				if (err) throw err;
 				else{
-					callback(result.rows);
-
+					if (JSON.stringify(result.rows) === "[]") {
+						callback('error');
+					}
+					else {
+						callback(result.rows);
+					}
 				}
 			});
 

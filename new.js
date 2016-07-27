@@ -344,7 +344,9 @@ router.get('/city/:cityID', csrfProtection, function(req, res){
                         }
                         console.log('!F');
                         tool.get_suggestion_by_city_id(user_id, req.params.cityID, function(suggestions){
-
+                            if (suggestions === 'error') {
+                                suggestions = false;
+                            };
                             res.render('city', {
                                 city_info: city_info,
                                 csrfToken: req.csrfToken(),
