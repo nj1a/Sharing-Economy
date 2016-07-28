@@ -52,7 +52,7 @@ module.exports = {
 						console.log(result.rows);
 						for (var i = 0; i < result.rows.length; i++) {
 							data.push(result.rows[i].city);
-						};
+						}
 						callback(data);
 					}
 				}
@@ -186,7 +186,7 @@ module.exports = {
 		pg.connect(process.env.DATABASE_URL, function(err, client, done) {	
 			var query_string = "INSERT INTO city_rating VALUES ("+ city_id+", "+user_id + ", "+rating + ", \'"+comment+"\' , \'"+ date_rated +"\')";
 			console.log(query_string);
-			client.query(query_string, function(err, result){
+			client.query(query_string, function(err){
 				done();
 				if (err) throw err;
 				else{
