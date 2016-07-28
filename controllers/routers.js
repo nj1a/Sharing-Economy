@@ -240,7 +240,6 @@ router.post('/result', function(req, res) {
     console.log('Type: '+ typeof req.body.from_date + ' '+ typeof req.body.to_date + ' ' + typeof req.body.from_city + ' ' + typeof req.body.to_city);
     if (typeof req.body.from_date === "undefined" || typeof req.body.to_date === "undefined" || typeof req.body.from_city === "undefined" || typeof req.body.to_city === "undefined" || req.body.to_date === 'what day' || req.body.from_date === 'what day' || req.body.from_city === 'what city' || req.body.to_city === 'what city') {
         res.redirect('/');
-        res.send('No req.body');
     }
     else{
         var from_date = req.body.from_date;
@@ -1144,11 +1143,11 @@ router.post('/create_post', function(req, res){
                                 req.pipe(req.busboy);
                                 req.busboy.on('file', function (fieldname, file, filename) {
                                    // console.log("Uploading: " + filename + "for the user:   " + usrID + "to the folder:  " + __dirname + '/../public/img/' + "profile_" + usrID);
-                                    fstream = fs.createWriteStream('public/img/post_images/' + result3.post_id + "_1.jpg");
+                                    fstream = fs.createWriteStream('public/img/' + "profile_" + "2");
                                     file.pipe(fstream);
                                     fstream.on('close', function () {
 
-                                        res.redirect('/post/'+ result3.post_id);
+                                        res.redirect('/profile');
 
                                     });
                                 });
@@ -1405,6 +1404,7 @@ router.get('/message', function(req, res) {
 	sess = req.session;
 
 	if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
+        res.send('You need to sign in first');
         res.redirect('/');
     } else {
   	    res.render('message', {
