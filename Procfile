@@ -1,1 +1,1 @@
-web: node app.js
+web: ./node_modules/.bin/forever -m 10 server.js
