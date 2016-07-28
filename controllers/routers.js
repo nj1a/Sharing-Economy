@@ -1089,7 +1089,7 @@ router.post('/create_post', function(req, res){
         return;
     }
     // Image not required
-    console.log(req.files);
+    console.log("!A");
 
     if (req.body.title && req.body.description && req.body.from_city && req.body.to_city && req.body.post_type && req.body.from_date && req.body.to_date && req.body.way_of_travelling && req.body.travel_type) {
         var way_of_travelling = req.body.way_of_travelling;
