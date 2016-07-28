@@ -539,6 +539,7 @@ router.get('/profile', function(req, res){
                             var usrID = JSON.stringify(result.rows[0].user_id);
                             var path;
                             if (fs.existsSync(__dirname + '/../public/img/' + "profile_" + usrID)) {
+                                console.log("This person has a updated img");
                                 path = '/img/' + "profile_" + usrID;
                             } else {
                                 path = '/img/default_profile.jpg';
@@ -923,7 +924,7 @@ router.post('/file-upload', function(req, res){
     var fstream;
     req.pipe(req.busboy);
     req.busboy.on('file', function (fieldname, file, filename) {
-        console.log("Uploading: " + filename);
+        console.log("Uploading: " + filename + "for the user:   " + usrID);
         fstream = fs.createWriteStream(__dirname + '/../public/img/' + "profile_" + usrID);
         file.pipe(fstream);
         fstream.on('close', function () {
