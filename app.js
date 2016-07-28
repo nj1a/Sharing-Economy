@@ -17,6 +17,10 @@ app.use('/img', express.static(path.join(__dirname + 'img')));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+// performance
+var compression = require('compression');
+app.use(compression());
+
 // define routes
 var routers = require('./controllers/routers');
 app.use(routers);
