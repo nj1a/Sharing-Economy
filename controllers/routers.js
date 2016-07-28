@@ -1133,7 +1133,7 @@ router.post('/create_post', function(req, res){
                                 req.pipe(req.busboy);
                                 req.busboy.on('file', function (fieldname, file, filename) {
                                     console.log("Uploading: " + filename);
-                                    fstream = fs.createWriteStream(__dirname + '/public/img/post_images/' + result3.post_id + "_1.jpg");
+                                    fstream = fs.createWriteStream('../public/img/post_images/' + result3.post_id + "_1.jpg");
                                     file.pipe(fstream);
                                     fstream.on('close', function () {
 
