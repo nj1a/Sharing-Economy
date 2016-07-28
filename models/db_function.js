@@ -1,3 +1,5 @@
+// A list of db functions for postgressql query to call
+
 var pg = require('pg');
 
 module.exports = {
