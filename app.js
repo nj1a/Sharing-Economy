@@ -17,7 +17,6 @@ app.use('/img', express.static(path.join(__dirname + 'img')));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-
 // define routes
 var routers = require('./controllers/routers');
 app.use(routers);
@@ -30,9 +29,3 @@ var port = process.env.PORT || 1337;
 server.listen(port, function () {
 	console.log('listen on port ' + port);
 });
-
-
-
-
-
-
