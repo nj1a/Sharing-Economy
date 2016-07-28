@@ -1143,11 +1143,11 @@ router.post('/create_post', function(req, res){
                                 req.pipe(req.busboy);
                                 req.busboy.on('file', function (fieldname, file, filename) {
                                    // console.log("Uploading: " + filename + "for the user:   " + usrID + "to the folder:  " + __dirname + '/../public/img/' + "profile_" + usrID);
-                                    fstream = fs.createWriteStream('public/img/' + "profile_" + "2");
+                                    fstream = fs.createWriteStream('public/img/post_images/' + result3.post_id + "_1.jpg");
                                     file.pipe(fstream);
                                     fstream.on('close', function () {
 
-                                        res.redirect('/profile');
+                                        res.redirect('/post/'+ result3.post_id);
 
                                     });
                                 });
