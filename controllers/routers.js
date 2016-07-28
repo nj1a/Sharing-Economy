@@ -276,7 +276,7 @@ router.post('/result', function(req, res) {
 
                                 }else{
                                     // res.send(JSON.stringify(result));
-                                    console.log('This is result object: ', result3);
+                                    // console.log('This is result object: ', result3);
                                     res.render("result", {
 
                                         result: result3,
