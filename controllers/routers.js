@@ -1139,7 +1139,6 @@ router.post('/create_post', function(req, res){
                                 // res.send(JSON.stringify(result));
                                 console.log('This is result object: ', result3);
                                 // res.send('Your post_id is: '+result3.post_id);
-<<<<<<< HEAD
                                 // var fstream;
                                 // req.pipe(req.busboy);
                                 // req.busboy.on('file', function (fieldname, file, filename) {
@@ -1153,20 +1152,7 @@ router.post('/create_post', function(req, res){
                                 //     });
                                 // });
                                 res.redirect('/post/'+ result3.post_id);
-=======
-                                var fstream;
-                                req.pipe(req.busboy);
-                                req.busboy.on('file', function (fieldname, file, filename) {
-                                   // console.log("Uploading: " + filename + "for the user:   " + usrID + "to the folder:  " + __dirname + '/../public/img/' + "profile_" + usrID);
-                                    fstream = fs.createWriteStream('public/img/' + "profile_" + "2");
-                                    file.pipe(fstream);
-                                    fstream.on('close', function () {
 
-                                        res.redirect('/profile');
-
-                                    });
-                                });
->>>>>>> 546d32562991adcbcb74b5595ee969668a683cfa
 
                             }
                         });
