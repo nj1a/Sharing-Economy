@@ -101,12 +101,14 @@ router.use(expressValidator({
 
 router.post('/admin_sign', function(req, res){
     sess = req.session;
+    var password = sha256(req.body.password);
+    var email = req.body.email;
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query('SELECT count(*) FROM wanderland.user_account WHERE wanderland.user_account.email = ' +
-                "'"+ req.body.email + "'" +  ' AND wanderland.user_account.password =' + "'" + req.body.password + "'" + ' AND wanderland.user_account.is_admin = ' + "'" +'t' + "'", function(err, result) {
+                "'"+ email + "'" +  ' AND wanderland.user_account.password =' + "'" + password + "'" + ' AND wanderland.user_account.is_admin = ' + "'" +'t' + "'", function(err, result) {
                     console.log('SELECT count(*) FROM wanderland.user_account WHERE wanderland.user_account.email = ' +
-                "'"+ req.body.email + "'" +  ' AND wanderland.user_account.password =' + "'" + req.body.password + "'" + ' AND wanderland.user_account.is_admin = ' + "'" +'t' + "'");
+                "'"+ email + "'" +  ' AND wanderland.user_account.password =' + "'" + password + "'" + ' AND wanderland.user_account.is_admin = ' + "'" +'t' + "'");
                     console.log(JSON.stringify(result.rows[0].count));
                     done();
                     if (err) {
@@ -124,7 +126,7 @@ router.post('/admin_sign', function(req, res){
 router.post('/login', function(req, res){
     sess = req.session;
     var email = req.body.email;
-    var password = req.body.pass;
+    var password = sha256(req.body.pass);
     var username = req.body.username;
 
     if (validateEmail(email) && validateBlackList(password)) {
@@ -693,7 +695,7 @@ router.get('/findUser/:email', function(req, res){
 router.post("/adminUpdate", function(req, res){
     var user_id = req.body.user_id;
     var email = req.body.email;
-    var password = req.body.password;
+    var password = sha256(req.body.password);
     var username = req.body.username;
     var first_name = req.body.first_name;
     var last_name = req.body.last_name;
@@ -739,7 +741,7 @@ router.get('/deleteUser/:email', function(req, res){
 
 router.post('/createUser', function(req, res){
     var email = req.body.email;
-    var password = req.body.password;
+    var password = sha256(req.body.password);
     var username = req.body.username;
     var first_name = req.body.first_name;
     var last_name = req.body.last_name;
@@ -929,8 +931,8 @@ router.post('/file-upload', function(req, res){
 router.post('/updatePassword', parseForm, csrfProtection, function(req, res){
 
     sess=req.session;
-    var currPW = req.body.cpassword;
-    var newPW = req.body.npassword;
+    var currPW = sha256(req.body.cpassword);
+    var newPW = sha256(req.body.npassword);
     if (sess.email) {
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
@@ -1141,7 +1143,7 @@ router.post('/create_post', function(req, res){
 
                                     });
                                 });
-                                
+
                             }
                         });
 
