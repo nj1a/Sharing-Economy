@@ -131,10 +131,10 @@ $(document).ready(function() {
 				if(data==='done')           
             {	
             	//alert(1);
-                window.location.href="/profile";
-            } else {
+                window.location.href="/";
+            } else if (data==="signup failed") {
             	//alert(2);
-            	alert(data);
+            	//alert(data);
             	if (x===null){
             		$("#error_user").html("either username or email address already exists");
             		show_login_pop();
