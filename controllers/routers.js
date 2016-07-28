@@ -456,16 +456,6 @@ router.get('/country/:countryID', csrfProtection, function(req, res){
 
 });
 
-
-router.get('/admin-manage', csrfProtection, function(req, res) {
-
-    res.render('admin-manage', {
-        title: 'admin_manage',
-        message: 'adminManage'//,
-        //csrfToken: req.csrfToken()
-    });
-});
-
 router.post('/enter-data', function(req, res) {
     var country = req.body.country;
     var country_code = req.body.country_code;
