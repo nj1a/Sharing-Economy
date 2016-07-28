@@ -146,6 +146,7 @@ $(document).ready(() => {
         var $count = $('<span/>').addClass('label label-success').text(data.count);
         var $list = $('<li/>').addClass('list-group-item list-group-item-success').text('Rooms');
         $count.appendTo($list);
+        $list.append('<span class="label label-info" name="createRoom", data-toggle="modal", data-target="#roomModal">+</span>');
         $list.appendTo('#rooms');
 
         if (data.count) { // at least one room
