@@ -1404,7 +1404,6 @@ router.get('/message', function(req, res) {
 	sess = req.session;
 
 	if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
-        res.send('You need to sign in first');
         res.redirect('/');
     } else {
   	    res.render('message', {
