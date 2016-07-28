@@ -1,4 +1,4 @@
-// var chai = require('chai');
+var chai = require('chai');
 var expect = chai.expect;
 var request = require('superagent');
 
