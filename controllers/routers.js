@@ -10,6 +10,17 @@ var router = express.Router();
 var csrf = require('csurf');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var multer  =   require('multer');
+var global_post_Id;
+var storage =   multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, '../public/img/post_images/');
+  },
+  filename: function (req, file, callback) {
+    callback(null, global_post_Id+"_1.jpg");
+  }
+});
+var upload = multer({ storage : storage}).single('userPhoto');
 
 var update_handler = require("../models/handle_update.js");
 var tool = require('../models/db_function');
@@ -1131,17 +1142,12 @@ router.post('/create_post', function(req, res){
                                 // res.send(JSON.stringify(result));
                                 console.log('This is result object: ', result3);
                                 // res.send('Your post_id is: '+result3.post_id);
-                                var fstream;
-                                req.pipe(req.busboy);
-                                req.busboy.on('file', function (fieldname, file, filename) {
-                                    console.log("Uploading: " + filename);
-                                    fstream = fs.createWriteStream('../public/img/post_images/' + result3.post_id + "_1.jpg");
-                                    file.pipe(fstream);
-                                    fstream.on('close', function () {
-
-                                        res.redirect('/post/'+result3.post_id);
-
-                                    });
+                                global_post_Id = result3.post_id;
+                                upload(req,res,function(err) {
+                                    if(err) {
+                                        return res.end("Error uploading file.");
+                                    }
+                                    res.redirect('/post/'+result3.post_id);
                                 });
 
                             }
