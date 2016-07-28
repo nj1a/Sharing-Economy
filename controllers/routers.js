@@ -911,7 +911,7 @@ router.post('/file-upload', function(req, res){
     req.pipe(req.busboy);
     req.busboy.on('file', function (fieldname, file, filename) {
         console.log("Uploading: " + filename);
-        fstream = fs.createWriteStream(__dirname + '/public/img/' + "profile_" + usrID + ".jpg");
+        fstream = fs.createWriteStream('../public/img/' + "profile_" + usrID + ".jpg");
         file.pipe(fstream);
         fstream.on('close', function () {
 
