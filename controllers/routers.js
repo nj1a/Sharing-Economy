@@ -527,7 +527,7 @@ router.get('/profile', function(req, res){
                             }
                             var usrID = JSON.stringify(result.rows[0].user_id);
                             var path;
-                            if (fs.existsSync(__dirname + '/../public/img/' + "profile_" + usrID)) {
+                            if (fs.existsSync('public/img/' + "profile_" + usrID)) {
                                 console.log("This person has a updated img");
                                 path = '/img/' + "profile_" + usrID;
                             } else {
@@ -601,7 +601,7 @@ router.get('/showusr', function(req, res){
                             }
                             var usrID = JSON.stringify(result.rows[0].user_id);
                             var path;
-                            if (fs.existsSync(__dirname + '/public/img/' + "profile_" + usrID)) {
+                            if (fs.existsSync('public/img/' + "profile_" + usrID)) {
                                 path = '/img/' + "profile_" + usrID;
                             } else {
                                 path = '/img/default_profile.jpg';
