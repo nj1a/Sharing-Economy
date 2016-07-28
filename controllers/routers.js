@@ -20,7 +20,9 @@ var parseForm = bodyParser.urlencoded({ extended: false });
 router.use(busboy());
 router.use(cookieParser());
 
-
+// performance
+var compression = require('compression');
+router.use(compression());
 
 var sess;
 
@@ -237,7 +239,7 @@ router.post('/result', function(req, res) {
     console.log('hi');
     console.log('Type: '+ typeof req.body.from_date + ' '+ typeof req.body.to_date + ' ' + typeof req.body.from_city + ' ' + typeof req.body.to_city);
     if (typeof req.body.from_date === "undefined" || typeof req.body.to_date === "undefined" || typeof req.body.from_city === "undefined" || typeof req.body.to_city === "undefined" || req.body.to_date === 'what day' || req.body.from_date === 'what day' || req.body.from_city === 'what city' || req.body.to_city === 'what city') {
-        res.redirect('/');
+        res.send('No req.body');
     }
     else{
         var from_date = req.body.from_date;
@@ -1079,8 +1081,6 @@ router.get('/post/:postId', function(req, res){
 
 // Process create_post request
 router.post('/create_post', function(req, res){
-    console.log('create post');
-    console.log(req.body);
     if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
         res.send('You need to sign in first');
         return;
@@ -1124,26 +1124,24 @@ router.post('/create_post', function(req, res){
 
                             }else{
                                 // result3.post_id
-                                // res.redirect('/post/'+result3.post_id);
+                                res.redirect('/post/'+result3.post_id);
 
                                 // res.send(JSON.stringify(result));
-                                console.log('This is result object: ', result3);
-                                // res.send('Your post_id is: '+result3.post_id);
+                                // console.log('This is result object: ', result3);
+                                // // res.send('Your post_id is: '+result3.post_id);
                                 // var fstream;
                                 // req.pipe(req.busboy);
                                 // req.busboy.on('file', function (fieldname, file, filename) {
                                 //    // console.log("Uploading: " + filename + "for the user:   " + usrID + "to the folder:  " + __dirname + '/../public/img/' + "profile_" + usrID);
-                                //     fstream = fs.createWriteStream('public/img/post_images/' + result3.post_id + "_1.jpg");
+                                //     fstream = fs.createWriteStream('public/img/' + "profile_" + "2");
                                 //     file.pipe(fstream);
                                 //     fstream.on('close', function () {
 
-                                //         res.redirect('/post/'+ result3.post_id);
+                                //         res.redirect('/profile');
 
                                 //     });
                                 // });
-                                res.redirect('/post/'+ result3.post_id);
-
-
+                            
                             }
                         });
 

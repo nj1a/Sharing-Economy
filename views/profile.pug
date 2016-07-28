@@ -63,17 +63,15 @@ html(lang="en")
                             div(id="view-request" class="main-nav-button")
                                 a(id="nav4" href="#")
                                     span(class="nav-title")="View friends request"
-                            div(id="create-post" class="main-nav-button")
-                                a(id="nav5" href="#")
-                                    span(class="nav-title")="Create Post"
+                            
 
 
                 ul(id="account-settings" class="profile-info selected")
                     li(id="profile-manage" class="bdb-lg profile-contents")
                         section(class="container-content")
                             section(class="content-key")
-                                span(class="sub-title") My Profile 
-                                span(class="sub-description") some description.... 
+                                span(class="sub-title") My Account
+                                 
                             
                             section(class="content-value")
                                 div(class="picture")
@@ -127,7 +125,7 @@ html(lang="en")
                         section(class="container-content")
                             section(class="content-key")
                                 span(class="sub-title") Password
-                                span(class="sub-description") some description.... 
+                                span(class="sub-description") change your password 
                             
                             section(class="content-value")
                                 div(class="edit-password")
@@ -151,33 +149,13 @@ html(lang="en")
 
                                         div(class="mt10")
                                             input(id="updatePW" class="button" type="submit" disabled = "true" value="UPDATE")
-
-
-
-
-
-                    li(id="two-factor-manage" class="bdb-lg profile-contents")
-                        section(class="container-content")
-                            section(class="content-key")
-                                span(class="sub-title") Two-factor Authentication
-                                span(class="sub-description") some description.... 
-                            
-                            section(class="content-value")
-
-                    li(id="privacy-manage" class="bdb-lg profile-contents")
-                        section(class="container-content")
-                            section(class="content-key")
-                                span(class="sub-title") Privacy Settings
-                                span(class="sub-description") some description.... 
-                            
-                            section(class="content-value")
                 
                 ul(id="personal-info" class="profile-info")
                     li(class="profile-contents")
                         section(class="container-content bdb-lg")
                             section(class="content-key")
                                 span(class="sub-title") Personal Information 
-                                span(class="sub-description") some description.... 
+                                span(class="sub-description") update your information
                             
                             section(class="content-value")                       
                                 div(class="info-content") 
@@ -259,49 +237,6 @@ html(lang="en")
                                                     input(type="text" placeholder="Enter email address of an existing user" name="findEmail" id="inputEmail")
                                                     //span(class="username-field")
                                                     input(type="button" value="find user!" id="findUsr")
-
-
-
-
-                        li(class="profile-contents")
-                            section(class="container-content bdb-lg")
-                                section(class="content-key")
-                                    span(class="sub-title") Create an account 
-                                    span(class="sub-description") Add a new user to the database
-
-
-                                section(class="content-value")
-                                    form
-                                        div(class="acc-info") 
-                                            
-                                                label(class="profile-label") Username
-                                                div(class="username-container")
-                                                    input(type="text" placeholder="username"  name="newACCusername" id="newACCusername")
-                                        
-                                            
-                                                label(class="profile-label") Email address
-                                                div(class="username-container")
-                                                    input(type="text" placeholder="email"  name="newACCemail" id="newACCemail")
-                                        
-                                            
-                                                label(class="profile-label") Password
-                                                div(class="username-container")
-                                                    input(type="text" placeholder="password"  name="newACCpass" id="newACCpass")
-                                        
-                                           
-                                                label(class="profile-label") First name
-                                                div(class="username-container")
-                                                    input(type="text" placeholder="first name" name="newACCfname" id="newACCfname")
-                                        
-                                           
-                                                label(class="profile-label") Last name
-                                                div(class="username-container")
-                                                    input(type="text" placeholder="last name" name="newACClname" id="newACClname")
-                                        
-                                            
-                                                input(type="submit" value="create!" id="createUsr")
-
-
                                                
 
                         li(class="profile-contents")
@@ -325,7 +260,7 @@ html(lang="en")
                             section(class="container-content bdb-lg")
                                 section(class="content-key") 
                                     span(class="sub-title") data mgmt
-                                    span(class="sub-description") Visit your friends profile!
+                                    span(class="sub-description") manage database
                 else
                     ul(id="friends" class="profile-info")
                         li(class="profile-contents")
@@ -350,18 +285,7 @@ html(lang="en")
                                     div(class="info-content")
                                         div(id="resultWrap2")
                                             div(id="resultField2")
-
-                    ul(id="createPost" class="profile-info")
-                        li(class="profile-contents")
-                            section(class="container-content bdb-lg")
-                                section(class="content-key")
-                                    span(class="sub-title") Create Post
-                                    span(class="sub-description") Create your post!
-
-                                section(class="content-value")                       
-                                    div(class="info-content")
-                                        div(id="resultWrap2")
-                                            div(id="resultField2")
+                        
                                                 
                                             
 
