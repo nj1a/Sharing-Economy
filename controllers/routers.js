@@ -20,6 +20,10 @@ var parseForm = bodyParser.urlencoded({ extended: false });
 router.use(busboy());
 router.use(cookieParser());
 
+// performance
+var compression = require('compression');
+router.use(compression());
+
 var sess;
 
 function validateEmail(email) {
@@ -235,7 +239,7 @@ router.post('/result', function(req, res) {
     console.log('hi');
     console.log('Type: '+ typeof req.body.from_date + ' '+ typeof req.body.to_date + ' ' + typeof req.body.from_city + ' ' + typeof req.body.to_city);
     if (typeof req.body.from_date === "undefined" || typeof req.body.to_date === "undefined" || typeof req.body.from_city === "undefined" || typeof req.body.to_city === "undefined" || req.body.to_date === 'what day' || req.body.from_date === 'what day' || req.body.from_city === 'what city' || req.body.to_city === 'what city') {
-        res.redirect('/');
+        res.send('No req.body');
     }
     else{
         var from_date = req.body.from_date;
