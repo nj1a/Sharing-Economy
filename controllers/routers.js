@@ -239,7 +239,7 @@ router.post('/result', function(req, res) {
     console.log('hi');
     console.log('Type: '+ typeof req.body.from_date + ' '+ typeof req.body.to_date + ' ' + typeof req.body.from_city + ' ' + typeof req.body.to_city);
     if (typeof req.body.from_date === "undefined" || typeof req.body.to_date === "undefined" || typeof req.body.from_city === "undefined" || typeof req.body.to_city === "undefined" || req.body.to_date === 'what day' || req.body.from_date === 'what day' || req.body.from_city === 'what city' || req.body.to_city === 'what city') {
-        res.send('No req.body');
+        res.redirect('/');
     }
     else{
         var from_date = req.body.from_date;
@@ -1139,6 +1139,7 @@ router.post('/create_post', function(req, res){
                                 // res.send(JSON.stringify(result));
                                 console.log('This is result object: ', result3);
                                 // res.send('Your post_id is: '+result3.post_id);
+<<<<<<< HEAD
                                 // var fstream;
                                 // req.pipe(req.busboy);
                                 // req.busboy.on('file', function (fieldname, file, filename) {
@@ -1152,6 +1153,20 @@ router.post('/create_post', function(req, res){
                                 //     });
                                 // });
                                 res.redirect('/post/'+ result3.post_id);
+=======
+                                var fstream;
+                                req.pipe(req.busboy);
+                                req.busboy.on('file', function (fieldname, file, filename) {
+                                   // console.log("Uploading: " + filename + "for the user:   " + usrID + "to the folder:  " + __dirname + '/../public/img/' + "profile_" + usrID);
+                                    fstream = fs.createWriteStream('public/img/' + "profile_" + "2");
+                                    file.pipe(fstream);
+                                    fstream.on('close', function () {
+
+                                        res.redirect('/profile');
+
+                                    });
+                                });
+>>>>>>> 546d32562991adcbcb74b5595ee969668a683cfa
 
                             }
                         });
