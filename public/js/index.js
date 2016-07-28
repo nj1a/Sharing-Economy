@@ -128,11 +128,8 @@ $(document).ready(function() {
 
 		if (reqType===2) {
 			$.post("/signup", {google: google, emailNew:email, password:pass, username:username}, function(data){
-				if(data==='done')           
-            {	
-            	//alert(1);
-                window.location.href="/";
-            } else if (data==="signup failed") {
+            
+            if (data==="signup failed") {
             	//alert(2);
             	//alert(data);
             	if (x===null){
@@ -143,6 +140,8 @@ $(document).ready(function() {
             	
             	isValid = false;
 
+            } else {
+            	window.location.href="/";
             }
 			});
 
