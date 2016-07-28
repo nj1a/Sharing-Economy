@@ -40,4 +40,13 @@ describe("route", () => {
 		});
 	});
 
+	it("should see the woulrd map", done => {
+		request.get('http://localhost:1337/world_map').end((err, res) => {
+			expect(res).to.exist;
+			expect(res.status).to.equal(200);
+			expect(res.error).to.equal(false);
+			done();
+		});
+	});
+
 });
