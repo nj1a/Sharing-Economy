@@ -1091,6 +1091,8 @@ router.get('/post/:postId', function(req, res){
 
 // Process create_post request
 router.post('/create_post', function(req, res){
+    console.log('create post');
+    console.log(req.body);
     if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
         res.send('You need to sign in first');
         return;
