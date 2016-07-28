@@ -45,7 +45,7 @@ function validateBlackList(password) {
 router.use(session({secret: 'shhhhh',
                     resave: true,
                     saveUninitialized: false,
-                    cookie: {maxAge: 500000}
+                    cookie: {maxAge: 50000000}
                 }));
 
 router.use(expressValidator({
@@ -251,7 +251,7 @@ router.post('/result', function(req, res) {
                              validateBlackList(to_city) && validateBlackList(to_country);
 
         if (validatation) {
-            console.log("Type2: "+ typeof from_city + ' '+typeof to_city_id + ' '+typeof from_country + ' '+ typeof to_country);
+            console.log("Type2: "+ typeof from_city + ' '+typeof to_city + ' '+typeof from_country + ' '+ typeof to_country);
             if (typeof from_city === 'undefined' || typeof to_city === 'undefined' || typeof from_country === 'undefined' || typeof to_country === 'undefined') {
                 res.send('Please enter both city and country name');
             }
