@@ -1089,6 +1089,8 @@ router.get('/post/:postId', function(req, res){
 
 // Process create_post request
 router.post('/create_post', function(req, res){
+    console.log('create post');
+    console.log(req.body);
     if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
         res.send('You need to sign in first');
         return;
@@ -1137,18 +1139,20 @@ router.post('/create_post', function(req, res){
                                 // res.send(JSON.stringify(result));
                                 console.log('This is result object: ', result3);
                                 // res.send('Your post_id is: '+result3.post_id);
-                                var fstream;
-                                req.pipe(req.busboy);
-                                req.busboy.on('file', function (fieldname, file, filename) {
-                                   // console.log("Uploading: " + filename + "for the user:   " + usrID + "to the folder:  " + __dirname + '/../public/img/' + "profile_" + usrID);
-                                    fstream = fs.createWriteStream('public/img/' + "profile_" + "2");
-                                    file.pipe(fstream);
-                                    fstream.on('close', function () {
+                                // var fstream;
+                                // req.pipe(req.busboy);
+                                // req.busboy.on('file', function (fieldname, file, filename) {
+                                //    // console.log("Uploading: " + filename + "for the user:   " + usrID + "to the folder:  " + __dirname + '/../public/img/' + "profile_" + usrID);
+                                //     fstream = fs.createWriteStream('public/img/post_images/' + result3.post_id + "_1.jpg");
+                                //     file.pipe(fstream);
+                                //     fstream.on('close', function () {
 
-                                        res.redirect('/profile');
+                                //         res.redirect('/post/'+ result3.post_id);
 
-                                    });
-                                });
+                                //     });
+                                // });
+                                res.redirect('/post/'+ result3.post_id);
+
 
                             }
                         });
