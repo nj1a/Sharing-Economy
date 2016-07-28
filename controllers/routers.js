@@ -20,10 +20,6 @@ var parseForm = bodyParser.urlencoded({ extended: false });
 router.use(busboy());
 router.use(cookieParser());
 
-// performance
-var compression = require('compression');
-router.use(compression());
-
 var sess;
 
 function validateEmail(email) {
