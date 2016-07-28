@@ -527,8 +527,8 @@ router.get('/profile', function(req, res){
                             }
                             var usrID = JSON.stringify(result.rows[0].user_id);
                             var path;
-                            if (fs.existsSync(__dirname + '/public/img/' + "profile_" + usrID + ".jpg")) {
-                                path = '/img/' + "profile_" + usrID + ".jpg";
+                            if (fs.existsSync(__dirname + '/../public/img/' + "profile_" + usrID)) {
+                                path = '/img/' + "profile_" + usrID;
                             } else {
                                 path = '/img/default_profile.jpg';
                             }
@@ -600,8 +600,8 @@ router.get('/showusr', function(req, res){
                             }
                             var usrID = JSON.stringify(result.rows[0].user_id);
                             var path;
-                            if (fs.existsSync(__dirname + '/public/img/' + "profile_" + usrID + ".jpg")) {
-                                path = '/img/' + "profile_" + usrID + ".jpg";
+                            if (fs.existsSync(__dirname + '/public/img/' + "profile_" + usrID)) {
+                                path = '/img/' + "profile_" + usrID;
                             } else {
                                 path = '/img/default_profile.jpg';
                             }
@@ -913,7 +913,7 @@ router.post('/file-upload', function(req, res){
     req.pipe(req.busboy);
     req.busboy.on('file', function (fieldname, file, filename) {
         console.log("Uploading: " + filename);
-        fstream = fs.createWriteStream(__dirname + '/../public/img/' + "profile_" + usrID + ".jpg");
+        fstream = fs.createWriteStream(__dirname + '/../public/img/' + "profile_" + usrID);
         file.pipe(fstream);
         fstream.on('close', function () {
 
@@ -1335,8 +1335,8 @@ router.get("/getFriends/:username", function(req, res){
                     for (var i=0; i < result.rows.length; i++) {
                         var user = result.rows[i].user_id;
                         var path;
-                        if (fs.existsSync(__dirname + '/public/img/' + "profile_" + user + ".jpg")) {
-                                path = '/img/' + "profile_" + user + ".jpg";
+                        if (fs.existsSync(__dirname + '/../public/img/' + "profile_" + user)) {
+                                path = '/img/' + "profile_" + user;
                             } else {
                                 path = '/img/default_profile.jpg';
                             }
