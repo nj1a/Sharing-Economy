@@ -3,8 +3,6 @@ var session = require('express-session');
 var pg = require('pg');
 var fs = require('fs');
 var busboy = require('connect-busboy');
-var multer = require('multer');
-// var upload = multer({ dest: '../public/img/post_images' });
 var expressValidator = require('express-validator');
 var sha256 = require('js-sha256');
 var glob = require('glob');
@@ -1131,7 +1129,19 @@ router.post('/create_post', function(req, res){
                                 // res.send(JSON.stringify(result));
                                 console.log('This is result object: ', result3);
                                 // res.send('Your post_id is: '+result3.post_id);
-                                res.redirect('/post/'+result3.post_id);
+                                var fstream;
+                                req.pipe(req.busboy);
+                                req.busboy.on('file', function (fieldname, file, filename) {
+                                    console.log("Uploading: " + filename);
+                                    fstream = fs.createWriteStream(__dirname + '/public/img/post_images/' + result3.post_id + "_1.jpg");
+                                    file.pipe(fstream);
+                                    fstream.on('close', function () {
+
+                                        res.redirect('/post/'+result3.post_id);
+
+                                    });
+                                });
+                                
                             }
                         });
 
