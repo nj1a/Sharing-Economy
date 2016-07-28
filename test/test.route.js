@@ -74,7 +74,6 @@ describe("route", () => {
 		// try to get New York
 		request.get('https://wander-land.herokuapp.com/city/1').end((err, res) => {
 			expect(res).to.exist;
-			console.log(res);
 			expect(res.status).to.equal(200);
 			expect(res.error).to.equal(false);
 			done();

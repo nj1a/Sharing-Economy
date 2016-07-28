@@ -877,7 +877,9 @@ router.post('/signup', function(req, res){
                                     done();
 
                                     if (err) {
+                                        console.log("error from the database");
                                         res.send("Error " + err);
+
                                     }
                                     sess.email = email;
                                     if (!google) {
@@ -1403,6 +1405,7 @@ router.get('/message', function(req, res) {
 
 	if (typeof sess === 'undefined' || typeof sess.email === 'undefined') {
         res.send('You need to sign in first');
+        res.redirect('/index');
     } else {
   	    res.render('message', {
             email: sess.email
