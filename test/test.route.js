@@ -79,4 +79,24 @@ describe("route", () => {
 			done();
 		});
 	});
+
+	it("should get country by country id", done => {
+		// try to get Greendland
+		request.get('https://wander-land.herokuapp.com/country/85').end((err, res) => {
+			expect(res).to.exist;
+			expect(res.status).to.equal(200);
+			expect(res.error).to.equal(false);
+			done();
+		});
+	});
+
+	it("should be able to access admin page", done => {
+		// try to get Greendland
+		request.get('https://wander-land.herokuapp.com/admin').end((err, res) => {
+			expect(res).to.exist;
+			expect(res.status).to.equal(200);
+			expect(res.error).to.equal(false);
+			done();
+		});
+	});
 });

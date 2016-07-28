@@ -224,7 +224,7 @@ $(document).ready(function(){
 										date_of_birth: $("#editedDOB").val(),
 										description: $("#editedDesc").val()}, 
 										function(data){
-											alert(data);
+											
 											$("#resultBox").attr("class", "perma");
 											
 											$("#editEnabledArea1").remove();
@@ -252,11 +252,7 @@ $(document).ready(function(){
 	});
 
 	$("#createUsr").click(function(event) {
-		/*alert($("#newACCemail").val());
-		alert($("#newACCpass").val());
-		alert($("#newACCusername").val());
-		alert($("#newACCfname").val());
-		alert($("#newACClname").val());*/
+		
 
 		$.post("/createUser", {email: $("#newACCemail").val(),
 							   password: $("#newACCpass").val(),
