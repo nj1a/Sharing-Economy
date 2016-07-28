@@ -134,6 +134,7 @@ $(document).ready(function() {
                 window.location.href="/profile";
             } else {
             	//alert(2);
+            	alert(data);
             	if (x===null){
             		$("#error_user").html("either username or email address already exists");
             		show_login_pop();
