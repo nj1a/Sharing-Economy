@@ -900,6 +900,7 @@ router.post('/signup', function(req, res){
 });
 
 router.post('/file-upload', function(req, res){
+    console.log('hi');
     var userEmail = sess.email;
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         client.query('select user_id from wanderland.user_account where email = ' + "'" + userEmail + "'", function(err, result){

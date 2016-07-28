@@ -49,7 +49,7 @@ describe("route", () => {
 		});
 	});
 
-	it("should get country by key", done => {
+	it("should get country by country code", done => {
 		// try to get Greenland
 		request.get('https://wander-land.herokuapp.com/get_country?key=GL').end((err, res) => {
 			expect(res).to.exist;
@@ -70,10 +70,11 @@ describe("route", () => {
 		});
 	});
 
-	it("should get city by key", done => {
+	it("should get city by city id", done => {
 		// try to get New York
-		request.get('https://wander-land.herokuapp.com/get_city?key=1').end((err, res) => {
+		request.get('https://wander-land.herokuapp.com/city/1').end((err, res) => {
 			expect(res).to.exist;
+			console.log(res);
 			expect(res.status).to.equal(200);
 			expect(res.error).to.equal(false);
 			done();
