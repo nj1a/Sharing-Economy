@@ -18,22 +18,13 @@ html(xmlns='http://www.w3.org/1999/xhtml', xml:lang='en', lang='en')
     nav.w3-top
       ul.w3-navbar.w3-theme-d2.w3-left-align.w3-large
         li
-          a.w3-padding-large.w3-hover-white(href='#')
+          a.w3-padding-large.w3-hover-white(href='/')
             i.fa.fa-home
         li
-          a.w3-padding-large.w3-hover-white(href='#', title='Account Settings')
+          a.w3-padding-large.w3-hover-white(href='/profile', title='Account Settings')
             i.fa.fa-user
-        li.w3-hide-small
-          a.w3-padding-large.w3-hover-white(href='#', title='Inbox')
-            i.fa.fa-envelope
-        li.w3-hide-small
-          a.w3-padding-large.w3-hover-white(href='#', title='Notifications')
-            i.fa.fa-bell
-        li.w3-hide-small
-          a.w3-padding-large.w3-hover-white(href='#', title='Admin Panel')
-            i.fa.fa-eye
         li.w3-hide-small.w3-right
-          a.w3-padding-large.w3-hover-white(href='#', title='My Account')
-            img.w3-circle.avatar(src='../assets/images/avatar.jpg', alt='Avatar')
+          form(class="anchor-wrap" action="/logout" method="get")
+            input(type="submit" class="flt_r m_l_5" id="logoutButton" value="SIGN OUT")
     #title Click anywhere on the map to search for country. Click and hold to drag the map after the map is zoomed in. 
     #vmap

@@ -24,10 +24,9 @@ html(lang="en")
                     li
                     a.w3-padding-large.w3-hover-white(href='/profile', title='Account Settings')
                         i.fa.fa-user
-                    li.w3-hide-small
-                    a.w3-padding-large.w3-hover-white(href='/message', title='Messages')
-                        i.fa.fa-envelope
                     li.w3-hide-small.w3-right
+                        form(class="anchor-wrap" action="/logout" method="get")
+                            input(type="submit" class="flt_r m_l_5" id="logoutButton" value="SIGN OUT")
         section(class="main col-md-10 col-md-offset-1")
             section(class="overlay" id="first")
                 section(class="overlay-content")
